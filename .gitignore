@@ -9,3 +9,4 @@ app/dst
 dist
 /commonjs
 /esm
+/coverage
