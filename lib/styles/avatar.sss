@@ -1,0 +1,21 @@
+.avatar
+  display: inline-block
+  vertical-align: top
+  text-align: center
+  font-size: 16px
+  font-weight: 700
+  overflow: hidden
+  white-space: nowrap
+  text-overflow: ellipsis
+  user-select: none
+  border: 1px solid transparent
+
+  &_fill
+    @each $key in $colors
+      &_$(key)
+        background-color: var(--$(key), $$(key))
+        border-color: var(--$(key), $$(key))
+  &_stroke
+    @each $key in $colors
+      &_$(key)
+        border-color: var(--$(key), $$(key))

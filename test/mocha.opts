@@ -1,0 +1,6 @@
+--timeout 15000
+--colors
+--require jsdom-global/register
+--require babel-register
+--recursive
+test

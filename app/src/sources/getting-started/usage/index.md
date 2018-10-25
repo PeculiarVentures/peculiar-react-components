@@ -1,12 +1,10 @@
-# Alternative UI
-[![CircleCI](https://circleci.com/gh/pentatonica/lib-react-components.svg?style=shield&circle-token=cd2f63c1aa99c49819bfa4f6c9555131fb6e1a2f)](https://circleci.com/gh/pentatonica/lib-react-components)
+# Usage
 
-## Install
-```bash
-npm install lib-react-components --save
-```
+You can use any of the components as demonstrated in the documentation.
+Please refer to each component's [demo page](/demos/button) to see how they should be imported.
 
-## Use components
+## Quick start
+
 Here's a quick example to get you started, **it's literally all you need**:
 
 Add styles file to your html:
@@ -27,5 +25,5 @@ function App() {
   );
 }
 
-ReactDOM.render(<App />, document.getElementById('#root'));
+ReactDOM.render(<App />, document.querySelector('#root'));
 ```

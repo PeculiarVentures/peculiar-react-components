@@ -1,0 +1,10 @@
+.content_loader
+  display: block
+  &_color
+    @each $key in $colors
+      &_$(key)
+        stop-color: var(--$(key), $$(key))
+        stop-opacity: 0.5
+        &_flow
+          stop-color: var(--$(key), $$(key))
+          stop-opacity: 1

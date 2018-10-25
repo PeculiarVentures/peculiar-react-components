@@ -1,0 +1,50 @@
+.sidebar_wrapper
+  width: 320px
+  min-width: 320px
+  padding: 47px 0
+  overflow: auto
+  -webkit-overflow-scrolling: touch
+
+.logo_container
+  padding: 0 40px
+
+.logo
+  font-size: 18px
+  line-height: 22px
+  font-weight: 700
+  display: inline-block
+  transition: opacity 300ms
+  &:hover
+    opacity: .7
+  &.logo_active
+    pointer-events: none
+
+.menu
+  margin-top: 72px
+  ul
+    list-style: none
+    padding: 8px 0
+
+.menu_item_group
+  padding: 0 40px
+  line-height: 2.4
+  font-weight: 600
+
+.menu_item
+  padding: 0 56px
+  line-height: 2
+
+a.menu_item_group,
+a.menu_item
+  display: block
+  transition: background 300ms
+  &:hover
+    background: rgba(white, .6)
+  &_active
+    pointer-events: none
+    background: rgba(white, .4)
+
+@media (max-width: 736px)
+  .sidebar_wrapper
+    display: none
+    
