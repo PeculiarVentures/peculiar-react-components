@@ -14,7 +14,7 @@
   "sideEffects": false,
   "scripts": {
     "test": "NODE_ENV=test BABEL_ENV=commonjs mocha --opts ./test/mocha.opts",
-    "test:unit": "BABEL_ENV=test ENV_FILE=./app/env/development NODE_ENV=test ./node_modules/.bin/jest",
+    "test:unit": "BABEL_ENV=test NODE_ENV=test jest",
     "lint": "eslint --ext .js,.jsx lib app test",
     "development": "cd ./app && npm run development",
     "predevelopment": "npm run theme:create",
@@ -51,8 +51,6 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.2",
-    "babel-jest": "^23.6.0",
-    "babel-plugin-dynamic-import-node": "^2.2.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
@@ -67,7 +65,6 @@
     "eslint-plugin-react": "^7.9.1",
     "ignore-styles": "^5.0.1",
     "jest": "^23.6.0",
-    "jest-css-modules-transform": "^2.1.1",
     "jsdom": "^11.6.2",
     "jsdom-global": "^3.0.2",
     "rimraf": "^2.6.2",

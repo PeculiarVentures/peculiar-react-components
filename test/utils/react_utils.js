@@ -1,13 +1,6 @@
-const PropTypes = require('prop-types');
-const theme = require('./theme');
+global.defaultComponentContext = {};
 
-global.defaultComponentContext = {
-  theme,
-};
-
-global.defaultComponentContextTypes = {
-  theme: PropTypes.object,
-};
+global.defaultComponentContextTypes = {};
 
 global.defaultComponentOptions = {
   context: global.defaultComponentContext,
