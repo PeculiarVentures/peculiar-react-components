@@ -13,6 +13,13 @@
         "react",
         "stage-0"
       ]
+    },
+    "test": {
+      "presets": [
+        "env",
+        "stage-0",
+        "react"
+      ]
     }
   }
 }
