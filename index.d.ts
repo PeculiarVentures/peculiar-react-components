@@ -20,7 +20,8 @@ type TypographyType = 'h1'
   | 'b1'
   | 'b2'
   | 'b3'
-  | 'c1';
+  | 'c1'
+  | string;
 type ValidationType = 'password'
   | 'name'
   | 'fullName'
