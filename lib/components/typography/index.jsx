@@ -53,7 +53,7 @@ export default function Typography(props, context) {
     },
     className,
   );
-  const Component = /h[1-10]/.test(type) ? type : 'p';
+  const Component = /h[1-9]/.test(type) ? type : 'p';
 
   return (
     <Component
