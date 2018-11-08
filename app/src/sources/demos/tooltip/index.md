@@ -11,3 +11,7 @@
 ## Props
 
 {{"props": "../lib/components/tooltip/tooltip.jsx"}}
+
+## Props TooltipPopper
+
+{{"props": "../lib/components/tooltip/tooltip_popper.jsx"}}

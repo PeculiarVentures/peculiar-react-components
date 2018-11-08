@@ -334,6 +334,16 @@ interface TooltipProps {
   ref?: React.Ref<HTMLElement>;
 }
 
+interface TooltipPopperProps {
+  open: boolean;
+  children: React.ReactNode;
+  arrow?: boolean;
+  placement?: PlacementType;
+  positionFixed?: boolean;
+  offset?: number;
+  referenceElement?: React.Ref<HTMLElement>;
+}
+
 interface TypographyProps {
   children: React.ReactNode;
   type?: TypographyType
@@ -418,6 +428,7 @@ declare const Tabs: React.ComponentType<TabsProps>;
 declare const Input: React.ComponentType<InputProps>;
 declare const TextField: React.ComponentType<TextFieldProps>;
 declare const Tooltip: React.ComponentType<TooltipProps>;
+declare const TooltipPopper: React.ComponentType<TooltipPopperProps>;
 declare const Typography: React.ComponentType<TypographyProps>;
 
 declare const CheckmarkIcon: React.ComponentType<CheckmarkIconProps>;
