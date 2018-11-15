@@ -332,6 +332,9 @@ interface TooltipProps {
   component?: string;
   offset?: number;
   ref?: React.Ref<HTMLElement>;
+  open?: boolean;
+  onClose?: () => void;
+  autoHideDuration?: number;
 }
 
 interface TooltipPopperProps {
