@@ -83,9 +83,16 @@ export default class Tooltip extends Component {
      */
     open: PropTypes.bool, // eslint-disable-line
     /**
-     * Callback fired when the tooltip to be close (works only with `open` prop)
+     * Callback fired when the tooltip requests to be closed (works only with `open` prop).
      */
     onClose: PropTypes.func,
+    /**
+     * The number of milliseconds to wait before automatically calling
+     * the onClose function. onClose should then set the state of
+     * the open prop to hide the Tooltip. This behavior is disabled by
+     * default with the null value.
+     */
+    autoHideDuration: PropTypes.number,
   }
 
   static defaultProps = {
@@ -96,6 +103,7 @@ export default class Tooltip extends Component {
     component: 'div',
     offset: 10,
     onClose() {},
+    autoHideDuration: 0,
   }
 
   constructor(props) {
@@ -133,6 +141,12 @@ export default class Tooltip extends Component {
       this.setState({
         open,
       });
+
+      if (open) {
+        this._setAutoHideTimer();
+      } else {
+        clearTimeout(this.timerAutoHide);
+      }
     }
   }
 
@@ -270,6 +284,30 @@ export default class Tooltip extends Component {
     }
   }
 
+  timerAutoHide = null;
+
+  /**
+   * Set timer for fire onClose callback
+   * @param {number} duration
+   */
+  _setAutoHideTimer(duration = null) {
+    const { onClose, autoHideDuration } = this.props;
+
+    if (!onClose || !autoHideDuration) {
+      return;
+    }
+
+    clearTimeout(this.timerAutoHide);
+
+    this.timerAutoHide = setTimeout(() => {
+      if (!onClose || !autoHideDuration) {
+        return;
+      }
+
+      onClose();
+    }, duration || autoHideDuration || 0);
+  }
+
   /**
    * Call callback event props
    * @param {string} type
@@ -386,6 +424,7 @@ export default class Tooltip extends Component {
       offset,
       open: openProp,
       onClose,
+      autoHideDuration,
       ...other
     } = this.props;
     const { open } = this.state;
