@@ -22,11 +22,7 @@ export default class Radio extends PureComponent {
     /**
      * The value of the component
      */
-    value: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-      PropTypes.bool,
-    ]),
+    value: PropTypes.string,
     /**
      * Callback fired when the state is changed
      */

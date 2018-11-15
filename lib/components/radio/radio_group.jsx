@@ -19,19 +19,11 @@ export default class RadioGroup extends PureComponent {
      * selected by default. This takes precedence over the `checked` property
      * of the `Radio` elements
      */
-    defaultValue: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-      PropTypes.bool,
-    ]),
+    defaultValue: PropTypes.string,
     /**
      * Value of the selected radio button
      */
-    value: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-      PropTypes.bool,
-    ]),
+    value: PropTypes.string,
     /**
      * Change callback
      */
