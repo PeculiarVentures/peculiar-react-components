@@ -129,7 +129,7 @@ interface RadioProps {
   checked?: boolean;
   disabled?: boolean;
   name?: boolean;
-  value?: boolean;
+  value?: boolean | string | number;
   onChange?: (e: Event, value: boolean) => void;
   inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
   labelPosition?: 'left' | 'right';
@@ -147,7 +147,7 @@ interface RadioGroupProps {
   children: React.ReactNode;
   name: string;
   defaultValue?: string;
-  value?: string;
+  value?: boolean | string | number;
   onChange?: (e: Event, value: string) => void;
   className?: string;
   ref?: React.Ref<HTMLElement>;
