@@ -128,8 +128,8 @@ interface ProgressiveImageProps {
 interface RadioProps {
   checked?: boolean;
   disabled?: boolean;
-  name?: boolean;
-  value?: boolean;
+  name?: string;
+  value?: string;
   onChange?: (e: Event, value: boolean) => void;
   inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
   labelPosition?: 'left' | 'right';
