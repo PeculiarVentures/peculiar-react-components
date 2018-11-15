@@ -83,9 +83,9 @@ export default class Tooltip extends Component {
      */
     open: PropTypes.bool, // eslint-disable-line
     /**
-     * Callback fired when the tooltip open and click action fired for not tooltip.
+     * Callback fired when the tooltip to be close (works only with `open` prop)
      */
-    onDocumentClick: PropTypes.func,
+    onClose: PropTypes.func,
   }
 
   static defaultProps = {
@@ -95,7 +95,7 @@ export default class Tooltip extends Component {
     positionFixed: true,
     component: 'div',
     offset: 10,
-    onDocumentClick() {},
+    onClose() {},
   }
 
   constructor(props) {
@@ -240,7 +240,7 @@ export default class Tooltip extends Component {
    * @param {SytheticEvent} e
    */
   onDocumentClick(e) {
-    const { onDocumentClick } = this.props;
+    const { onClose } = this.props;
     const { open } = this.state;
     const { target } = e;
     const root = findDOMNode(this); // eslint-disable-line
@@ -248,7 +248,9 @@ export default class Tooltip extends Component {
     if (!contains(root, target) && open) {
       this.setOpen(false);
 
-      onDocumentClick(e);
+      if ('open' in this.props) {
+        onClose(e);
+      }
     }
   }
 
@@ -383,7 +385,7 @@ export default class Tooltip extends Component {
       component: C,
       offset,
       open: openProp,
-      onDocumentClick,
+      onClose,
       ...other
     } = this.props;
     const { open } = this.state;
