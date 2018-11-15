@@ -78,6 +78,14 @@ export default class Tooltip extends Component {
      * Padding from tooltip to reference element in `px`.
      */
     offset: PropTypes.number,
+    /**
+     * If `true`, the tooltip is shown.
+     */
+    open: PropTypes.bool, // eslint-disable-line
+    /**
+     * Callback fired when the tooltip open and click action fired for not tooltip.
+     */
+    onDocumentClick: PropTypes.func,
   }
 
   static defaultProps = {
@@ -87,13 +95,14 @@ export default class Tooltip extends Component {
     positionFixed: true,
     component: 'div',
     offset: 10,
+    onDocumentClick() {},
   }
 
-  constructor() {
+  constructor(props) {
     super();
 
     this.state = {
-      open: false,
+      open: !!props.open,
     };
 
     this.onFocus = this.onFocus.bind(this);
@@ -114,6 +123,16 @@ export default class Tooltip extends Component {
   componentDidMount() {
     if (this.isClickToHide()) {
       window.document.addEventListener('mousedown', this.onDocumentClick);
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { open } = nextProps;
+
+    if (open !== undefined) {
+      this.setState({
+        open,
+      });
     }
   }
 
@@ -221,11 +240,15 @@ export default class Tooltip extends Component {
    * @param {SytheticEvent} e
    */
   onDocumentClick(e) {
+    const { onDocumentClick } = this.props;
+    const { open } = this.state;
     const { target } = e;
     const root = findDOMNode(this); // eslint-disable-line
 
-    if (!contains(root, target)) {
+    if (!contains(root, target) && open) {
       this.setOpen(false);
+
+      onDocumentClick(e);
     }
   }
 
@@ -359,6 +382,8 @@ export default class Tooltip extends Component {
       positionFixed,
       component: C,
       offset,
+      open: openProp,
+      onDocumentClick,
       ...other
     } = this.props;
     const { open } = this.state;
