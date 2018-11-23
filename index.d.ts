@@ -262,7 +262,6 @@ interface TabProps {
   children: React.ReactNode;
   selected?: boolean;
   onClick?: (e: Event, value: string | number) => void;
-  onEnterPress?: (e: Event, value: string | number) => void;
   tabIndex?: number;
   color?: Color;
   colorOn?: Color;
