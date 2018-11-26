@@ -110,6 +110,20 @@ interface CircularProgressProps extends React.HTMLAttributes<HTMLDivElement> {
   ref?: React.Ref<HTMLElement>;
 }
 
+interface CounterProps extends React.HTMLAttributes<HTMLDivElement> {
+  value?: number;
+  defaultValue?: number;
+  minValue: number;
+  maxValue: number;
+  onChange?: void;
+  minValueLabel?: number | string;
+  maxValueLabel?: number | string;
+  disabled?: boolean;
+  bgType?: Fill;
+  color?: Color;
+  textColor?: Color;
+}
+
 interface LinearProgressProps extends React.HTMLAttributes<HTMLDivElement> {
   color?: Color;
   colorProgress?: Color;
@@ -415,6 +429,7 @@ declare const Checkbox: React.ComponentType<CheckboxProps>;
 declare const ContentLoader: React.ComponentType<ContentLoaderProps>;
 declare const HighlightCode: React.ComponentType<HighlightCodeProps>;
 declare const CircularProgress: React.ComponentType<CircularProgressProps>;
+declare const Counter: React.ComponentType<CounterProps>;
 declare const LinearProgress: React.ComponentType<LinearProgressProps>;
 declare const ProgressiveImage: React.ComponentType<ProgressiveImageProps>;
 declare const Radio: React.ComponentType<RadioProps>;

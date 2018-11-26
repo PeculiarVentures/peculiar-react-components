@@ -1,0 +1,59 @@
+.counter_container
+  display: inline-block
+  vertical-align: top
+  outline: none
+  border-radius: $borderRadius
+  white-space: nowrap
+  overflow: hidden
+  text-overflow: ellipsis
+  text-decoration: none
+  font-family: inherit
+  padding: 0 14px
+  height: 36px
+  line-height: 36px
+  vertical-align: middle
+  position: relative
+  &[disabled]
+    cursor: default
+    pointer-events: none
+    color: var(--light_grey, $light_grey)
+    &[data-type="stroke"]
+      border-color: var(--light_grey, $light_grey)
+    &[data-type="fill"]
+      background-color: var(--light_grey, $light_grey)
+      border-color: var(--light_grey, $light_grey)
+      color: var(--grey, $white)
+    .increase_triangle,
+    .decrease_triangle
+      fill: var(--grey, $grey) !important
+
+  .counter_fill
+    @each $key in $colors
+      &_$(key)
+        fill: var(--$(key), $$(key))
+        &:not(svg)
+          background-color: var(--$(key), $$(key))
+          border-color: var(--$(key), $$(key))
+
+.increase_triangle
+  top: 12px
+  position: absolute
+  width: 6px
+  right: 5px
+  cursor: pointer
+  transition: opacity .3s
+  &:hover
+    opacity: .7
+  
+
+.decrease_triangle
+  bottom: 12px  
+  transform: rotate(180deg)
+  position: absolute
+  width: 6px
+  right: 5px
+  cursor: pointer
+  transform: rotate(180deg)
+  transition: opacity .3s
+  &:hover
+    opacity: .7

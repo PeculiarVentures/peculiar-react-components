@@ -46,6 +46,10 @@ export default [
         title: 'Content loader',
       },
       {
+        pathname: '/demos/counter',
+        title: 'Counter',
+      },
+      {
         pathname: '/demos/highlight-code',
         title: 'Highlight code',
       },
