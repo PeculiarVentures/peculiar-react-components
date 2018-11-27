@@ -129,7 +129,7 @@ export default class Counter extends React.Component {
       >
         <CounterTriangleIcon
           className={classNames(
-            'triangle',
+            'counter_triangle',
             `fill_${textColor}`,
           )}
           onClick={() => this.onChange(1)}
@@ -137,7 +137,7 @@ export default class Counter extends React.Component {
         />
         <CounterTriangleIcon
           className={classNames(
-            'triangle',
+            'counter_triangle',
             `fill_${textColor}`,
           )}
           onClick={() => this.onChange(-1)}
