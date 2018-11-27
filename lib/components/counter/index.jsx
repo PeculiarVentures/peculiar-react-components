@@ -138,20 +138,12 @@ export default class Counter extends React.Component {
         {...counterProps}
       >
         <CounterTriangleIcon
-          className={classNames(
-            'counter_triangle',
-            `counter_triangle_${textColor}`,
-            `counter_triangle_focus_${colorFocus}`,
-          )}
+          className="counter_triangle"
           onClick={() => this.onChange(1)}
           data-id="increase-triangle"
         />
         <CounterTriangleIcon
-          className={classNames(
-            'counter_triangle',
-            `counter_triangle_${textColor}`,
-            `counter_triangle_focus_${colorFocus}`,
-          )}
+          className="counter_triangle"
           onClick={(e) => {
             e.stopPropagation();
             this.onChange(-1);
