@@ -44,30 +44,9 @@ export default function ContentLoader(props) {
         </clipPath>
 
         <linearGradient id={idGradient}>
-          <stop offset="0%" className={[`content_loader_color_${color}`]}>
-            <animate
-              attributeName="offset"
-              values="-2; 1"
-              dur={`${duration}s`}
-              repeatCount="indefinite"
-            />
-          </stop>
-          <stop offset="50%" className={[`content_loader_color_${color}_flow`]}>
-            <animate
-              attributeName="offset"
-              values="-1.5; 1.5"
-              dur={`${duration}s`}
-              repeatCount="indefinite"
-            />
-          </stop>
-          <stop offset="100%" className={[`content_loader_color_${color}`]}>
-            <animate
-              attributeName="offset"
-              values="-1; 2"
-              dur={`${duration}s`}
-              repeatCount="indefinite"
-            />
-          </stop>
+          <stop offset="0%" className={`content_loader_color_${color}`} />
+          <stop offset="50%" className={`content_loader_color_${color}`} />
+          <stop offset="100%" className={`content_loader_color_${color}`} />
         </linearGradient>
       </defs>
     </svg>

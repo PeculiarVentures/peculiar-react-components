@@ -1,5 +1,5 @@
 # Alternative UI
-[![CircleCI](https://circleci.com/gh/pentatonica/lib-react-components.svg?style=shield&circle-token=cd2f63c1aa99c49819bfa4f6c9555131fb6e1a2f)](https://circleci.com/gh/pentatonica/lib-react-components)
+[![CircleCI](https://circleci.com/gh/PeculiarVentures/react-components.svg?style=svg&circle-token=e09e288d212560eb0fc4a250a0d9c05394df2c3b)](https://circleci.com/gh/PeculiarVentures/react-components)
 
 ## Install
 ```bash
@@ -29,3 +29,7 @@ function App() {
 
 ReactDOM.render(<App />, document.getElementById('#root'));
 ```
+
+## Documentation
+
+Check out our [documentation website](https://peculiarventures.github.io/react-components/).

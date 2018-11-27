@@ -78,6 +78,21 @@ export default class Tooltip extends Component {
      * Padding from tooltip to reference element in `px`.
      */
     offset: PropTypes.number,
+    /**
+     * If `true`, the tooltip is shown.
+     */
+    open: PropTypes.bool, // eslint-disable-line
+    /**
+     * Callback fired when the tooltip requests to be closed (works only with `open` prop).
+     */
+    onClose: PropTypes.func,
+    /**
+     * The number of milliseconds to wait before automatically calling
+     * the onClose function. onClose should then set the state of
+     * the open prop to hide the Tooltip. This behavior is disabled by
+     * default with the null value.
+     */
+    autoHideDuration: PropTypes.number,
   }
 
   static defaultProps = {
@@ -87,13 +102,15 @@ export default class Tooltip extends Component {
     positionFixed: true,
     component: 'div',
     offset: 10,
+    onClose() {},
+    autoHideDuration: 0,
   }
 
-  constructor() {
+  constructor(props) {
     super();
 
     this.state = {
-      open: false,
+      open: !!props.open,
     };
 
     this.onFocus = this.onFocus.bind(this);
@@ -114,6 +131,22 @@ export default class Tooltip extends Component {
   componentDidMount() {
     if (this.isClickToHide()) {
       window.document.addEventListener('mousedown', this.onDocumentClick);
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { open } = nextProps;
+
+    if (open !== undefined) {
+      this.setState({
+        open,
+      });
+
+      if (open) {
+        this._setAutoHideTimer();
+      } else {
+        clearTimeout(this.timerAutoHide);
+      }
     }
   }
 
@@ -221,11 +254,17 @@ export default class Tooltip extends Component {
    * @param {SytheticEvent} e
    */
   onDocumentClick(e) {
+    const { onClose } = this.props;
+    const { open } = this.state;
     const { target } = e;
     const root = findDOMNode(this); // eslint-disable-line
 
-    if (!contains(root, target)) {
+    if (!contains(root, target) && open) {
       this.setOpen(false);
+
+      if ('open' in this.props) {
+        onClose(e);
+      }
     }
   }
 
@@ -243,6 +282,30 @@ export default class Tooltip extends Component {
         });
       }
     }
+  }
+
+  timerAutoHide = null;
+
+  /**
+   * Set timer for fire onClose callback
+   * @param {number} duration
+   */
+  _setAutoHideTimer(duration = null) {
+    const { onClose, autoHideDuration } = this.props;
+
+    if (!onClose || !autoHideDuration) {
+      return;
+    }
+
+    clearTimeout(this.timerAutoHide);
+
+    this.timerAutoHide = setTimeout(() => {
+      if (!onClose || !autoHideDuration) {
+        return;
+      }
+
+      onClose();
+    }, duration || autoHideDuration || 0);
   }
 
   /**
@@ -359,6 +422,9 @@ export default class Tooltip extends Component {
       positionFixed,
       component: C,
       offset,
+      open: openProp,
+      onClose,
+      autoHideDuration,
       ...other
     } = this.props;
     const { open } = this.state;

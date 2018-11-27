@@ -20,7 +20,8 @@ type TypographyType = 'h1'
   | 'b1'
   | 'b2'
   | 'b3'
-  | 'c1';
+  | 'c1'
+  | string;
 type ValidationType = 'password'
   | 'name'
   | 'fullName'
@@ -127,8 +128,8 @@ interface ProgressiveImageProps {
 interface RadioProps {
   checked?: boolean;
   disabled?: boolean;
-  name?: boolean;
-  value?: boolean;
+  name?: string;
+  value?: string;
   onChange?: (e: Event, value: boolean) => void;
   inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
   labelPosition?: 'left' | 'right';
@@ -261,7 +262,6 @@ interface TabProps {
   children: React.ReactNode;
   selected?: boolean;
   onClick?: (e: Event, value: string | number) => void;
-  onEnterPress?: void;
   tabIndex?: number;
   color?: Color;
   colorOn?: Color;
@@ -272,7 +272,7 @@ interface TabsProps {
   children: React.ReactNode;
   defaultValue?: string | number;
   value?: string | number;
-  onChange?: void;
+  onChange?: (e: Event, value: string | number) => void;
   color?: Color;
   colorOn?: Color;
   align?: 'left' | 'center' | 'right';
@@ -318,7 +318,7 @@ interface TextFieldProps extends InpuBasicProps {
     | 'email'
     | 'tel'
     | 'date';
-  validation?: ValidationType[];
+  validation?: (ValidationType|((value: string | number) => boolean))[];
 }
 
 interface TooltipProps {
@@ -331,6 +331,19 @@ interface TooltipProps {
   component?: string;
   offset?: number;
   ref?: React.Ref<HTMLElement>;
+  open?: boolean;
+  onClose?: () => void;
+  autoHideDuration?: number;
+}
+
+interface TooltipPopperProps {
+  open: boolean;
+  children: React.ReactNode;
+  arrow?: boolean;
+  placement?: PlacementType;
+  positionFixed?: boolean;
+  offset?: number;
+  referenceElement?: React.Ref<HTMLElement>;
 }
 
 interface TypographyProps {
@@ -417,6 +430,7 @@ declare const Tabs: React.ComponentType<TabsProps>;
 declare const Input: React.ComponentType<InputProps>;
 declare const TextField: React.ComponentType<TextFieldProps>;
 declare const Tooltip: React.ComponentType<TooltipProps>;
+declare const TooltipPopper: React.ComponentType<TooltipPopperProps>;
 declare const Typography: React.ComponentType<TypographyProps>;
 
 declare const CheckmarkIcon: React.ComponentType<CheckmarkIconProps>;

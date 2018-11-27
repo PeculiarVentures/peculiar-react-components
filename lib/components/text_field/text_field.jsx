@@ -126,6 +126,9 @@ export default class TextField extends PureComponent {
      * If true, the input will be required.
      */
     required: PropTypes.bool,
+    /**
+     * If false, the input will be unvalid styles.
+     */
     valid: PropTypes.bool,
     /**
      * The short hint displayed in the input before the user enters a value.
@@ -205,17 +208,35 @@ export default class TextField extends PureComponent {
     validation: undefined,
   };
 
-  state = {
-    type: this.props.type,
-    valid: TextField.validateValue(
-      this.props.value || this.props.defaultValue,
-      this.props.validation,
-    ),
-    hasValue: !!(this.props.value || this.props.defaultValue),
-  };
+  constructor(props) {
+    super(props);
+
+    let valid;
+
+    if (typeof props.valid === 'boolean') {
+      valid = props.valid;
+    } else {
+      valid = TextField.validateValue(
+        props.value || props.defaultValue,
+        props.validation,
+      );
+    }
+
+    this.state = {
+      type: props.type,
+      valid,
+      hasValue: !!(props.value || props.defaultValue),
+    };
+  }
 
   componentWillReceiveProps(nextProps) {
     const { value } = this.props;
+
+    if (typeof nextProps.valid === 'boolean') {
+      return this.setState({
+        valid: nextProps.valid,
+      });
+    }
 
     if (value !== nextProps.value) {
       this.setState({
@@ -223,6 +244,8 @@ export default class TextField extends PureComponent {
         hasValue: !!nextProps.value,
       });
     }
+
+    return true;
   }
 
   /**
@@ -303,14 +326,16 @@ export default class TextField extends PureComponent {
    * @param {SytheticEvent} e
    */
   _onChange = (e) => {
-    const { onChange, validation } = this.props;
+    const { onChange, valid: validProp } = this.props;
     const { value } = e.target;
-    const valid = TextField.validateValue(value, validation);
+    const valid = this.isValid(value);
 
-    this.setState({
-      valid,
-      hasValue: !!value,
-    });
+    if (typeof validProp !== 'boolean') {
+      this.setState({
+        valid,
+        hasValue: !!value,
+      });
+    }
 
     if (onChange) {
       onChange(e, valid);
@@ -321,27 +346,26 @@ export default class TextField extends PureComponent {
    * Validate field value
    */
   validateField() {
-    const { validation } = this.props;
-    const value = this.inputNode.getValue();
-    const valid = TextField.validateValue(value, validation);
+    const valid = this.isValid();
 
     this.setState({
       valid,
-      hasValue: !!value,
     });
-
-    return valid;
   }
 
   /**
    * Return 'valid' state
    * @return {boolean}
    */
-  isValid() {
-    const { validation } = this.props;
-    const value = this.inputNode.getValue();
+  isValid(value) {
+    const { validation, valid } = this.props;
+    const inputValue = value || this.inputNode.getValue();
 
-    return TextField.validateValue(value, validation);
+    if (typeof valid === 'boolean') {
+      return valid;
+    }
+
+    return TextField.validateValue(inputValue, validation);
   }
 
   /**
@@ -395,7 +419,7 @@ export default class TextField extends PureComponent {
       onKeyUp,
       onEnterPress,
       onChangeType,
-      type,
+      type: typeProp,
       value,
       required,
       valid: validProp,
@@ -412,18 +436,10 @@ export default class TextField extends PureComponent {
       ...other
     } = this.props;
     const {
-      type: typeState,
-      valid: validState,
+      type,
+      valid,
       hasValue,
     } = this.state;
-
-    let valid = true;
-
-    if (typeof validProp === 'boolean') {
-      valid = validProp;
-    } else if (hasValue) {
-      valid = validState;
-    }
 
     return (
       <label
@@ -441,10 +457,10 @@ export default class TextField extends PureComponent {
           defaultValue={defaultValue}
           disabled={disabled}
           multiLine={multiLine}
-          type={typeState}
+          type={type}
           value={value}
           required={required}
-          valid={valid}
+          valid={hasValue ? valid : true}
           placeholder={placeholder}
           name={name}
           bgType={bgType}
@@ -457,7 +473,7 @@ export default class TextField extends PureComponent {
             className: classNames(
               inputProps.className,
               {
-                text_field_type_password: type === 'password',
+                text_field_type_password: typeProp === 'password',
               },
             ),
           }}
