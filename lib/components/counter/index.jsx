@@ -65,10 +65,13 @@ export default class Counter extends React.Component {
   }
 
   onKeyDown = (e) => {
-    if (e.keyCode !== 9) {
+    if (e.keyCode === 38) {
       e.preventDefault();
-      if (e.keyCode === 38) this.onChange(1);
-      if (e.keyCode === 40) this.onChange(-1);
+      this.onChange(1);
+    }
+    if (e.keyCode === 40) {
+      e.preventDefault();
+      this.onChange(-1);
     }
   }
 
@@ -125,6 +128,7 @@ export default class Counter extends React.Component {
         value={inputValue}
         disabled={disabled}
         onKeyDown={this.onKeyDown}
+        onClick={() => this.onChange(1)}
         name="counter"
         inputProps={{
           readOnly: true,
@@ -148,7 +152,10 @@ export default class Counter extends React.Component {
             `counter_triangle_${textColor}`,
             `counter_triangle_focus_${colorFocus}`,
           )}
-          onClick={() => this.onChange(-1)}
+          onClick={(e) => {
+            e.stopPropagation();
+            this.onChange(-1);
+          }}
           data-id="decrease-triangle"
         />
       </Input>

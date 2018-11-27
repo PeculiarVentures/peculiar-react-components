@@ -1,4 +1,5 @@
 .counter
+  cursor: default
   &:focus ~ .counter_triangle_focus
     @each $key in $colors
       &_$(key)
@@ -10,13 +11,9 @@
   width: 6px
   right: 5px
   cursor: pointer
-  transition: opacity .3s
-  @each $key in $colors
-    &_$(key)
-      & [data-fill]
-        fill: var(--$(key), $$(key))
-        transition: fill 300ms
-
+  z-index: 1
+  [data-fill]
+    transition: opacity .3s, fill 300ms
   &:hover
     opacity: .7
   &[data-id="increase-triangle"]
