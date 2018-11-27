@@ -23,8 +23,8 @@ export default class Counter extends React.Component {
     minValue: PropTypes.number,
     maxValue: PropTypes.number,
     onChange: PropTypes.func,
-    minValueLabel: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    maxValueLabel: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    minValuePaceholder: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    maxValuePaceholder: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     disabled: PropTypes.bool,
     bgType: PropTypes.oneOf(['fill', 'stroke']),
     color: PropTypes.string,
@@ -43,8 +43,8 @@ export default class Counter extends React.Component {
     minValue: undefined,
     maxValue: undefined,
     onChange() {},
-    minValueLabel: undefined,
-    maxValueLabel: undefined,
+    minValuePaceholder: undefined,
+    maxValuePaceholder: undefined,
     disabled: false,
     bgType: 'fill',
     color: 'grey',
@@ -98,9 +98,9 @@ export default class Counter extends React.Component {
       color,
       textColor,
       minValue,
-      minValueLabel,
+      minValuePaceholder,
       maxValue,
-      maxValueLabel,
+      maxValuePaceholder,
       disabled,
       inputProps,
       counterProps,
@@ -108,8 +108,8 @@ export default class Counter extends React.Component {
 
     let value = fontSize;
 
-    if (minValue === fontSize && minValueLabel) value = minValueLabel;
-    if (maxValue === fontSize && maxValueLabel) value = maxValueLabel;
+    if (minValue === fontSize && minValuePaceholder) value = minValuePaceholder;
+    if (maxValue === fontSize && maxValuePaceholder) value = maxValuePaceholder;
 
     return (
       <Input
