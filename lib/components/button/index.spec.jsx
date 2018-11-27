@@ -72,7 +72,7 @@ describe('<Button />', () => {
       global.defaultComponentOptions,
     );
 
-    expect(wrapper.find('button').children().text()).toBe('1');
+    expect(wrapper.find('button').children().html()).toBe('<p>1</p>');
   });
 
   it('with classNames', () => {
