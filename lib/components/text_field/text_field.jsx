@@ -126,6 +126,9 @@ export default class TextField extends PureComponent {
      * If true, the input will be required.
      */
     required: PropTypes.bool,
+    /**
+     * If false, the input will be unvalid styles.
+     */
     valid: PropTypes.bool,
     /**
      * The short hint displayed in the input before the user enters a value.
@@ -222,6 +225,7 @@ export default class TextField extends PureComponent {
     this.state = {
       type: props.type,
       valid,
+      hasValue: !!(props.value || props.defaultValue),
     };
   }
 
@@ -237,6 +241,7 @@ export default class TextField extends PureComponent {
     if (value !== nextProps.value) {
       this.setState({
         valid: TextField.validateValue(nextProps.value, nextProps.validation),
+        hasValue: !!nextProps.value,
       });
     }
 
@@ -328,6 +333,7 @@ export default class TextField extends PureComponent {
     if (typeof validProp !== 'boolean') {
       this.setState({
         valid,
+        hasValue: !!value,
       });
     }
 
@@ -413,7 +419,7 @@ export default class TextField extends PureComponent {
       onKeyUp,
       onEnterPress,
       onChangeType,
-      type,
+      type: typeProp,
       value,
       required,
       valid: validProp,
@@ -430,8 +436,9 @@ export default class TextField extends PureComponent {
       ...other
     } = this.props;
     const {
-      type: typeState,
+      type,
       valid,
+      hasValue,
     } = this.state;
 
     return (
@@ -450,10 +457,10 @@ export default class TextField extends PureComponent {
           defaultValue={defaultValue}
           disabled={disabled}
           multiLine={multiLine}
-          type={typeState}
+          type={type}
           value={value}
           required={required}
-          valid={valid}
+          valid={hasValue ? valid : true}
           placeholder={placeholder}
           name={name}
           bgType={bgType}
@@ -466,7 +473,7 @@ export default class TextField extends PureComponent {
             className: classNames(
               inputProps.className,
               {
-                text_field_type_password: type === 'password',
+                text_field_type_password: typeProp === 'password',
               },
             ),
           }}
