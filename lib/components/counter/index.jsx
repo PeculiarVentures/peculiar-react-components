@@ -63,9 +63,11 @@ export default class Counter extends React.Component {
   }
 
   onKeyDown = (e) => {
-    e.preventDefault();
-    if (e.keyCode === 38) this.onChange(1);
-    if (e.keyCode === 40) this.onChange(-1);
+    if (e.keyCode !== 9) {
+      e.preventDefault();
+      if (e.keyCode === 38) this.onChange(1);
+      if (e.keyCode === 40) this.onChange(-1);
+    }
   }
 
   onChange(add) {
