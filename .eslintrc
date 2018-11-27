@@ -1,9 +1,13 @@
 {
   "parser": "babel-eslint",
+  "plugins": [
+    "jest"
+  ],
   "env": {
     "browser": true,
     "es6": true,
-    "mocha": true
+    "mocha": true,
+    "jest/globals": true
   },
   "parserOptions": {
     "ecmaVersion": 6,

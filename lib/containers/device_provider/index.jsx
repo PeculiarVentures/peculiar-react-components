@@ -1,11 +1,11 @@
-import React, { Component } from 'react'; // eslint-disable-line
+import React, { PureComponent } from 'react'; // eslint-disable-line
 import PropTypes from 'prop-types';
 import { getDeviceInfo } from '../../utils/device_info';
 
 /**
  * DeviceProvider component
  */
-export default class DeviceProvider extends Component {
+export default class DeviceProvider extends PureComponent {
   static propTypes = {
     /**
      * This is what will be displayed inside the DeviceProvider
@@ -33,16 +33,6 @@ export default class DeviceProvider extends Component {
 
   componentDidMount() {
     window.addEventListener('resize', this.bindedResize);
-  }
-
-  /**
-   * Rerender children only if device type changed
-   */
-  shouldComponentUpdate(nextProps, nextState) {
-    const { device } = this.state;
-    const { device: deviceNext } = nextState;
-
-    return device.type !== deviceNext.type;
   }
 
   componentWillUnmount() {

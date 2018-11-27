@@ -2,18 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-const textTypePropType = PropTypes.oneOf([
-  'h1',
-  'h2',
-  'h3',
-  'h4',
-  'h5',
-  'h6',
-  'b1',
-  'b2',
-  'b3',
-  'c1',
-  '',
+const textTypePropType = PropTypes.oneOfType([
+  PropTypes.oneOf([
+    'h1',
+    'h2',
+    'h3',
+    'h4',
+    'h5',
+    'h6',
+    'b1',
+    'b2',
+    'b3',
+    'c1',
+    '',
+  ]),
+  PropTypes.string,
 ]);
 
 /**
