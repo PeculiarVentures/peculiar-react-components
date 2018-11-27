@@ -7,8 +7,10 @@ export default function Usage() {
       <Counter
         minValue={0}
         maxValue={5}
+        bgType="stroke"
         color="primary"
-        textColor="white"
+        textColor="primary"
+        colorFocus="success"
         counterProps={{
           style: {
             marginBottom: 20,

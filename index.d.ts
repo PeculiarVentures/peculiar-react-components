@@ -122,6 +122,7 @@ interface CounterProps extends React.HTMLAttributes<HTMLDivElement> {
   bgType?: Fill;
   color?: Color;
   textColor?: Color;
+  colorFocus?: Color;
   inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
   counterProps?: React.InputHTMLAttributes<HTMLInputElement>;
 }

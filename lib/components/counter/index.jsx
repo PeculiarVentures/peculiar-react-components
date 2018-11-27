@@ -29,6 +29,7 @@ export default class Counter extends React.Component {
     bgType: PropTypes.oneOf(['fill', 'stroke']),
     color: PropTypes.string,
     textColor: PropTypes.string,
+    colorFocus: PropTypes.string,
     inputProps: PropTypes.oneOfType([
       PropTypes.object,
     ]),
@@ -51,6 +52,7 @@ export default class Counter extends React.Component {
     textColor: 'black',
     inputProps: {},
     counterProps: {},
+    colorFocus: 'primary',
   };
 
   constructor(props) {
@@ -99,6 +101,7 @@ export default class Counter extends React.Component {
       bgType,
       color,
       textColor,
+      colorFocus,
       minValue,
       minValuePaceholder,
       maxValue,
@@ -118,13 +121,14 @@ export default class Counter extends React.Component {
         bgType={bgType}
         color={color}
         textColor={textColor}
-        colorFocus={textColor}
+        colorFocus={colorFocus}
         value={inputValue}
         disabled={disabled}
         onKeyDown={this.onKeyDown}
         name="counter"
         inputProps={{
           readOnly: true,
+          className: 'counter',
           ...inputProps,
         }}
         {...counterProps}
@@ -132,7 +136,8 @@ export default class Counter extends React.Component {
         <CounterTriangleIcon
           className={classNames(
             'counter_triangle',
-            `fill_${textColor}`,
+            `counter_triangle_${textColor}`,
+            `counter_triangle_focus_${colorFocus}`,
           )}
           onClick={() => this.onChange(1)}
           data-id="increase-triangle"
@@ -140,7 +145,8 @@ export default class Counter extends React.Component {
         <CounterTriangleIcon
           className={classNames(
             'counter_triangle',
-            `fill_${textColor}`,
+            `counter_triangle_${textColor}`,
+            `counter_triangle_focus_${colorFocus}`,
           )}
           onClick={() => this.onChange(-1)}
           data-id="decrease-triangle"
