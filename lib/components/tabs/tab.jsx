@@ -13,8 +13,6 @@ export default function Tab(props) {
     children,
     selected,
     onClick,
-    onEnterPress,
-    onKeyDown, // eslint-disable-line
     tabIndex,
     color,
     colorOn,
@@ -29,16 +27,6 @@ export default function Tab(props) {
     if (!disabled) onClick(e, value);
   }
 
-  /**
-   * Tab press ENTER handler
-   * @param {SytheticEvent} e
-   */
-  function onKeyDownHandler(e) {
-    if (e.keyCode === 13 && !disabled) {
-      onEnterPress(e, value);
-    }
-  }
-
   return (
     <button
       data-component="tab"
@@ -46,7 +34,6 @@ export default function Tab(props) {
       type="button"
       tabIndex={tabIndex}
       onClick={onClickHandler}
-      onKeyDown={onKeyDownHandler}
       className={classNames(
         'tab',
         'h5',
@@ -96,10 +83,6 @@ Tab.propTypes = {
    */
   onClick: PropTypes.func,
   /**
-   * Callback function that is fired when the Tab enter pressed
-   */
-  onEnterPress: PropTypes.func,
-  /**
    * The tabIndex of the root element
    */
   tabIndex: PropTypes.number,
@@ -118,7 +101,6 @@ Tab.defaultProps = {
   disabled: false,
   selected: false,
   onClick() {},
-  onEnterPress() {},
   tabIndex: 0,
   color: 'grey',
   colorOn: 'primary',

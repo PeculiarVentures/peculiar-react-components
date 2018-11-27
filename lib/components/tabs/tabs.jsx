@@ -138,7 +138,6 @@ export default class Tabs extends PureComponent {
             key: index,
             selected: valueState === child.props.value,
             onClick: this.handleChange,
-            onEnterPress: this.handleChange,
             color,
             colorOn,
           });
