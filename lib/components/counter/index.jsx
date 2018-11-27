@@ -130,6 +130,7 @@ export default class Counter extends React.Component {
         onKeyDown={this.onKeyDown}
         onClick={() => this.onChange(1)}
         name="counter"
+        type="number"
         inputProps={{
           readOnly: true,
           className: 'counter',
