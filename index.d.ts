@@ -122,6 +122,8 @@ interface CounterProps extends React.HTMLAttributes<HTMLDivElement> {
   bgType?: Fill;
   color?: Color;
   textColor?: Color;
+  inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
+  counterProps?: React.InputHTMLAttributes<HTMLInputElement>;
 }
 
 interface LinearProgressProps extends React.HTMLAttributes<HTMLDivElement> {

@@ -1,5 +1,4 @@
-.increase_triangle
-  top: 9px
+.triangle
   position: absolute
   width: 6px
   right: 5px
@@ -7,16 +6,8 @@
   transition: opacity .3s
   &:hover
     opacity: .7
-  
-
-.decrease_triangle
-  bottom: 9px  
-  transform: rotate(180deg)
-  position: absolute
-  width: 6px
-  right: 5px
-  cursor: pointer
-  transform: rotate(180deg)
-  transition: opacity .3s
-  &:hover
-    opacity: .7
+  &[data-id="increase-triangle"]
+    top: 9px
+  &[data-id="decrease-triangle"]
+    bottom: 9px  
+    transform: rotate(180deg)

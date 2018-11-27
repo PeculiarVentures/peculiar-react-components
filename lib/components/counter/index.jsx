@@ -47,7 +47,7 @@ export default class Counter extends React.Component {
     maxValuePaceholder: undefined,
     disabled: false,
     bgType: 'fill',
-    color: 'grey',
+    color: 'light_grey',
     textColor: 'black',
     inputProps: {},
     counterProps: {},
@@ -58,41 +58,41 @@ export default class Counter extends React.Component {
     const { value, defaultValue } = props;
 
     this.state = {
-      fontSize: prepareValue(value, defaultValue),
+      value: prepareValue(value, defaultValue),
     };
   }
 
   onKeyDown = (e) => {
     e.preventDefault();
-    if (e.keyCode === 38) this.changeFontSize(1);
-    if (e.keyCode === 40) this.changeFontSize(-1);
+    if (e.keyCode === 38) this.onChange(1);
+    if (e.keyCode === 40) this.onChange(-1);
   }
 
-  changeFontSize(value) {
+  onChange(add) {
     const { minValue, maxValue, onChange } = this.props;
-    const { fontSize } = this.state;
-    const newSize = fontSize + value;
+    const { value } = this.state;
+    const newSize = value + add;
 
     if (minValue <= newSize && newSize <= maxValue) {
-      this.setState({ fontSize: newSize });
+      this.setState({ value: newSize });
       onChange(newSize);
 
       return;
     }
 
     if (newSize < minValue) {
-      this.setState({ fontSize: maxValue });
+      this.setState({ value: maxValue });
       onChange(newSize);
 
       return;
     }
 
-    this.setState({ fontSize: minValue });
+    this.setState({ value: minValue });
     onChange(newSize);
   }
 
   render() {
-    const { fontSize } = this.state;
+    const { value } = this.state;
     const {
       bgType,
       color,
@@ -106,10 +106,10 @@ export default class Counter extends React.Component {
       counterProps,
     } = this.props;
 
-    let value = fontSize;
+    let inputValue = value;
 
-    if (minValue === fontSize && minValuePaceholder) value = minValuePaceholder;
-    if (maxValue === fontSize && maxValuePaceholder) value = maxValuePaceholder;
+    if (minValue === value && minValuePaceholder) inputValue = minValuePaceholder;
+    if (maxValue === value && maxValuePaceholder) inputValue = maxValuePaceholder;
 
     return (
       <Input
@@ -117,7 +117,7 @@ export default class Counter extends React.Component {
         color={color}
         textColor={textColor}
         colorFocus={textColor}
-        value={value}
+        value={inputValue}
         disabled={disabled}
         onKeyDown={this.onKeyDown}
         name="counter"
@@ -129,17 +129,19 @@ export default class Counter extends React.Component {
       >
         <CounterTriangleIcon
           className={classNames(
-            'increase_triangle',
+            'triangle',
             `fill_${textColor}`,
           )}
-          onClick={() => !disabled && this.changeFontSize(1)}
+          onClick={() => this.onChange(1)}
+          data-id="increase-triangle"
         />
         <CounterTriangleIcon
           className={classNames(
-            'decrease_triangle',
+            'triangle',
             `fill_${textColor}`,
           )}
-          onClick={() => !disabled && this.changeFontSize(-1)}
+          onClick={() => this.onChange(-1)}
+          data-id="decrease-triangle"
         />
       </Input>
     );
