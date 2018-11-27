@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import Input from '../text_field/input';
 import CounterTriangleIcon from '../icons/counter_arrow';
 
 function prepareValue(value, defaultValue) {
@@ -28,6 +29,12 @@ export default class Counter extends React.Component {
     bgType: PropTypes.oneOf(['fill', 'stroke']),
     color: PropTypes.string,
     textColor: PropTypes.string,
+    inputProps: PropTypes.oneOfType([
+      PropTypes.object,
+    ]),
+    counterProps: PropTypes.oneOfType([
+      PropTypes.object,
+    ]),
   }
 
   static defaultProps = {
@@ -42,6 +49,8 @@ export default class Counter extends React.Component {
     bgType: 'fill',
     color: 'grey',
     textColor: 'black',
+    inputProps: {},
+    counterProps: {},
   };
 
   constructor(props) {
@@ -51,6 +60,12 @@ export default class Counter extends React.Component {
     this.state = {
       fontSize: prepareValue(value, defaultValue),
     };
+  }
+
+  onKeyDown = (e) => {
+    e.preventDefault();
+    if (e.keyCode === 38) this.changeFontSize(1);
+    if (e.keyCode === 40) this.changeFontSize(-1);
   }
 
   changeFontSize(value) {
@@ -81,13 +96,14 @@ export default class Counter extends React.Component {
     const {
       bgType,
       color,
+      textColor,
       minValue,
       minValueLabel,
       maxValue,
       maxValueLabel,
-      textColor,
       disabled,
-      ...other
+      inputProps,
+      counterProps,
     } = this.props;
 
     let value = fontSize;
@@ -96,32 +112,36 @@ export default class Counter extends React.Component {
     if (maxValue === fontSize && maxValueLabel) value = maxValueLabel;
 
     return (
-      <div
-        className={classNames(
-          'counter_container',
-          `${bgType}_${color}`,
-          `text_${textColor}`,
-        )}
-        data-typ={bgType}
+      <Input
+        bgType={bgType}
+        color={color}
+        textColor={textColor}
+        colorFocus={textColor}
+        value={value}
         disabled={disabled}
-        {...other}
+        onKeyDown={this.onKeyDown}
+        name="counter"
+        inputProps={{
+          readOnly: true,
+          ...inputProps,
+        }}
+        {...counterProps}
       >
-        {value}
         <CounterTriangleIcon
           className={classNames(
             'increase_triangle',
-            `counter_fill_${textColor}`,
+            `fill_${textColor}`,
           )}
           onClick={() => !disabled && this.changeFontSize(1)}
         />
         <CounterTriangleIcon
           className={classNames(
             'decrease_triangle',
-            `counter_fill_${textColor}`,
+            `fill_${textColor}`,
           )}
           onClick={() => !disabled && this.changeFontSize(-1)}
         />
-      </div>
+      </Input>
     );
   }
 }
