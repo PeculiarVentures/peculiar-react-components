@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import Input from '../text_field/input';
 import CounterTriangleIcon from '../icons/counter_arrow';
 
