@@ -110,12 +110,12 @@ interface CircularProgressProps extends React.HTMLAttributes<HTMLDivElement> {
   ref?: React.Ref<HTMLElement>;
 }
 
-interface CounterProps extends React.HTMLAttributes<HTMLDivElement> {
+interface CounterProps {
   value?: number;
   defaultValue?: number;
   minValue: number;
   maxValue: number;
-  onChange?: void;
+  onChange: (value: number) => void;
   minValueLabel?: number | string;
   maxValueLabel?: number | string;
   disabled?: boolean;
@@ -124,7 +124,7 @@ interface CounterProps extends React.HTMLAttributes<HTMLDivElement> {
   textColor?: Color;
   colorFocus?: Color;
   inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
-  counterProps?: React.InputHTMLAttributes<HTMLInputElement>;
+  counterProps?: React.InputHTMLAttributes<HTMLDivElement>;
 }
 
 interface LinearProgressProps extends React.HTMLAttributes<HTMLDivElement> {
