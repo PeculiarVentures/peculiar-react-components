@@ -50,6 +50,9 @@ export default class Input extends PureComponent {
      * If true, the input will be required.
      */
     required: PropTypes.bool,
+    /**
+     * If false, the input will be unvalid styles.
+     */
     valid: PropTypes.bool,
     /**
      * The short hint displayed in the input before the user enters a value.

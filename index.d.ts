@@ -335,7 +335,7 @@ interface TextFieldProps extends InpuBasicProps {
     | 'email'
     | 'tel'
     | 'date';
-  validation?: ValidationType[];
+  validation?: (ValidationType|((value: string | number) => boolean))[];
 }
 
 interface TooltipProps {
