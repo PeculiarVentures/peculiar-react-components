@@ -63,343 +63,633 @@ type CodeType = 'css'
   | 'glsl'
   | 'none';
 
-interface AvatarProps extends React.HTMLAttributes<HTMLImageElement | HTMLDivElement> {
-  letters?: string;
-  size?: number;
-  src?: string;
-  defaultSrc?: string;
-  bgType?: Fill;
-  color?: Color;
-  textColor?: Color;
-  ref?: React.Ref<HTMLElement>;
+type Omit<T, K extends keyof T> = Pick<T, ({ [P in keyof T]: P } & { [P in K]: never } & { [x: string]: never, [x: number]: never })[keyof T]>;
+
+/**
+ * Avatar
+ */
+declare namespace Avatar {
+  export interface AvatarProps extends React.HTMLProps<Avatar> {
+    letters?: string;
+    size?: number;
+    src?: string;
+    defaultSrc?: string;
+    bgType?: Fill;
+    color?: Color;
+    textColor?: Color;
+  }
 }
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  bgType?: Fill;
-  color?: Color;
-  align?: 'left' | 'center' | 'right';
-  textColor?: Color;
-  size?: 'small' | 'medium' | 'large';
-  href?: string;
-  children: React.ReactNode;
-  ref?: React.Ref<HTMLElement>;
+declare class Avatar extends React.Component<Avatar.AvatarProps> {}
+/**
+ * 
+ */
+
+/**
+ * Button
+ */
+declare namespace Button {
+  export interface ButtonProps extends Omit<React.HTMLProps<Button>, 'size'> {
+    children: React.ReactNode;
+    bgType?: Fill;
+    color?: Color;
+    align?: 'left' | 'center' | 'right';
+    textColor?: Color;
+    size?: 'small' | 'medium' | 'large';
+    href?: string;
+  }
 }
 
-interface CheckboxProps extends SwitchHandler {}
+declare class Button extends React.Component<Button.ButtonProps> {}
+/**
+ * 
+ */
 
-interface ContentLoaderProps extends React.SVGAttributes<SVGAElement> {
-  color?: Color;
-  duration?: number;
-  height?: number;
-  width?: number;
-  children: React.ReactNode;
-  ref?: React.Ref<HTMLElement>;
+/**
+ * Checkbox
+ */
+declare class Checkbox extends React.Component<SwitchHandler.SwitchHandlerProps> {}
+/**
+ * 
+ */
+
+/**
+* ContentLoader
+*/
+declare namespace ContentLoader {
+  export interface ContentLoaderProps extends React.HTMLProps<ContentLoader> {
+    children: React.ReactNode;
+    color?: Color;
+    duration?: number;
+    height?: number;
+    width?: number;
+  }
 }
 
-interface HighlightCodeProps extends React.HTMLAttributes<HTMLPreElement> {
-  children: React.ReactNode;
-  lang?: CodeType;
-  ref?: React.Ref<HTMLElement>;
+declare class ContentLoader extends React.Component<ContentLoader.ContentLoaderProps> {}
+/**
+ * 
+ */
+
+/**
+ * CircularProgress
+ */
+declare namespace CircularProgress {
+  export interface CircularProgressProps extends React.HTMLProps<CircularProgress> {
+    color?: Color;
+    colorProgress?: Color;
+    size?: number;
+    thickness?: number;
+  }
 }
 
-interface CircularProgressProps extends React.HTMLAttributes<HTMLDivElement> {
-  color?: Color;
-  colorProgress?: Color;
-  size?: number;
-  thickness?: number;
-  ref?: React.Ref<HTMLElement>;
+declare class CircularProgress extends React.Component<CircularProgress.CircularProgressProps> {}
+/**
+ * 
+ */
+
+/**
+ * Counter
+ */
+declare namespace Counter {
+  export interface CounterProps extends Omit<React.HTMLProps<Counter>, 'defaultValue' | 'onChange'> {
+    minValue: number;
+    maxValue: number;
+    onChange: (value: number) => void;
+    value?: number;
+    defaultValue?: number;
+    minValueLabel?: number | string;
+    maxValueLabel?: number | string;
+    disabled?: boolean;
+    bgType?: Fill;
+    color?: Color;
+    textColor?: Color;
+    colorFocus?: Color;
+    inputProps?: React.HTMLProps<HTMLInputElement>;
+    counterProps?: React.HTMLProps<HTMLDivElement>;
+  }
 }
 
-interface CounterProps {
-  value?: number;
-  defaultValue?: number;
-  minValue: number;
-  maxValue: number;
-  onChange: (value: number) => void;
-  minValueLabel?: number | string;
-  maxValueLabel?: number | string;
-  disabled?: boolean;
-  bgType?: Fill;
-  color?: Color;
-  textColor?: Color;
-  colorFocus?: Color;
-  inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
-  counterProps?: React.InputHTMLAttributes<HTMLDivElement>;
+declare class Counter extends React.Component<Counter.CounterProps> {}
+/**
+ * 
+ */
+
+/**
+ * HighlightCode
+ */
+declare namespace HighlightCode {
+  export interface HighlightCodeProps extends React.HTMLProps<HighlightCode> {
+    children: React.ReactNode;
+    lang?: CodeType;
+  }
 }
 
-interface LinearProgressProps extends React.HTMLAttributes<HTMLDivElement> {
-  color?: Color;
-  colorProgress?: Color;
-  value?: number;
-  ref?: React.Ref<HTMLElement>;
+declare class HighlightCode extends React.Component<HighlightCode.HighlightCodeProps> {}
+/**
+ * 
+ */
+
+/**
+ * LinearProgress
+ */
+declare namespace LinearProgress {
+  export interface LinearProgressProps extends React.HTMLProps<LinearProgress> {
+    color?: Color;
+    colorProgress?: Color;
+    value?: number;
+  }
 }
 
-interface ProgressiveImageProps {
-  children: React.ReactNode;
-  onError?: (error: Error) => void;
-  placeholder?: string;
-  src?: string;
-  ref?: React.Ref<HTMLElement>;
+declare class LinearProgress extends React.Component<LinearProgress.LinearProgressProps> {}
+/**
+ * 
+ */
+
+/**
+ * ProgressiveImage
+ */
+declare namespace ProgressiveImage {
+  export interface ProgressiveImageProps extends React.HTMLProps<ProgressiveImage> {
+    children: React.ReactNode;
+    onError?: (e: React.SyntheticEvent<ProgressiveImage>) => void;
+    placeholder?: string;
+    src?: string;
+  }
 }
 
-interface RadioProps {
-  checked?: boolean;
-  disabled?: boolean;
-  name?: string;
-  value?: string;
-  onChange?: (e: Event, value: boolean) => void;
-  inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
-  labelPosition?: 'left' | 'right';
-  className?: string;
-  tabIndex?: number;
-  bgType?: Fill;
-  color?: Color;
-  colorOn?: Color;
-  iconColor?: Color;
-  iconColorOn?: Color;
-  ref?: React.Ref<HTMLElement>;
+declare class ProgressiveImage extends React.Component<ProgressiveImage.ProgressiveImageProps> {}
+/**
+ * 
+ */
+
+/**
+ * Radio
+ */
+declare namespace Radio {
+  export interface RadioProps extends Omit<React.HTMLProps<Radio>, 'onChange'> {
+    checked?: boolean;
+    disabled?: boolean;
+    name?: string;
+    value?: string;
+    onChange?: (e: React.FormEvent<Radio>, value: boolean) => void;
+    inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
+    labelPosition?: 'left' | 'right';
+    className?: string;
+    tabIndex?: number;
+    bgType?: Fill;
+    color?: Color;
+    colorOn?: Color;
+    iconColor?: Color;
+    iconColorOn?: Color;
+  }
 }
 
-interface RadioGroupProps {
-  children: React.ReactNode;
-  name: string;
-  defaultValue?: string;
-  value?: string;
-  onChange?: (e: Event, value: string) => void;
-  className?: string;
-  ref?: React.Ref<HTMLElement>;
+declare class Radio extends React.Component<Radio.RadioProps> {}
+/**
+ * 
+ */
+
+/**
+ * RadioGroup
+ */
+declare namespace RadioGroup {
+  export interface RadioGroupProps extends Omit<React.HTMLProps<RadioGroup>, 'onChange'> {
+    children: React.ReactNode;
+    name: string;
+    defaultValue?: string;
+    value?: string;
+    onChange?: (e: React.FormEvent<RadioGroup>, value: string) => void;
+    className?: string;
+  }
 }
 
-interface SelectProps {
-  children: React.ReactNode;
-  native?: boolean;
-  name?: string;
-  disabled?: boolean;
-  value?: string | number;
-  defaultValue?: string | number;
-  onChange?: (e: Event, value: string | number, name: string) => void;
-  onFocus?: (e: Event, name: string) => void;
-  onBlur?: (e: Event, name: string) => void;
-  onKeyDown?: (e: Event, name: string) => void;
-  tabIndex?: number;
-  className?: string;
-  placeholder?: string | number;
-  inputProps?: object;
-  arrowComponent?: React.ReactNode;
-  bgType?: Fill;
-  color?: Color;
-  textColor?: Color;
-  colorFocus?: Color;
-  size?: 'medium' | 'large';
-  placement?: 'top' | 'bottom';
-  ref?: React.Ref<HTMLElement>;
+declare class RadioGroup extends React.Component<RadioGroup.RadioGroupProps> {}
+/**
+ * 
+ */
+
+
+/**
+ * Select
+ */
+declare namespace Select {
+  export interface SelectProps extends Omit<React.HTMLProps<Select>, 'placeholder' | 'size' | 'defaultValue' | 'onFocus' | 'onBlur' | 'onChange' | 'onKeyDown'> {
+    children: React.ReactNode;
+    native?: boolean;
+    name?: string;
+    disabled?: boolean;
+    value?: string | number;
+    defaultValue?: string | number;
+    onChange?: (e: React.FormEvent<Select>, value: string | number, name: string) => void;
+    onFocus?: (e: React.FocusEvent<Select>, name: string) => void;
+    onBlur?: (e: React.FocusEvent<Select>, name: string) => void;
+    onKeyDown?: (e: React.KeyboardEvent<Select>, name: string) => void;
+    tabIndex?: number;
+    className?: string;
+    placeholder?: string | number;
+    inputProps?: object;
+    arrowComponent?: React.ReactNode;
+    bgType?: Fill;
+    color?: Color;
+    textColor?: Color;
+    colorFocus?: Color;
+    size?: 'medium' | 'large';
+    placement?: 'top' | 'bottom';
+  }
 }
 
-interface SelectDropdownProps extends React.HTMLAttributes<HTMLDivElement> {
-  children?: React.ReactNode;
-  bgType?: Fill;
-  color?: Color;
-  colorFocus?: Color;
-  ref?: React.Ref<HTMLElement>;
+declare class Select extends React.Component<Select.SelectProps> {}
+/**
+ * 
+ */
+
+/**
+ * SelectDropdown
+ */
+declare namespace SelectDropdown {
+  export interface SelectDropdownProps extends React.HTMLProps<SelectDropdown> {
+    children?: React.ReactNode;
+    bgType?: Fill;
+    color?: Color;
+    colorFocus?: Color;
+  }
 }
 
-interface SelectItemProps extends React.HTMLAttributes<HTMLDivElement> {
-  children: React.ReactNode;
-  value: string | number;
-  selected?: boolean;
-  disabled?: boolean;
-  hasFocus?: boolean;
-  textColor?: Color;
-  colorFocus?: Color;
-  size?: 'medium' | 'large';
-  ref?: React.Ref<HTMLElement>;
+declare class SelectDropdown extends React.Component<SelectDropdown.SelectDropdownProps> {}
+/**
+ * 
+ */
+
+/**
+ * SelectItem
+ */
+declare namespace SelectItem {
+  export interface SelectItemProps extends Omit<React.HTMLProps<SelectItem>, 'size'> {
+    children: React.ReactNode;
+    value: string | number;
+    selected?: boolean;
+    disabled?: boolean;
+    hasFocus?: boolean;
+    textColor?: Color;
+    colorFocus?: Color;
+    size?: 'medium' | 'large';
+  }
 }
 
-interface SliderProps {
-  defaultValue?: number;
-  disabled?: boolean;
-  max?: number;
-  min?: number;
-  name?: string;
-  onChange?: (e: Event, value: number) => void;
-  onDragStart?: (e: Event) => void;
-  onDragStop?: (e: Event) => void;
-  onMouseDown?: (e: Event) => void;
-  onTouchStart?: (e: Event) => void;
-  required?: boolean;
-  step?: number;
-  value?: number;
-  className?: string;
-  tabIndex?: number;
-  color?: Color;
-  iconColor?: Color;
-  inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
-  ref?: React.Ref<HTMLElement>;
+declare class SelectItem extends React.Component<SelectItem.SelectItemProps> {}
+/**
+ * 
+ */
+
+/**
+ * Slider
+ */
+declare namespace Slider {
+  export interface SliderProps extends Omit<React.HTMLProps<Slider>, 'defaultValue' | 'onChange'> {
+    defaultValue?: number;
+    disabled?: boolean;
+    max?: number;
+    min?: number;
+    name?: string;
+    onChange?: (e: React.FormEvent<Slider>, value: number) => void;
+    onDragStart?: (e: React.DragEvent<Slider>) => void;
+    onDragStop?: (e: React.DragEvent<Slider>) => void;
+    onMouseDown?: (e: React.MouseEvent<Slider>) => void;
+    onTouchStart?: (e: React.TouchEvent<Slider>) => void;
+    required?: boolean;
+    step?: number;
+    value?: number;
+    className?: string;
+    tabIndex?: number;
+    color?: Color;
+    iconColor?: Color;
+    inputProps?: React.HTMLProps<HTMLInputElement>;
+  }
 }
 
-interface SnackbarProps {
-  autoHideDuration?: number;
-  children: React.ReactNode;
-  className?: string;
-  onClose?: (value: null, action: string) => void;
-  onMouseLeave?: (e: Event) => void;
-  onMouseEnter?: (e: Event) => void;
-  open?: boolean;
-  fullWidth?: boolean;
-  verticalPosition?: 'top' | 'bottom';
-  horizontalPosition?: 'left' | 'center' | 'right';
-  action?: React.ReactNode;
-  color?: Color;
-  textColor?: Color;
-  ref?: React.Ref<HTMLElement>;
+declare class Slider extends React.Component<Slider.SliderProps> {}
+/**
+ * 
+ */
+
+/**
+ * Snackbar
+ */
+declare namespace Snackbar {
+  export interface SnackbarProps extends Omit<React.HTMLProps<Snackbar>, 'action'> {
+    children: React.ReactNode;
+    autoHideDuration?: number;
+    className?: string;
+    onClose?: (value: null, action: string) => void;
+    onMouseLeave?: (e: React.MouseEvent<Snackbar>) => void;
+    onMouseEnter?: (e: React.MouseEvent<Snackbar>) => void;
+    open?: boolean;
+    fullWidth?: boolean;
+    verticalPosition?: 'top' | 'bottom';
+    horizontalPosition?: 'left' | 'center' | 'right';
+    action?: React.ReactNode;
+    color?: Color;
+    textColor?: Color;
+  }
 }
 
-interface SwitchHandler {
-  defaultChecked?: boolean;
-  disabled?: boolean;
-  onCheck?: (e: Event, checked: boolean) => void;
-  checked?: boolean;
-  inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
-  className?: string;
-  tabIndex?: number;
-  bgType?: Fill;
-  color?: Color;
-  colorOn?: Color;
-  iconColor?: Color;
-  iconColorOn?: Color;
-  ref?: React.Ref<HTMLElement>;
+declare class Snackbar extends React.Component<Snackbar.SnackbarProps> {}
+/**
+ * 
+ */
+
+/**
+ * SwitchHandler
+ */
+declare namespace SwitchHandler {
+  export interface SwitchHandlerProps extends React.HTMLProps<SwitchHandler> {
+    defaultChecked?: boolean;
+    disabled?: boolean;
+    onCheck?: (e: Event, checked: boolean) => void;
+    checked?: boolean;
+    inputProps?: React.HTMLProps<HTMLInputElement>;
+    className?: string;
+    tabIndex?: number;
+    bgType?: Fill;
+    color?: Color;
+    colorOn?: Color;
+    iconColor?: Color;
+    iconColorOn?: Color;
+  }
 }
 
-interface SwitchProps extends SwitchHandler {}
+declare class SwitchHandler extends React.Component<SwitchHandler.SwitchHandlerProps> {}
+/**
+ * 
+ */
 
-interface TabProps {
-  className?: string;
-  disabled?: boolean;
-  value: string | number;
-  children: React.ReactNode;
-  selected?: boolean;
-  onClick?: (e: Event, value: string | number) => void;
-  tabIndex?: number;
-  color?: Color;
-  colorOn?: Color;
-  ref?: React.Ref<HTMLElement>;
+/**
+ * Switch
+ */
+declare class Switch extends React.Component<SwitchHandler.SwitchHandlerProps> {}
+/**
+ * interface SwitchProps extends SwitchHandler {}
+ */
+
+/**
+ * Tab
+ */
+declare namespace Tab {
+  export interface TabProps extends Omit<React.HTMLProps<Tab>, 'onClick'> {
+    className?: string;
+    disabled?: boolean;
+    value: string | number;
+    children: React.ReactNode;
+    selected?: boolean;
+    onClick?: (e: React.MouseEvent<Tab>, value: string | number) => void;
+    tabIndex?: number;
+    color?: Color;
+    colorOn?: Color;
+  }
 }
 
-interface TabsProps {
-  children: React.ReactNode;
-  defaultValue?: string | number;
-  value?: string | number;
-  onChange?: (e: Event, value: string | number) => void;
-  color?: Color;
-  colorOn?: Color;
-  align?: 'left' | 'center' | 'right';
-  className?: string;
-  ref?: React.Ref<HTMLElement>;
+declare class Tab extends React.Component<Tab.TabProps> {}
+/**
+ * 
+ */
+
+/**
+ * Tabs
+ */
+declare namespace Tabs {
+  export interface TabsProps extends Omit<React.HTMLProps<Tabs>, 'onClick' | 'defaultValue' | 'onChange'> {
+    children: React.ReactNode;
+    defaultValue?: string | number;
+    value?: string | number;
+    onChange?: (e: React.MouseEvent<Tabs>, value: string | number) => void;
+    color?: Color;
+    colorOn?: Color;
+    align?: 'left' | 'center' | 'right';
+    className?: string;
+  }
 }
 
-interface InpuBasicProps {
-  tabIndex?: number;
-  className?: string;
-  defaultValue?: string | number;
-  disabled?: boolean;
-  multiLine?: boolean;
-  type?: string;
-  value?: string | number;
-  required?: boolean;
-  valid?: boolean;
-  placeholder?: string;
-  children: React.ReactNode;
-  name?: string;
-  bgType?: Fill;
-  color?: Color;
-  textColor?: Color;
-  colorFocus?: Color;
-  size?: 'medium' | 'large';
-  inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
-  autoComplete?: string;
-  autoFocus?: boolean;
-  ref?: React.Ref<HTMLElement>;
+declare class Tabs extends React.Component<Tabs.TabsProps> {}
+/**
+ * 
+ */
+
+/**
+ * Input
+ */
+declare namespace Input {
+  export interface InputProps extends Omit<React.HTMLProps<Input>, 'size' | 'defaultValue'> {
+    tabIndex?: number;
+    className?: string;
+    defaultValue?: string | number;
+    disabled?: boolean;
+    multiLine?: boolean;
+    type?: string;
+    value?: string | number;
+    required?: boolean;
+    valid?: boolean;
+    placeholder?: string;
+    children?: React.ReactNode;
+    name?: string;
+    bgType?: Fill;
+    color?: Color;
+    textColor?: Color;
+    colorFocus?: Color;
+    size?: 'medium' | 'large';
+    inputProps?: React.HTMLProps<HTMLInputElement>;
+    autoComplete?: string;
+    autoFocus?: boolean;
+    onChange?: (e: React.FormEvent<Input>) => void;
+  }
 }
 
-interface InputProps extends InpuBasicProps {
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+declare class Input extends React.Component<Input.InputProps> {}
+/**
+ * 
+ */
+
+/**
+ * TextField
+ */
+declare namespace TextField {
+  export interface TextFieldProps extends Omit<React.HTMLProps<Input>, 'size' | 'defaultValue' | 'onChange'> {
+    tabIndex?: number;
+    className?: string;
+    defaultValue?: string | number;
+    disabled?: boolean;
+    multiLine?: boolean;
+    value?: string | number;
+    required?: boolean;
+    valid?: boolean;
+    placeholder?: string;
+    children?: React.ReactNode;
+    name?: string;
+    bgType?: Fill;
+    color?: Color;
+    textColor?: Color;
+    colorFocus?: Color;
+    size?: 'medium' | 'large';
+    inputProps?: React.HTMLProps<HTMLInputElement>;
+    autoComplete?: string;
+    autoFocus?: boolean;
+    onChange?: (e: React.FormEvent<Input>, valid: boolean) => void;
+    onChangeType?: (type: string) => void;
+    onKeyUp?: (e: React.KeyboardEvent<Input>) => void;
+    onEnterPress?: (e: React.KeyboardEvent<Input>) => void;
+    type?: 'text'
+      | 'password'
+      | 'email'
+      | 'tel'
+      | 'date';
+    validation?: (ValidationType|((value: string | number) => boolean))[];
+  }
 }
 
-interface TextFieldProps extends InpuBasicProps {
-  onChange?: (e: Event, valid: boolean) => void;
-  onChangeType?: (type: string) => void;
-  onKeyUp?: React.KeyboardEventHandler<HTMLInputElement>;
-  onEnterPress?: React.KeyboardEventHandler<HTMLInputElement>;
-  type?: 'text'
-    | 'password'
-    | 'email'
-    | 'tel'
-    | 'date';
-  validation?: (ValidationType|((value: string | number) => boolean))[];
+declare class TextField extends React.Component<TextField.TextFieldProps> {}
+/**
+ * 
+ */
+
+/**
+ * Tooltip
+ */
+declare namespace Tooltip {
+  export interface TooltipProps extends Omit<React.HTMLProps<Tooltip>, 'content'> {
+    children: React.ReactNode;
+    content: React.ReactNode;
+    action?: 'click' | 'hover' | 'focus';
+    arrow?: boolean;
+    placement?: PlacementType;
+    positionFixed?: boolean;
+    component?: string;
+    offset?: number;
+    open?: boolean;
+    onClose?: () => void;
+    autoHideDuration?: number;
+  }
 }
 
-interface TooltipProps {
-  children: React.ReactNode;
-  content: React.ReactNode;
-  action?: 'click' | 'hover' | 'focus';
-  arrow?: boolean;
-  placement?: PlacementType;
-  positionFixed?: boolean;
-  component?: string;
-  offset?: number;
-  ref?: React.Ref<HTMLElement>;
-  open?: boolean;
-  onClose?: () => void;
-  autoHideDuration?: number;
+declare class Tooltip extends React.Component<Tooltip.TooltipProps> {}
+/**
+ * 
+ */
+
+/**
+ * TooltipPopper
+ */
+declare namespace TooltipPopper {
+  export interface TooltipPopperProps extends React.HTMLProps<TooltipPopper> {
+    open: boolean;
+    children: React.ReactNode;
+    arrow?: boolean;
+    placement?: PlacementType;
+    positionFixed?: boolean;
+    offset?: number;
+    referenceElement?: React.Ref<HTMLElement>;
+  }
 }
 
-interface TooltipPopperProps {
-  open: boolean;
-  children: React.ReactNode;
-  arrow?: boolean;
-  placement?: PlacementType;
-  positionFixed?: boolean;
-  offset?: number;
-  referenceElement?: React.Ref<HTMLElement>;
+declare class TooltipPopper extends React.Component<TooltipPopper.TooltipPopperProps> {}
+/**
+ * 
+ */
+
+/**
+ * Typography
+ */
+declare namespace Typography {
+  export interface TypographyProps extends React.HTMLProps<Typography> {
+    children: React.ReactNode;
+    type?: TypographyType
+    tabletType?: TypographyType;
+    mobileType?: TypographyType;
+    color?: Color;
+    align?: 'left' | 'center' | 'right' | 'auto';
+    className?: string;
+  }
 }
 
-interface TypographyProps {
-  children: React.ReactNode;
-  type?: TypographyType
-  tabletType?: TypographyType;
-  mobileType?: TypographyType;
-  color?: Color;
-  align?: 'left' | 'center' | 'right' | 'auto';
-  className?: string;
-  ref?: React.Ref<HTMLElement>;
+declare class Typography extends React.Component<Typography.TypographyProps> {}
+/**
+ * 
+ */
+
+/**
+ * Icons
+ */
+declare class CheckmarkIcon extends React.Component<React.SVGAttributes<SVGAElement>> {}
+declare class EyeInvisibleIcon extends React.Component<React.SVGAttributes<SVGAElement>> {}
+declare class EyeVisibleIcon extends React.Component<React.SVGAttributes<SVGAElement>> {}
+declare class RequiredIcon extends React.Component<React.SVGAttributes<SVGAElement>> {}
+declare class SelectArrowIcon extends React.Component<React.SVGAttributes<SVGAElement>> {}
+/**
+ * 
+ */
+
+/**
+ * DeviceProvider
+ */
+declare namespace DeviceProvider {
+  export interface DeviceProviderProps extends React.HTMLProps<DeviceProvider> {
+    children: React.ReactNode;
+  }
 }
 
-interface CheckmarkIconProps extends React.SVGAttributes<SVGAElement> {}
-interface EyeInvisibleIconProps extends React.SVGAttributes<SVGAElement> {}
-interface EyeVisibleIconProps extends React.SVGAttributes<SVGAElement> {}
-interface RequiredIconProps extends React.SVGAttributes<SVGAElement> {}
-interface SelectArrowIconProps extends React.SVGAttributes<SVGAElement> {}
+declare class DeviceProvider extends React.Component<DeviceProvider.DeviceProviderProps> {}
+/**
+ * 
+ */
 
-interface DeviceProviderProps {
-  children: React.ReactNode;
+/**
+ * OfflineProvider
+ */
+declare namespace OfflineProvider {
+  export interface OfflineProviderProps extends React.HTMLProps<OfflineProvider> {
+    children: React.ReactNode;
+  }
 }
 
-interface OfflineProviderProps {
-  children: React.ReactNode;
+declare class OfflineProvider extends React.Component<OfflineProvider.OfflineProviderProps> {}
+/**
+ * 
+ */
+
+/**
+ * Portal
+ */
+declare namespace Portal {
+  export interface PortalProps extends React.HTMLProps<Portal> {
+    children: React.ReactNode;
+    container?: HTMLElement;
+    onRendered?: () => void;
+  }
 }
 
-interface PortalProps {
-  children: React.ReactNode;
-  container?: HTMLElement;
-  onRendered?: () => void;
+declare class Portal extends React.Component<Portal.PortalProps> {}
+/**
+ * 
+ */
+
+/**
+ * SegueHandler
+ */
+declare namespace SegueHandler {
+  export interface SegueHandlerProps extends Omit<React.HTMLProps<SegueHandler>, 'defaultValue'> {
+    children: React.ReactNode;
+    value?: string | number;
+    defaultValue?: string | number;
+  }
 }
 
-interface SegueHandlerProps {
-  children: React.ReactNode;
-  value?: string | number;
-  defaultValue?: string | number;
-}
+declare class SegueHandler extends React.Component<SegueHandler.SegueHandlerProps> {}
+/**
+ * 
+ */
 
+/**
+ * utils
+ */
 interface WindowSize {
   width: number;
   height: number;
@@ -426,48 +716,56 @@ interface RegExps {
   objectID: RegExp;
 }
 
-declare const Avatar: React.ComponentType<AvatarProps>;
-declare const Button: React.ComponentType<ButtonProps>;
-declare const Checkbox: React.ComponentType<CheckboxProps>;
-declare const ContentLoader: React.ComponentType<ContentLoaderProps>;
-declare const HighlightCode: React.ComponentType<HighlightCodeProps>;
-declare const CircularProgress: React.ComponentType<CircularProgressProps>;
-declare const Counter: React.ComponentType<CounterProps>;
-declare const LinearProgress: React.ComponentType<LinearProgressProps>;
-declare const ProgressiveImage: React.ComponentType<ProgressiveImageProps>;
-declare const Radio: React.ComponentType<RadioProps>;
-declare const RadioGroup: React.ComponentType<RadioGroupProps>;
-declare const Select: React.ComponentType<SelectProps>;
-declare const SelectDropdown: React.ComponentType<SelectDropdownProps>;
-declare const SelectItem: React.ComponentType<SelectItemProps>;
-declare const Slider: React.ComponentType<SliderProps>;
-declare const Snackbar: React.ComponentType<SnackbarProps>;
-declare const Switch: React.ComponentType<SwitchProps>;
-declare const Tab: React.ComponentType<TabProps>;
-declare const Tabs: React.ComponentType<TabsProps>;
-declare const Input: React.ComponentType<InputProps>;
-declare const TextField: React.ComponentType<TextFieldProps>;
-declare const Tooltip: React.ComponentType<TooltipProps>;
-declare const TooltipPopper: React.ComponentType<TooltipPopperProps>;
-declare const Typography: React.ComponentType<TypographyProps>;
-
-declare const CheckmarkIcon: React.ComponentType<CheckmarkIconProps>;
-declare const EyeInvisibleIcon: React.ComponentType<EyeInvisibleIconProps>;
-declare const EyeVisibleIcon: React.ComponentType<EyeVisibleIconProps>;
-declare const RequiredIcon: React.ComponentType<RequiredIconProps>;
-declare const SelectArrowIcon: React.ComponentType<SelectArrowIconProps>;
-
-declare const DeviceProvider: React.ComponentType<DeviceProviderProps>;
-declare const OfflineProvider: React.ComponentType<OfflineProviderProps>;
-declare const Portal: React.ComponentType<PortalProps>;
-declare const SegueHandler: React.ComponentType<SegueHandlerProps>;
-
-declare function getWindowSize(): WindowSize;
 declare function getDeviceInfo(): DeviceInfo;
+declare function getWindowSize(): WindowSize;
 declare function uuid(): string;
-declare const regExps: RegExps;
 declare function validator(
   value: string | number,
   types: (ValidationType|((value: string | number) => boolean))[],
   ignoreStartAndEndSpaces?: boolean,
 ): boolean;
+declare const regExps: RegExps;
+/**
+ * 
+ */
+
+export {
+  Avatar,
+  Button,
+  Checkbox,
+  ContentLoader,
+  CircularProgress,
+  Counter,
+  HighlightCode,
+  LinearProgress,
+  ProgressiveImage,
+  Radio,
+  RadioGroup,
+  Select,
+  SelectDropdown,
+  SelectItem,
+  Slider,
+  Snackbar,
+  Switch,
+  Tab,
+  Tabs,
+  Input,
+  TextField,
+  Tooltip,
+  TooltipPopper,
+  Typography,
+  CheckmarkIcon,
+  EyeInvisibleIcon,
+  EyeVisibleIcon,
+  RequiredIcon,
+  SelectArrowIcon,
+  DeviceProvider,
+  OfflineProvider,
+  Portal,
+  SegueHandler,
+  getDeviceInfo,
+  getWindowSize,
+  uuid,
+  validator,
+  regExps,
+};
