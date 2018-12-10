@@ -62,6 +62,14 @@ type CodeType = 'css'
   | 'bash'
   | 'glsl'
   | 'none';
+type IconType = 'delete'
+  | 'clear'
+  | 'rotate'
+  | 'undo'
+  | 'cross'
+  | 'arrow_left'
+  | 'arrow_right'
+  | 'add'
 
 interface AvatarProps extends React.HTMLAttributes<HTMLImageElement | HTMLDivElement> {
   letters?: string;
@@ -83,6 +91,14 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   href?: string;
   children: React.ReactNode;
   ref?: React.Ref<HTMLElement>;
+}
+
+interface ButtonWithIconProps extends ButtonProps {
+  icon: IconType;
+  iconPosition?: 'left' | 'right';
+  iconColor?: Color;
+  iconClassName?: string;
+  
 }
 
 interface CheckboxProps extends SwitchHandler {}
@@ -428,6 +444,7 @@ interface RegExps {
 
 declare const Avatar: React.ComponentType<AvatarProps>;
 declare const Button: React.ComponentType<ButtonProps>;
+declare const ButtonWithIcon: React.ComponentType<ButtonWithIconProps>;
 declare const Checkbox: React.ComponentType<CheckboxProps>;
 declare const ContentLoader: React.ComponentType<ContentLoaderProps>;
 declare const HighlightCode: React.ComponentType<HighlightCodeProps>;

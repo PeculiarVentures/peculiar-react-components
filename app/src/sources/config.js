@@ -34,6 +34,10 @@ export default [
         title: 'Button',
       },
       {
+        pathname: '/demos/button_with_icon',
+        title: 'Button with icon',
+      },
+      {
         pathname: '/demos/checkbox',
         title: 'Checkbox',
       },
