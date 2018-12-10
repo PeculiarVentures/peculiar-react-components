@@ -235,6 +235,7 @@ export default class TextField extends PureComponent {
     if (typeof nextProps.valid === 'boolean') {
       return this.setState({
         valid: nextProps.valid,
+        hasValue: !!nextProps.value,
       });
     }
 
