@@ -1,11 +1,11 @@
 import React from 'react';
 
 /**
- * ArrowRightIcon - ArrowRightIcon svg component
+ * AddIcon - AddIcon svg component
  * @param props
  * @return {ReactElement} markup
  */
-export default function ArrowRightIcon(props) {
+export default function AddIcon(props) {
   return (
     <svg
       viewBox="0 0 29 29"
