@@ -36,6 +36,7 @@ export default function Usage() {
         textColor="secondary"
         iconColor="secondary"
         icon="arrow_right"
+        iconPosition="right"
       >
         arrow_right
       </ButtonWithIcon>

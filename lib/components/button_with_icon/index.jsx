@@ -117,8 +117,18 @@ export default class ButtonWithIcon extends PureComponent {
       iconColor,
       iconClassName,
       iconProps,
+      iconPosition,
     } = this.props;
-    const className = classNames(iconClassName, `fill_${iconColor}`, `${icon}_icon`, `stroke_${iconColor}`);
+    const className = classNames(
+      iconClassName,
+      `fill_${iconColor}`,
+      `${icon}_icon`,
+      `stroke_${iconColor}`,
+      {
+        icon_left: iconPosition === 'left',
+        icon_right: iconPosition === 'right',
+      },
+    );
 
     switch (icon) {
       case 'delete':
