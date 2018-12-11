@@ -327,6 +327,7 @@ interface InputProps extends InpuBasicProps {
 
 interface TextFieldProps extends InpuBasicProps {
   onChange?: (e: Event, valid: boolean) => void;
+  onBlur?: (e: Event) => void;
   onChangeType?: (type: string) => void;
   onKeyUp?: React.KeyboardEventHandler<HTMLInputElement>;
   onEnterPress?: React.KeyboardEventHandler<HTMLInputElement>;
