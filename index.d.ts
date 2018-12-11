@@ -338,7 +338,7 @@ interface TextFieldProps extends InpuBasicProps {
   validation?: (ValidationType|((value: string | number) => boolean))[];
 }
 
-interface TooltipProps {
+interface TooltipProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   content: React.ReactNode;
   action?: 'click' | 'hover' | 'focus';
