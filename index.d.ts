@@ -308,7 +308,7 @@ interface InpuBasicProps {
   required?: boolean;
   valid?: boolean;
   placeholder?: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   name?: string;
   bgType?: Fill;
   color?: Color;
