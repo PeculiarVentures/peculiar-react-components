@@ -233,6 +233,7 @@ interface SliderProps {
   tabIndex?: number;
   color?: Color;
   iconColor?: Color;
+  progressColor?: Color;
   inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
   ref?: React.Ref<HTMLElement>;
 }
