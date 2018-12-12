@@ -20,8 +20,9 @@ export default function Usage() {
       <Slider
         step={0.2}
         defaultValue={0.6}
-        color="black"
+        color="success"
         iconColor="success"
+        progressColor="black"
       />
     </div>
   );

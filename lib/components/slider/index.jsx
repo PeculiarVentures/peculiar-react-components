@@ -124,6 +124,10 @@ export default class Slider extends PureComponent {
      */
     iconColor: PropTypes.string,
     /**
+     * Component progress color from theme
+     */
+    progressColor: PropTypes.string,
+    /**
      * Properties for `<input type="hidden" />` element
      */
     inputProps: PropTypes.oneOfType([
@@ -149,6 +153,7 @@ export default class Slider extends PureComponent {
     tabIndex: 0,
     color: 'light_grey',
     iconColor: 'primary',
+    progressColor: '',
     inputProps: {},
   };
 
@@ -457,6 +462,7 @@ export default class Slider extends PureComponent {
       tabIndex,
       color,
       iconColor,
+      progressColor,
       inputProps,
       ...other
     } = this.props;
@@ -486,11 +492,12 @@ export default class Slider extends PureComponent {
         <div
           className={classNames(
             'slider_progress',
-            [`slider_${color}`],
+            [`slider_${progressColor || color}`],
           )}
           style={{
             width: `${percent}%`,
           }}
+          data-component="slider-progress"
         />
         <div
           className={classNames(
