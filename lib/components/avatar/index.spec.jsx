@@ -8,7 +8,7 @@ describe('<Avatar />', () => {
   it('render without errors', () => {
     const wrapper = mount(<Avatar />, global.defaultComponentOptions);
 
-    expect(wrapper.find('div').exists()).toBe(true);
+    expect(wrapper.find('img').exists()).toBe(true);
   });
 
   it('render with image', () => {
@@ -21,8 +21,8 @@ describe('<Avatar />', () => {
   it('change size', () => {
     const wrapper = mount(<Avatar size={80} />, global.defaultComponentOptions);
 
-    expect(wrapper.find('div').prop('style')).toHaveProperty('height', 80);
-    expect(wrapper.find('div').prop('style')).toHaveProperty('width', 80);
+    expect(wrapper.find('img').prop('style')).toHaveProperty('height', 80);
+    expect(wrapper.find('img').prop('style')).toHaveProperty('width', 80);
   });
 
   it('with styles', () => {
@@ -33,17 +33,17 @@ describe('<Avatar />', () => {
       />, global.defaultComponentOptions,
     );
 
-    expect(wrapper.find('div').prop('style')).toHaveProperty('opacity', 0.7);
+    expect(wrapper.find('img').prop('style')).toHaveProperty('opacity', 0.7);
   });
 
   it('with letters', () => {
     const wrapper = mount(
       <Avatar
-        letters="AB"
+        letters="Admin"
       />, global.defaultComponentOptions,
     );
 
-    expect(wrapper.find('div').text()).toBe('AB');
+    expect(wrapper.find('div').text()).toBe('A');
     expect(wrapper.find('div').prop('className')).toBe('avatar round_circle avatar_fill_light_grey text_primary');
     expect(wrapper.find('div').prop('style')).toHaveProperty('lineHeight', '38px');
   });
@@ -51,21 +51,21 @@ describe('<Avatar />', () => {
   it('change theme', () => {
     const wrapper = mount(
       <Avatar
-        letters="AC"
+        letters="User"
         bgType="stroke"
         color="secondary"
         textColor="black"
       />, global.defaultComponentOptions,
     );
 
-    expect(wrapper.find('div').text()).toBe('AC');
+    expect(wrapper.find('div').text()).toBe('U');
     expect(wrapper.find('div').prop('className')).toBe('avatar round_circle avatar_stroke_secondary text_black');
   });
 
   it('with className', () => {
     const wrapper = mount(
       <Avatar
-        letters="AC"
+        letters="Custom"
         className="my_custom_class"
       />, global.defaultComponentOptions,
     );

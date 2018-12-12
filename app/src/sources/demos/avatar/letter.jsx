@@ -5,13 +5,13 @@ export default function Usage() {
   return (
     <div>
       <Avatar
-        letters="AU"
+        letters="Admin"
         style={{
           marginRight: 10,
         }}
       />
       <Avatar
-        letters="AU"
+        letters="User"
         color="secondary"
         style={{
           marginRight: 10,
@@ -19,7 +19,7 @@ export default function Usage() {
         size={50}
       />
       <Avatar
-        letters="AU"
+        letters="Custom"
         bgType="stroke"
         color="wrong"
         textColor="wrong"
