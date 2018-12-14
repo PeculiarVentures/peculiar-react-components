@@ -41,6 +41,7 @@ export default class Tooltip extends Component {
       'click',
       'hover',
       'focus',
+      'none',
     ]),
     /**
      * If `true`, the tooltip arrow is shown.

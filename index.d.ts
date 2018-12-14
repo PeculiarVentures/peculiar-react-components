@@ -343,7 +343,7 @@ interface TextFieldProps extends InpuBasicProps {
 interface TooltipProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   content: React.ReactNode;
-  action?: 'click' | 'hover' | 'focus';
+  action?: 'click' | 'hover' | 'focus' | 'none';
   arrow?: boolean;
   placement?: PlacementType;
   positionFixed?: boolean;
