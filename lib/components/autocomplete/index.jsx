@@ -246,13 +246,13 @@ export default class Autocomplete extends Component {
   };
 
   _handleSpaceEnterPress(e) {
-    const { value, name, onChange } = this.props;
+    const { name, onChange } = this.props;
     const {
       valueSelected,
       open,
     } = this.state;
 
-    if (open && valueSelected && !value) {
+    if (open && valueSelected) {
       if (!('value' in this.props)) {
         this.textFieldNode.inputNode.inputNode.value = valueSelected;
         this.textFieldNode.validateField();
