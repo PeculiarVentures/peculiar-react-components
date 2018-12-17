@@ -340,6 +340,37 @@ interface TextFieldProps extends InpuBasicProps {
   validation?: (ValidationType|((value: string | number) => boolean))[];
 }
 
+interface AutocompleteProps {
+  tabIndex?: number;
+  className?: string;
+  defaultValue?: string | number;
+  disabled?: boolean;
+  value?: string | number;
+  required?: boolean;
+  valid?: boolean;
+  placeholder?: string;
+  children?: React.ReactNode;
+  name?: string;
+  bgType?: Fill;
+  color?: Color;
+  textColor?: Color;
+  colorFocus?: Color;
+  size?: 'medium' | 'large';
+  inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
+  autoComplete?: string;
+  ref?: React.Ref<HTMLElement>;
+  onChange?: (e: Event, value: string | number, name: string, action: 'select' | undefined) => void;
+  onFocus?: (e: Event, name: string) => void;
+  onBlur?: (e: Event, name: string) => void;
+  onKeyDown?: (e: Event, name: string) => void;
+  type?: 'text'
+    | 'password'
+    | 'email'
+    | 'tel'
+    | 'date';
+  validation?: (ValidationType|((value: string | number) => boolean))[];
+}
+
 interface TooltipProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   content: React.ReactNode;
@@ -429,6 +460,7 @@ interface RegExps {
 }
 
 declare const Avatar: React.ComponentType<AvatarProps>;
+declare const Autocomplete: React.ComponentType<AutocompleteProps>;
 declare const Button: React.ComponentType<ButtonProps>;
 declare const Checkbox: React.ComponentType<CheckboxProps>;
 declare const ContentLoader: React.ComponentType<ContentLoaderProps>;
