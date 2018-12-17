@@ -437,6 +437,7 @@ export default class TextField extends PureComponent {
       autoComplete,
       autoFocus,
       children,
+      validation,
       ...other
     } = this.props;
     const {
