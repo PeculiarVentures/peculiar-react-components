@@ -30,6 +30,10 @@ export default [
         title: 'Avatar',
       },
       {
+        pathname: '/demos/autocomplete',
+        title: 'Autocomplete',
+      },
+      {
         pathname: '/demos/button',
         title: 'Button',
       },

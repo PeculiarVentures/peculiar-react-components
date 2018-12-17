@@ -69,6 +69,7 @@ export default class TextField extends PureComponent {
   }
 
   static propTypes = {
+    children: PropTypes.node,
     tabIndex: PropTypes.number,
     /**
      * The CSS class name of the wrapper element.
@@ -182,6 +183,7 @@ export default class TextField extends PureComponent {
   };
 
   static defaultProps = {
+    children: null,
     tabIndex: 0,
     className: '',
     defaultValue: undefined,
@@ -434,6 +436,7 @@ export default class TextField extends PureComponent {
       inputProps,
       autoComplete,
       autoFocus,
+      children,
       ...other
     } = this.props;
     const {
@@ -484,6 +487,7 @@ export default class TextField extends PureComponent {
           onKeyUp={this._onEnterPress}
         >
           {this._renderPasswordBtn()}
+          {children}
         </Input>
       </label>
     );
