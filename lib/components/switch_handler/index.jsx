@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import Typography from '../typography';
 
 /**
  * SwitchHandler component (for extend)
@@ -31,11 +32,18 @@ export default class SwitchHandler extends PureComponent {
     /**
      * Label for toggle
      */
-    label: PropTypes.node, // eslint-disable-line
+    label: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]),
     /**
      * Where the label will be placed next to the toggle
      */
-    labelPosition: PropTypes.oneOf(['left', 'right']), // eslint-disable-line
+    labelPosition: PropTypes.oneOf(['left', 'right']),
+    /**
+     * `Typography` props for label
+     */
+    labelProps: PropTypes.object, // eslint-disable-line
     /**
      * The CSS class name of the root element
      */
@@ -72,7 +80,9 @@ export default class SwitchHandler extends PureComponent {
     defaultChecked: false,
     disabled: false,
     inputProps: {},
+    label: undefined,
     labelPosition: 'left',
+    labelProps: {},
     className: '',
     tabIndex: 0,
     bgType: 'fill',
@@ -82,9 +92,13 @@ export default class SwitchHandler extends PureComponent {
     iconColorOn: 'white',
   };
 
-  state = {
-    checkedState: !!(this.props.checked || this.props.defaultChecked),
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      checkedState: !!(props.checked || props.defaultChecked),
+    };
+  }
 
   componentWillReceiveProps(nextProps) {
     const { checked } = this.props;
@@ -105,6 +119,7 @@ export default class SwitchHandler extends PureComponent {
     const { checkedState } = this.state;
 
     if (onCheck) onCheck(e, !checkedState);
+
     if (!{}.hasOwnProperty.call(this.props, 'checked')) {
       this.setState({
         checkedState: !checkedState,
@@ -113,28 +128,22 @@ export default class SwitchHandler extends PureComponent {
   };
 
   /**
-   * onKeyUp handler
-   * @param {SytheticEvent} e
-   */
-  onKeyUp = (e) => {
-    const keyCode = e.keyCode;
-
-    if (keyCode === 13) {
-      this.onChange(e);
-    }
-  };
-
-  /**
    * renderLabel
    * @return {ReactElement} markup
    */
-  renderLabel(className) {
-    const { label } = this.props;
+  renderLabel() {
+    const { label, labelPosition, labelProps } = this.props;
 
     return label && (
-      <div className={className}>
+      <Typography
+        type="b2"
+        color="black"
+        className="switch_label"
+        data-position={labelPosition}
+        {...labelProps}
+      >
         {label}
-      </div>
+      </Typography>
     );
   }
 

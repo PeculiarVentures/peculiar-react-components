@@ -22,7 +22,7 @@ export default class Usage extends Component {
     } = this.state;
 
     return (
-      <div>
+      <div style={{ textAlign: 'center' }}>
         <Checkbox
           style={{
             marginRight: 10,
