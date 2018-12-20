@@ -1,9 +1,18 @@
 .checkbox
+  cursor: pointer
+  transition: opacity 300ms
+  font-size: 0
   position: relative
   display: inline-block
   vertical-align: top
-  cursor: pointer
-  transition: opacity 300ms
+  .switch_label
+    display: inline-block
+    vertical-align: middle
+    width: calc(100% - 20px)
+    &[data-position="left"]
+      padding-right: 10px
+    &[data-position="right"]
+      padding-left: 10px
   &_input
     position: absolute
     cursor: inherit
@@ -84,3 +93,5 @@
         border-color: var(--grey, $grey)
       .checkbox_icon
         fill: var(--white, $white)
+    .switch_label
+      opacity: .5

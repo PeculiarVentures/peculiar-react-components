@@ -8,6 +8,10 @@
 
 {{"demo": "/demos/checkbox/fill.jsx", "showCode": "true"}}
 
+## With label
+
+{{"demo": "/demos/checkbox/label.jsx", "showCode": "true"}}
+
 ## Controlled
 
 {{"demo": "/demos/checkbox/controlled.jsx", "showCode": "true"}}

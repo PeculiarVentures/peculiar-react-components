@@ -3,7 +3,7 @@ import { Checkbox } from 'lib-react-components';
 
 export default function Usage() {
   return (
-    <div>
+    <div style={{ textAlign: 'center' }}>
       <Checkbox
         style={{
           marginRight: 10,

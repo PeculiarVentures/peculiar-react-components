@@ -269,6 +269,9 @@ interface SwitchHandler {
   iconColor?: Color;
   iconColorOn?: Color;
   ref?: React.Ref<HTMLElement>;
+  label?: string | number;
+  labelPosition?: 'left' | 'right';
+  labelProps?: TypographyProps;
 }
 
 interface SwitchProps extends SwitchHandler {}

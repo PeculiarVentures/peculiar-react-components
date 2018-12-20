@@ -3,7 +3,7 @@ import { Switch } from 'lib-react-components';
 
 export default function Usage() {
   return (
-    <div>
+    <div style={{ textAlign: 'center' }}>
       <Switch
         style={{
           marginRight: 10,

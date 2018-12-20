@@ -1,5 +1,5 @@
 import React from 'react';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import SwitchHandler from '../switch_handler';
 
 /**
@@ -19,6 +19,7 @@ export default class Switch extends SwitchHandler {
       inputProps,
       label,
       labelPosition,
+      labelProps,
       className,
       tabIndex,
       bgType,
@@ -36,37 +37,38 @@ export default class Switch extends SwitchHandler {
         data-type={bgType}
         data-checked={checkedState}
         data-disabled={disabled}
-        className={classNames(
+        className={classnames(
           'switch',
           className,
         )}
         {...other}
       >
+        {labelPosition === 'left' ? this.renderLabel() : null}
         <input
           {...inputProps}
           tabIndex={tabIndex}
           type="checkbox"
           className="switch_input"
           onChange={this.onChange}
-          onKeyUp={this.onKeyUp}
           disabled={disabled}
           checked={checkedState}
         />
         <div
-          className={classNames(
+          className={classnames(
             'switch_container',
             [`switch_${bgType}_${color}`],
             [`switch_${bgType}_${colorOn}_checked`],
           )}
         >
           <div
-            className={classNames(
+            className={classnames(
               'switch_tumbler',
               [`switch_fill_${iconColor}`],
               [`switch_fill_${iconColorOn}_checked`],
             )}
           />
         </div>
+        {labelPosition === 'right' ? this.renderLabel() : null}
       </div>
     );
   }
