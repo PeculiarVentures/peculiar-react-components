@@ -30,6 +30,7 @@ export default function Usage() {
           display: 'inline-block',
           marginRight: 10,
         }}
+        color="grey"
       >
         <Button>
           Click me
@@ -38,13 +39,14 @@ export default function Usage() {
       <Tooltip
         action="focus"
         content={
-          <p>
+          <p className="text_white">
             Tooltip content
           </p>
         }
         style={{
           display: 'inline-block',
         }}
+        color="black"
       >
         <Button>
           Focus me
