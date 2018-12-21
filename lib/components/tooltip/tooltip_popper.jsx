@@ -1,7 +1,8 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import { Popper } from 'react-popper';
+import RightTriangleIcon from '../icons/right_triangle';
 
 /**
  * TooltipPopper component
@@ -17,6 +18,7 @@ export default function TooltipPopper(props) {
     placement: placementProp,
     positionFixed,
     offset,
+    color,
     ...other
   } = props;
 
@@ -70,29 +72,25 @@ export default function TooltipPopper(props) {
             data-component="tooltip_popper"
           >
             <div
-              className={classNames(
+              className={classnames(
                 'tooltip',
-                'fill_white',
+                `fill_${color}`,
                 'shadow',
                 'round_small',
               )}
               data-placement={placement}
             >
               {arrow && (
-                <Fragment>
-                  <div
-                    ref={arrowProps.ref}
-                    style={arrowProps.style}
-                    className="tooltip_arrow"
-                    data-component="tooltip_arrow"
+                <div
+                  ref={arrowProps.ref}
+                  style={arrowProps.style}
+                  data-component="tooltip_arrow"
+                  className="tooltip_arrow"
+                >
+                  <RightTriangleIcon
+                    className={classnames('tooltip_arrow_icon', `fill_${color}`)}
                   />
-                  <div
-                    ref={arrowProps.ref}
-                    style={arrowProps.style}
-                    className="tooltip_arrow_border"
-                    data-component="tooltip_arrow"
-                  />
-                </Fragment>
+                </div>
               )}
               {children}
             </div>
@@ -154,6 +152,10 @@ TooltipPopper.propTypes = {
    * Padding from popper to `referenceElement` in `px`.
    */
   offset: PropTypes.number,
+  /**
+   * Color for tooltip component
+   */
+  color: PropTypes.string,
 };
 
 TooltipPopper.defaultProps = {
@@ -162,4 +164,5 @@ TooltipPopper.defaultProps = {
   placement: 'auto',
   positionFixed: true,
   offset: 10,
+  color: 'white',
 };

@@ -94,6 +94,10 @@ export default class Tooltip extends Component {
      * default with the null value.
      */
     autoHideDuration: PropTypes.number,
+    /**
+     * Color for tooltip component
+     */
+    color: PropTypes.string,
   }
 
   static defaultProps = {
@@ -105,6 +109,7 @@ export default class Tooltip extends Component {
     offset: 10,
     onClose() {},
     autoHideDuration: 0,
+    color: 'white',
   }
 
   constructor(props) {
@@ -426,6 +431,7 @@ export default class Tooltip extends Component {
       open: openProp,
       onClose,
       autoHideDuration,
+      color,
       ...other
     } = this.props;
     const { open } = this.state;
@@ -472,6 +478,7 @@ export default class Tooltip extends Component {
           positionFixed={positionFixed}
           arrow={arrow}
           offset={offset}
+          color={color}
         >
           {content}
         </TooltipPopper>

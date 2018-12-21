@@ -388,6 +388,7 @@ interface TooltipProps extends React.HTMLAttributes<HTMLDivElement> {
   open?: boolean;
   onClose?: () => void;
   autoHideDuration?: number;
+  color?: Color;
 }
 
 interface TooltipPopperProps {
@@ -398,6 +399,7 @@ interface TooltipPopperProps {
   positionFixed?: boolean;
   offset?: number;
   referenceElement?: React.Ref<HTMLElement>;
+  color?: Color;
 }
 
 interface TypographyBasicProps {

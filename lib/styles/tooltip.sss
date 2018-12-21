@@ -8,50 +8,34 @@
   padding: 16px 20px
   animation: fadeIn 150ms forwards
   position: relative
+  border: none
 
   &[data-placement^="top"]
     .tooltip_arrow
-      border-color: #fff transparent transparent transparent
       top: 100%
-    .tooltip_arrow_border
-      top: calc(100% + 1px)
-      border-color: rgba(214, 219, 222, .15) transparent transparent transparent
+      transform: rotate(180deg)
+      transform-origin: 50% 50%
 
   &[data-placement^="bottom"]
     .tooltip_arrow
-      border-color: transparent transparent #fff transparent
       bottom: 100%
-    .tooltip_arrow_border
-      bottom: calc(100% + 1px)
-      border-color: transparent transparent rgba(214, 219, 222, .15) transparent
 
   &[data-placement^="left"]
     .tooltip_arrow
-      border-color: transparent transparent transparent #fff
       left: 100%
-    .tooltip_arrow_border
-      left: calc(100% + 1px)
-      border-color: transparent transparent transparent rgba(214, 219, 222, .15)
+      transform: rotate(90deg)
+      transform-origin: 40% 20%
 
   &[data-placement^="right"]
     .tooltip_arrow
-      border-color: transparent #fff transparent transparent
       right: 100%
-    .tooltip_arrow_border
-      right: calc(100% + 1px)
-      border-color: transparent rgba(214, 219, 222, .15) transparent transparent
+      transform: rotate(-90deg)
+      transform-origin: 60% 20%
+
   &_arrow
     z-index: 2
     position: absolute
-    content: ''
-    width: 0
-    height: 0
-    border-style: solid
-    border-width: 8px 8px 8px 8px
-  &_arrow_border
-    position: absolute
-    content: ''
-    width: 0
-    height: 0
-    border-style: solid
-    border-width: 8px 8px 8px 8px
+    height: 7px
+  &_arrow_icon
+    display: block
+    height: 100%
