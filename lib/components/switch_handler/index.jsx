@@ -8,6 +8,10 @@ import Typography from '../typography';
 export default class SwitchHandler extends PureComponent {
   static propTypes = {
     /**
+     * Name attribute for input tag
+     */
+    name: PropTypes.string,
+    /**
      * Initial state for input
      */
     defaultChecked: PropTypes.bool,
@@ -77,6 +81,7 @@ export default class SwitchHandler extends PureComponent {
   };
 
   static defaultProps = {
+    name: undefined,
     defaultChecked: false,
     disabled: false,
     inputProps: {},

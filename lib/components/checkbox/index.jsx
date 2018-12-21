@@ -13,6 +13,7 @@ export default class Checkbox extends SwitchHandler {
    */
   render() {
     const {
+      name,
       defaultChecked,
       disabled,
       onCheck,
@@ -53,6 +54,7 @@ export default class Checkbox extends SwitchHandler {
           onChange={this.onChange}
           disabled={disabled}
           checked={checkedState}
+          name={name}
         />
         <div
           className={classnames(

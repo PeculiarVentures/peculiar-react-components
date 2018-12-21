@@ -256,6 +256,7 @@ interface SnackbarProps {
 }
 
 interface SwitchHandler {
+  name?: string;
   defaultChecked?: boolean;
   disabled?: boolean;
   onCheck?: (e: Event, checked: boolean) => void;
