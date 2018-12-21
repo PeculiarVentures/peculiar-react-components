@@ -398,7 +398,7 @@ interface TooltipPopperProps {
   placement?: PlacementType;
   positionFixed?: boolean;
   offset?: number;
-  referenceElement?: React.Ref<HTMLElement>;
+  referenceElement?: HTMLElement;
   color?: Color;
 }
 
