@@ -271,7 +271,7 @@ interface SwitchHandler {
   ref?: React.Ref<HTMLElement>;
   label?: string | number;
   labelPosition?: 'left' | 'right';
-  labelProps?: TypographyProps;
+  labelProps?: TypographyBasicProps;
 }
 
 interface SwitchProps extends SwitchHandler {}
@@ -399,14 +399,17 @@ interface TooltipPopperProps {
   referenceElement?: React.Ref<HTMLElement>;
 }
 
-interface TypographyProps {
-  children: React.ReactNode;
+interface TypographyBasicProps {
   type?: TypographyType
   tabletType?: TypographyType;
   mobileType?: TypographyType;
   color?: Color;
   align?: 'left' | 'center' | 'right' | 'auto';
   className?: string;
+}
+
+interface TypographyProps extends TypographyBasicProps {
+  children: React.ReactNode;
   ref?: React.Ref<HTMLElement>;
 }
 
