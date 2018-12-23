@@ -2,23 +2,35 @@
   "env": {
     "commonjs": {
       "presets": [
-        "env",
-        "react",
-        "stage-0"
+        "@babel/preset-env",
+        "@babel/preset-react",
+        "@babel/preset-typescript"
+      ],
+      "plugins": [
+        "@babel/plugin-proposal-class-properties",
+        "@babel/plugin-syntax-dynamic-import"
       ]
     },
     "esm": {
       "presets": [
-        ["env", { "modules": false }],
-        "react",
-        "stage-0"
+        ["@babel/preset-env", { "modules": false }],
+        "@babel/preset-react",
+        "@babel/preset-typescript",
+      ],
+      "plugins": [
+        "@babel/plugin-proposal-class-properties",
+        "@babel/plugin-syntax-dynamic-import"
       ]
     },
     "test": {
       "presets": [
-        "env",
-        "stage-0",
-        "react"
+        "@babel/preset-env",
+        "@babel/preset-react",
+        "@babel/preset-typescript"
+      ],
+      "plugins": [
+        "@babel/plugin-proposal-class-properties",
+        "@babel/plugin-syntax-dynamic-import"
       ]
     }
   }

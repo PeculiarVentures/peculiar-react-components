@@ -1,13 +1,12 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "esnext",
     "module": "commonjs",
     "checkJs": false,
     "jsx": "react",
-    "declaration": true,
     "declarationMap": false,
     "sourceMap": true,
-    "outDir": "lib",
+    "outDir": "commonjs",
     "strict": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
@@ -17,6 +16,7 @@
     "noImplicitReturns": true,
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "isolatedModules": true
   }
 }

@@ -13,7 +13,7 @@
   "module": "esm/index.js",
   "sideEffects": false,
   "scripts": {
-    "test": "BABEL_ENV=test NODE_ENV=test jest",
+    "test": "BABEL_ENV=test NODE_ENV=test jest --config jest.config.js",
     "lint": "eslint --ext .js,.jsx lib app test",
     "development": "cd ./app && npm run development",
     "predevelopment": "npm run theme:create",
@@ -23,7 +23,8 @@
     "build:esm": "BABEL_ENV=esm babel lib --out-dir esm --extensions \".js,.jsx,.ts,.tsx\" --ignore *.css,*.sss,*.spec.js,*.spec.jsx --source-maps",
     "build": "npm run check:types && npm run build:commonjs && npm run build:esm",
     "prebuild": "npm run clean",
-    "clean": "rimraf commonjs && rimraf esm"
+    "clean": "rimraf commonjs && rimraf esm",
+    "clear_jest": "jest --clearCache"
   },
   "repository": {
     "type": "git",
@@ -50,16 +51,20 @@
     "react-popper": "^1.0.2"
   },
   "devDependencies": {
-    "@types/react": "^16.7.18",
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.2.3",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/plugin-transform-runtime": "^7.2.0",
+    "@babel/preset-env": "^7.2.3",
+    "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.1.0",
-    "babel-cli": "^6.26.0",
+    "@babel/register": "^7.0.0",
+    "@types/classnames": "^2.2.6",
+    "@types/react": "^16.7.18",
+    "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^8.2.2",
     "babel-jest": "^23.6.0",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1",
-    "babel-register": "^6.26.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "eslint": "^4.18.2",
