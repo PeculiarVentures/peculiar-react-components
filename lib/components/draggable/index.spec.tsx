@@ -1,7 +1,6 @@
 import React from 'react';
 import { mount, ReactWrapper } from 'enzyme';
 import { Draggable, DraggableProps } from '../../../';
-import { wrap } from 'module';
 
 jest.useFakeTimers();
 
