@@ -13,7 +13,7 @@
   "module": "esm/index.js",
   "sideEffects": false,
   "scripts": {
-    "test": "BABEL_ENV=test NODE_ENV=test jest",
+    "test": "jest --coverage",
     "lint": "eslint --ext .js,.jsx lib app test",
     "development": "cd ./app && npm run development",
     "predevelopment": "npm run theme:create",
@@ -22,7 +22,8 @@
     "build:esm": "BABEL_ENV=esm babel lib --out-dir esm --ignore *.css,*.sss,*.spec.js,*.spec.jsx --source-maps",
     "build": "npm run build:commonjs && npm run build:esm",
     "prebuild": "npm run clean",
-    "clean": "rimraf commonjs && rimraf esm"
+    "clean": "rimraf commonjs && rimraf esm",
+    "compile:esm": "tsc"
   },
   "repository": {
     "type": "git",
@@ -45,12 +46,16 @@
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-popper": "^1.0.2"
+    "react-popper": "^1.0.2",
+    "tslib": "^1.9.3"
   },
   "devDependencies": {
+    "@types/classnames": "^2.2.6",
+    "@types/enzyme": "^3.1.15",
+    "@types/jest": "^23.3.10",
+    "@types/react": "^16.7.18",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.2",
-    "babel-jest": "^23.6.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
@@ -69,7 +74,12 @@
     "jsdom": "^11.6.2",
     "jsdom-global": "^3.0.2",
     "rimraf": "^2.6.2",
-    "traverse": "^0.6.6"
+    "traverse": "^0.6.6",
+    "ts-jest": "^23.10.5",
+    "tslint": "^5.12.0",
+    "tslint-config-airbnb": "^5.11.1",
+    "tslint-react": "^3.6.0",
+    "typescript": "^3.2.2"
   },
   "files": [
     "LICENSE.md",
