@@ -452,6 +452,15 @@ interface DraggableProps {
   color?: Color;
 }
 
+interface DraggableStatic {
+  Precision: (num: number) => number;
+  rectIntersect: (r1: number[], r2: number[]) => boolean;
+  isRectsEqual: (r1: number[], r2: number[]) => boolean;
+  rectToPixels: (contianerSize: [number, number], rect: [number, number, number, number]) => [number, number, number, number];
+  rectToPercents: (contianerSize: [number, number], rect: [number, number, number, number]) => [number, number, number, number];
+  getCoordsFromEvent: (event: React.MouseEvent<any> | React.TouchEvent<any>) => [number, number];
+}
+
 interface WindowSize {
   width: number;
   height: number;
@@ -509,7 +518,7 @@ declare const EyeInvisibleIcon: React.ComponentType<EyeInvisibleIconProps>;
 declare const EyeVisibleIcon: React.ComponentType<EyeVisibleIconProps>;
 declare const RequiredIcon: React.ComponentType<RequiredIconProps>;
 declare const SelectArrowIcon: React.ComponentType<SelectArrowIconProps>;
-declare const Draggable: React.ComponentType<any>;
+declare const Draggable: React.ComponentType<DraggableProps> & DraggableStatic;
 
 declare const DeviceProvider: React.ComponentType<DeviceProviderProps>;
 declare const OfflineProvider: React.ComponentType<OfflineProviderProps>;
