@@ -4,6 +4,9 @@
     "module": "commonjs",
     "checkJs": false,
     "jsx": "react",
+    "types": [
+      "jest"
+    ],
     "declarationMap": false,
     "sourceMap": true,
     "outDir": "commonjs",
