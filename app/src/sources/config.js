@@ -54,6 +54,10 @@ export default [
         title: 'Counter',
       },
       {
+        pathname: '/demos/draggable',
+        title: 'Draggable',
+      },
+      {
         pathname: '/demos/highlight-code',
         title: 'Highlight code',
       },
