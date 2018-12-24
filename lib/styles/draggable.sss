@@ -1,0 +1,88 @@
+.draggable
+  &_background,
+  &_border
+    position: absolute
+    width: 100%
+    height: 100%
+    top: 0
+    left: 0
+  &_background
+    opacity: 0.1
+  &_border
+    opacity: 0.5
+    border-style: dashed !important
+  &_dot
+    width: 24px
+    height: 24px
+    border-radius: 50%
+    position: absolute
+    cursor: pointer
+    &.top_left
+      left: -12px
+      top: -12px
+      z-index: 1
+      cursor: nwse-resize
+    &.top_right
+      right: -12px
+      top: -12px
+      z-index: 2
+      cursor: nesw-resize
+    &.bottom_left
+      left: -12px
+      bottom: -12px
+      z-index: 3
+      cursor: nesw-resize
+    &.bottom_right
+      right: -12px
+      bottom: -12px
+      z-index: 4
+      cursor: nwse-resize
+    .inner
+      display: block
+      width: 50%
+      height: 50%
+      border: 2px solid white
+      border-radius: 50%
+      position: relative
+      top: 50%
+      left: 50%
+      transform: translate(-50%,-50%)
+      pointer-events: none
+  &_dot_add
+    cursor: pointer
+    position: absolute
+    line-height: 0
+    text-align: center
+    width: 20px
+    height: 20px
+    border-radius: 50%
+    .inner
+      width: 6px
+      height: 6px
+      border-radius: 50%
+      border-width: 1px
+      background: white
+      position: absolute
+      top: 7px
+      left: 7px
+      pointer-events: none
+    &.bottom
+      right: calc(50% - 10px)
+      bottom: -10px
+      cursor: ns-resize
+      z-index: 5
+    &.top
+      right: calc(50% - 10px)
+      top: -10px
+      cursor: ns-resize
+      z-index: 6
+    &.left
+      top: calc(50% - 10px)
+      left: -10px
+      cursor: ew-resize
+      z-index: 7
+    &.right
+      top: calc(50% - 10px)
+      right: -10px
+      cursor: ew-resize
+      z-index: 8

@@ -442,6 +442,16 @@ interface SegueHandlerProps {
   defaultValue?: string | number;
 }
 
+interface DraggableProps {
+  rect: [number, number, number, number];
+  containerSizes: [number, number];
+  onChange?: (rect: [number, number, number, number]) => void;
+  onRemove?: () => void;
+  onCancel?: () => void;
+  active?: boolean;
+  color?: Color;
+}
+
 interface WindowSize {
   width: number;
   height: number;
@@ -499,6 +509,7 @@ declare const EyeInvisibleIcon: React.ComponentType<EyeInvisibleIconProps>;
 declare const EyeVisibleIcon: React.ComponentType<EyeVisibleIconProps>;
 declare const RequiredIcon: React.ComponentType<RequiredIconProps>;
 declare const SelectArrowIcon: React.ComponentType<SelectArrowIconProps>;
+declare const Draggable: React.ComponentType<any>;
 
 declare const DeviceProvider: React.ComponentType<DeviceProviderProps>;
 declare const OfflineProvider: React.ComponentType<OfflineProviderProps>;
