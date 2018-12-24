@@ -1,11 +1,17 @@
 import React from 'react';
 import { mount, ReactWrapper } from 'enzyme';
-import { Draggable, DraggableProps } from '../../../';
+import Draggable, { IDraggableProps } from './index';
 
 jest.useFakeTimers();
 
+interface IGlobal {
+  defaultComponentOptions: any;
+}
+
+declare var global: IGlobal;
+
 describe('Draggable', () => {
-  let wrapper: ReactWrapper<DraggableProps, {}, Draggable> | null;
+  let wrapper: ReactWrapper<IDraggableProps, {}, Draggable> | null;
 
   function getStyle(obj: HTMLDivElement) {
     return {
@@ -16,7 +22,7 @@ describe('Draggable', () => {
     };
   }
 
-  const basicProps: DraggableProps = {
+  const basicProps: IDraggableProps = {
     containerSizes: [500, 500],
     rect: [25, 25, 50, 50],
   };

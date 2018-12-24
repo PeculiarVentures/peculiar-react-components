@@ -5,7 +5,9 @@
     "checkJs": false,
     "jsx": "react",
     "types": [
-      "jest"
+      "jest",
+      "node",
+      "hammerjs"
     ],
     "declarationMap": false,
     "sourceMap": true,
@@ -20,6 +22,9 @@
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "typeRoots": [
+      "node_modules/@types"
+    ]
   }
 }

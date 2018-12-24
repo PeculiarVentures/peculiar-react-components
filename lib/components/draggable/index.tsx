@@ -4,7 +4,7 @@ import classNames from 'classnames';
 export type FieldRect = [number, number, number, number];
 export type Vec2 = [number, number];
 
-let Hammer: any;
+let Hammer: HammerStatic;
 
 if (window) {
   Hammer = require('hammerjs');
