@@ -13,7 +13,7 @@
   "module": "esm/index.js",
   "sideEffects": false,
   "scripts": {
-    "test": "BABEL_ENV=test NODE_ENV=test jest --config jest.config.js",
+    "test": "BABEL_ENV=test NODE_ENV=test jest",
     "lint": "eslint --ext .js,.jsx lib app test",
     "development": "cd ./app && npm run development",
     "predevelopment": "npm run theme:create",

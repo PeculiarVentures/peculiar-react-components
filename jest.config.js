@@ -7,15 +7,18 @@ module.exports = {
   moduleFileExtensions: [
     'js',
     'jsx',
+    'ts',
+    'tsx',
   ],
   transform: {
     '^.+\\.jsx?$': 'babel-jest',
+    '^.+\\.tsx?$': 'babel-jest',
   },
   testMatch: [
-    '**/*.spec.(js|jsx)',
+    '**/*.spec.(js|jsx|ts|tsx)',
   ],
   collectCoverageFrom: [
-    'lib/**.{js|jsx}',
+    'lib/**.{js|jsx|ts|tsx}',
   ],
   coverageDirectory: 'coverage',
   coverageReporters: ['lcov', 'html'],
