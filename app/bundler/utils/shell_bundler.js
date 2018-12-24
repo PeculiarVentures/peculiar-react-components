@@ -279,8 +279,6 @@ class ShellBundler {
         .then(() => callback())
         .catch((error) => {
           compilation.errors.push(new Error(error));
-          console.log(templatesEntry, outputPathName);
-          console.log(error);
           throw error;
         });
     });
