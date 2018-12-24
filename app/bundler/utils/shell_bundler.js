@@ -12,6 +12,9 @@ const uuid = require('./uuid').default;
 
 const beautifyHtml = beautify.html;
 
+global.window = undefined;
+global.document = undefined;
+
 const renderToStaticDocument = (Component, props) => (
   renderToStaticMarkup(<IntlWrapper inShell><Component {...props} /></IntlWrapper>) // eslint-disable-line
 );
@@ -276,6 +279,8 @@ class ShellBundler {
         .then(() => callback())
         .catch((error) => {
           compilation.errors.push(new Error(error));
+          console.log(templatesEntry, outputPathName);
+          console.log(error);
           throw error;
         });
     });
