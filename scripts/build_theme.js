@@ -69,8 +69,8 @@ const fonts = {
     await themeConstructor.createThemes([
       {
         name: 'default',
-        entry: path.join(__dirname, '../styles/index.sss'),
-        out: path.join(__dirname, '../themes'),
+        entry: path.join(__dirname, '../lib/styles/index.sss'),
+        out: path.join(__dirname, '../lib/themes'),
         options: {
           palette: {
             primary: '#4DA3FC',
@@ -134,8 +134,8 @@ const fonts = {
       },
       {
         name: 'if',
-        entry: path.join(__dirname, '../styles/index.sss'),
-        out: path.join(__dirname, '../themes'),
+        entry: path.join(__dirname, '../lib/styles/index.sss'),
+        out: path.join(__dirname, '../lib/themes'),
         options: {
           palette: {
             primary: '#3D7DFF',
@@ -198,8 +198,8 @@ const fonts = {
       },
       {
         name: 'tc',
-        entry: path.join(__dirname, '../styles/index.sss'),
-        out: path.join(__dirname, '../themes'),
+        entry: path.join(__dirname, '../lib/styles/index.sss'),
+        out: path.join(__dirname, '../lib/themes'),
         options: {
           palette: {
             primary: '#8F70FA',

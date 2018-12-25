@@ -9,21 +9,19 @@
     "ui",
     "javascript"
   ],
-  "main": "commonjs/index.js",
+  "main": "cjs/index.js",
   "module": "esm/index.js",
   "sideEffects": false,
   "scripts": {
     "test": "jest --coverage",
-    "lint": "eslint --ext .js,.jsx lib app test",
+    "lint": "eslint --ext .js,.jsx app scripts && tslint --format stylish lib/**/**/*.{ts,tsx}",
     "development": "cd ./app && npm run development",
-    "predevelopment": "npm run theme:create",
-    "theme:create": "node lib/utils/build_theme.js",
-    "build:commonjs": "BABEL_ENV=commonjs babel lib --out-dir commonjs --ignore *.css,*.sss,*.spec.js,*.spec.jsx --source-maps",
-    "build:esm": "BABEL_ENV=esm babel lib --out-dir esm --ignore *.css,*.sss,*.spec.js,*.spec.jsx --source-maps",
-    "build": "npm run build:commonjs && npm run build:esm",
-    "prebuild": "npm run clean",
     "clean": "rimraf commonjs && rimraf esm",
-    "compile:esm": "tsc"
+    "prebuild": "npm run clean",
+    "build": "npm run build:esm && npm run build:cjs && npm run build:theme",
+    "build:esm": "tsc",
+    "build:cjs": "tsc -p ./tsconfig.cjs.json",
+    "build:theme": "node ./scripts/build_theme.js"
   },
   "repository": {
     "type": "git",
@@ -85,7 +83,7 @@
     "LICENSE.md",
     "README.md",
     "lib/",
-    "commonjs/",
+    "cjs/",
     "esm/",
     "index.d.ts"
   ]

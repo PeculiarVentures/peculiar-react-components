@@ -1,7 +1,7 @@
 module.exports = {
   setupFiles: [
-    './test/utils/test_shim.js',
-    './test/utils/test_setup.js',
+    './scripts/test_shim.js',
+    './scripts/test_setup.js',
   ],
   moduleFileExtensions: [
     'ts',
@@ -15,7 +15,7 @@ module.exports = {
     '**/*.spec.(ts|tsx)',
   ],
   collectCoverageFrom: [
-    'src/**.{ts|tsx}',
+    'lib/**.{ts|tsx}',
   ],
   coverageDirectory: 'coverage',
   coverageReporters: ['lcov', 'html'],

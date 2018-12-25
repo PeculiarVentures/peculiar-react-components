@@ -27,10 +27,10 @@
     "stripInternal": true,
     "target": "es5",
     "typeRoots": ["./node_modules/@types"],
-    "outDir": "./dist/esm",
+    "outDir": "./esm",
   },
   "include": [
-    "src/**/*"
+    "lib/**/*"
   ],
   "exclude": [
     "node_modules",

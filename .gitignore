@@ -7,6 +7,6 @@ package-lock.json
 app/dst
 **/compiled_env.json
 dist
-/commonjs
+/cjs
 /esm
 /coverage

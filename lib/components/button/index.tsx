@@ -65,20 +65,24 @@ export class Button extends React.Component<IButtonProps> {
     const isLink = this.isLink();
     const component = isLink ? 'a' : 'button';
 
-    return React.createElement(component, {
-      ...other,
-      'data-component': 'button',
-      'data-type': bgType,
-      href: isLink ? href : undefined,
-      className: classnames(
-        'button',
-        'round_small',
-        [`text_${align}`],
-        [`button_${size}`],
-        [`button_${bgType}_${color}`],
-        [`button_text_${textColor}`],
-        className,
-      ),
-    }, children);
+    return React.createElement(
+      component,
+      {
+        ...other,
+        'data-component': 'button',
+        'data-type': bgType,
+        href: isLink ? href : undefined,
+        className: classnames(
+          'button',
+          'round_small',
+          [`text_${align}`],
+          [`button_${size}`],
+          [`button_${bgType}_${color}`],
+          [`button_text_${textColor}`],
+          className,
+        ),
+      },
+      children,
+    );
   }
 }
