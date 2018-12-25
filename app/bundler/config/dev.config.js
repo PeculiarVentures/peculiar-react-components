@@ -10,7 +10,6 @@ const getCommitHash = require('../utils/get_commit_hash');
 const getClientEnvironment = require('../utils/env');
 
 const env = getClientEnvironment();
-const THEME_NAME = env.raw.THEME_NAME || 'default';
 const publicPath = '/';
 
 module.exports = {
