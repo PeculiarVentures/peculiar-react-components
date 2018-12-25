@@ -1,6 +1,6 @@
-/* eslint "import/no-extraneous-dependencies": 1 */
+import ghPages from 'gh-pages'; // eslint-disable-line
 
-const ghPages = require('gh-pages');
+const debug = require('./debug')('deploy:gh-pages');
 
 /**
  * Deploy dir to gh-pages
@@ -17,7 +17,9 @@ const ghPages = require('gh-pages');
  *    type in "GH_EMAIL" and for the value type in your email address associated
  *    with your github account.
  */
-module.exports = function deployToGhPages(publishDir) {
+export default function deployToGhPages(publishDir) {
+  debug('> START');
+
   return new Promise((resolve, reject) => {
     let result = {};
 
@@ -35,11 +37,13 @@ module.exports = function deployToGhPages(publishDir) {
       result,
       (err) => {
         if (err) {
+          debug(`> FAILED: Uploading files - ${err}`);
           reject(err);
         } else {
+          debug('> SUCCESS: Finished Uploading files...');
           resolve();
         }
       },
     );
   });
-};
+}

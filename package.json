@@ -13,9 +13,9 @@
   "module": "esm/index.js",
   "sideEffects": false,
   "scripts": {
+    "start": "cd ./app && npm start",
     "test": "jest --coverage",
     "lint": "eslint --ext .js,.jsx app scripts && tslint --format stylish lib/**/**/*.{ts,tsx}",
-    "development": "cd ./app && npm run development",
     "clean": "rimraf commonjs && rimraf esm",
     "prebuild": "npm run clean",
     "build": "npm run build:esm && npm run build:cjs && npm run build:theme",

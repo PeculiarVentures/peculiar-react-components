@@ -1,0 +1,42 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "module": "esnext",
+    "target": "es5",
+    "lib": ["es6", "dom"],
+    "types": [
+      "node",
+      "react",
+      "react-dom"
+    ],
+    "sourceMap": true,
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "jsx": "react",
+    "moduleResolution": "node",
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "importHelpers": true,
+    "strictNullChecks": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "noUnusedLocals": true,
+    "esModuleInterop": true,
+    "typeRoots": [
+      "node_modules/@types",
+      "src/typings.d.ts"
+    ]
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "bundler",
+    "test",
+    "**/*.spec.*",
+    "**/*.specb.*"
+  ]
+}
