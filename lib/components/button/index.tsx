@@ -58,6 +58,16 @@ export class Button extends React.Component<IButtonProps> {
     return href && !disabled;
   }
 
+  private renderChildren() {
+    const { children } = this.props;
+
+    return (
+      <span>
+        {children}
+      </span>
+    );
+  }
+
   render() {
     const {
       bgType,
@@ -67,7 +77,6 @@ export class Button extends React.Component<IButtonProps> {
       size,
       href,
       children,
-      disabled,
       className,
       ...other
     } = this.props;
@@ -84,14 +93,16 @@ export class Button extends React.Component<IButtonProps> {
         className: classnames(
           'button',
           'round_small',
-          [`text_${align}`],
+          'truncate_text',
           [`button_${size}`],
-          [`button_${bgType}_${color}`],
-          [`button_text_${textColor}`],
+          [`text_${align}`],
+          [`text_${textColor}`],
+          [`stroke_${color}`],
+          [`fill_${color}`],
           className,
         ),
       },
-      children,
+      this.renderChildren(),
     );
   }
 }
