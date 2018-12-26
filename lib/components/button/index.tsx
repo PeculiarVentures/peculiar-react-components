@@ -30,7 +30,7 @@ export interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEleme
    */
   href?: string;
   /**
-   * This is what will be displayed inside the button
+   * This is what will be displayed inside the component
    */
   children: React.ReactNode;
   /**

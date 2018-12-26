@@ -6,8 +6,14 @@ import 'prismjs/components/prism-bash';
 import 'prismjs/components/prism-glsl';
 import { Omit } from '../../typings';
 
-export interface IHighlightCodeProps {
+export interface IHighlightCodeProps extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * This is what will be displayed inside the component
+   */
   children: React.ReactNode;
+  /**
+   * Supported highlighting languages
+   */
   lang?: 'css' |
     'html' |
     'javascript' |
@@ -19,6 +25,9 @@ export interface IHighlightCodeProps {
     'bash' |
     'glsl' |
     'none';
+  /**
+   * The CSS class name of the root element
+   */
   className?: string;
 }
 
@@ -41,20 +50,23 @@ export class HighlightCode extends React.Component<IHighlightCodeProps> {
     const { lang } = this.props;
     const grammar = Prism.languages[lang];
     const repeatSymbol: any = '&nbsp;';
-    let _html = this.rootNode.textContent;
+    let html = this.rootNode.textContent;
 
     if (grammar) {
       try {
-        _html = Prism.highlight(_html, grammar);
+        html = Prism.highlight(html, grammar);
       } catch (err) {
-        console.warn(`React Components Highlighter: There is an error highlighting lang ${lang}`, err);
+        console.warn(
+          `React Components Highlighter: There is an error highlighting lang ${lang}`,
+          err,
+        );
       }
     } else {
-      _html = _html.replace(/[<>]/g, s => `&#${s.charCodeAt(0)};`);
+      html = html.replace(/[<>]/g, s => `&#${s.charCodeAt(0)};`);
     }
 
     // Treat iOS whie-space: pre; behavior
-    this.rootNode.innerHTML = _html
+    this.rootNode.innerHTML = html
       .replace(/\n/g, '<br>')
       .replace(/<br>[ ]+/g, str => `<br>${repeatSymbol.repeat(str.length - 5)}`)
       .replace(/^[ ]+/g, str => repeatSymbol.repeat(str.length));

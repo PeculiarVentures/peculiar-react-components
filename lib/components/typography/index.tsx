@@ -15,13 +15,34 @@ type TextType = 'h1' |
   'c1' |
   string;
 
-export interface ITypographyProps {
+export interface ITypographyProps extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * This is what will be displayed inside the component
+   */
   children: React.ReactNode;
+  /**
+   * Typography type
+   */
   type?: TextType;
+  /**
+   * Typography type for tablet
+   */
   tabletType?: TextType;
+  /**
+   * Typography type for mobile
+   */
   mobileType?: TextType;
+  /**
+   * Component color from theme
+   */
   color?: string;
+  /**
+   * Component content aligment
+   */
   align?: 'left' | 'center' | 'right' | 'auto';
+  /**
+   * The CSS class name of the root element
+   */
   className?: string;
 }
 

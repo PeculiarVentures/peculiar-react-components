@@ -1,14 +1,14 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import {
-  Router,
+  BrowserRouter,
   Route,
   Switch,
   Redirect,
 } from 'react-router-dom';
 import { asyncComponent } from 'react-async-component';
 import Example from './components/example';
-import history from './utils/history';
+import Sidebar from './components/sidebar';
 import docsConfig from './docs/config';
 
 const Main = asyncComponent({
@@ -37,13 +37,31 @@ class Routing extends React.Component {
     ));
 
     return (
-      <Router history={history}>
-        <Switch>
-          <Route exact={true} path="/" component={Main} />
-          {routes}
-          <Redirect to="/" />
-        </Switch>
-      </Router>
+      <BrowserRouter>
+        <div
+          style={{
+            height: '100%',
+            display: 'flex',
+          }}
+        >
+          <Sidebar
+            pages={docsConfig}
+          />
+          <div
+            style={{
+              width: '100%',
+              overflow: 'auto',
+              WebkitOverflowScrolling: 'touch',
+            }}
+          >
+            <Switch>
+              <Route exact={true} path="/" component={Main} />
+              {routes}
+              <Redirect to="/" />
+            </Switch>
+          </div>
+        </div>
+      </BrowserRouter>
     );
   }
 }
