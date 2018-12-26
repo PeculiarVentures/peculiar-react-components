@@ -6,6 +6,7 @@
   "rules": {
     "variable-name": [true, "ban-keywords", "check-format", "allow-pascal-case"],
     "import-name": false,
-    "no-boolean-literal-compare": false
+    "no-boolean-literal-compare": false,
+    "jsx-no-multiline-js": false,
   }
 }

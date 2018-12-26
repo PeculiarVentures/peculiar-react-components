@@ -91,6 +91,11 @@ module.exports = {
     symlinks: false,
     modules: [path.resolve('node_modules')],
   },
+  resolveLoader: {
+    alias: {
+      'doc-loader': path.join(__dirname, '../utils/doc-loader/index.js'),
+    },
+  },
   optimization: {
     runtimeChunk: 'single',
     splitChunks: {
@@ -223,6 +228,16 @@ module.exports = {
       {
         test: /\.(png|jp?g)$/,
         use: ['url-loader'],
+      },
+      {
+        test: /\.md?$/,
+        use: [{
+          loader: 'doc-loader',
+          options: {
+            examplesDirPath: './src/docs',
+          },
+        }],
+        exclude: /node_modules/,
       },
     ],
   },
