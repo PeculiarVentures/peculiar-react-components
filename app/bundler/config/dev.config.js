@@ -35,6 +35,8 @@ module.exports = {
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    symlinks: false,
+    modules: [path.resolve('node_modules')],
   },
   optimization: {
     runtimeChunk: 'single',

@@ -11,6 +11,7 @@
   ],
   "main": "cjs/index.js",
   "module": "esm/index.js",
+  "typings": "esm/index.d.ts",
   "sideEffects": false,
   "scripts": {
     "start": "cd ./app && npm start",
