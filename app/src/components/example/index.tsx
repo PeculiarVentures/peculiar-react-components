@@ -30,7 +30,7 @@ export default class Example extends React.Component<IExampleProps> {
                 DemoComponent = asyncComponent({
                   resolve: () => import(
                     /* webpackChunkName: "[request]" */
-                    `../../sources${d.options.demo}`)
+                    `../../docs${d.options.demo}`)
                     .then(Module => () => (
                       <div className={s.demo_container}>
                         <Module.default />
