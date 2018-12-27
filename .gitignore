@@ -10,3 +10,4 @@ dist
 /cjs
 /esm
 /coverage
+.awcache
