@@ -15,7 +15,9 @@ module.exports = {
     '**/*.spec.(ts|tsx)',
   ],
   collectCoverageFrom: [
-    'lib/**.{ts|tsx}',
+    'lib/**.tsx',
+    '!**/**.story.tsx',
+    '!**/**.spec.tsx',
   ],
   coverageDirectory: 'coverage',
   coverageReporters: ['lcov', 'html'],

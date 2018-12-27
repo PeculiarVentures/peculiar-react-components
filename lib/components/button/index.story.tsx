@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { select, boolean } from '@storybook/addon-knobs';
+import { select, boolean, text } from '@storybook/addon-knobs';
 import { Button } from './index';
 
 const bgType = {
@@ -31,6 +31,7 @@ const props: any = {
     textColor: select('Text color (textColor)', color, 'white'),
     size: select('Size (size)', size, 'medium'),
     disabled: boolean('Disabled (disabled)', false),
+    children: text('Children (children)', 'Button'),
   }),
 };
 
@@ -39,10 +40,6 @@ storiesOf('Button', module)
     const regularProps = props.regular();
 
     return (
-      <Button
-        {...regularProps}
-      >
-        Button
-      </Button>
+      <Button {...regularProps} />
     );
   });

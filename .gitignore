@@ -4,7 +4,6 @@
 node_modules
 package-lock.json
 *.log
-app/dst
 **/compiled_env.json
 dist
 /cjs

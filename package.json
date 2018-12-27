@@ -14,9 +14,8 @@
   "typings": "esm/index.d.ts",
   "sideEffects": false,
   "scripts": {
-    "start": "cd ./app && npm start",
     "test": "jest --coverage",
-    "lint": "eslint --ext .js,.jsx app scripts && tslint --format stylish lib/**/**/*.{ts,tsx}",
+    "lint": "eslint --ext .js,.jsx scripts && tslint --format stylish lib/**/**/*.{ts,tsx}",
     "clean": "rimraf commonjs && rimraf esm",
     "prebuild": "npm run clean",
     "build": "npm run build:esm && npm run build:cjs && npm run build:theme",
