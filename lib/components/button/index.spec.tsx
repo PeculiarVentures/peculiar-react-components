@@ -11,6 +11,7 @@ describe('<Button />', () => {
     );
     const buttonNode = wrapper.find('button');
 
+    expect(buttonNode.prop('data-component')).toBe('button');
     expect(buttonNode.children().html()).toBe('<span>Button</span>');
     expect(buttonNode.exists()).toBe(true);
   });
@@ -24,7 +25,6 @@ describe('<Button />', () => {
     const buttonNode = wrapper.find('button');
 
     expect(buttonNode.prop('disabled')).toBe(undefined);
-    expect(buttonNode.prop('data-component')).toBe('button');
     // tslint:disable-next-line
     expect(buttonNode.prop('className')).toBe('button round_small truncate_text button_medium text_center text_white stroke_primary fill_primary');
   });

@@ -9,7 +9,9 @@ describe('<Typography />', () => {
         Hello
       </Typography>,
     );
+    const pNode = wrapper.find('p');
 
-    expect(wrapper.find('p').exists()).toBe(true);
+    expect(pNode.prop('data-component')).toBe('typography');
+    expect(pNode.exists()).toBe(true);
   });
 });
