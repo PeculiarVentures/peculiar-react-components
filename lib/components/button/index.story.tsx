@@ -16,6 +16,7 @@ const color = {
   success: 'success',
   wrong: 'wrong',
   white: 'white',
+  light_grey: 'light_grey',
 };
 
 const size = {
