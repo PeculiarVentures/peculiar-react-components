@@ -58,7 +58,7 @@ export class Button extends React.Component<IButtonProps> {
     return href && !disabled;
   }
 
-  private renderChildren() {
+  private renderChildren(): JSX.Element {
     const { children } = this.props;
 
     return (
@@ -68,7 +68,7 @@ export class Button extends React.Component<IButtonProps> {
     );
   }
 
-  render() {
+  render(): JSX.Element {
     const {
       bgType,
       color,

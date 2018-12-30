@@ -57,7 +57,7 @@ export class Typography extends React.Component<ITypographyProps> {
     device: PropTypes.object,
   };
 
-  render() {
+  render(): JSX.Element {
     const {
       children,
       type: propsType,

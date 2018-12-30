@@ -38,15 +38,15 @@ export class HighlightCode extends React.Component<IHighlightCodeProps> {
     lang: 'js',
   };
 
-  componentDidMount() {
+  componentDidMount(): void {
     this.hightlight();
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(): void {
     this.hightlight();
   }
 
-  private hightlight() {
+  private hightlight(): void {
     const { lang } = this.props;
     const grammar = Prism.languages[lang];
     const repeatSymbol: any = '&nbsp;';
@@ -72,7 +72,7 @@ export class HighlightCode extends React.Component<IHighlightCodeProps> {
       .replace(/^[ ]+/g, str => repeatSymbol.repeat(str.length));
   }
 
-  render() {
+  render(): JSX.Element {
     const {
       children,
       lang,

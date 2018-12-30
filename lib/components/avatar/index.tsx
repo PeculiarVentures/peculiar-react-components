@@ -48,13 +48,13 @@ export class Avatar extends React.Component<IAvatarProps> {
     textColor: 'primary',
   };
 
-  private onErrorHandler = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+  private onErrorHandler = (e: React.SyntheticEvent<HTMLImageElement, Event>): void => {
     const { defaultSrc } = this.props;
 
     e.currentTarget.src = defaultSrc;
   }
 
-  render() {
+  render(): JSX.Element {
     const {
       letters,
       className,
