@@ -17,7 +17,7 @@ export interface ISwitchHandlerProps extends React.HTMLAttributes<HTMLDivElement
   /**
    * Callback function that is fired when the toggle switch is toggled
    */
-  onCheck?: (e: React.ChangeEvent<HTMLInputElement>, checked: boolean) => void;
+  onCheck?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   /**
    * Toggled if set to true
    */
@@ -103,11 +103,15 @@ export class SwitchHandler extends React.PureComponent<ISwitchHandlerProps, ISwi
   }
 
   public onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const { onCheck } = this.props;
+    const { onCheck, onChange } = this.props;
     const { checkedState } = this.state;
 
     if (onCheck) {
-      onCheck(e, !checkedState);
+      onCheck(e);
+    }
+
+    if (onChange) {
+      onChange(e);
     }
 
     if (!{}.hasOwnProperty.call(this.props, 'checked')) {
