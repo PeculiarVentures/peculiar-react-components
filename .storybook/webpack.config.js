@@ -24,6 +24,15 @@ module.exports = (baseConfig, env, config) => {
       },
     ],
   });
+  
+  config.module.rules.push({
+    test: /\.story\.(ts|tsx)$/,
+    loaders: [{
+      loader: require.resolve('@storybook/addon-storysource/loader'),
+      options: { parser: 'typescript' }
+    }],
+    enforce: 'pre',
+  });
 
   config.optimization = {
     runtimeChunk: 'single',
