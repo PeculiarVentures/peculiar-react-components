@@ -38,7 +38,7 @@ export class CircularProgress extends React.PureComponent<ICircularProgressProps
     thickness: 4,
   };
 
-  render() {
+  render(): JSX.Element {
     const {
       className,
       color,
