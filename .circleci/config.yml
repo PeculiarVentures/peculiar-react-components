@@ -27,11 +27,11 @@ jobs:
       - run:
           name: run-test-command
           command: 'npm run test'
-      - deploy:
-          name: deploy
-          when: on_success
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              # Deploy to gh-pages
-              cd app && npm run deploy:gh-pages
-            fi
+    #   - deploy:
+    #       name: deploy
+    #       when: on_success
+    #       command: |
+    #         if [ "${CIRCLE_BRANCH}" == "master" ]; then
+    #           # Deploy to gh-pages
+    #           cd app && npm run deploy:gh-pages
+    #         fi

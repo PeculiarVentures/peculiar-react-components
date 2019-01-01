@@ -1,1 +1,1 @@
-export { default as CheckmarkIcon } from './checkmark';
+export * from './checkmark';
