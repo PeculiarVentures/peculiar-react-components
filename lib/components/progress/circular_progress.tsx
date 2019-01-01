@@ -28,7 +28,7 @@ export interface ICircularProgressProps extends React.HTMLAttributes<HTMLDivElem
   thickness?: number;
 }
 
-export class CircularProgress extends React.Component<ICircularProgressProps> {
+export class CircularProgress extends React.PureComponent<ICircularProgressProps> {
   private SIZE: number = 50;
 
   public static defaultProps: ICircularProgressProps = {
@@ -56,9 +56,9 @@ export class CircularProgress extends React.Component<ICircularProgressProps> {
         className={classnames('circle_progress', className)}
         // tslint:disable-next-line
         style={{
+          ...style,
           width: size,
           height: size,
-          ...style,
         }}
       >
         <svg
