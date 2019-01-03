@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import { Omit } from '../../typings';
 
 export interface IModalProps {
@@ -8,7 +8,10 @@ export interface IModalProps {
    * This is what will be displayed inside the component
    */
   children: React.ReactNode;
-  transparent?: boolean;
+  /**
+   * Opacity value for overlay element from `0` to `1`
+   */
+  transparent?: number;
   /**
    * The CSS class name of the root element
    */
@@ -21,15 +24,26 @@ export interface IModalProps {
    * Component background from theme
    */
   color?: string;
+  /**
+   * Props for content element
+   */
+  contentProps?: React.HTMLAttributes<HTMLElement>;
+  /**
+   * Use CSS for align content for vertical and horizontal
+   */
+  center?: boolean;
 }
 
 export class Modal extends React.Component<IModalProps> {
   public static defaultProps: Omit<IModalProps, 'children'> = {
+    transparent: 1,
     color: 'white',
+    contentProps: {},
+    center: false,
   };
 
-  public rootElement: Element;
   public bodyElement: Element;
+  public rootElement: Element;
 
   constructor(props: IModalProps) {
     super(props);
@@ -37,48 +51,74 @@ export class Modal extends React.Component<IModalProps> {
     this.bodyElement = window.document.body;
 
     this.rootElement = document.createElement('div');
-
-    this.rootElement.className = classNames(
-      'modal',
-      [`fill_${props.color}`],
-      { m_transparent: props.transparent },
-      props.className,
-    );
+    this.rootElement.className = classnames('modal', props.className);
+    this.rootElement.setAttribute('data-component', 'modal');
+    this.rootElement.setAttribute('data-center', String(props.center));
   }
 
   componentDidMount() {
     this.bodyElement.appendChild(this.rootElement);
     this.bodyElement.addEventListener('keyup', this.onKeyUp);
-    this.rootElement.addEventListener('click', this.onClick);
   }
 
   componentWillUnmount() {
     this.bodyElement.removeChild(this.rootElement);
     this.bodyElement.removeEventListener('keyup', this.onKeyUp);
-    this.rootElement.removeEventListener('click', this.onClick);
   }
 
-  public onKeyUp = (e: KeyboardEvent): void => {
+  private getTransparentValue(): number {
+    const { transparent } = this.props;
+
+    if (transparent > 1) {
+      return 1;
+    }
+
+    if (transparent < 0) {
+      return 0;
+    }
+
+    return transparent;
+  }
+
+  private onKeyUp = (e: KeyboardEvent): void => {
     const { onClose } = this.props;
 
-    if (e.keyCode === 27 && onClose) {
+    if (e.key === 'Escape' && onClose) {
       onClose();
     }
   }
 
-  public onClick = (e: MouseEvent): void => {
+  private onClick = (): void => {
     const { onClose } = this.props;
 
-    if (e.target === this.rootElement && onClose) {
+    if (onClose) {
       onClose();
     }
+  }
+
+  private renderContent(): JSX.Element {
+    const { children, color, contentProps } = this.props;
+
+    return (
+      <React.Fragment>
+        <div
+          className={classnames('modal_overlay', [`fill_${color}`])}
+          style={{ opacity: this.getTransparentValue() }}
+          onClick={this.onClick}
+        />
+        <div
+          {...contentProps}
+          className={classnames('modal_content', contentProps.className)}
+        >
+          {children}
+        </div>
+      </React.Fragment>
+    );
   }
 
   render(): JSX.Element {
-    const { children } = this.props;
-
     return ReactDOM.createPortal(
-      children,
+      this.renderContent(),
       this.rootElement,
     );
   }
