@@ -4,6 +4,10 @@ import { Omit } from '../../typings';
 
 export interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
+   * This is what will be displayed inside the component
+   */
+  children: React.ReactNode;
+  /**
    * Component type one of `fill` or `stroke`.
    * If `fill` - component will be have background-color from `color` props.
    * If `stroke` - component will be have border-color from `color` props.
@@ -29,10 +33,6 @@ export interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEleme
    * The URL to link to when the button is clicked
    */
   href?: string;
-  /**
-   * This is what will be displayed inside the component
-   */
-  children: React.ReactNode;
   /**
    * Disables the button if set to true
    */

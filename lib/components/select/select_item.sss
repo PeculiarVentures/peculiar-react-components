@@ -2,10 +2,8 @@
   letter-spacing: 0.04em
   cursor: pointer
   width: auto
-  text-overflow: ellipsis
-  white-space: nowrap
-  overflow: hidden
   transition: color 300ms, background-color 300ms, opacity 300ms
+
   &_medium
     padding: 0 10px
     font-size: $input-medium-fontSize
@@ -18,19 +16,15 @@
   &[data-disabled="true"]
     pointer-events: none
     cursor: default
-    color: rgba($black, .1)
+    color: var(--grey, $grey)
+    opacity: .4
 
-  &[data-disabled="false"]
-    &:hover
-      opacity: .5
-    &.select_item_text
+  &[data-has-focus="true"]
+    &.select_item_focus
       @each $key in $colors
         &_$(key)
-          color: var(--$(key), $$(key))
-          &[data-has-focus="true"]
-            background-color: rgba($$(key), .05)
-    &[data-selected="true"]
-      &.select_item_selected
-        @each $key in $colors
-          &_$(key)
-            color: var(--$(key), $$(key))
+          background-color: rgba($$(key), .05)
+
+  &:not([data-disabled="true"])
+    &:hover
+      opacity: .5

@@ -3,7 +3,7 @@ import { mount } from 'enzyme';
 import { Typography } from './index';
 
 describe('<Typography />', () => {
-  it('render without errors', () => {
+  it('expect default render', () => {
     const wrapper = mount(
       <Typography>
         Hello
