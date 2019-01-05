@@ -16,10 +16,14 @@ const color = {
 
 const props: any = {
   regular: () => ({
-    color: select('Color (color)', color, 'light_grey'),
-    colorProgress: select('Color progress (colorProgress)', color, 'primary'),
-    size: number('Size (size)', 24),
-    thickness: number('Thickness (thickness)', 4),
+    color: select('Color (color)', color, CircularProgress.defaultProps.color),
+    colorProgress: select(
+      'Color progress (colorProgress)',
+      color,
+      CircularProgress.defaultProps.colorProgress,
+    ),
+    size: number('Size (size)', CircularProgress.defaultProps.size),
+    thickness: number('Thickness (thickness)', CircularProgress.defaultProps.thickness),
   }),
 };
 

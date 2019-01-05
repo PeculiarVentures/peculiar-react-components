@@ -16,8 +16,8 @@ const color = {
 
 const props: any = {
   regular: () => ({
-    color: select('Overlay color (color)', color, 'white'),
-    transparent: number('Overlay transparent (transparent)', 1),
+    color: select('Overlay color (color)', color, Modal.defaultProps.color),
+    transparent: number('Overlay transparent (transparent)', Modal.defaultProps.transparent),
   }),
 };
 

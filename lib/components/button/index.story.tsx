@@ -27,12 +27,12 @@ const size = {
 
 const props: any = {
   regular: () => ({
-    bgType: select('Background type (bgType)', bgType, 'fill'),
-    color: select('Color (color)', color, 'primary'),
-    textColor: select('Text color (textColor)', color, 'white'),
-    size: select('Size (size)', size, 'medium'),
-    disabled: boolean('Disabled (disabled)', false),
+    bgType: select('Background type (bgType)', bgType, Button.defaultProps.bgType),
+    color: select('Color (color)', color, Button.defaultProps.color),
+    textColor: select('Text color (textColor)', color, Button.defaultProps.textColor),
+    size: select('Size (size)', size, Button.defaultProps.size),
     children: text('Children (children)', 'Button'),
+    disabled: boolean('Disabled (disabled)', false),
   }),
 };
 

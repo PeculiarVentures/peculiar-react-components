@@ -26,17 +26,25 @@ const labelPosition = {
 
 const props: any = {
   regular: () => ({
-    bgType: select('Background type (bgType)', bgType, 'fill'),
-    color: select('Color (color)', color, 'light_grey'),
-    colorOn: select('Color checked (colorOn)', color, 'primary'),
-    iconColor: select('Icon color (iconColor)', color, 'grey'),
-    iconColorOn: select('Icon color checked (iconColorOn)', color, 'white'),
-    disabled: boolean('Disabled (disabled)', false),
-    label: text('Label (label)', ''),
-    labelPosition: select('Label position (labelPosition)', labelPosition, 'left'),
+    bgType: select('Background type (bgType)', bgType, Checkbox.defaultProps.bgType),
+    color: select('Color (color)', color, Checkbox.defaultProps.color),
+    colorOn: select('Color checked (colorOn)', color, Checkbox.defaultProps.colorOn),
+    iconColor: select('Icon color (iconColor)', color, Checkbox.defaultProps.iconColor),
+    iconColorOn: select(
+      'Icon color checked (iconColorOn)',
+      color,
+      Checkbox.defaultProps.iconColorOn,
+    ),
+    labelPosition: select(
+      'Label position (labelPosition)',
+      labelPosition,
+      Checkbox.defaultProps.labelPosition,
+    ),
     labelProps: {
       color: select('Label color (labelProps -> color)', color, 'black'),
     },
+    label: text('Label (label)', ''),
+    disabled: boolean('Disabled (disabled)', false),
   }),
 };
 

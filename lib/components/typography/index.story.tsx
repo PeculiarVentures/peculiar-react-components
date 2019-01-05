@@ -36,9 +36,9 @@ const type = {
 
 const props: any = {
   regular: () => ({
-    type: select('Type (type)', type, 'h1'),
-    color: select('Color (color)', color, 'black'),
-    align: select('Align (align)', align, 'left'),
+    type: select('Type (type)', type, Typography.defaultProps.type),
+    color: select('Color (color)', color, Typography.defaultProps.color),
+    align: select('Align (align)', align, Typography.defaultProps.align),
     children: text('Children (children)', 'Typography text'),
   }),
 };

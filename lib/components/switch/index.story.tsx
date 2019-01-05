@@ -26,17 +26,21 @@ const labelPosition = {
 
 const props: any = {
   regular: () => ({
-    bgType: select('Background type (bgType)', bgType, 'fill'),
-    color: select('Color (color)', color, 'light_grey'),
-    colorOn: select('Color checked (colorOn)', color, 'primary'),
-    iconColor: select('Icon color (iconColor)', color, 'grey'),
-    iconColorOn: select('Icon color checked (iconColorOn)', color, 'white'),
-    disabled: boolean('Disabled (disabled)', false),
-    label: text('Label (label)', ''),
-    labelPosition: select('Label position (labelPosition)', labelPosition, 'left'),
+    bgType: select('Background type (bgType)', bgType, Switch.defaultProps.bgType),
+    color: select('Color (color)', color, Switch.defaultProps.color),
+    colorOn: select('Color checked (colorOn)', color, Switch.defaultProps.colorOn),
+    iconColor: select('Icon color (iconColor)', color, Switch.defaultProps.iconColor),
+    iconColorOn: select('Icon color checked (iconColorOn)', color, Switch.defaultProps.iconColorOn),
+    labelPosition: select(
+      'Label position (labelPosition)',
+      labelPosition,
+      Switch.defaultProps.labelPosition,
+    ),
     labelProps: {
       color: select('Label color (labelProps -> color)', color, 'black'),
     },
+    label: text('Label (label)', ''),
+    disabled: boolean('Disabled (disabled)', false),
   }),
 };
 

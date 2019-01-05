@@ -71,11 +71,11 @@ export class Radio extends React.PureComponent<IRadioProps> {
     checked: false,
     disabled: false,
     labelPosition: 'left',
-    bgType: 'fill',
+    bgType: 'stroke',
     color: 'light_grey',
     colorOn: 'primary',
     iconColor: 'grey',
-    iconColorOn: 'white',
+    iconColorOn: 'primary',
   };
 
   private onChange = (e: React.ChangeEvent<HTMLInputElement>) => {

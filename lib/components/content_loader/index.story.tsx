@@ -16,7 +16,7 @@ const color = {
 
 const props: any = {
   regular: () => ({
-    color: select('Color (color)', color, 'grey'),
+    color: select('Color (color)', color, ContentLoader.defaultProps.color),
     width: number('Width (width)', 500),
     height: number('Height (height)', 70),
   }),

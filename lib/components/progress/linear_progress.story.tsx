@@ -16,8 +16,12 @@ const color = {
 
 const props: any = {
   regular: () => ({
-    color: select('Color (color)', color, 'light_grey'),
-    colorProgress: select('Color progress (colorProgress)', color, 'primary'),
+    color: select('Color (color)', color, LinearProgress.defaultProps.color),
+    colorProgress: select(
+      'Color progress (colorProgress)',
+      color,
+      LinearProgress.defaultProps.colorProgress,
+    ),
     value: number('Value (value)', 10),
   }),
 };

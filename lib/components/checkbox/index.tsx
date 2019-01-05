@@ -6,11 +6,11 @@ import CheckmarkIcon from '../../icons/checkmark';
 export class Checkbox extends SwitchHandler {
   public static defaultProps: ISwitchHandlerProps = {
     labelPosition: 'left',
-    bgType: 'fill',
+    bgType: 'stroke',
     color: 'light_grey',
     colorOn: 'primary',
     iconColor: 'grey',
-    iconColorOn: 'white',
+    iconColorOn: 'primary',
   };
 
   render(): JSX.Element {

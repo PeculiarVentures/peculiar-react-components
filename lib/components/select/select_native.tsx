@@ -40,6 +40,9 @@ export interface ISelectNativeProps extends React.HTMLAttributes<HTMLElement> {
    * Properties applied to the select element.
    */
   inputProps?: React.SelectHTMLAttributes<HTMLSelectElement>;
+  /**
+   * Arrow icon component for button show/hide dropdow
+   */
   arrowComponent?: React.ReactNode;
   /**
    * Component type one of `fill` or `stroke`.
@@ -63,22 +66,17 @@ export interface ISelectNativeProps extends React.HTMLAttributes<HTMLElement> {
    * Component size.
    */
   size?: 'medium' | 'large';
-  /**
-   * Select dropdown opened place
-   */
-  placement?: 'top' | 'bottom';
 }
 
 export class SelectNative extends React.PureComponent<ISelectNativeProps> {
   public inputNode: HTMLSelectElement;
 
   public static defaultProps: Omit<ISelectNativeProps, 'children'> = {
-    bgType: 'fill',
+    bgType: 'stroke',
     color: 'light_grey',
     textColor: 'black',
     colorFocus: 'primary',
     size: 'medium',
-    placement: 'bottom',
   };
 
   private renderOpenButton(): JSX.Element {
@@ -108,7 +106,6 @@ export class SelectNative extends React.PureComponent<ISelectNativeProps> {
       textColor,
       colorFocus,
       size,
-      placement,
       ...other
     } = this.props;
 

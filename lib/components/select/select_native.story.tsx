@@ -1,35 +1,40 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-// import { select, text, boolean } from '@storybook/addon-knobs';
+import { select, boolean } from '@storybook/addon-knobs';
 import { SelectNative } from './index';
 
-// const color = {
-//   primary: 'primary',
-//   secondary: 'secondary',
-//   black: 'black',
-//   grey: 'grey',
-//   success: 'success',
-//   wrong: 'wrong',
-//   white: 'white',
-//   light_grey: 'light_grey',
-// };
+const color = {
+  primary: 'primary',
+  secondary: 'secondary',
+  black: 'black',
+  grey: 'grey',
+  success: 'success',
+  wrong: 'wrong',
+  white: 'white',
+  light_grey: 'light_grey',
+};
 
-// const size = {
-//   medium: 'medium',
-//   large: 'large',
-// };
+const size = {
+  medium: 'medium',
+  large: 'large',
+};
 
-// const props: any = {
-//   regular: () => ({
-//     color: select('Color (color)', color, SelectItem.defaultProps.color),
-//     colorFocus: select('Color focus (colorFocus)', color, SelectItem.defaultProps.colorFocus),
-//     selected: boolean('Selected (selected)', false),
-//     disabled: boolean('Disabled (disabled)', false),
-//     hasFocus: boolean('Has focus (hasFocus)', false),
-//     size: select('Size (size)', size, SelectItem.defaultProps.size),
-//     children: text('Children (children)', 'Select item text'),
-//   }),
-// };
+const bgType = {
+  fill: 'fill',
+  stroke: 'stroke',
+};
+
+const props: any = {
+  regular: () => ({
+    bgType: select('Background type (bgType)', bgType, SelectNative.defaultProps.bgType),
+    size: select('Size (size)', size, SelectNative.defaultProps.size),
+    color: select('Color (color)', color, SelectNative.defaultProps.color),
+    colorFocus: select('Color focus (colorFocus)', color, SelectNative.defaultProps.colorFocus),
+    textColor: select('Color text (textColor)', color, SelectNative.defaultProps.textColor),
+    disabled: boolean('Disabled (disabled)', false),
+  }),
+};
+
 const options = [
   {
     label: 'Mercury',
@@ -67,10 +72,11 @@ const options = [
 
 storiesOf('SelectNative', module)
   .add('default', () => {
-    // const regularProps = props.regular();
+    const regularProps = props.regular();
 
     return (
       <SelectNative
+        {...regularProps}
         style={{ width: 300 }}
       >
         {options.map(opt => ( // tslint:disable-line

@@ -77,11 +77,11 @@ interface ISwitchHandlerState {
 export class SwitchHandler extends React.PureComponent<ISwitchHandlerProps, ISwitchHandlerState> {
   public static defaultProps: ISwitchHandlerProps = {
     labelPosition: 'left',
-    bgType: 'fill',
+    bgType: 'stroke',
     color: 'light_grey',
     colorOn: 'primary',
     iconColor: 'grey',
-    iconColorOn: 'white',
+    iconColorOn: 'primary',
   };
 
   constructor(props: ISwitchHandlerProps) {

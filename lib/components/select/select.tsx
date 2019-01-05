@@ -34,8 +34,17 @@ export interface ISelectProps extends Omit<React.HTMLAttributes<HTMLElement>, 'p
     value: string | number,
     name: string,
   ) => void;
+  /**
+   * Callback function fired when a root element has focus.
+   */
   onFocus?: (e: React.FocusEvent<HTMLDivElement>, name: string) => void;
+  /**
+   * Callback function fired when a root element lost focus.
+   */
   onBlur?: (e: React.FocusEvent<HTMLDivElement>, name: string) => void;
+  /**
+   * Callback function fired when a key pressed on the root element.
+   */
   onKeyDown?: (e: React.KeyboardEvent<HTMLDivElement>, name: string) => void;
   /**
    * Element tabIndex.
@@ -54,6 +63,9 @@ export interface ISelectProps extends Omit<React.HTMLAttributes<HTMLElement>, 'p
    * Properties applied to the input element.
    */
   inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
+  /**
+   * Arrow icon component for button show/hide dropdow
+   */
   arrowComponent?: React.ReactNode;
   /**
    * Component type one of `fill` or `stroke`.
@@ -97,7 +109,7 @@ export class Select extends React.PureComponent<ISelectProps, ISelectState> {
 
   public static defaultProps: Omit<ISelectProps, 'children'> = {
     tabIndex: 0,
-    bgType: 'fill',
+    bgType: 'stroke',
     color: 'light_grey',
     textColor: 'black',
     colorFocus: 'primary',

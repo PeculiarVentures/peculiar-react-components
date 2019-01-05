@@ -21,10 +21,10 @@ const color = {
 
 const props: any = {
   regular: () => ({
-    bgType: select('Background type (bgType)', bgType, 'fill'),
-    color: select('Color (color)', color, 'light_grey'),
-    textColor: select('Text color (textColor)', color, 'primary'),
-    size: number('Size (size)', 40),
+    bgType: select('Background type (bgType)', bgType, Avatar.defaultProps.bgType),
+    color: select('Color (color)', color, Avatar.defaultProps.color),
+    textColor: select('Text color (textColor)', color, Avatar.defaultProps.textColor),
+    size: number('Size (size)', Avatar.defaultProps.size),
     letters: text('Letters (letters)', ''),
     src: text('Src (src)', ''),
   }),

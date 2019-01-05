@@ -31,7 +31,7 @@ export class SelectDropdown extends React.PureComponent<ISelectDropdownProps> {
   dropdownNode: HTMLElement;
 
   public static defaultProps: Omit<ISelectDropdownProps, 'children'> = {
-    bgType: 'fill',
+    bgType: 'stroke',
     color: 'light_grey',
     colorFocus: 'primary',
   };
