@@ -124,11 +124,19 @@ export class SelectNative extends React.PureComponent<ISelectNativeProps> {
           // tslint:disable-next-line
           className={classnames(
             'select_field',
-            [`select_field_${size}`],
-            [`select_field_${bgType}_${color}`],
-            [`select_field_text_${textColor}`],
-            [`select_field_focus_${colorFocus}`],
+            'truncate_text',
             'round_small',
+            [`text_${textColor}`],
+            [`select_field_${size}`],
+            [`select_field_focus_${colorFocus}`],
+            [`stroke_${color}`],
+            {
+              [`fill_${color}`]: bgType === 'fill',
+              fill_white: bgType === 'stroke',
+            },
+            // [`select_field_${bgType}_${color}`],
+            // [`select_field_text_${textColor}`],
+            // [`select_field_focus_${colorFocus}`],
           )}
           name={name}
           disabled={disabled}

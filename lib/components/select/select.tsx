@@ -432,18 +432,27 @@ export class Select extends React.PureComponent<ISelectProps, ISelectState> {
           // tslint:disable-next-line
           className={classnames(
             'select_field',
-            [`select_field_${size}`],
-            [`select_field_${bgType}_${color}`],
-            [`select_field_text_${textColor}`],
-            [`select_field_focus_${colorFocus}`],
+            'truncate_text',
             'round_small',
+            [`select_field_${size}`],
+            [`select_field_focus_${colorFocus}`],
+            [`stroke_${color}`],
             {
+              [`fill_${color}`]: bgType === 'fill',
+              fill_white: bgType === 'stroke',
               select_field_empty: !valueState,
             },
           )}
           onClick={this.handleClick}
         >
-          {displayValue}
+          <span
+            // tslint:disable-next-line
+            className={classnames(
+              [`text_${textColor}`],
+            )}
+          >
+            {displayValue}
+          </span>
         </div>
         <input
           {...inputProps}

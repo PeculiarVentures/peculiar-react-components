@@ -7,5 +7,6 @@ export * from './modal';
 export * from './progress';
 export * from './progressive_image';
 export * from './radio';
+export * from './select';
 export * from './switch';
 export * from './typography';
