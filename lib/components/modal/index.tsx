@@ -42,8 +42,8 @@ export class Modal extends React.Component<IModalProps> {
     center: false,
   };
 
-  public bodyElement: Element;
-  public rootElement: Element;
+  public bodyElement: HTMLElement;
+  public rootElement: HTMLElement;
 
   constructor(props: IModalProps) {
     super(props);

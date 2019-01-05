@@ -3,8 +3,8 @@ import * as React from 'react';
 const CheckmarkIcon: React.SFC<React.SVGAttributes<HTMLOrSVGElement>> = (props): JSX.Element => {
   return (
     <svg
-      viewBox="0 0 10 7"
       {...props}
+      viewBox="0 0 10 7"
     >
       <g
         transform="rotate(45 7.115 5.192)"

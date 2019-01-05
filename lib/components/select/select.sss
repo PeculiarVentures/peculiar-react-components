@@ -20,13 +20,6 @@
     display: none
     position: absolute
     left: 0
-    width: 100%
-    border: 1px solid transparent
-    max-height: 150px
-    z-index: 1
-    overflow: auto
-    -webkit-overflow-scrolling: touch
-    transition: background 300ms, border-color 300ms
   &_field
     appearance: none
     font-family: inherit
@@ -110,7 +103,7 @@
     .select_arrow_icon
       opacity: .3
         
-  &[data-disabled="false"]
+  &:not([data-disabled="true"])
     &:focus
       box-shadow: 0 4px 10px 0 rgba(64,72,79, 0.1)
       .select_field_focus

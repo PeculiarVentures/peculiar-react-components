@@ -70,7 +70,7 @@ export class RadioGroup extends React.PureComponent<IRadioGroupProps, IRadioGrou
     } = this.props;
     const { valueState } = this.state;
 
-    return React.Children.map(children, (child, index) => {
+    return React.Children.map(children, (child: React.ReactElement<IRadioProps>, index) => {
       if (!React.isValidElement(child)) {
         return null;
       }
@@ -78,9 +78,9 @@ export class RadioGroup extends React.PureComponent<IRadioGroupProps, IRadioGrou
       return React.cloneElement(child, {
         name,
         key: index,
-        checked: valueState === (child.props as IRadioProps).value,
+        checked: valueState === child.props.value,
         onChange: this.onChange,
-      } as IRadioProps);
+      });
     });
   }
 
