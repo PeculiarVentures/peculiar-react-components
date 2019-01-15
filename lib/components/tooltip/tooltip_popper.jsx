@@ -78,6 +78,7 @@ export default function TooltipPopper(props) {
                 'shadow',
                 'round_small',
               )}
+              data-component="tooltip_content"
               data-placement={placement}
             >
               {arrow && (
