@@ -135,11 +135,6 @@ export default class Autocomplete extends Component {
       PropTypes.object,
     ]),
     /**
-     * This property helps users to fill forms faster, especially on mobile devices.
-     * The name can be confusing, as it's more like an autofill.
-     */
-    autoComplete: PropTypes.string,
-    /**
      * Array with validation types.
      */
     validation: PropTypes.arrayOf(validationPropType),
@@ -165,7 +160,6 @@ export default class Autocomplete extends Component {
     colorFocus: 'primary',
     size: 'medium',
     inputProps: {},
-    autoComplete: undefined,
     validation: undefined,
   }
 
@@ -350,7 +344,6 @@ export default class Autocomplete extends Component {
       colorFocus,
       size,
       inputProps,
-      autoComplete,
       children,
       validation,
       ...other
@@ -419,7 +412,7 @@ export default class Autocomplete extends Component {
           valid={valid}
           name={name}
           inputProps={inputProps}
-          autoComplete={autoComplete}
+          autoComplete="off"
           validation={validation}
         >
           {(options && options.length > 0) && (

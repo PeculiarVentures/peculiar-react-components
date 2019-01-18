@@ -56,7 +56,7 @@ export default function Avatar(props) {
    */
   return (
     <img
-      src={src}
+      src={src || defaultSrc}
       className={classNames(
         'avatar',
         'round_circle',
