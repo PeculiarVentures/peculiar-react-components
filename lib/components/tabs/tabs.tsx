@@ -43,7 +43,7 @@ interface ITabsState {
 }
 
 export class Tabs extends React.PureComponent<ITabsProps, ITabsState> {
-  static defaultProps: Omit<ITabsProps, 'children'> = {
+  public static defaultProps: Omit<ITabsProps, 'children'> = {
     color: 'grey',
     colorOn: 'primary',
     align: 'center',
