@@ -1,0 +1,24 @@
+.tab 
+  display: inline-block
+  vertical-align: top
+  height: 54px
+  padding: 0 17px
+  outline: none
+  border-bottom: 2px solid transparent
+  transition: color 300ms, border-color 300ms
+  background: transparent
+  font-family: inherit
+  text-decoration: none
+
+  > span
+    transition: opacity 300ms
+
+  &:not([disabled])
+    cursor: pointer
+    &:hover,
+    &:focus
+      > span
+        opacity: .5
+
+  &[data-selected="true"]
+    border-width: 0 0 2px 0 !important

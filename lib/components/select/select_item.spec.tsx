@@ -11,7 +11,7 @@ describe('<SelectItem />', () => {
     );
     const rootNode = wrapper.find('div');
 
-    expect(rootNode.prop('data-component')).toBe('select_item');
     expect(rootNode.exists()).toBe(true);
+    expect(rootNode.prop('data-component')).toBe('select_item');
   });
 });

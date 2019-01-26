@@ -9,4 +9,5 @@ export * from './progressive_image';
 export * from './radio';
 export * from './select';
 export * from './switch';
+export * from './tabs';
 export * from './typography';

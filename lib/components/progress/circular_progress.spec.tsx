@@ -7,9 +7,9 @@ describe('<CircularProgress />', () => {
     const wrapper = mount(
       <CircularProgress />,
     );
-    const divNode = wrapper.find('div');
+    const rootNode = wrapper.find('div');
 
-    expect(divNode.prop('data-component')).toBe('circular_progress');
-    expect(divNode.exists()).toBe(true);
+    expect(rootNode.exists()).toBe(true);
+    expect(rootNode.prop('data-component')).toBe('circular_progress');
   });
 });

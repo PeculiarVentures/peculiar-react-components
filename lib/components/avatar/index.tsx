@@ -75,6 +75,7 @@ export class Avatar extends React.Component<IAvatarProps> {
     if (letters && !src) {
       return (
         <div
+          {...other}
           data-component="avatar"
           data-type={bgType}
           // tslint:disable-next-line
@@ -94,7 +95,6 @@ export class Avatar extends React.Component<IAvatarProps> {
             width: size,
             lineHeight: `${size - 2}px`,
           }}
-          {...other}
         >
           {letters[0]}
         </div>
@@ -103,6 +103,7 @@ export class Avatar extends React.Component<IAvatarProps> {
 
     return (
       <img
+        {...other}
         data-component="avatar"
         data-type={bgType}
         src={src || defaultSrc}
@@ -120,7 +121,6 @@ export class Avatar extends React.Component<IAvatarProps> {
           width: size,
         }}
         onError={this.onErrorHandler}
-        {...other}
       />
     );
   }

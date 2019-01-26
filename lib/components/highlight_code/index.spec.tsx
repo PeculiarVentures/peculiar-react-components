@@ -9,9 +9,9 @@ describe('<HighlightCode />', () => {
         Hello
       </HighlightCode>,
     );
-    const preNode = wrapper.find('pre');
+    const rootNode = wrapper.find('pre');
 
-    expect(preNode.prop('data-component')).toBe('highlight_code');
-    expect(preNode.exists()).toBe(true);
+    expect(rootNode.exists()).toBe(true);
+    expect(rootNode.prop('data-component')).toBe('highlight_code');
   });
 });

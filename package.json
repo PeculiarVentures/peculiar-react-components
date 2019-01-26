@@ -18,10 +18,10 @@
     "lint": "eslint --ext .js,.jsx scripts && tslint --format stylish lib/**/**/*.{ts,tsx}",
     "clean": "rimraf commonjs && rimraf esm",
     "prebuild": "npm run clean",
-    "build": "npm run build:esm && npm run build:cjs && npm run build:theme",
+    "build": "npm run build:esm && npm run build:cjs && npm run build:css",
     "build:esm": "tsc",
     "build:cjs": "tsc -p ./tsconfig.cjs.json",
-    "build:theme": "node ./scripts/build_theme.js",
+    "build:css": "node ./scripts/build_theme.js",
     "storybook": "start-storybook -p 3000 -s ./lib/themes"
   },
   "repository": {

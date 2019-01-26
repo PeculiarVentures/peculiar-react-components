@@ -9,7 +9,7 @@ describe('<Checkbox />', () => {
     );
     const rootNode = wrapper.find('div').at(0);
 
-    expect(rootNode.prop('data-component')).toBe('checkbox');
     expect(rootNode.exists()).toBe(true);
+    expect(rootNode.prop('data-component')).toBe('checkbox');
   });
 });

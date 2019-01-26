@@ -13,7 +13,7 @@ describe('<Select />', () => {
     );
     const rootNode = wrapper.find('div').at(0);
 
-    expect(rootNode.prop('data-component')).toBe('select');
     expect(rootNode.exists()).toBe(true);
+    expect(rootNode.prop('data-component')).toBe('select');
   });
 });

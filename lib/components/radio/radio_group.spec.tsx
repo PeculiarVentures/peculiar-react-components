@@ -11,7 +11,7 @@ describe('<RadioGroup />', () => {
     );
     const rootNode = wrapper.find('div').at(0);
 
-    expect(rootNode.prop('data-component')).toBe('radio_group');
     expect(rootNode.exists()).toBe(true);
+    expect(rootNode.prop('data-component')).toBe('radio_group');
   });
 });

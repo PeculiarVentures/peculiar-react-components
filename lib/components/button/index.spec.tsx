@@ -9,11 +9,11 @@ describe('<Button />', () => {
         Button
       </Button>,
     );
-    const buttonNode = wrapper.find('button');
+    const rootNode = wrapper.find('button');
 
-    expect(buttonNode.prop('data-component')).toBe('button');
-    expect(buttonNode.children().html()).toBe('<span>Button</span>');
-    expect(buttonNode.exists()).toBe(true);
+    expect(rootNode.exists()).toBe(true);
+    expect(rootNode.prop('data-component')).toBe('button');
+    expect(rootNode.children().html()).toBe('<span>Button</span>');
   });
 
   it('expect basic button attributes', () => {
@@ -22,11 +22,11 @@ describe('<Button />', () => {
         Button
       </Button>,
     );
-    const buttonNode = wrapper.find('button');
+    const rootNode = wrapper.find('button');
 
-    expect(buttonNode.prop('disabled')).toBe(undefined);
+    expect(rootNode.prop('disabled')).toBe(undefined);
     // tslint:disable-next-line
-    expect(buttonNode.prop('className')).toBe('button round_small truncate_text button_medium text_center text_white stroke_primary fill_primary');
+    expect(rootNode.prop('className')).toBe('button round_small truncate_text button_medium text_center text_white stroke_primary fill_primary');
   });
 
   it('expect change class name for new theme props', () => {
@@ -66,10 +66,10 @@ describe('<Button />', () => {
         Button
       </Button>,
     );
-    const buttonNode = wrapper.find('button');
+    const rootNode = wrapper.find('button');
 
-    expect(buttonNode.prop('href')).toBe(undefined);
-    expect(buttonNode.prop('disabled')).toBe(true);
+    expect(rootNode.prop('href')).toBe(undefined);
+    expect(rootNode.prop('disabled')).toBe(true);
   });
 
   it('expect show className from props', () => {

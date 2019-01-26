@@ -8,10 +8,10 @@ describe('<Avatar />', () => {
 
   it('expect render img', () => {
     const wrapper = mount(<Avatar />);
-    const imgNode = wrapper.find('img');
+    const rootNode = wrapper.find('img');
 
-    expect(imgNode.prop('data-component')).toBe('avatar');
-    expect(imgNode.exists()).toBe(true);
+    expect(rootNode.exists()).toBe(true);
+    expect(rootNode.prop('data-component')).toBe('avatar');
   });
 
   it('expect ', () => {
@@ -22,10 +22,10 @@ describe('<Avatar />', () => {
 
   it('change size', () => {
     const wrapper = mount(<Avatar size={80} />);
-    const imgNode = wrapper.find('img');
+    const rootNode = wrapper.find('img');
 
-    expect(imgNode.prop('style')).toHaveProperty('height', 80);
-    expect(imgNode.prop('style')).toHaveProperty('width', 80);
+    expect(rootNode.prop('style')).toHaveProperty('height', 80);
+    expect(rootNode.prop('style')).toHaveProperty('width', 80);
   });
 
   it('with styles', () => {
@@ -45,12 +45,12 @@ describe('<Avatar />', () => {
         letters="Admin"
       />,
     );
-    const divNode = wrapper.find('div');
+    const rootNode = wrapper.find('div');
 
-    expect(divNode.text()).toBe('A');
+    expect(rootNode.text()).toBe('A');
     // tslint:disable-next-line
-    expect(divNode.prop('className')).toBe('avatar round_circle truncate_text stroke_light_grey fill_light_grey text_primary');
-    expect(divNode.prop('style')).toHaveProperty('lineHeight', '38px');
+    expect(rootNode.prop('className')).toBe('avatar round_circle truncate_text stroke_light_grey fill_light_grey text_primary');
+    expect(rootNode.prop('style')).toHaveProperty('lineHeight', '38px');
   });
 
   it('change theme', () => {
@@ -62,11 +62,11 @@ describe('<Avatar />', () => {
         textColor="black"
       />,
     );
-    const divNode = wrapper.find('div');
+    const rootNode = wrapper.find('div');
 
-    expect(divNode.text()).toBe('U');
+    expect(rootNode.text()).toBe('U');
     // tslint:disable-next-line
-    expect(divNode.prop('className')).toBe('avatar round_circle truncate_text stroke_secondary fill_secondary text_black');
+    expect(rootNode.prop('className')).toBe('avatar round_circle truncate_text stroke_secondary fill_secondary text_black');
   });
 
   it('with className', () => {

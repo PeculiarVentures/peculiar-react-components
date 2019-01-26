@@ -11,9 +11,9 @@ describe('<ContentLoader />', () => {
         <rect x="80" y="40" rx="3" ry="3" width="250" height="10" />
       </ContentLoader>,
     );
-    const svgNode = wrapper.find('svg');
+    const rootNode = wrapper.find('svg');
 
-    expect(svgNode.prop('data-component')).toBe('content_loader');
-    expect(svgNode.exists()).toBe(true);
+    expect(rootNode.exists()).toBe(true);
+    expect(rootNode.prop('data-component')).toBe('content_loader');
   });
 });

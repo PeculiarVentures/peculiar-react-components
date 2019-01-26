@@ -22,8 +22,8 @@ describe('<ProgressiveImage />', () => {
         )}
       </ProgressiveImage>,
     );
-    const imgNode = wrapper.find('img');
+    const rootNode = wrapper.find('img');
 
-    expect(imgNode.exists()).toBe(true);
+    expect(rootNode.exists()).toBe(true);
   });
 });

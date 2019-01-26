@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { Omit } from '../../typings';
 
-type TextType = 'h1' |
+export type TextType = 'h1' |
   'h2' |
   'h3' |
   'h4' |

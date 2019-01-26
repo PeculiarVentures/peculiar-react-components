@@ -7,9 +7,9 @@ describe('<LinearProgress />', () => {
     const wrapper = mount(
       <LinearProgress />,
     );
-    const divNode = wrapper.find('div').at(0);
+    const rootNode = wrapper.find('div').at(0);
 
-    expect(divNode.prop('data-component')).toBe('linear_progress');
-    expect(divNode.exists()).toBe(true);
+    expect(rootNode.exists()).toBe(true);
+    expect(rootNode.prop('data-component')).toBe('linear_progress');
   });
 });

@@ -13,7 +13,7 @@ describe('<SelectDropdown />', () => {
     );
     const rootNode = wrapper.find('div').at(0);
 
-    expect(rootNode.prop('data-component')).toBe('select_dropdown');
     expect(rootNode.exists()).toBe(true);
+    expect(rootNode.prop('data-component')).toBe('select_dropdown');
   });
 });
