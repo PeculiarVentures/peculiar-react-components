@@ -30,7 +30,7 @@ export interface ITooltipPopperProps {
    * compatible with Popper.js and lets you use it as replacement of
    * a real DOM node.
    */
-  referenceElement: React.ReactElement<HTMLElement>;
+  referenceElement: Element;
   /**
    * If `true`, the popper arrow is shown.
    */
@@ -57,6 +57,13 @@ export interface ITooltipPopperProps {
   color?: string;
 }
 
+interface ITooltipContentProps {
+  ref: React.RefObject<HTMLDivElement>;
+  style: React.CSSProperties;
+  placement: PlacementType;
+  arrowProps: React.HTMLAttributes<any> & React.RefAttributes<any>;
+}
+
 export class TooltipPopper extends React.Component<ITooltipPopperProps> {
   public static defaultProps: Omit<ITooltipPopperProps, 'children' | 'referenceElement'> = {
     arrow: true,
@@ -66,7 +73,7 @@ export class TooltipPopper extends React.Component<ITooltipPopperProps> {
     color: 'white',
   };
 
-  private renderContent(obj: any): JSX.Element {
+  private renderContent(props: ITooltipContentProps): JSX.Element {
     const {
       children,
       arrow,
@@ -79,9 +86,9 @@ export class TooltipPopper extends React.Component<ITooltipPopperProps> {
       style: { top, left, position },
       placement,
       arrowProps,
-    } = obj;
+    } = props;
 
-    let direction = '';
+    let direction: string = '';
 
     if (placement) {
       if (placement.indexOf('right') !== -1) {
@@ -97,33 +104,35 @@ export class TooltipPopper extends React.Component<ITooltipPopperProps> {
 
     return (
       <div
+        data-component="tooltip_popper"
         ref={ref}
+        // tslint:disable-next-line
         style={{
+          position,
           top: 0,
           left: 0,
-          position,
           transform: `translate3d(${left}px, ${top}px, 0)`,
           transformOrigin: 'top center',
           [`padding${direction}`]: offset,
         }}
-        data-component="tooltip_popper"
       >
         <div
-          className={classnames(
-            'tooltip',
-            `fill_${color}`,
-            'shadow',
-            'round_small',
-          )}
           data-component="tooltip_content"
           data-placement={placement}
+          // tslint:disable-next-line
+          className={classnames(
+            'tooltip',
+            'shadow',
+            'round_small',
+            `fill_${color}`,
+          )}
         >
-          {arrow && (
+          {arrow && ( // tslint:disable-line
             <div
-              ref={arrowProps.ref}
-              style={arrowProps.style}
               data-component="tooltip_arrow"
               className="tooltip_arrow"
+              ref={arrowProps.ref}
+              style={arrowProps.style}
             >
               <RightTriangleIcon
                 className={classnames('tooltip_arrow_icon', `fill_${color}`)}

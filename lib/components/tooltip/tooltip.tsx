@@ -3,7 +3,7 @@ import { findDOMNode } from 'react-dom';
 import { TooltipPopper, PlacementType } from './index';
 import { Omit } from '../../typings';
 
-function contains(root: Element | Text, n: Node) {
+function contains(root: Element | Text, n: Node): boolean {
   let node = n;
 
   while (node) {
@@ -21,7 +21,7 @@ export interface ITooltipProps extends React.HTMLAttributes<HTMLElement> {
   /**
    * Tooltip reference element.
    */
-  children: React.ReactElement<HTMLElement>;
+  children: React.ReactElement<any>;
   /**
    * This is what will be displayed inside the tooltip.
    */
@@ -57,7 +57,7 @@ export interface ITooltipProps extends React.HTMLAttributes<HTMLElement> {
   /**
    * Callback fired when the tooltip requests to be closed (works only with `open` prop).
    */
-  onClose?: () => void;
+  onClose?: (e?: MouseEvent) => void;
   /**
    * The number of milliseconds to wait before automatically calling
    * the onClose function. onClose should then set the state of
@@ -79,9 +79,8 @@ export class Tooltip extends React.Component<ITooltipProps, ITooltipState> {
   private focusTime: number = 0;
   private preClickTime: number = 0;
   private preTouchTime: number = 0;
-  private parentNode: any = null;
-  private timerAutoHide: any = null;
-  private delayTimer: any = null;
+  private parentNode: Element = null;
+  private timerAutoHide: number = null;
 
   public static defaultProps: Omit<ITooltipProps, 'children' | 'content'> = {
     action: 'hover',
@@ -137,20 +136,20 @@ export class Tooltip extends React.Component<ITooltipProps, ITooltipState> {
     window.document.removeEventListener('mousedown', this.onDocumentClick);
   }
 
-  onFocus(e: React.FocusEvent<HTMLElement>) {
+  onFocus(e: React.FocusEvent<HTMLElement>): void {
     this.fireEvents('onFocus', e);
 
     this.focusTime = Date.now();
     this.setOpen(true);
   }
 
-  onBlur(e: React.FocusEvent<HTMLElement>) {
+  onBlur(e: React.FocusEvent<HTMLElement>): void {
     this.fireEvents('onBlur', e);
 
     this.setOpen(false);
   }
 
-  onClick(e: React.MouseEvent<HTMLElement, MouseEvent>) {
+  onClick(e: React.MouseEvent<HTMLElement, MouseEvent>): void {
     const { open } = this.state;
 
     this.fireEvents('onClick', e);
@@ -159,7 +158,7 @@ export class Tooltip extends React.Component<ITooltipProps, ITooltipState> {
      * focus will trigger click
      */
     if (this.focusTime) {
-      let preTime;
+      let preTime: number;
 
       if (this.preClickTime && this.preTouchTime) {
         preTime = Math.min(this.preClickTime, this.preTouchTime);
@@ -188,26 +187,26 @@ export class Tooltip extends React.Component<ITooltipProps, ITooltipState> {
     }
   }
 
-  onMouseDown(e: React.MouseEvent<HTMLElement, MouseEvent>) {
+  onMouseDown(e: React.MouseEvent<HTMLElement, MouseEvent>): void {
     this.fireEvents('onMouseDown', e);
     this.preClickTime = Date.now();
   }
 
-  onMouseEnter() {
+  onMouseEnter(): void {
     this.setOpen(true);
   }
 
-  onMouseLeave() {
+  onMouseLeave(): void {
     this.setOpen(false);
   }
 
-  onTouchStart(e: React.TouchEvent<HTMLElement>) {
+  onTouchStart(e: React.TouchEvent<HTMLElement>): void {
     this.fireEvents('onTouchStart', e);
     this.preTouchTime = Date.now();
   }
 
-  onDocumentClick(e: MouseEvent) {
-    // const { onClose } = this.props;
+  onDocumentClick(e: MouseEvent): void {
+    const { onClose } = this.props;
     const { open } = this.state;
     const { target } = e;
     const root = findDOMNode(this);
@@ -215,13 +214,13 @@ export class Tooltip extends React.Component<ITooltipProps, ITooltipState> {
     if (!contains(root, target as Node) && open) {
       this.setOpen(false);
 
-      // if ('open' in this.props) {
-      //   onClose(e);
-      // }
+      if ('open' in this.props && onClose) {
+        onClose(e);
+      }
     }
   }
 
-  setOpen(value: boolean) {
+  setOpen(value: boolean): void {
     const { open } = this.state;
 
     if (open !== value) {
@@ -233,7 +232,7 @@ export class Tooltip extends React.Component<ITooltipProps, ITooltipState> {
     }
   }
 
-  private setAutoHideTimer(duration?: number) {
+  private setAutoHideTimer(duration?: number): void {
     const { onClose, autoHideDuration } = this.props;
 
     if (!onClose || !autoHideDuration) {
@@ -242,7 +241,7 @@ export class Tooltip extends React.Component<ITooltipProps, ITooltipState> {
 
     clearTimeout(this.timerAutoHide);
 
-    this.timerAutoHide = setTimeout(
+    this.timerAutoHide = window.setTimeout(
       () => {
         if (!onClose || !autoHideDuration) {
           return;
@@ -254,7 +253,10 @@ export class Tooltip extends React.Component<ITooltipProps, ITooltipState> {
     );
   }
 
-  fireEvents(type: 'onClick' | 'onMouseDown' | 'onTouchStart' | 'onFocus' | 'onBlur', e: any) {
+  fireEvents(
+    type: 'onClick' | 'onMouseDown' | 'onTouchStart' | 'onFocus' | 'onBlur',
+    e: any,
+  ): void {
     const { children } = this.props;
     const callback: any = this.props[type];
     const childCallback = children.props[type];
@@ -278,50 +280,43 @@ export class Tooltip extends React.Component<ITooltipProps, ITooltipState> {
     return childPros[event] || this.props[event];
   }
 
-  isClickToShow() {
+  isClickToShow(): boolean {
     const { action } = this.props;
 
     return action.indexOf('click') !== -1;
   }
 
-  isClickToHide() {
+  isClickToHide(): boolean {
     const { action } = this.props;
 
     return action.indexOf('click') !== -1;
   }
 
-  isMouseEnterToShow() {
+  isMouseEnterToShow(): boolean {
     const { action } = this.props;
 
     return action.indexOf('hover') !== -1;
   }
 
-  isMouseLeaveToHide() {
+  isMouseLeaveToHide(): boolean {
     const { action } = this.props;
 
     return action.indexOf('hover') !== -1;
   }
 
-  isFocusToShow() {
+  isFocusToShow(): boolean {
     const { action } = this.props;
 
     return action.indexOf('focus') !== -1;
   }
 
-  isBlurToHide() {
+  isBlurToHide(): boolean {
     const { action } = this.props;
 
     return action.indexOf('focus') !== -1;
   }
 
-  clearDelayTimer() {
-    if (this.delayTimer) {
-      clearTimeout(this.delayTimer);
-      this.delayTimer = null;
-    }
-  }
-
-  render() {
+  render(): JSX.Element {
     const {
       children,
       content,
@@ -379,7 +374,7 @@ export class Tooltip extends React.Component<ITooltipProps, ITooltipState> {
         {React.cloneElement(children, newChildProps)}
         <TooltipPopper
           open={open}
-          referenceElement={this.parentNode || {}}
+          referenceElement={this.parentNode || {} as any}
           placement={placement}
           positionFixed={positionFixed}
           arrow={arrow}
