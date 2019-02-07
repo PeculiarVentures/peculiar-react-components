@@ -21,6 +21,7 @@ export default function SelectItem(props) {
 
   return (
     <div
+      data-component="select_item"
       data-disabled={disabled}
       data-selected={selected}
       data-has-focus={hasFocus}

@@ -430,6 +430,7 @@ export default class Select extends PureComponent {
           {...other}
         >
           <select
+            data-component="select_field"
             {...inputProps}
             tabIndex={tabIndex}
             multiple={false}
@@ -512,6 +513,7 @@ export default class Select extends PureComponent {
         })}
       >
         <div
+          data-component="select_field"
           className={classNames(
             'select_field',
             [`select_field_${size}`],

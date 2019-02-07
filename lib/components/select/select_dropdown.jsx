@@ -76,6 +76,7 @@ export default class SelectDropdown extends PureComponent {
 
     return (
       <div
+        data-component="select_dropdown"
         className={classNames(
           'select_dropdown',
           [`stroke_${colorFocus}`],
