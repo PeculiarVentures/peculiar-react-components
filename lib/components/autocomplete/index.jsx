@@ -169,30 +169,83 @@ export default class Autocomplete extends Component {
   };
 
   componentWillUnmount() {
-    clearTimeout(this._blurTimeout);
+    clearTimeout(this._inputBlurTimeout);
+    clearTimeout(this._inputFocusTimeout);
+    clearTimeout(this._overlayBlurTimeout);
   }
 
-  _blurTimeout = null;
+  _inputBlurTimeout = null;
+  _inputFocusTimeout = null;
+  _overlayBlurTimeout = null;
+  _overlayHasFocus = false;
   _childrenValues = [];
   textFieldNode = null;
 
-  _handleFocus = (e) => {
-    const { onFocus } = this.props;
-
-    clearTimeout(this._blurTimeout);
-    onFocus(e);
-  };
-
-  _handleBlur = (e) => {
+  _onBlurInput = (e) => {
     const { onBlur } = this.props;
 
-    clearTimeout(this._blurTimeout);
-    this._blurTimeout = setTimeout(this.setState.bind(this, { open: false }), 100);
+    this._inputBlurTimeout = window.setTimeout(
+      () => {
+        if (!this._overlayHasFocus) {
+          this._closeDropdown();
 
-    onBlur(e);
-  };
+          onBlur(e);
+        }
+      },
+      1,
+    );
+  }
 
-  _handleKeyDown = (event) => {
+  _onFocusInput = (e) => {
+    const { onFocus } = this.props;
+
+    this._inputFocusTimeout = window.setTimeout(
+      () => { this._overlayHasFocus = false; },
+      2,
+    );
+
+    onFocus(e);
+  }
+
+  _onFocusOverlay = (e) => {
+    e.preventDefault();
+
+    this._overlayHasFocus = true;
+    this.textFieldNode.inputNode.inputNode.focus();
+  }
+
+  _onBlurOverlay = () => {
+    this._overlayBlurTimeout = window.setTimeout(
+      () => { this._overlayHasFocus = false; },
+      3,
+    );
+  }
+
+  _closeDropdown() {
+    const { open } = this.state;
+
+    if (!open) {
+      return;
+    }
+
+    this.setState({
+      open: false,
+    });
+  }
+
+  _openDropdown() {
+    const { open } = this.state;
+
+    if (open) {
+      return;
+    }
+
+    this.setState({
+      open: true,
+    });
+  }
+
+  _onKeyDownInput = (event) => {
     const {
       onKeyDown,
       disabled,
@@ -207,9 +260,7 @@ export default class Autocomplete extends Component {
        * hide dropdown list
        */
       if (keyCode === 27) {
-        this.setState({
-          open: false,
-        });
+        this._closeDropdown();
       }
 
       /**
@@ -256,9 +307,7 @@ export default class Autocomplete extends Component {
         this.textFieldNode.validateField();
       }
 
-      this.setState({
-        open: false,
-      });
+      this._closeDropdown();
 
       onChange(e, valueSelected, name, 'select');
     }
@@ -301,13 +350,11 @@ export default class Autocomplete extends Component {
     }
   }
 
-  _handleItemClick = child => (e) => {
+  _onClickSelectItem = child => (e) => {
     const { onChange, name } = this.props;
     const valueChild = child.props.value;
 
-    this.setState({
-      open: false,
-    });
+    this._closeDropdown();
 
     if (!('value' in this.props)) {
       this.textFieldNode.inputNode.inputNode.value = valueChild;
@@ -317,13 +364,11 @@ export default class Autocomplete extends Component {
     onChange(e, valueChild, name, 'select');
   };
 
-  _handleChange = (e) => {
+  _onChangeInput = (e) => {
     const { onChange, name } = this.props;
     const value = e.target.value;
 
-    this.setState({
-      open: true,
-    });
+    this._openDropdown();
 
     onChange(e, value, name);
   }
@@ -375,7 +420,7 @@ export default class Autocomplete extends Component {
       }
 
       return cloneElement(child, {
-        onClick: disabledChild ? null : this._handleItemClick(child),
+        onClick: disabledChild ? null : this._onClickSelectItem(child),
         selected,
         hasFocus: valueSelected === valueChild,
         size,
@@ -398,10 +443,10 @@ export default class Autocomplete extends Component {
       >
         <TextField
           placeholder={placeholder}
-          onBlur={this._handleBlur}
-          onFocus={this._handleFocus}
-          onChange={this._handleChange}
-          onKeyDown={this._handleKeyDown}
+          onBlur={this._onBlurInput}
+          onFocus={this._onFocusInput}
+          onChange={this._onChangeInput}
+          onKeyDown={this._onKeyDownInput}
           size={size}
           textColor={textColor}
           colorFocus={colorFocus}
@@ -418,19 +463,21 @@ export default class Autocomplete extends Component {
           inputProps={inputProps}
           autoComplete="off"
           validation={validation}
-        >
-          {(options && options.length > 0) && (
-            <SelectDropdown
-              className="autocomplete_dropdown"
-              bgType={bgType}
-              color={color}
-              colorFocus={colorFocus}
-              ref={(node) => { this.dropdownNode = node; }}
-            >
-              {options}
-            </SelectDropdown>
-          )}
-        </TextField>
+        />
+        {(options && options.length > 0) && (
+          <SelectDropdown
+            className="autocomplete_dropdown"
+            bgType={bgType}
+            color={color}
+            colorFocus={colorFocus}
+            ref={(node) => { this.dropdownNode = node; }}
+            tabIndex={0}
+            onFocus={this._onFocusOverlay}
+            onBlur={this._onBlurOverlay}
+          >
+            {options}
+          </SelectDropdown>
+        )}
       </div>
     );
   }
