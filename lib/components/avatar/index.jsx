@@ -34,7 +34,10 @@ export default function Avatar(props) {
         className={classNames(
           'avatar',
           'round_circle',
-          [`avatar_${bgType}_${color}`],
+          {
+            [`fill_${color}`]: bgType === 'fill',
+          },
+          [`stroke_${color}`],
           [`text_${textColor}`],
           className,
         )}
@@ -60,6 +63,9 @@ export default function Avatar(props) {
       className={classNames(
         'avatar',
         'round_circle',
+        {
+          [`fill_${color}`]: color,
+        },
         className,
       )}
       style={{
