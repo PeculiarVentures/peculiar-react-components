@@ -157,6 +157,7 @@ export default class Tooltip extends Component {
   }
 
   componentWillUnmount() {
+    clearTimeout(this.timerAutoHide);
     window.document.removeEventListener('mousedown', this.onDocumentClick);
   }
 
