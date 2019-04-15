@@ -450,6 +450,7 @@ export default class TextField extends PureComponent {
       <label
         data-component="text_field"
         data-disabled={disabled}
+        data-valid={hasValue ? valid : true}
         className={classNames(
           'text_field',
           className,
