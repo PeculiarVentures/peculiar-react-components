@@ -31,6 +31,7 @@ export default function Avatar(props) {
      */
     return (
       <div
+        data-component="avatar"
         className={classNames(
           'avatar',
           'round_circle',
@@ -59,6 +60,7 @@ export default function Avatar(props) {
    */
   return (
     <img
+      data-component="avatar"
       src={src || defaultSrc}
       className={classNames(
         'avatar',
@@ -74,7 +76,6 @@ export default function Avatar(props) {
         width: size,
       }}
       onError={(e) => { e.target.src = defaultSrc; }}
-      data-component="avatar"
       {...other}
     />
   );
