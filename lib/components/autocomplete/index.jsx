@@ -168,6 +168,10 @@ export default class Autocomplete extends Component {
     valueSelected: null,
   };
 
+  componentWillUnmount() {
+    clearTimeout(this._blurTimeout);
+  }
+
   _blurTimeout = null;
   _childrenValues = [];
   textFieldNode = null;

@@ -148,6 +148,10 @@ export default class Select extends PureComponent {
     }
   }
 
+  componentWillUnmount() {
+    clearTimeout(this._blurTimeout);
+  }
+
   /**
    * Get select value
    * @return {string|number}
