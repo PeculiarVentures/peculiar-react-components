@@ -150,14 +150,18 @@ export default class Tooltip extends Component {
 
       if (open) {
         this._setAutoHideTimer();
-      } else {
+      } else if (this.timerAutoHide) {
         clearTimeout(this.timerAutoHide);
+        this.timerAutoHide = null;
       }
     }
   }
 
   componentWillUnmount() {
-    clearTimeout(this.timerAutoHide);
+    if (this.timerAutoHide) {
+      clearTimeout(this.timerAutoHide);
+      this.timerAutoHide = null;
+    }
     window.document.removeEventListener('mousedown', this.onDocumentClick);
   }
 
@@ -304,9 +308,12 @@ export default class Tooltip extends Component {
       return;
     }
 
-    clearTimeout(this.timerAutoHide);
+    if (this.timerAutoHide) {
+      clearTimeout(this.timerAutoHide);
+    }
 
     this.timerAutoHide = setTimeout(() => {
+      this.timerAutoHide = null;
       if (!onClose || !autoHideDuration) {
         return;
       }
