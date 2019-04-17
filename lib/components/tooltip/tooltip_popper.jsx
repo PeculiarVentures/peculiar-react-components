@@ -19,6 +19,7 @@ export default function TooltipPopper(props) {
     positionFixed,
     offset,
     color,
+    zIndex,
     ...other
   } = props;
 
@@ -68,6 +69,7 @@ export default function TooltipPopper(props) {
               transform: `translate3d(${left}px, ${top}px, 0)`,
               transformOrigin: 'top center',
               [`padding${direction}`]: offset,
+              zIndex,
             }}
             data-component="tooltip_popper"
           >
@@ -154,9 +156,13 @@ TooltipPopper.propTypes = {
    */
   offset: PropTypes.number,
   /**
-   * Color for tooltip component
+   * Color for tooltip component.
    */
   color: PropTypes.string,
+  /**
+   * Z-index for tooltip component.
+   */
+  zIndex: PropTypes.number,
 };
 
 TooltipPopper.defaultProps = {
@@ -166,4 +172,5 @@ TooltipPopper.defaultProps = {
   positionFixed: true,
   offset: 10,
   color: 'white',
+  zIndex: 1,
 };

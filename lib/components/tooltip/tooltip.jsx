@@ -1,7 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 import TooltipPopper from './tooltip_popper';
+import Portal from '../../containers/portal';
 
 /**
  * Check if node is root element
@@ -95,9 +97,35 @@ export default class Tooltip extends Component {
      */
     autoHideDuration: PropTypes.number,
     /**
-     * Color for tooltip component
+     * Color for tooltip component.
      */
     color: PropTypes.string,
+    /**
+     * Z-index for tooltip component.
+     */
+    zIndex: PropTypes.number,
+    /**
+     * If `true`, the tooltip overlay will show for opened tooltip.
+     */
+    overlay: PropTypes.bool,
+    /**
+     * Color for tooltip overlay background.
+     */
+    overlayColor: PropTypes.string,
+    /**
+     * Opacity for tooltip overlay.
+     */
+    overlayOpacity: PropTypes.number,
+    /**
+     * Z-index for tooltip overlay.
+     */
+    overlayZIndex: PropTypes.number,
+    /**
+     * HTML props for tooltip overlay.
+     */
+    overlayProps: PropTypes.oneOfType([
+      PropTypes.object,
+    ]),
   }
 
   static defaultProps = {
@@ -110,6 +138,12 @@ export default class Tooltip extends Component {
     onClose() {},
     autoHideDuration: 0,
     color: 'white',
+    zIndex: 1,
+    overlay: false,
+    overlayColor: 'black',
+    overlayOpacity: 0.3,
+    overlayZIndex: 0,
+    overlayProps: {},
   }
 
   constructor(props) {
@@ -162,6 +196,7 @@ export default class Tooltip extends Component {
       clearTimeout(this.timerAutoHide);
       this.timerAutoHide = null;
     }
+
     window.document.removeEventListener('mousedown', this.onDocumentClick);
   }
 
@@ -265,17 +300,12 @@ export default class Tooltip extends Component {
    * @param {SytheticEvent} e
    */
   onDocumentClick(e) {
-    const { onClose } = this.props;
     const { open } = this.state;
     const { target } = e;
-    const root = findDOMNode(this); // eslint-disable-line
+    const root = findDOMNode(this.parentNode); // eslint-disable-line
 
     if (!contains(root, target) && open) {
       this.setOpen(false);
-
-      if ('open' in this.props) {
-        onClose(e);
-      }
     }
   }
 
@@ -284,6 +314,7 @@ export default class Tooltip extends Component {
    * @param {boolean} value
    */
   setOpen(value) {
+    const { onClose } = this.props;
     const { open } = this.state;
 
     if (open !== value) {
@@ -291,6 +322,10 @@ export default class Tooltip extends Component {
         this.setState({
           open: value,
         });
+
+        if (onClose && !value) {
+          onClose();
+        }
       }
     }
   }
@@ -314,6 +349,7 @@ export default class Tooltip extends Component {
 
     this.timerAutoHide = setTimeout(() => {
       this.timerAutoHide = null;
+
       if (!onClose || !autoHideDuration) {
         return;
       }
@@ -422,6 +458,47 @@ export default class Tooltip extends Component {
     }
   }
 
+  renderOverlay() {
+    const {
+      overlay,
+      overlayColor,
+      overlayOpacity,
+      overlayZIndex,
+      overlayProps,
+      action,
+    } = this.props;
+    const { open } = this.state;
+
+    if (overlay && action === 'click') {
+      const {
+        className,
+        style,
+        ...other
+      } = overlayProps;
+
+      return (
+        <Portal>
+          <div
+            data-open={open}
+            className={classnames(
+              'tooltip_overlay',
+              `fill_${overlayColor}`,
+              className,
+            )}
+            style={{
+              opacity: open ? overlayOpacity : 0,
+              zIndex: overlayZIndex,
+              ...style,
+            }}
+            {...other}
+          />
+        </Portal>
+      );
+    }
+
+    return null;
+  }
+
   /**
    * render
    * @return {ReactElement} markup
@@ -440,6 +517,12 @@ export default class Tooltip extends Component {
       onClose,
       autoHideDuration,
       color,
+      zIndex,
+      overlay,
+      overlayColor,
+      overlayOpacity,
+      overlayZIndex,
+      overlayProps,
       ...other
     } = this.props;
     const { open } = this.state;
@@ -473,24 +556,28 @@ export default class Tooltip extends Component {
     }
 
     return (
-      <C
-        {...newWrapperProps}
-        ref={(node) => { this.parentNode = node; }}
-        data-component="tooltip"
-      >
-        {React.cloneElement(children, newChildProps)}
-        <TooltipPopper
-          open={open}
-          referenceElement={this.parentNode || {}}
-          placement={placement}
-          positionFixed={positionFixed}
-          arrow={arrow}
-          offset={offset}
-          color={color}
+      <Fragment>
+        {this.renderOverlay()}
+        <C
+          {...newWrapperProps}
+          ref={(node) => { this.parentNode = node; }}
+          data-component="tooltip"
         >
-          {content}
-        </TooltipPopper>
-      </C>
+          {React.cloneElement(children, newChildProps)}
+          <TooltipPopper
+            open={open}
+            referenceElement={this.parentNode || {}}
+            placement={placement}
+            positionFixed={positionFixed}
+            arrow={arrow}
+            offset={offset}
+            color={color}
+            zIndex={zIndex}
+          >
+            {content}
+          </TooltipPopper>
+        </C>
+      </Fragment>
     );
   }
 }

@@ -39,3 +39,14 @@
   &_arrow_icon
     display: block
     height: 100%
+  &_overlay
+    width: 100%
+    height: 100%
+    position: absolute
+    top: 0
+    left: 0
+    visibility: hidden
+    transition: opacity .3s, visibility 0ms 300ms
+    &[data-open="true"]
+      visibility: visible
+      transition: opacity .3s, visibility 0ms 0ms

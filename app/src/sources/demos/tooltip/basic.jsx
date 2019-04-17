@@ -31,9 +31,10 @@ export default function Usage() {
           marginRight: 10,
         }}
         color="grey"
+        overlay={true}
       >
         <Button>
-          Click me
+          Click me (with overlay)
         </Button>
       </Tooltip>
       <Tooltip
