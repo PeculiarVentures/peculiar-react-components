@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { Popper } from 'react-popper';
 import RightTriangleIcon from '../icons/right_triangle';
+import Portal from '../../containers/portal';
 
 /**
  * TooltipPopper component
@@ -20,6 +21,7 @@ export default function TooltipPopper(props) {
     offset,
     color,
     zIndex,
+    usePortal,
     ...other
   } = props;
 
@@ -27,7 +29,7 @@ export default function TooltipPopper(props) {
     return null;
   }
 
-  return (
+  const renderTooltip = (
     <Popper
       modifiers={{
         computeStyle: {
@@ -102,6 +104,16 @@ export default function TooltipPopper(props) {
       }}
     </Popper>
   );
+
+  if (usePortal) {
+    return (
+      <Portal>
+        {renderTooltip}
+      </Portal>
+    );
+  }
+
+  return renderTooltip;
 }
 
 TooltipPopper.propTypes = {
@@ -163,6 +175,10 @@ TooltipPopper.propTypes = {
    * Z-index for tooltip component.
    */
   zIndex: PropTypes.number,
+  /**
+   * Use React portal for render tooltip to another elemenet.
+   */
+  usePortal: PropTypes.bool,
 };
 
 TooltipPopper.defaultProps = {
@@ -173,4 +189,5 @@ TooltipPopper.defaultProps = {
   offset: 10,
   color: 'white',
   zIndex: 1,
+  usePortal: false,
 };

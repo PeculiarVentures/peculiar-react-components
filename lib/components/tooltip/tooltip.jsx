@@ -126,6 +126,10 @@ export default class Tooltip extends Component {
     overlayProps: PropTypes.oneOfType([
       PropTypes.object,
     ]),
+    /**
+     * Use React portal for render tooltip to another elemenet.
+     */
+    usePortal: PropTypes.bool,
   }
 
   static defaultProps = {
@@ -144,6 +148,7 @@ export default class Tooltip extends Component {
     overlayOpacity: 0.3,
     overlayZIndex: 0,
     overlayProps: {},
+    usePortal: false,
   }
 
   constructor(props) {
@@ -523,6 +528,7 @@ export default class Tooltip extends Component {
       overlayOpacity,
       overlayZIndex,
       overlayProps,
+      usePortal,
       ...other
     } = this.props;
     const { open } = this.state;
@@ -573,6 +579,7 @@ export default class Tooltip extends Component {
             offset={offset}
             color={color}
             zIndex={zIndex}
+            usePortal={usePortal}
           >
             {content}
           </TooltipPopper>
