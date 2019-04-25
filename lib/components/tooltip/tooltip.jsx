@@ -305,8 +305,19 @@ export default class Tooltip extends Component {
    * @param {SytheticEvent} e
    */
   onDocumentClick(e) {
+    const { usePortal } = this.props;
     const { open } = this.state;
     const { target } = e;
+    const tooltipRoot = document.querySelector('[data-component="tooltip_popper"]');
+
+    if (usePortal && tooltipRoot) {
+      if (!contains(tooltipRoot, target) && open) {
+        this.setOpen(false);
+      }
+
+      return;
+    }
+
     const root = findDOMNode(this.parentNode); // eslint-disable-line
 
     if (!contains(root, target) && open) {
