@@ -22,6 +22,7 @@ export default function TooltipPopper(props) {
     color,
     zIndex,
     usePortal,
+    preventOverflow,
     ...other
   } = props;
 
@@ -34,6 +35,12 @@ export default function TooltipPopper(props) {
       modifiers={{
         computeStyle: {
           gpuAcceleration: false,
+        },
+        preventOverflow: {
+          enabled: preventOverflow,
+        },
+        hide: {
+          enabled: preventOverflow,
         },
       }}
       placement={placementProp}
@@ -179,6 +186,10 @@ TooltipPopper.propTypes = {
    * Use React portal for render tooltip to another elemenet.
    */
   usePortal: PropTypes.bool,
+  /**
+   * Use preventOverflow for prevent overflow on tooltip.
+   */
+  preventOverflow: PropTypes.bool,
 };
 
 TooltipPopper.defaultProps = {
@@ -190,4 +201,5 @@ TooltipPopper.defaultProps = {
   color: 'white',
   zIndex: 1,
   usePortal: false,
+  preventOverflow: true,
 };
