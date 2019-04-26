@@ -38,7 +38,7 @@ export default function TooltipPopper(props) {
         },
         preventOverflow: {
           enabled: preventOverflow,
-        }
+        },
       }}
       placement={placementProp}
       referenceElement={referenceElement}
@@ -187,6 +187,7 @@ TooltipPopper.propTypes = {
     Use preventOverflow for prevent overflow on tooltip. 
    */
   preventOverflow: PropTypes.bool,
+
 };
 
 TooltipPopper.defaultProps = {

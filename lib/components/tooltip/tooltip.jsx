@@ -134,6 +134,7 @@ export default class Tooltip extends Component {
       Use preventOverflow for prevent overflow on tooltip. 
      */
     preventOverflow: PropTypes.bool,
+  
   }
 
   static defaultProps = {
@@ -545,6 +546,7 @@ export default class Tooltip extends Component {
       overlayZIndex,
       overlayProps,
       usePortal,
+      preventOverflow,
       ...other
     } = this.props;
     const { open } = this.state;
