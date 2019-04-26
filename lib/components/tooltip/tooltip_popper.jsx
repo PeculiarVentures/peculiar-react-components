@@ -39,6 +39,9 @@ export default function TooltipPopper(props) {
         preventOverflow: {
           enabled: preventOverflow,
         },
+        hide: {
+          enabled: preventOverflow,
+        },
       }}
       placement={placementProp}
       referenceElement={referenceElement}
