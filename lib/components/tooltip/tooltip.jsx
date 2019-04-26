@@ -130,6 +130,10 @@ export default class Tooltip extends Component {
      * Use React portal for render tooltip to another elemenet.
      */
     usePortal: PropTypes.bool,
+    /**
+      Use preventOverflow for prevent overflow on tooltip. 
+     */
+    preventOverflow: PropTypes.bool,
   }
 
   static defaultProps = {
@@ -149,6 +153,7 @@ export default class Tooltip extends Component {
     overlayZIndex: 0,
     overlayProps: {},
     usePortal: false,
+    preventOverflow: true,
   }
 
   constructor(props) {
@@ -591,6 +596,7 @@ export default class Tooltip extends Component {
             color={color}
             zIndex={zIndex}
             usePortal={usePortal}
+            preventOverflow={preventOverflow}
           >
             {content}
           </TooltipPopper>
