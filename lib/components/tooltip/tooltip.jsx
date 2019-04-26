@@ -131,10 +131,9 @@ export default class Tooltip extends Component {
      */
     usePortal: PropTypes.bool,
     /**
-      Use preventOverflow for prevent overflow on tooltip. 
+     * Use preventOverflow for prevent overflow on tooltip. 
      */
     preventOverflow: PropTypes.bool,
-  
   }
 
   static defaultProps = {

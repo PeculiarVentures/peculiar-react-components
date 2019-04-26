@@ -184,7 +184,7 @@ TooltipPopper.propTypes = {
    */
   usePortal: PropTypes.bool,
   /**
-    Use preventOverflow for prevent overflow on tooltip. 
+   * Use preventOverflow for prevent overflow on tooltip. 
    */
   preventOverflow: PropTypes.bool,
 
