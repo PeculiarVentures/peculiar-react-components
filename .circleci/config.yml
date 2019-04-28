@@ -10,12 +10,12 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}-{{ checksum "app/package.json" }}
+          key: dependency-cache-{{ checksum "package.json" }}
       - run:
           name: install-npm-dependencies
-          command: 'npm install && cd app && npm install'
+          command: 'npm install'
       - save_cache:
-          key: dependency-cache-{{ checksum "package.json" }}-{{ checksum "app/package.json" }}
+          key: dependency-cache-{{ checksum "package.json" }}
           paths:
             - ./node_modules
       - run:
@@ -27,11 +27,11 @@ jobs:
       - run:
           name: run-test-command
           command: 'npm run test'
-      - deploy:
-          name: deploy
-          when: on_success
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              # Deploy to gh-pages
-              cd app && npm run deploy:gh-pages
-            fi
+    #   - deploy:
+    #       name: deploy
+    #       when: on_success
+    #       command: |
+    #         if [ "${CIRCLE_BRANCH}" == "master" ]; then
+    #           # Deploy to gh-pages
+    #           cd app && npm run deploy:gh-pages
+    #         fi

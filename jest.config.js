@@ -1,21 +1,23 @@
 module.exports = {
   setupFiles: [
-    './test/utils/test_shim.js',
-    './test/utils/test_setup.js',
-    './test/utils/react_utils.js',
+    './test/test_shim.js',
+    './test/test_setup.js',
   ],
   moduleFileExtensions: [
+    'ts',
+    'tsx',
     'js',
-    'jsx',
   ],
   transform: {
-    '^.+\\.jsx?$': 'babel-jest',
+    '^.+\\.(ts|tsx)$': 'ts-jest',
   },
   testMatch: [
-    '**/*.spec.(js|jsx)',
+    '**/*.spec.(ts|tsx)',
   ],
   collectCoverageFrom: [
-    'lib/**.{js|jsx}',
+    'lib/**.tsx',
+    '!**/**.story.tsx',
+    '!**/**.spec.tsx',
   ],
   coverageDirectory: 'coverage',
   coverageReporters: ['lcov', 'html'],

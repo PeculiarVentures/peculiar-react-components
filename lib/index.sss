@@ -1,0 +1,17 @@
+// @import "fill.sss"
+// @import "stroke.sss"
+// @import "round.sss"
+@import "./components/button/button.sss"
+  
+.truncate_text
+  overflow: hidden
+  text-overflow: ellipsis
+  white-space: nowrap
+
+.tiny_align
+  &:before
+    display: inline-block
+    vertical-align: middle
+    width: 0
+    height: 100%
+    content: ''
