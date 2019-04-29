@@ -3,8 +3,12 @@ import { mount, ReactWrapper } from 'enzyme';
 
 import { Button, IButtonProps } from './index';
 
+/* tslint:disable:max-line-length */
 describe('<Button />', () => {
   let wrapper: ReactWrapper<IButtonProps, {}, Button> | null;
+  const defaultProps: Partial<IButtonProps> = {
+    onClick: jest.fn(),
+  };
 
   afterEach(() => {
     jest.resetAllMocks();
@@ -16,11 +20,11 @@ describe('<Button />', () => {
   });
 
   it('expect render', () => {
-    wrapper = mount(
+    wrapper = mount((
       <Button>
         Button
-      </Button>,
-    );
+      </Button>
+    ));
     const rootNode = wrapper.find('button');
 
     expect(rootNode.exists())
@@ -32,11 +36,11 @@ describe('<Button />', () => {
   });
 
   it('expect basic button attributes', () => {
-    wrapper = mount(
+    wrapper = mount((
       <Button>
         Button
-      </Button>,
-    );
+      </Button>
+    ));
     const rootNode = wrapper.find('button');
 
     expect(rootNode.prop('disabled'))
@@ -46,7 +50,7 @@ describe('<Button />', () => {
   });
 
   it('expect change class name for new theme props', () => {
-    wrapper = mount(
+    wrapper = mount((
       <Button
         bgType="stroke"
         color="secondary"
@@ -54,35 +58,35 @@ describe('<Button />', () => {
         size="medium"
       >
         Button
-      </Button>,
-    );
+      </Button>
+    ));
 
     expect(wrapper.find('button').prop('className'))
       .toBe('button round_small truncate_text button_medium text_center text_black stroke_secondary fill_secondary');
   });
 
   it('expect render link', () => {
-    wrapper = mount(
+    wrapper = mount((
       <Button
         href="/"
       >
         Button
-      </Button>,
-    );
+      </Button>
+    ));
 
     expect(wrapper.find('a').prop('href'))
       .toBe('/');
   });
 
   it('expect render disabled button', () => {
-    wrapper = mount(
+    wrapper = mount((
       <Button
         href="/"
         disabled={true}
       >
         Button
-      </Button>,
-    );
+      </Button>
+    ));
     const rootNode = wrapper.find('button');
 
     expect(rootNode.prop('href'))
@@ -92,50 +96,48 @@ describe('<Button />', () => {
   });
 
   it('expect show className from props', () => {
-    wrapper = mount(
+    wrapper = mount((
       <Button
         className="custom"
       >
         Button
-      </Button>,
-    );
+      </Button>
+    ));
 
     expect(wrapper.find('button').prop('className'))
       .toBe('button round_small truncate_text button_medium text_center text_white stroke_primary fill_primary custom');
   });
 
   it('expect call onClick action', () => {
-    const click = jest.fn();
-    wrapper = mount(
+    wrapper = mount((
       <Button
-        onClick={click}
+        {...defaultProps}
       >
         Button
-      </Button>,
-    );
+      </Button>
+    ));
 
     wrapper.find('button').simulate('click');
     wrapper.update();
 
-    expect(click)
+    expect(defaultProps.onClick)
       .toBeCalled();
   });
 
   it('expect not call onClick action', () => {
-    const click = jest.fn();
-    wrapper = mount(
+    wrapper = mount((
       <Button
-        onClick={click}
+        {...defaultProps}
         disabled={true}
       >
         Button
-      </Button>,
-    );
+      </Button>
+    ));
 
     wrapper.find('button').simulate('click');
     wrapper.update();
 
-    expect(click)
+    expect(defaultProps.onClick)
       .not.toBeCalled();
   });
 });
