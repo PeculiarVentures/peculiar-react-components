@@ -1,36 +1,52 @@
 import * as React from 'react';
-import { mount } from 'enzyme';
+import { mount, ReactWrapper } from 'enzyme';
 
-import { Button } from './index';
+import { Button, IButtonProps } from './index';
 
 describe('<Button />', () => {
+  let wrapper: ReactWrapper<IButtonProps, {}, Button> | null;
+
+  afterEach(() => {
+    jest.resetAllMocks();
+
+    if (wrapper) {
+      wrapper.unmount();
+      wrapper = null;
+    }
+  });
+
   it('expect render', () => {
-    const wrapper = mount(
+    wrapper = mount(
       <Button>
         Button
       </Button>,
     );
     const rootNode = wrapper.find('button');
 
-    expect(rootNode.exists()).toBe(true);
-    expect(rootNode.prop('data-component')).toBe('button');
-    expect(rootNode.children().html()).toBe('<span>Button</span>');
+    expect(rootNode.exists())
+      .toBe(true);
+    expect(rootNode.prop('data-component'))
+      .toBe('button');
+    expect(rootNode.children().html())
+      .toBe('<span>Button</span>');
   });
 
   it('expect basic button attributes', () => {
-    const wrapper = mount(
+    wrapper = mount(
       <Button>
         Button
       </Button>,
     );
     const rootNode = wrapper.find('button');
 
-    expect(rootNode.prop('disabled')).toBe(undefined);
-    expect(rootNode.prop('className')).toBe('button round_small truncate_text button_medium text_center text_white stroke_primary fill_primary');
+    expect(rootNode.prop('disabled'))
+      .toBe(undefined);
+    expect(rootNode.prop('className'))
+      .toBe('button round_small truncate_text button_medium text_center text_white stroke_primary fill_primary');
   });
 
   it('expect change class name for new theme props', () => {
-    const wrapper = mount(
+    wrapper = mount(
       <Button
         bgType="stroke"
         color="secondary"
@@ -41,11 +57,12 @@ describe('<Button />', () => {
       </Button>,
     );
 
-    expect(wrapper.find('button').prop('className')).toBe('button round_small truncate_text button_medium text_center text_black stroke_secondary fill_secondary');
+    expect(wrapper.find('button').prop('className'))
+      .toBe('button round_small truncate_text button_medium text_center text_black stroke_secondary fill_secondary');
   });
 
   it('expect render link', () => {
-    const wrapper = mount(
+    wrapper = mount(
       <Button
         href="/"
       >
@@ -53,11 +70,12 @@ describe('<Button />', () => {
       </Button>,
     );
 
-    expect(wrapper.find('a').prop('href')).toBe('/');
+    expect(wrapper.find('a').prop('href'))
+      .toBe('/');
   });
 
   it('expect render disabled button', () => {
-    const wrapper = mount(
+    wrapper = mount(
       <Button
         href="/"
         disabled={true}
@@ -67,12 +85,14 @@ describe('<Button />', () => {
     );
     const rootNode = wrapper.find('button');
 
-    expect(rootNode.prop('href')).toBe(undefined);
-    expect(rootNode.prop('disabled')).toBe(true);
+    expect(rootNode.prop('href'))
+      .toBe(undefined);
+    expect(rootNode.prop('disabled'))
+      .toBe(true);
   });
 
   it('expect show className from props', () => {
-    const wrapper = mount(
+    wrapper = mount(
       <Button
         className="custom"
       >
@@ -80,12 +100,13 @@ describe('<Button />', () => {
       </Button>,
     );
 
-    expect(wrapper.find('button').prop('className')).toBe('button round_small truncate_text button_medium text_center text_white stroke_primary fill_primary custom');
+    expect(wrapper.find('button').prop('className'))
+      .toBe('button round_small truncate_text button_medium text_center text_white stroke_primary fill_primary custom');
   });
 
   it('expect call onClick action', () => {
     const click = jest.fn();
-    const wrapper = mount(
+    wrapper = mount(
       <Button
         onClick={click}
       >
@@ -96,12 +117,13 @@ describe('<Button />', () => {
     wrapper.find('button').simulate('click');
     wrapper.update();
 
-    expect(click).toBeCalled();
+    expect(click)
+      .toBeCalled();
   });
 
   it('expect not call onClick action', () => {
     const click = jest.fn();
-    const wrapper = mount(
+    wrapper = mount(
       <Button
         onClick={click}
         disabled={true}
@@ -113,6 +135,7 @@ describe('<Button />', () => {
     wrapper.find('button').simulate('click');
     wrapper.update();
 
-    expect(click).not.toBeCalled();
+    expect(click)
+      .not.toBeCalled();
   });
 });

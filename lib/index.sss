@@ -1,6 +1,3 @@
-// @import "fill.sss"
-// @import "stroke.sss"
-// @import "round.sss"
 @import "./components/button/button.sss"
   
 .truncate_text
@@ -15,3 +12,30 @@
     width: 0
     height: 100%
     content: ''
+
+.round_small
+  border-radius: $borderRadius
+
+.round_circle
+  border-radius: 50%
+
+// fill
+@each $key in $colors
+  .fill_$(key)
+    &:not(svg)
+      background-color: var(--$(key), $$(key))
+    svg& [data-fill]
+      fill: var(--$(key), $$(key))
+
+// stroke
+@each $key in $colors
+  .stroke_$(key)
+    &:not(svg)
+      border: 1px solid var(--$(key), $$(key))
+    svg& [data-stroke]
+      stroke: var(--$(key), $$(key))
+
+// text
+@each $key in $colors
+  .text_$(key)
+    color: var(--$(key), $$(key))

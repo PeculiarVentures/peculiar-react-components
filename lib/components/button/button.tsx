@@ -48,8 +48,8 @@ export class Button extends React.Component<IButtonProps> {
   public static defaultProps: Omit<IButtonProps, 'children'> = {
     bgType: 'fill',
     color: 'primary',
-    align: 'center',
     textColor: 'white',
+    align: 'center',
     size: 'medium',
   };
 
