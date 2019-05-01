@@ -62,6 +62,7 @@ export default class Checkbox extends SwitchHandler {
             [`checkbox_${bgType}_${color}`],
             [`checkbox_${bgType}_${colorOn}_checked`],
           )}
+          data-component="checkbox_container"
         >
           <CheckmarkIcon
             className={classnames(

@@ -185,6 +185,7 @@ export default class Radio extends PureComponent {
             [`radio_${bgType}_${color}`],
             [`radio_${bgType}_${colorOn}_checked`],
           )}
+          data-component="radio_container"
         >
           <div
             className={classNames(

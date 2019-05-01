@@ -61,6 +61,7 @@ export default class Switch extends SwitchHandler {
             [`switch_${bgType}_${color}`],
             [`switch_${bgType}_${colorOn}_checked`],
           )}
+          data-component="switch_container"
         >
           <div
             className={classnames(
