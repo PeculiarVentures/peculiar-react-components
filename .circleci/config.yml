@@ -31,7 +31,7 @@ jobs:
           name: deploy
           when: on_success
           command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+            if [ "${CIRCLE_BRANCH}" == "0.3.x" ]; then
               # Deploy to gh-pages
               cd app && npm run deploy:gh-pages
             fi
