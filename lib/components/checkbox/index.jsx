@@ -42,7 +42,6 @@ export default class Checkbox extends SwitchHandler {
       iconColor,
       iconColorOn,
       iconType,
-      classNameOn,
       ...other
     } = this.props;
     const { checkedState } = this.state;
