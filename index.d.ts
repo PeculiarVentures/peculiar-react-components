@@ -397,6 +397,8 @@ interface TooltipProps extends React.HTMLAttributes<HTMLDivElement> {
   overlayProps?: React.HTMLAttributes<HTMLDivElement>;
   usePortal?: boolean;
   preventOverflow?: boolean,
+  classNameTooltip?: string;
+  classNameTooltipContent?: string;
 }
 
 interface TooltipPopperProps {
@@ -411,6 +413,8 @@ interface TooltipPopperProps {
   zIndex?: number;
   usePortal?: boolean;
   preventOverflow?: boolean,
+  classNameTooltip?: string;
+  classNameTooltipContent?: string;
 }
 
 interface TypographyBasicProps {

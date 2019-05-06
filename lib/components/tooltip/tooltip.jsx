@@ -134,6 +134,14 @@ export default class Tooltip extends Component {
      * Use preventOverflow for prevent overflow on tooltip.
      */
     preventOverflow: PropTypes.bool,
+    /**
+     * Class name for tooltip popper root element
+     */
+    classNameTooltip: PropTypes.string,
+    /**
+     * Class name for tooltip popper content element
+     */
+    classNameTooltipContent: PropTypes.string,
   }
 
   static defaultProps = {
@@ -154,6 +162,8 @@ export default class Tooltip extends Component {
     overlayProps: {},
     usePortal: false,
     preventOverflow: true,
+    classNameTooltip: '',
+    classNameTooltipContent: '',
   }
 
   constructor(props) {
@@ -546,6 +556,8 @@ export default class Tooltip extends Component {
       overlayProps,
       usePortal,
       preventOverflow,
+      classNameTooltip,
+      classNameTooltipContent,
       ...other
     } = this.props;
     const { open } = this.state;
@@ -598,6 +610,8 @@ export default class Tooltip extends Component {
             zIndex={zIndex}
             usePortal={usePortal}
             preventOverflow={preventOverflow}
+            classNameTooltip={classNameTooltip}
+            classNameTooltipContent={classNameTooltipContent}
           >
             {content}
           </TooltipPopper>

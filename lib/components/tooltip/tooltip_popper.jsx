@@ -23,6 +23,8 @@ export default function TooltipPopper(props) {
     zIndex,
     usePortal,
     preventOverflow,
+    classNameTooltip,
+    classNameTooltipContent,
     ...other
   } = props;
 
@@ -81,6 +83,7 @@ export default function TooltipPopper(props) {
               zIndex,
             }}
             data-component="tooltip_popper"
+            className={classNameTooltip}
           >
             <div
               className={classnames(
@@ -88,6 +91,7 @@ export default function TooltipPopper(props) {
                 `fill_${color}`,
                 'shadow',
                 'round_small',
+                classNameTooltipContent,
               )}
               data-component="tooltip_content"
               data-placement={placement}
@@ -190,6 +194,14 @@ TooltipPopper.propTypes = {
    * Use preventOverflow for prevent overflow on tooltip.
    */
   preventOverflow: PropTypes.bool,
+  /**
+   * Class name for tooltip popper root element
+   */
+  classNameTooltip: PropTypes.string,
+  /**
+   * Class name for tooltip popper content element
+   */
+  classNameTooltipContent: PropTypes.string,
 };
 
 TooltipPopper.defaultProps = {
@@ -202,4 +214,6 @@ TooltipPopper.defaultProps = {
   zIndex: 1,
   usePortal: false,
   preventOverflow: true,
+  classNameTooltip: '',
+  classNameTooltipContent: '',
 };
