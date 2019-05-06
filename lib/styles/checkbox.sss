@@ -28,6 +28,7 @@
       ~ .checkbox_container
         box-shadow: 0 4px 10px 0 rgba(64,72,79, 0.1)
   &_container
+    position: relative
     width: 20px
     height: 20px
     border-radius: $borderRadius
@@ -38,11 +39,12 @@
     border: 1px solid transparent
     text-align: center
   &_icon, &_square
-    position: relative
+    position: absolute
+    left: 50%
     top: 50%
     vertical-align: top
     width: 11px
-    transform: translate(0, -50%)
+    transform: translate(-50%, -50%)
     display: none
     transition: fill 300ms
   &_square

@@ -21,16 +21,17 @@ export default function Usage() {
         defaultChecked
         iconColorOn="black"
         bgType="fill"
+        style={{
+          marginRight: 10,
+        }}
       />
       <Checkbox
         defaultChecked
         iconColorOn="secondary"
-        bgType="fill"
-        color="grey"
-        className="stroke_secondary"
-        classNameOn="stroke_black"
-        colorOn="grey_2"
-        iconColor="grey_1"
+        bgType="stroke"
+        color="black"
+        colorOn="secondary"
+        iconColor="primary"
         iconType="square"
       />
     </div>

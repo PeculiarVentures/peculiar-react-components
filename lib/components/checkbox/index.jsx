@@ -16,13 +16,11 @@ export default class Checkbox extends SwitchHandler {
   static propTypes = {
     ...SwitchHandler.propTypes,
     iconType: PropTypes.string,
-    classNameOn: PropTypes.string,
   };
 
   static defaultProps = {
     ...SwitchHandler.defaultProps,
     iconType: 'checkmark',
-    classNameOn: '',
   };
 
   render() {
@@ -58,7 +56,6 @@ export default class Checkbox extends SwitchHandler {
         className={classnames(
           'checkbox',
           className,
-          { [classNameOn]: checkedState },
         )}
         {...other}
       >
