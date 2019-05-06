@@ -4,6 +4,7 @@
   position: relative
   display: inline-block
   vertical-align: top
+  border-radius: 3px
   .switch_label
     display: inline-block
     vertical-align: middle
@@ -36,7 +37,7 @@
     transition: background 300ms, border-color 300ms, box-shadow 300ms, opacity 300ms
     border: 1px solid transparent
     text-align: center
-  &_icon
+  &_icon, &_square
     position: relative
     top: 50%
     vertical-align: top
@@ -44,6 +45,10 @@
     transform: translate(0, -50%)
     display: none
     transition: fill 300ms
+  &_square
+    height: 11px
+    transition: background 300ms
+    border-radius: 1px
 
   &[data-disabled="false"]
     &:hover
@@ -65,7 +70,7 @@
           border-color: var(--$(key), $$(key))
 
   &[data-checked="true"]
-    .checkbox_icon
+    .checkbox_icon, .checkbox_square
       display: inline-block
     .checkbox_fill
       @each $key in $colors
