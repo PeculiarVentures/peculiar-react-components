@@ -1,5 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
+import PropTypes from 'prop-types';
 import SwitchHandler from '../switch_handler';
 import CheckmarkIcon from '../icons/checkmark';
 
@@ -11,6 +12,17 @@ export default class Checkbox extends SwitchHandler {
    * render
    * @return {ReactElement} markup
    */
+
+  static propTypes = {
+    ...SwitchHandler.propTypes,
+    iconType: PropTypes.string,
+  };
+
+  static defaultProps = {
+    ...SwitchHandler.defaultProps,
+    iconType: 'checkmark',
+  };
+
   render() {
     const {
       name,
@@ -29,6 +41,7 @@ export default class Checkbox extends SwitchHandler {
       colorOn,
       iconColor,
       iconColorOn,
+      iconType,
       ...other
     } = this.props;
     const { checkedState } = this.state;
@@ -64,13 +77,23 @@ export default class Checkbox extends SwitchHandler {
           )}
           data-component="checkbox_container"
         >
-          <CheckmarkIcon
-            className={classnames(
-              'checkbox_icon',
-              [`checkbox_fill_${iconColor}`],
-              [`checkbox_fill_${iconColorOn}_checked`],
-            )}
-          />
+          {iconType === 'square' ? (
+            <div
+              className={classnames(
+                'checkbox_icon_square',
+                [`checkbox_fill_${iconColor}`],
+                [`checkbox_fill_${iconColorOn}_checked`],
+              )}
+            />
+          ) : (
+            <CheckmarkIcon
+              className={classnames(
+                'checkbox_icon_checkmark',
+                [`checkbox_fill_${iconColor}`],
+                [`checkbox_fill_${iconColorOn}_checked`],
+              )}
+            />
+          )}
         </div>
         {labelPosition === 'right' ? this.renderLabel() : null}
       </div>

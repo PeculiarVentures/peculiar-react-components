@@ -85,7 +85,9 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   ref?: React.Ref<HTMLElement>;
 }
 
-interface CheckboxProps extends SwitchHandler {}
+interface CheckboxProps extends SwitchHandler {
+  iconType?: 'checkmark' | 'square';
+}
 
 interface ContentLoaderProps extends React.SVGAttributes<SVGAElement> {
   color?: Color;
