@@ -192,7 +192,6 @@ export default class Radio extends PureComponent {
               'radio_tumbler',
               [`radio_fill_${iconColorOn}_checked`],
             )}
-            data-component="radio_tumbler"
           />
         </div>
       </div>

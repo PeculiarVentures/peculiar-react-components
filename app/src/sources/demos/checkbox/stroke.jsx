@@ -22,6 +22,15 @@ export default function Usage() {
       <Checkbox
         bgType="stroke"
         iconColorOn="primary"
+        defaultChecked
+        iconType="square"
+        style={{
+          marginRight: 10,
+        }}
+      />
+      <Checkbox
+        bgType="stroke"
+        iconColorOn="primary"
         disabled
         style={{
           marginRight: 10,

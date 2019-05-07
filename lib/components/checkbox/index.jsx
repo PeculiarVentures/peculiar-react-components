@@ -77,28 +77,23 @@ export default class Checkbox extends SwitchHandler {
           )}
           data-component="checkbox_container"
         >
-          {
-            iconType === 'square' &&
+          {iconType === 'square' ? (
             <div
-              data-component="icon"
               className={classnames(
-                'checkbox_square',
+                'checkbox_icon_square',
                 [`fill_${iconColor}`],
                 [`fill_${iconColorOn}`],
               )}
             />
-          }
-          {
-            iconType === 'checkmark' &&
+          ) : (
             <CheckmarkIcon
-              data-component="icon"
               className={classnames(
-                'checkbox_icon',
+                'checkbox_icon_checkmark',
                 [`checkbox_fill_${iconColor}`],
                 [`checkbox_fill_${iconColorOn}_checked`],
               )}
             />
-          }
+          )}
         </div>
         {labelPosition === 'right' ? this.renderLabel() : null}
       </div>
