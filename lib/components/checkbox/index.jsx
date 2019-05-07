@@ -81,8 +81,8 @@ export default class Checkbox extends SwitchHandler {
             <div
               className={classnames(
                 'checkbox_icon_square',
-                [`fill_${iconColor}`],
-                [`fill_${iconColorOn}`],
+                [`checkbox_fill_${iconColor}`],
+                [`checkbox_fill_${iconColorOn}_checked`],
               )}
             />
           ) : (
