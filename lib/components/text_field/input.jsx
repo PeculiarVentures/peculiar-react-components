@@ -238,7 +238,7 @@ export default class Input extends PureComponent {
           type={multiLine ? null : type}
           className={classNames(
             'input_field',
-            { fill_white: bgType !== 'fill' },
+            { fill_white: bgType === 'stroke' },
             [`input_field_${size}`],
             [`input_field_${bgType}_${color}`],
             [`input_field_text_${textColor}`],
