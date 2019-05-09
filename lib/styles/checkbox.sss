@@ -7,7 +7,7 @@
   .switch_label
     display: inline-block
     vertical-align: middle
-    width: calc(100% - 20px)
+    width: calc(100% - $checkbox-size)
     transition: opacity 300ms
     &[data-position="left"]
       padding-right: 10px
@@ -27,8 +27,8 @@
       ~ .checkbox_container
         box-shadow: 0 4px 10px 0 rgba(64,72,79, 0.1)
   &_container
-    width: 20px
-    height: 20px
+    width: $checkbox-size
+    height: $checkbox-size
     border-radius: $borderRadius
     display: inline-block
     vertical-align: middle
@@ -43,13 +43,11 @@
     transform: translateY(-50%)
     display: none
     transition: fill 300ms
+    width: $checkbox-iconSize
   &_icon_square
-    height: 12px
-    width: 12px
+    height: $checkbox-iconSize
     transition: background 300ms
     border-radius: 1px
-  &_icon_checkmark
-    width: 11px
 
   &[data-disabled="false"]
     &:hover
