@@ -7,7 +7,7 @@ export default function Usage() {
       <TextField
         placeholder="Planet name"
         color="black"
-        textColor="black"
+        textColor="white"
         style={{
           maxWidth: 300,
           marginBottom: 10,
