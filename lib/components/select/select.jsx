@@ -520,7 +520,6 @@ export default class Select extends PureComponent {
           data-component="select_field"
           className={classNames(
             'select_field',
-            { fill_white: bgType === 'stroke' },
             [`select_field_${size}`],
             [`select_field_${bgType}_${color}`],
             [`select_field_text_${textColor}`],
@@ -528,6 +527,7 @@ export default class Select extends PureComponent {
             'round_small',
             {
               select_field_empty: !valueState,
+              fill_white: bgType === 'stroke',
             },
           )}
           onClick={this._handleClick}
