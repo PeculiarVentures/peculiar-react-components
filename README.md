@@ -33,3 +33,22 @@ ReactDOM.render(<App />, document.getElementById('#root'));
 ## Documentation
 
 Check out our [documentation website](https://peculiarventures.github.io/react-components/).
+
+## Development
+
+1. Install modules
+```bash
+npm install && cd app && npm install && cd ..
+```
+
+2. Build package and styles
+```bash
+npm run build && npm run theme:create
+```
+
+3. Start development server
+```bash
+npm run development
+```
+
+4. Open port `:3000`

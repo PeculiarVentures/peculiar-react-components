@@ -1,6 +1,6 @@
 {
   "name": "lib-react-components",
-  "version": "0.3.25",
+  "version": "0.3.28",
   "description": "React components",
   "keywords": [
     "react",
@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
-    "lib-theme-contructor": "0.0.5",
+    "lib-theme-contructor": "0.0.6",
     "prismjs": "^1.14.0",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",

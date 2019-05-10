@@ -7,7 +7,7 @@
   .switch_label
     display: inline-block
     vertical-align: middle
-    width: calc(100% - 36px)
+    width: calc(100% - $switch-width)
     transition: opacity 300ms
     &[data-position="left"]
       padding-right: 10px
@@ -27,18 +27,18 @@
       ~ .switch_container
         box-shadow: 0 4px 10px 0 rgba(64,72,79, 0.1)
   &_container
-    width: 36px
-    height: 22px
-    border-radius: 22px
-    padding: calc((22px - 16px - 2px) / 2)
+    width: $switch-width
+    height: $switch-height
+    border-radius: $switch-height
+    padding: calc(($switch-height - $switch-height + 4px) / 2)
     display: inline-block
     vertical-align: middle
     box-sizing: border-box
     transition: background 300ms, border-color 300ms, box-shadow 300ms, opacity 300ms
     border: 1px solid transparent
   &_tumbler
-    width: 16px
-    height: 16px
+    width: calc($switch-height - 6px)
+    height: calc($switch-height - 6px)
     border-radius: 50%
     margin-left: 0
     transition: margin-left 300ms, background 300ms
@@ -62,7 +62,7 @@
 
   &[data-checked="true"]
     .switch_tumbler
-      margin-left: calc(100% - 16px)
+      margin-left: calc(100% - $switch-height + 6px)
     .switch_fill
       @each $key in $colors
         &_$(key)_checked

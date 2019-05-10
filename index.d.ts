@@ -87,7 +87,6 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 interface CheckboxProps extends SwitchHandler {
   iconType?: 'checkmark' | 'square';
-  classNameOn?: string;
 }
 
 interface ContentLoaderProps extends React.SVGAttributes<SVGAElement> {

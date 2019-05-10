@@ -15,6 +15,7 @@ export default function Usage() {
         bgType="stroke"
         iconColorOn="primary"
         defaultChecked
+        iconType="square"
         style={{
           marginRight: 10,
         }}

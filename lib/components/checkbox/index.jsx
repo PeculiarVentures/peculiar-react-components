@@ -16,13 +16,11 @@ export default class Checkbox extends SwitchHandler {
   static propTypes = {
     ...SwitchHandler.propTypes,
     iconType: PropTypes.string,
-    classNameOn: PropTypes.string,
   };
 
   static defaultProps = {
     ...SwitchHandler.defaultProps,
     iconType: 'checkmark',
-    classNameOn: '',
   };
 
   render() {
@@ -44,7 +42,6 @@ export default class Checkbox extends SwitchHandler {
       iconColor,
       iconColorOn,
       iconType,
-      classNameOn,
       ...other
     } = this.props;
     const { checkedState } = this.state;
@@ -58,7 +55,6 @@ export default class Checkbox extends SwitchHandler {
         className={classnames(
           'checkbox',
           className,
-          { [classNameOn]: checkedState },
         )}
         {...other}
       >
@@ -81,28 +77,23 @@ export default class Checkbox extends SwitchHandler {
           )}
           data-component="checkbox_container"
         >
-          {
-            iconType === 'square' &&
+          {iconType === 'square' ? (
             <div
-              data-component="icon"
               className={classnames(
-                'checkbox_square',
-                [`fill_${iconColor}`],
-                [`fill_${iconColorOn}`],
-              )}
-            />
-          }
-          {
-            iconType === 'checkmark' &&
-            <CheckmarkIcon
-              data-component="icon"
-              className={classnames(
-                'checkbox_icon',
+                'checkbox_icon_square',
                 [`checkbox_fill_${iconColor}`],
                 [`checkbox_fill_${iconColorOn}_checked`],
               )}
             />
-          }
+          ) : (
+            <CheckmarkIcon
+              className={classnames(
+                'checkbox_icon_checkmark',
+                [`checkbox_fill_${iconColor}`],
+                [`checkbox_fill_${iconColorOn}_checked`],
+              )}
+            />
+          )}
         </div>
         {labelPosition === 'right' ? this.renderLabel() : null}
       </div>

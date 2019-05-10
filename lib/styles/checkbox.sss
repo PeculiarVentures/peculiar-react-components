@@ -4,11 +4,10 @@
   position: relative
   display: inline-block
   vertical-align: top
-  border-radius: 3px
   .switch_label
     display: inline-block
     vertical-align: middle
-    width: calc(100% - 20px)
+    width: calc(100% - $checkbox-size)
     transition: opacity 300ms
     &[data-position="left"]
       padding-right: 10px
@@ -28,8 +27,8 @@
       ~ .checkbox_container
         box-shadow: 0 4px 10px 0 rgba(64,72,79, 0.1)
   &_container
-    width: 20px
-    height: 20px
+    width: $checkbox-size
+    height: $checkbox-size
     border-radius: $borderRadius
     display: inline-block
     vertical-align: middle
@@ -37,16 +36,16 @@
     transition: background 300ms, border-color 300ms, box-shadow 300ms, opacity 300ms
     border: 1px solid transparent
     text-align: center
-  &_icon, &_square
+  &_icon_square, &_icon_checkmark
     position: relative
     top: 50%
     vertical-align: top
-    width: 11px
-    transform: translate(0, -50%)
+    transform: translateY(-50%)
     display: none
     transition: fill 300ms
-  &_square
-    height: 11px
+    width: $checkbox-iconSize
+  &_icon_square
+    height: $checkbox-iconSize
     transition: background 300ms
     border-radius: 1px
 
@@ -70,7 +69,7 @@
           border-color: var(--$(key), $$(key))
 
   &[data-checked="true"]
-    .checkbox_icon, .checkbox_square
+    .checkbox_icon_checkmark, .checkbox_icon_square
       display: inline-block
     .checkbox_fill
       @each $key in $colors

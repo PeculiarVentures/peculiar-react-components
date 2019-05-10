@@ -11,6 +11,7 @@ export default function Usage() {
       />
       <Checkbox
         defaultChecked
+        iconType="square"
         style={{
           marginRight: 10,
         }}

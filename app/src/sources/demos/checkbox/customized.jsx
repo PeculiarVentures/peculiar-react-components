@@ -22,17 +22,6 @@ export default function Usage() {
         iconColorOn="black"
         bgType="fill"
       />
-      <Checkbox
-        defaultChecked
-        iconColorOn="secondary"
-        bgType="fill"
-        color="grey"
-        className="stroke_secondary"
-        classNameOn="stroke_black"
-        colorOn="grey_2"
-        iconColor="grey_1"
-        iconType="square"
-      />
     </div>
   );
 }
