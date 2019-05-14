@@ -63,7 +63,7 @@ type CodeType = 'css'
   | 'glsl'
   | 'none';
 
-interface AvatarProps extends React.HTMLAttributes<HTMLImageElement | HTMLDivElement> {
+interface AvatarProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   letters?: string;
   size?: number;
   src?: string;
