@@ -251,6 +251,9 @@ export default class Autocomplete extends Component {
       disabled,
       name,
     } = this.props;
+    const {
+      open,
+    } = this.state;
 
     if (!disabled) {
       const { keyCode } = event;
@@ -264,10 +267,19 @@ export default class Autocomplete extends Component {
       }
 
       /**
-       * space or enter key press
-       * open/hide dropdown or select element in dropdown list
+       * space key press
+       * hide dropdown or select element in dropdown list
        */
-      if (keyCode === 32 || keyCode === 13) {
+      if (keyCode === 32) {
+        event.preventDefault();
+        this._handleSpaceEnterPress(event);
+      }
+
+      /**
+       * enter key press
+       * hide dropdown or select element in dropdown list
+       */
+      if (keyCode === 13 && open) {
         event.preventDefault();
         this._handleSpaceEnterPress(event);
       }
