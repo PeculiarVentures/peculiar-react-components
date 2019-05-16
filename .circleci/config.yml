@@ -1,37 +1,94 @@
-version: 2
+version: 2.1
+
+defaults: &defaults
+  working_directory: ~/ci-build
+  docker:
+    - image: circleci/node:8.9.3
 
 jobs:
-  build:
-    branches:
-      ignore:
-        - gh-pages
-    docker:
-      - image: circleci/node:8.2.1
+  pre-build:
+    <<: *defaults
+    steps:
+      - checkout:
+          path: ~/ci-build/
+      - attach_workspace:
+          at: ~/ci-build/
+      - restore_cache:
+          key: dependency-cache-lib-{{ checksum "package.json" }}
+      - run: npm install
+      - save_cache:
+          key: dependency-cache-lib-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+      - persist_to_workspace:
+          root: ~/ci-build
+          paths:
+            - node_modules
+
+  lint:
+    <<: *defaults
     steps:
       - checkout
+      - attach_workspace:
+          at: ~/ci-build
+      - run: npm run lint
+
+  test-unit:
+    <<: *defaults
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/ci-build
+      - run: npm run test
+
+  pre-build-deploy-docs:
+    <<: *defaults
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/ci-build/
       - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}-{{ checksum "app/package.json" }}
-      - run:
-          name: install-npm-dependencies
-          command: 'npm install && cd app && npm install'
+          key: dependency-cache-docs-{{ checksum "app/package.json" }}
+      - run: cd app && npm install
       - save_cache:
-          key: dependency-cache-{{ checksum "package.json" }}-{{ checksum "app/package.json" }}
+          key: dependency-cache-docs-{{ checksum "app/package.json" }}
           paths:
-            - ./node_modules
-      - run:
-          name: run-lint-command
-          command: 'npm run lint'
-      - run:
-          name: run-build-package
-          command: 'npm run build'
-      - run:
-          name: run-test-command
-          command: 'npm run test'
-      - deploy:
-          name: deploy
-          when: on_success
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "0.3.x" ]; then
-              # Deploy to gh-pages
-              cd app && npm run deploy:gh-pages
-            fi
+            - app/node_modules
+      - persist_to_workspace:
+          root: ~/ci-build
+          paths:
+            - app/node_modules
+
+  deploy-docs:
+    <<: *defaults
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/ci-build
+      - run: npm run build && cd app && npm run deploy:gh-pages
+
+workflows:
+  version: 2
+  lint-test-deploy:
+    jobs:
+      - pre-build
+      - lint:
+          requires:
+            - pre-build
+      - test-unit:
+          requires:
+            - lint
+      - pre-build-deploy-docs:
+          requires:
+            - test-unit
+          filters:
+            branches:
+              only:
+                - 0.3.x
+      - deploy-docs:
+          requires:
+            - pre-build-deploy-docs
+          filters:
+            branches:
+              only:
+                - 0.3.x
