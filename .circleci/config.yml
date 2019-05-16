@@ -1,12 +1,12 @@
 version: 2.1
 
 defaults: &defaults
+  working_directory: ~/ci-build
   docker:
     - image: circleci/node:8.9.3
 
 jobs:
   pre-build:
-    working_directory: ~/ci-build
     <<: *defaults
     steps:
       - checkout:
@@ -26,7 +26,6 @@ jobs:
             - node_modules
 
   lint:
-    working_directory: ~/ci-build
     <<: *defaults
     steps:
       - checkout
@@ -35,7 +34,6 @@ jobs:
       - run: npm run lint
 
   test-unit:
-    working_directory: ~/ci-build
     <<: *defaults
     steps:
       - checkout
@@ -44,7 +42,6 @@ jobs:
       - run: npm run test
 
   pre-build-deploy-docs:
-    working_directory: ~/ci-build
     <<: *defaults
     steps:
       - checkout
@@ -63,7 +60,6 @@ jobs:
             - app/node_modules
 
   deploy-docs:
-    working_directory: ~/ci-build
     <<: *defaults
     steps:
       - checkout
@@ -88,11 +84,11 @@ workflows:
           filters:
             branches:
               only:
-                - ci-config-fix
+                - 0.3.x
       - deploy-docs:
           requires:
             - pre-build-deploy-docs
           filters:
             branches:
               only:
-                - ci-config-fix
+                - 0.3.x
