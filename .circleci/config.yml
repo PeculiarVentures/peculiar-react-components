@@ -69,7 +69,7 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/ci-build
-      - run: cd app && npm run deploy:gh-pages
+      - run: npm run build && cd app && npm run deploy:gh-pages
 
 workflows:
   version: 2
