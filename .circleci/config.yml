@@ -43,6 +43,34 @@ jobs:
           at: ~/ci-build
       - run: npm run test
 
+  pre-build-deploy-docs:
+    working_directory: ~/ci-build
+    <<: *defaults
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/ci-build/
+      - restore_cache:
+          key: dependency-cache-docs-{{ checksum "app/package.json" }}
+      - run: cd app && npm install
+      - save_cache:
+          key: dependency-cache-docs-{{ checksum "app/package.json" }}
+          paths:
+            - app/node_modules
+      - persist_to_workspace:
+          root: ~/ci-build
+          paths:
+            - app/node_modules
+
+  deploy-docs:
+    working_directory: ~/ci-build
+    <<: *defaults
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/ci-build
+      - run: cd app && npm run deploy:gh-pages
+
 workflows:
   version: 2
   lint-test-deploy:
@@ -54,38 +82,17 @@ workflows:
       - test-unit:
           requires:
             - lint
-
-  # build:
-  #   branches:
-  #     ignore:
-  #       - gh-pages
-  #   docker:
-  #     - image: circleci/node:8.2.1
-  #   steps:
-  #     - checkout
-  #     - restore_cache:
-  #         key: dependency-cache-{{ checksum "package.json" }}-{{ checksum "app/package.json" }}
-  #     - run:
-  #         name: install-npm-dependencies
-  #         command: 'npm install && cd app && npm install'
-  #     - save_cache:
-  #         key: dependency-cache-{{ checksum "package.json" }}-{{ checksum "app/package.json" }}
-  #         paths:
-  #           - ./node_modules
-  #     - run:
-  #         name: run-lint-command
-  #         command: 'npm run lint'
-  #     - run:
-  #         name: run-build-package
-  #         command: 'npm run build'
-  #     - run:
-  #         name: run-test-command
-  #         command: 'npm run test'
-  #     - deploy:
-  #         name: deploy
-  #         when: on_success
-  #         command: |
-  #           if [ "${CIRCLE_BRANCH}" == "0.3.x" ]; then
-  #             # Deploy to gh-pages
-  #             cd app && npm run deploy:gh-pages
-  #           fi
+      - pre-build-deploy-docs:
+          requires:
+            - test-unit
+          filters:
+            branches:
+              only:
+                - ci-config-fix
+      - deploy-docs:
+          requires:
+            - pre-build-deploy-docs
+          filters:
+            branches:
+              only:
+                - ci-config-fix
