@@ -27,7 +27,7 @@
     "stripInternal": true,
     "target": "es5",
     "typeRoots": ["node_modules/@types"],
-    "outDir": "./esm",
+    "outDir": "./dist/esm",
   },
   "include": [
     "lib/**/*"
