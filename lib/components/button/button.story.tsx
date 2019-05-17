@@ -37,7 +37,7 @@ const props: any = {
   }),
 };
 
-storiesOf('Button', module)
+storiesOf('Components|Button', module)
   .add('default', () => {
     const regularProps = props.regular();
 
