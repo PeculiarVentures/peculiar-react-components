@@ -12,7 +12,6 @@ addDecorator(
     sidebarAnimations: true,
   })
 );
-
 addDecorator(
   withInfo({
     header: false,
@@ -27,7 +26,6 @@ addDecorator(
     },
   })
 );
-
 addDecorator(withKnobs());
 
 function loadStories() {
