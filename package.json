@@ -9,9 +9,9 @@
     "ui",
     "javascript"
   ],
-  "main": "cjs/index.js",
-  "module": "esm/index.js",
-  "typings": "esm/index.d.ts",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "typings": "dist/esm/index.d.ts",
   "sideEffects": false,
   "scripts": {
     "test": "jest --coverage",
@@ -59,11 +59,8 @@
     "awesome-typescript-loader": "^5.2.1",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.12.1",
-    "i": "^0.3.6",
-    "install": "^0.12.2",
     "jest": "^24.7.1",
-    "lib-theme-contructor": "0.0.5",
-    "npm": "^6.9.0",
+    "lib-theme-contructor": "0.0.6",
     "react-docgen-typescript-loader": "^3.1.0",
     "ts-jest": "^24.0.2",
     "tslint": "^5.16.0",
@@ -76,7 +73,6 @@
     "LICENSE.md",
     "README.md",
     "lib/",
-    "cjs/",
-    "esm/"
+    "dist/"
   ]
 }
