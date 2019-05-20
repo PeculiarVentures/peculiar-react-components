@@ -7,6 +7,7 @@ import { Button } from './index';
 const bgType = {
   fill: 'fill',
   stroke: 'stroke',
+  flat: 'flat',
 };
 
 const color = {

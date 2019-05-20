@@ -9,11 +9,12 @@ export interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEleme
    */
   children: React.ReactNode;
   /**
-   * Component type one of `fill` or `stroke`.
+   * Component type one of `fill` or `stroke` or `flat`.
    * If `fill` - component will be have background-color from `color` props.
    * If `stroke` - component will be have border-color from `color` props.
+   * If `flat` - component will be witout background and border.
    */
-  bgType?: 'fill' | 'stroke';
+  bgType?: 'fill' | 'stroke' | 'flat';
   /**
    * Component color from theme
    */
@@ -98,8 +99,10 @@ export class Button extends React.Component<IButtonProps> {
           [`button_${size}`],
           [`text_${align}`],
           [`text_${textColor}`],
-          [`stroke_${color}`],
-          [`fill_${color}`],
+          {
+            [`stroke_${color}`]: bgType !== 'flat',
+            [`fill_${color}`]: bgType === 'fill',
+          },
           className,
         ),
       },
