@@ -62,7 +62,7 @@ describe('<Button />', () => {
     ));
 
     expect(wrapper.find('button').prop('className'))
-      .toBe('button round_small truncate_text button_medium text_center text_black stroke_secondary fill_secondary');
+      .toBe('button round_small truncate_text button_medium text_center text_black stroke_secondary');
   });
 
   it('expect render link', () => {
