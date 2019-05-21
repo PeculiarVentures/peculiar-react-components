@@ -40,6 +40,10 @@ jobs:
       - attach_workspace:
           at: ~/ci-build
       - run: npm run test
+      - persist_to_workspace:
+          root: ~/ci-build
+          paths:
+            - coverage
 
   deploy-coverage:
     <<: *defaults
