@@ -1,5 +1,6 @@
 # Alternative UI
 [![CircleCI](https://circleci.com/gh/PeculiarVentures/react-components.svg?style=svg&circle-token=e09e288d212560eb0fc4a250a0d9c05394df2c3b)](https://circleci.com/gh/PeculiarVentures/react-components)
+[![Coverage Status](https://coveralls.io/repos/github/PeculiarVentures/react-components/badge.svg?branch=master&t=NoVVN0)](https://coveralls.io/github/PeculiarVentures/react-components?branch=master)
 
 ## Install
 ```bash
