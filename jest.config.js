@@ -15,7 +15,7 @@ module.exports = {
     '**/*.spec.(ts|tsx)',
   ],
   collectCoverageFrom: [
-    'lib/**.tsx',
+    'lib/**/**.tsx',
     '!**/**.story.tsx',
     '!**/**.spec.tsx',
   ],
