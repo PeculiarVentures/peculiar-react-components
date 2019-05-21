@@ -41,6 +41,14 @@ jobs:
           at: ~/ci-build
       - run: npm run test
 
+  deploy-coverage:
+    <<: *defaults
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/ci-build
+      - run: npm run coverage:deploy
+
 workflows:
   version: 2
   lint-test-deploy:
@@ -52,3 +60,6 @@ workflows:
       - test-unit:
           requires:
             - lint
+      - deploy-coverage:
+          requires:
+            - test-unit

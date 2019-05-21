@@ -22,7 +22,8 @@
     "build:esm": "tsc",
     "build:cjs": "tsc -p ./tsconfig.cjs.json",
     "build:css": "node ./scripts/build_theme.js",
-    "storybook": "start-storybook -p 3000 -s ./lib/themes"
+    "storybook": "start-storybook -p 3000 -s ./lib/themes",
+    "coverage:deploy": "cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
   },
   "repository": {
     "type": "git",
@@ -58,6 +59,7 @@
     "@types/storybook__addon-knobs": "^5.0.0",
     "@types/storybook__react": "^4.0.1",
     "awesome-typescript-loader": "^5.2.1",
+    "coveralls": "^3.0.3",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.12.1",
     "jest": "^24.7.1",
