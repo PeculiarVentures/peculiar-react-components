@@ -37,7 +37,10 @@ export default class Radio extends PureComponent {
     /**
      * Label for radio
      */
-    label: PropTypes.node,
+    label: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]),
     /**
      * Where the label will be placed next to the radio
      */
