@@ -151,7 +151,9 @@ interface RadioProps {
   value?: string;
   onChange?: (e: Event, value: boolean) => void;
   inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
+  label?: string | number;
   labelPosition?: 'left' | 'right';
+  labelProps?: TypographyBasicProps;
   className?: string;
   tabIndex?: number;
   bgType?: Fill;

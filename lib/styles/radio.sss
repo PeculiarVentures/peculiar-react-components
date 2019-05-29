@@ -4,6 +4,15 @@
   vertical-align: top
   cursor: pointer
   transition: opacity 300ms
+  .radio_label
+    display: inline-block
+    vertical-align: middle
+    width: calc(100% - $checkbox-size)
+    transition: opacity 300ms
+    &[data-position="left"]
+      padding-right: 10px
+    &[data-position="right"]
+      padding-left: 10px
   &_input
     position: absolute
     cursor: inherit
@@ -84,3 +93,5 @@
         background-color: var(--white, $white)
     &.radio_input
       z-index: -1
+    .radio_label
+      opacity: 0.5
