@@ -70,7 +70,7 @@ const fonts = {
       {
         name: 'default',
         entry: path.join(__dirname, '../lib/index.sss'),
-        out: path.join(__dirname, '../lib/themes'),
+        out: path.join(__dirname, '../dist/themes'),
         options: {
           palette: {
             primary: '#4DA3FC',

@@ -22,9 +22,27 @@
     "build:esm": "tsc",
     "build:cjs": "tsc -p ./tsconfig.cjs.json",
     "build:css": "node ./scripts/build_theme.js",
-    "storybook": "start-storybook -p 3000 -s ./lib/themes",
-    "coverage:deploy": "cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
+    "storybook": "npm run build:css && start-storybook -p 3000 -s ./dist/themes",
+    "coverage:deploy": "cat ./coverage/lcov.info | coveralls && rm -rf ./coverage",
+    "size": "size-limit"
   },
+  "size-limit": [
+    {
+      "name": "cjs",
+      "path": "dist/cjs/**/*.js",
+      "webpack": false
+    },
+    {
+      "name": "esm",
+      "path": "dist/esm/**/*.js",
+      "webpack": false
+    },
+    {
+      "name": "css",
+      "path": "dist/themes/default.css",
+      "webpack": false
+    }
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/PeculiarVentures/react-components.git"
@@ -65,6 +83,7 @@
     "jest": "^24.7.1",
     "lib-theme-contructor": "0.0.6",
     "react-docgen-typescript-loader": "^3.1.0",
+    "size-limit": "^1.3.5",
     "ts-jest": "^24.0.2",
     "tslint": "^5.16.0",
     "tslint-config-airbnb": "^5.11.1",
