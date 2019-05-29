@@ -4,6 +4,15 @@
   vertical-align: top
   cursor: pointer
   transition: opacity 300ms
+  .radio_label
+    display: inline-block
+    vertical-align: middle
+    width: calc(100% - $checkbox-size)
+    transition: opacity 300ms
+    &[data-position="left"]
+      padding-right: 10px
+    &[data-position="right"]
+      padding-left: 10px
   &_input
     position: absolute
     cursor: inherit
@@ -13,7 +22,7 @@
     height: 100%
     left: 0
     top: 0
-    z-index: inherit
+    z-index: 1
     &:focus
       ~ .radio_container
         box-shadow: 0 4px 10px 0 rgba(64,72,79, 0.1)
@@ -24,7 +33,7 @@
     display: inline-block
     vertical-align: middle
     box-sizing: border-box
-    transition: background 300ms, border-color 300ms, box-shadow 300ms
+    transition: background 300ms, border-color 300ms, box-shadow 300ms, opacity 300ms
     border: 1px solid transparent
     text-align: center
   &_tumbler
@@ -40,47 +49,40 @@
 
   &[data-disabled="false"]
     &:hover
-      opacity: .5
+      .radio_label,
+      .radio_container
+        opacity: .5
 
-    &[data-checked="false"]
-      .radio_fill
-        @each $key in $colors
-          &_$(key)
-            background-color: var(--$(key), $$(key))
-            border-color: var(--$(key), $$(key))
-      .radio_stroke
-        @each $key in $colors
-          &_$(key)
-            border-color: var(--$(key), $$(key))
+  &[data-checked="false"]
+    .radio_fill
+      @each $key in $colors
+        &_$(key)
+          background-color: var(--$(key), $$(key))
+          border-color: var(--$(key), $$(key))
+    .radio_stroke
+      @each $key in $colors
+        &_$(key)
+          border-color: var(--$(key), $$(key))
 
-    &[data-checked="true"]
-      .radio_fill
-        @each $key in $colors
-          &_$(key)_checked
-            background-color: var(--$(key), $$(key))
-            border-color: var(--$(key), $$(key))
-      .radio_stroke
-        @each $key in $colors
-          &_$(key)_checked
-            border-color: var(--$(key), $$(key))
-  
   &[data-checked="true"]
     .radio_tumbler
       display: inline-block
 
+    .radio_fill
+      @each $key in $colors
+        &_$(key)_checked
+          background-color: var(--$(key), $$(key))
+          border-color: var(--$(key), $$(key))
+    .radio_stroke
+      @each $key in $colors
+        &_$(key)_checked
+          border-color: var(--$(key), $$(key))
+
   &[data-disabled="true"]
     cursor: default
     pointer-events: none
-    &[data-type="stroke"]
-      .radio_container
-        border-color: var(--grey, $grey)
-      .radio_tumbler
-        background-color: var(--grey, $grey)
-    &[data-type="fill"]
-      .radio_container
-        background-color: var(--grey, $grey)
-        border-color: var(--grey, $grey)
-      .radio_tumbler
-        background-color: var(--white, $white)
-    &.radio_input
+    .radio_label,
+    .radio_container
+      opacity: .5
+    .radio_input
       z-index: -1

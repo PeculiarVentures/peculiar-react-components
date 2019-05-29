@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import Typography from '../typography';
 
 /**
  * Radio component
@@ -36,11 +37,18 @@ export default class Radio extends PureComponent {
     /**
      * Label for radio
      */
-    label: PropTypes.node,
+    label: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]),
     /**
      * Where the label will be placed next to the radio
      */
     labelPosition: PropTypes.oneOf(['left', 'right']),
+    /**
+     * `Typography` props for label
+     */
+    labelProps: PropTypes.object, // eslint-disable-line
     /**
      * The CSS class name of the root element
      */
@@ -82,6 +90,7 @@ export default class Radio extends PureComponent {
     inputProps: {},
     label: undefined,
     labelPosition: 'left',
+    labelProps: {},
     className: '',
     tabIndex: 0,
     bgType: 'fill',
@@ -118,17 +127,19 @@ export default class Radio extends PureComponent {
    * @return {ReactElement} markup
    */
   renderLabel() {
-    const { label } = this.props;
+    const { label, labelPosition, labelProps } = this.props;
 
-    if (label) {
-      return (
-        <div className="label">
-          {label}
-        </div>
-      );
-    }
-
-    return null;
+    return label && (
+      <Typography
+        type="b2"
+        color="black"
+        className="radio_label"
+        data-position={labelPosition}
+        {...labelProps}
+      >
+        {label}
+      </Typography>
+    );
   }
 
   /**
@@ -145,6 +156,7 @@ export default class Radio extends PureComponent {
       inputProps,
       label,
       labelPosition,
+      labelProps,
       className,
       tabIndex,
       bgType,
@@ -167,6 +179,7 @@ export default class Radio extends PureComponent {
         )}
         {...other}
       >
+        {labelPosition === 'left' ? this.renderLabel() : null}
         <input
           {...inputProps}
           tabIndex={tabIndex}
@@ -194,6 +207,7 @@ export default class Radio extends PureComponent {
             )}
           />
         </div>
+        {labelPosition === 'right' ? this.renderLabel() : null}
       </div>
     );
   }
