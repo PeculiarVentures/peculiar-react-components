@@ -416,7 +416,7 @@ export default class Tooltip extends Component {
       return this[`fire${event}`];
     }
 
-    return childPros[event] || props[event];
+    return childPros[event];
   }
 
   /**
