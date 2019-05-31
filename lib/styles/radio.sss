@@ -7,7 +7,7 @@
   .radio_label
     display: inline-block
     vertical-align: middle
-    width: calc(100% - $checkbox-size)
+    width: calc(100% - $radio-size)
     transition: opacity 300ms
     &[data-position="left"]
       padding-right: 10px
@@ -27,8 +27,8 @@
       ~ .radio_container
         box-shadow: 0 4px 10px 0 rgba(64,72,79, 0.1)
   &_container
-    width: $checkbox-size
-    height: $checkbox-size
+    width: $radio-size
+    height: $radio-size
     border-radius: 50%
     display: inline-block
     vertical-align: middle
@@ -40,8 +40,8 @@
     position: relative
     top: 50%
     vertical-align: top
-    width: $checkbox-iconSize
-    height: $checkbox-iconSize
+    width: $radio-iconSize
+    height: $radio-iconSize
     transform: translate(0, -50%)
     display: none
     transition: background 300ms
