@@ -403,6 +403,7 @@ interface TooltipProps extends React.HTMLAttributes<HTMLDivElement> {
   preventOverflow?: boolean,
   classNameTooltip?: string;
   classNameTooltipContent?: string;
+  showDelay?: number;
 }
 
 interface TooltipPopperProps {
@@ -419,6 +420,7 @@ interface TooltipPopperProps {
   preventOverflow?: boolean,
   classNameTooltip?: string;
   classNameTooltipContent?: string;
+  showDelay?: number;
 }
 
 interface TypographyBasicProps {
