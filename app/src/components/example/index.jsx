@@ -19,7 +19,7 @@ export default function Example(props) {
   function Data({ data }) { // eslint-disable-line
     return (
       <div className={s.example_wrapper}>
-        {data.map((d, index) => {
+        {data.map((d, index) => {  // eslint-disable-line
           if (d.type === 'demo') {
             let DemoComponent = () => null;
             let DemoCode = () => null;

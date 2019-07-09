@@ -6,10 +6,6 @@ import 'prismjs/components/prism-jsx';
 import 'prismjs/components/prism-bash';
 import 'prismjs/components/prism-glsl';
 
-Prism.hooks.add('before-highlight', function (env) {
-  env.code = env.element.innerText;
-});
-
 /**
  * Highlight component
  */
@@ -39,6 +35,16 @@ export default class HighlightCode extends Component {
 
   static defaultProps = {
     lang: 'js',
+  }
+
+  /**
+   * Fix Prism removes <br/> on Prism.highlightAll()
+   * https://github.com/PrismJS/prism/issues/832
+   */
+  componentWillMount() {
+    Prism.hooks.add('before-highlight', (env) => {
+      env.code = env.element.innerText;
+    });
   }
 
   componentDidMount() {
