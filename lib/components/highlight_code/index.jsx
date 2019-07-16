@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Prism from 'prismjs';
 import classNames from 'classnames';
@@ -9,7 +9,7 @@ import 'prismjs/components/prism-glsl';
 /**
  * Highlight component
  */
-export default class HighlightCode extends Component {
+export default class HighlightCode extends PureComponent {
   static propTypes = {
     /**
      * This is what will be displayed inside the component
@@ -47,12 +47,14 @@ export default class HighlightCode extends Component {
     });
   }
 
-  componentDidMount() {
-    this._hightlight();
-  }
+  _getPlainCode() {
+    const children = this.props.children;
 
-  componentDidUpdate() {
-    this._hightlight();
+    if (Array.isArray(children)) {
+      return children.join(' ');
+    }
+
+    return String(children);
   }
 
   /**
@@ -61,7 +63,7 @@ export default class HighlightCode extends Component {
   _hightlight() {
     const { lang } = this.props;
     const grammar = Prism.languages[lang];
-    let _html = this.rootNode.textContent;
+    let _html = this._getPlainCode();
 
     if (grammar) {
       try {
@@ -74,7 +76,7 @@ export default class HighlightCode extends Component {
     }
 
     // Treat iOS whie-space: pre; behavior
-    this.rootNode.innerHTML = _html
+    return _html
       .replace(/\n/g, '<br>')
       .replace(/<br>[ ]+/g, str => `<br>${'&nbsp;'.repeat(str.length - 5)}`)
       .replace(/^[ ]+/g, str => '&nbsp;'.repeat(str.length));
@@ -106,9 +108,8 @@ export default class HighlightCode extends Component {
           }}
           ref={(node) => { this.rootNode = node; }}
           className={`language-${lang}`}
-        >
-          {children}
-        </code>
+          dangerouslySetInnerHTML={{ __html: this._hightlight() }}
+        />
       </pre>
     );
   }
