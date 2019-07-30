@@ -1,6 +1,6 @@
 {
   "name": "lib-react-components",
-  "version": "0.3.31",
+  "version": "0.3.38",
   "description": "React components",
   "keywords": [
     "react",
@@ -16,7 +16,7 @@
     "test": "BABEL_ENV=test NODE_ENV=test jest",
     "lint": "eslint --ext .js,.jsx lib app test",
     "development": "cd ./app && npm run development",
-    "predevelopment": "npm run theme:create",
+    "predevelopment": "npm run build && npm run theme:create",
     "theme:create": "node lib/utils/build_theme.js",
     "build:commonjs": "BABEL_ENV=commonjs babel lib --out-dir commonjs --ignore *.css,*.sss,*.spec.js,*.spec.jsx --source-maps",
     "build:esm": "BABEL_ENV=esm babel lib --out-dir esm --ignore *.css,*.sss,*.spec.js,*.spec.jsx --source-maps",

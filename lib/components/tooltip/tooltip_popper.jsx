@@ -25,6 +25,7 @@ export default function TooltipPopper(props) {
     preventOverflow,
     classNameTooltip,
     classNameTooltipContent,
+    showDelay,
     ...other
   } = props;
 
@@ -95,6 +96,11 @@ export default function TooltipPopper(props) {
               )}
               data-component="tooltip_content"
               data-placement={placement}
+              style={{
+                animationDelay: `${showDelay}ms`,
+                MozAnimationDelay: `${showDelay}ms`,
+                WebkitAnimationDelay: `${showDelay}ms`,
+              }}
             >
               {arrow && (
                 <div
@@ -202,6 +208,10 @@ TooltipPopper.propTypes = {
    * Class name for tooltip popper content element
    */
   classNameTooltipContent: PropTypes.string,
+  /**
+   * The number of milliseconds to wait before showing the tooltip.
+   */
+  showDelay: PropTypes.number,
 };
 
 TooltipPopper.defaultProps = {
@@ -216,4 +226,5 @@ TooltipPopper.defaultProps = {
   preventOverflow: true,
   classNameTooltip: '',
   classNameTooltipContent: '',
+  showDelay: 0,
 };

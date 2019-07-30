@@ -142,6 +142,10 @@ export default class Tooltip extends Component {
      * Class name for tooltip popper content element
      */
     classNameTooltipContent: PropTypes.string,
+    /**
+     * The number of milliseconds to wait before showing the tooltip.
+     */
+    showDelay: PropTypes.number,
   }
 
   static defaultProps = {
@@ -164,6 +168,7 @@ export default class Tooltip extends Component {
     preventOverflow: true,
     classNameTooltip: '',
     classNameTooltipContent: '',
+    showDelay: 0,
   }
 
   constructor(props) {
@@ -416,7 +421,7 @@ export default class Tooltip extends Component {
       return this[`fire${event}`];
     }
 
-    return childPros[event] || props[event];
+    return childPros[event];
   }
 
   /**
@@ -558,6 +563,7 @@ export default class Tooltip extends Component {
       preventOverflow,
       classNameTooltip,
       classNameTooltipContent,
+      showDelay,
       ...other
     } = this.props;
     const { open } = this.state;
@@ -612,6 +618,7 @@ export default class Tooltip extends Component {
             preventOverflow={preventOverflow}
             classNameTooltip={classNameTooltip}
             classNameTooltipContent={classNameTooltipContent}
+            showDelay={showDelay}
           >
             {content}
           </TooltipPopper>

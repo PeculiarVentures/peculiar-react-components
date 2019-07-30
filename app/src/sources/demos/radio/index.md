@@ -8,6 +8,10 @@
 
 {{"demo": "/demos/radio/fill.jsx", "showCode": "true"}}
 
+## With label
+
+{{"demo": "/demos/radio/label.jsx", "showCode": "true"}}
+
 ## Controlled
 
 {{"demo": "/demos/radio/controlled.jsx", "showCode": "true"}}
