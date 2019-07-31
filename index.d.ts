@@ -472,6 +472,11 @@ interface SegueHandlerProps {
   defaultValue?: string | number;
 }
 
+interface AnalyticsProviderProps {
+  children: React.ReactNode;
+  onEvent: (eventName: string) => void
+}
+
 interface WindowSize {
   width: number;
   height: number;
@@ -534,8 +539,10 @@ declare const DeviceProvider: React.ComponentType<DeviceProviderProps>;
 declare const OfflineProvider: React.ComponentType<OfflineProviderProps>;
 declare const Portal: React.ComponentType<PortalProps>;
 declare const SegueHandler: React.ComponentType<SegueHandlerProps>;
+declare const AnalyticsProvider: React.ComponentType<AnalyticsProviderProps>;
 
 declare function getWindowSize(): WindowSize;
+declare function withAnalytics<T>(component: React.ComponentType<T>, trigger?: keyof T): React.ComponentType<T>;
 declare function getDeviceInfo(): DeviceInfo;
 declare function uuid(): string;
 declare const regExps: RegExps;
