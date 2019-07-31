@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ * AnalyticsHOC
+ */
 export default function withAnalytics(Component, firingEventProp = 'onClick') {
   const AnalyticsWrapper = ({ forwardRef, gaEventName, ...props }, context) => {
     const oldProp = props[firingEventProp];
