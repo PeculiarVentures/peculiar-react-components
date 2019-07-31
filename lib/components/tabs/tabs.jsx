@@ -1,11 +1,12 @@
 import React, { PureComponent, Children, isValidElement, cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import withAnalytics from '../../containers/analytics_hoc';
 
 /**
  * Tabs component
  */
-export default class Tabs extends PureComponent {
+class Tabs extends PureComponent {
   static propTypes = {
     /**
      * The contents of the Tabs
@@ -146,3 +147,5 @@ export default class Tabs extends PureComponent {
     );
   }
 }
+
+export default withAnalytics(Tabs, 'onChange');

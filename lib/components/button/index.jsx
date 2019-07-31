@@ -1,11 +1,12 @@
 import React, { PureComponent } from 'react';
+import withAnalytics from '../../containers/analytics_hoc';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 /**
  * Button component
  */
-export default class Button extends PureComponent {
+class Button extends PureComponent {
   static propTypes = {
     /**
      * The tabIndex attribute for button
@@ -118,3 +119,5 @@ export default class Button extends PureComponent {
     );
   }
 }
+
+export default withAnalytics(Button, 'onClick');

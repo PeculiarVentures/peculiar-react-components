@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import withAnalytics from '../../containers/analytics_hoc';
 
 /**
  * Verifies min/max range.
@@ -51,7 +52,7 @@ function valueInRangePropType(props, propName, componentName, ...rest) {
 /**
  * Slider component
  */
-export default class Slider extends PureComponent {
+class Slider extends PureComponent {
   static propTypes = {
     /**
      * The default value of the slider
@@ -523,3 +524,5 @@ export default class Slider extends PureComponent {
     );
   }
 }
+
+export default withAnalytics(Slider, 'onDragStop');

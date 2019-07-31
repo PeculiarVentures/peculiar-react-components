@@ -1,13 +1,14 @@
 import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
+import withAnalytics from '../../containers/analytics_hoc';
 import SwitchHandler from '../switch_handler';
 import CheckmarkIcon from '../icons/checkmark';
 
 /**
  * Checkbox component
  */
-export default class Checkbox extends SwitchHandler {
+class Checkbox extends SwitchHandler {
   /**
    * render
    * @return {ReactElement} markup
@@ -100,3 +101,5 @@ export default class Checkbox extends SwitchHandler {
     );
   }
 }
+
+export default withAnalytics(Checkbox, 'onCheck');
