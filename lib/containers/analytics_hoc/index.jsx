@@ -11,7 +11,10 @@ export default function withAnalytics(Component, firingEventProp = 'onClick') {
       if (context.gaFireEvent && gaEventName) {
         context.gaFireEvent(gaEventName);
       }
-      oldProp && oldProp(...args);
+
+      if (typeof oldProp === 'function') {
+        oldProp(...args);
+      }
     };
 
     return (
@@ -21,18 +24,26 @@ export default function withAnalytics(Component, firingEventProp = 'onClick') {
         ref={forwardRef}
       />
     );
-  }
+  };
 
-  const WrappedComponent = React.forwardRef((props, ref) => {
-    return <AnalyticsWrapper
-      {...props}
-      forwardRef={ref}
-    />;
-  });
+  const WrappedComponent = React.forwardRef((props, ref) => (
+    <AnalyticsWrapper {...props} forwardRef={ref} />
+  ));
 
   WrappedComponent.name = Component.name;
   AnalyticsWrapper.contextTypes = {
     gaFireEvent: PropTypes.func,
+  };
+  AnalyticsWrapper.propTypes = {
+    forwardRef: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+    ]),
+    gaEventName: PropTypes.string,
+  };
+  AnalyticsWrapper.defaultProps = {
+    forwardRef: null,
+    gaEventName: '',
   };
 
   return WrappedComponent;

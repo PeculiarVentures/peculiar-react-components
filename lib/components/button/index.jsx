@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
-import withAnalytics from '../../containers/analytics_hoc';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import withAnalytics from '../../containers/analytics_hoc';
 
 /**
  * Button component

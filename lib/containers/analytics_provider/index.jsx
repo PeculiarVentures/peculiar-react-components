@@ -1,15 +1,21 @@
-import React, { PureComponent } from 'react';
+import { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 /**
  * AnalyticsProvider component
  */
 export default class AnalyticsProvider extends PureComponent {
-  static PropTypes = {
+  static propTypes = {
     /**
      * Triggered with event name once component with gaEventName was interacted
      */
-    gaFireEvent: PropTypes.func,
+    onEvent: PropTypes.func,
+    children: PropTypes.node,
+  };
+
+  static defaultProps = {
+    onEvent: () => null,
+    children: null,
   };
 
   static childContextTypes = {
