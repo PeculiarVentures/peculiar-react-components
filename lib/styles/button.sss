@@ -36,29 +36,29 @@
         background-color: var(--$(key), $$(key))
         border-color: transparent   
         &:hover
-          background: rgba($$(key), .8)
+          background: color-mod(rgba($$(key), 1) lightness(65%))
           box-shadow: 0px 3px 10px rgba($$(key), 0.5)
         &:focus
           background: var(--$(key), $$(key))
-          box-shadow: 0px 6px 10px rgba($$(key), 0.5)
+          box-shadow: 0px 6px 10px rgba($$(key), 0.5), inset 0px 0px 7px rgba($grey_5_border, 0.9)
         &:active,
         &:visited
-          background: rgba($$(key), .7)
+          background: color-mod(rgba($$(key), 1) lightness(70%))
           box-shadow: -1px 4px 6px rgba($$(key), 0.5)
         
   &_stroke
     @each $key in $colors
       &_$(key)
         border-color: var(--$(key), $$(key))
-        background-color: rgba($black, .0)
+        background-color: var(--white, $white)
         &:hover
-          background-color: rgba($black, .05)
+          background-color: var(--grey_1, $grey_1)
         &:focus
-          border-width: 2px
-          background-color: rgba($black, .03)
+          background-color: var(--white, $white)
+          box-shadow: inset 0px 0px 7px rgba($grey_5_border, 0.5)
         &:active,
         &:visited
-          background: rgba($black, .09)
+          background-color: var(--grey_2, $grey_2)
 
   &_text
     @each $key in $colors
