@@ -107,19 +107,12 @@ workflows:
   lint-test-deploy:
     jobs:
       - pre-build
-      - pre-build-theme-constructor
       - lint:
           requires:
             - pre-build
-      - lint-theme-contructor:
-          requires:
-            - pre-build-theme-constructor
       - test-unit:
           requires:
             - pre-build
-      - test-unit-theme-contructor:
-          requires:
-            - pre-build-theme-constructor
       - pre-build-deploy-docs:
           requires:
             - lint
