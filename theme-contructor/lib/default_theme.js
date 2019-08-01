@@ -9,6 +9,9 @@ module.exports = {
     success: '#00D093',
     wrong: '#F12727',
     white: '#FFFFFF',
+    grey_1: '#FBFCFD',
+    grey_2: '#F4F7FC',
+    grey_5_border: '#7C8589',
   },
   variables: {
     borderRadius: '3px',
