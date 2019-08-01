@@ -21,7 +21,7 @@ describe('Theme constructor', () => {
     const data = await fs.readFile(path.join(__dirname, './expected/df.css'), 'utf8');
 
     assert.equal(
-      'svg.fill_primary [data-fill]{fill:#3d7dff;fill:var(--primary,#3d7dff)}svg.fill_secondary [data-fill]{fill:#ffc200;fill:var(--secondary,#ffc200)}svg.fill_black [data-fill]{fill:#222d47;fill:var(--black,#222d47)}svg.fill_dark_grey [data-fill]{fill:#5b647d;fill:var(--dark_grey,#5b647d)}svg.fill_grey [data-fill]{fill:#cbcfd7;fill:var(--grey,#cbcfd7)}svg.fill_light_grey [data-fill]{fill:#f5f6fa;fill:var(--light_grey,#f5f6fa)}svg.fill_success [data-fill]{fill:#00d093;fill:var(--success,#00d093)}svg.fill_wrong [data-fill]{fill:#f12727;fill:var(--wrong,#f12727)}svg.fill_white [data-fill]{fill:#fff;fill:var(--white,#fff)}.border-radius{border-radius:3px}',
+      'svg.fill_primary [data-fill]{fill:#3d7dff;fill:var(--primary,#3d7dff)}svg.fill_secondary [data-fill]{fill:#ffc200;fill:var(--secondary,#ffc200)}svg.fill_black [data-fill]{fill:#222d47;fill:var(--black,#222d47)}svg.fill_dark_grey [data-fill]{fill:#5b647d;fill:var(--dark_grey,#5b647d)}svg.fill_grey [data-fill]{fill:#cbcfd7;fill:var(--grey,#cbcfd7)}svg.fill_light_grey [data-fill]{fill:#f5f6fa;fill:var(--light_grey,#f5f6fa)}svg.fill_success [data-fill]{fill:#00d093;fill:var(--success,#00d093)}svg.fill_wrong [data-fill]{fill:#f12727;fill:var(--wrong,#f12727)}svg.fill_white [data-fill]{fill:#fff;fill:var(--white,#fff)}.border-radius{border-radius:3px}.transform{color:hsla(0,0%,80%,.1)}.lightness{background:#b3b3b3}',
       data,
     );
   });
@@ -54,7 +54,7 @@ describe('Theme constructor', () => {
     const data = await fs.readFile(path.join(__dirname, './expected/if.css'), 'utf8');
 
     assert.equal(
-      'svg.fill_primary [data-fill]{fill:#3d7dff;fill:var(--primary,#3d7dff)}svg.fill_secondary [data-fill]{fill:#ffc200;fill:var(--secondary,#ffc200)}svg.fill_black [data-fill]{fill:#222d47;fill:var(--black,#222d47)}svg.fill_dark_grey [data-fill]{fill:#95a0ba;fill:var(--dark_grey,#95a0ba)}svg.fill_grey [data-fill]{fill:#cbcfd7;fill:var(--grey,#cbcfd7)}svg.fill_light_grey [data-fill]{fill:#f5f6fa;fill:var(--light_grey,#f5f6fa)}svg.fill_success [data-fill]{fill:#00d093;fill:var(--success,#00d093)}svg.fill_wrong [data-fill]{fill:#f12727;fill:var(--wrong,#f12727)}svg.fill_white [data-fill]{fill:#fff;fill:var(--white,#fff)}.border-radius{border-radius:4px}',
+      'svg.fill_primary [data-fill]{fill:#3d7dff;fill:var(--primary,#3d7dff)}svg.fill_secondary [data-fill]{fill:#ffc200;fill:var(--secondary,#ffc200)}svg.fill_black [data-fill]{fill:#222d47;fill:var(--black,#222d47)}svg.fill_dark_grey [data-fill]{fill:#95a0ba;fill:var(--dark_grey,#95a0ba)}svg.fill_grey [data-fill]{fill:#cbcfd7;fill:var(--grey,#cbcfd7)}svg.fill_light_grey [data-fill]{fill:#f5f6fa;fill:var(--light_grey,#f5f6fa)}svg.fill_success [data-fill]{fill:#00d093;fill:var(--success,#00d093)}svg.fill_wrong [data-fill]{fill:#f12727;fill:var(--wrong,#f12727)}svg.fill_white [data-fill]{fill:#fff;fill:var(--white,#fff)}.border-radius{border-radius:4px}.transform{color:hsla(0,0%,80%,.1)}.lightness{background:#b3b3b3}',
       data,
     );
   });
@@ -99,11 +99,11 @@ describe('Theme constructor', () => {
     const dataFf = await fs.readFile(path.join(__dirname, './expected/ff.css'), 'utf8');
 
     assert.equal(
-      'svg.fill_primary [data-fill]{fill:#3d7dff;fill:var(--primary,#3d7dff)}svg.fill_secondary [data-fill]{fill:#ffc200;fill:var(--secondary,#ffc200)}svg.fill_black [data-fill]{fill:#222d47;fill:var(--black,#222d47)}svg.fill_dark_grey [data-fill]{fill:#5b647d;fill:var(--dark_grey,#5b647d)}svg.fill_grey [data-fill]{fill:#cbcfd7;fill:var(--grey,#cbcfd7)}svg.fill_light_grey [data-fill]{fill:#f5f6fa;fill:var(--light_grey,#f5f6fa)}svg.fill_success [data-fill]{fill:#00d093;fill:var(--success,#00d093)}svg.fill_wrong [data-fill]{fill:#f12727;fill:var(--wrong,#f12727)}svg.fill_white [data-fill]{fill:#fff;fill:var(--white,#fff)}.border-radius{border-radius:3px}',
+      'svg.fill_primary [data-fill]{fill:#3d7dff;fill:var(--primary,#3d7dff)}svg.fill_secondary [data-fill]{fill:#ffc200;fill:var(--secondary,#ffc200)}svg.fill_black [data-fill]{fill:#222d47;fill:var(--black,#222d47)}svg.fill_dark_grey [data-fill]{fill:#5b647d;fill:var(--dark_grey,#5b647d)}svg.fill_grey [data-fill]{fill:#cbcfd7;fill:var(--grey,#cbcfd7)}svg.fill_light_grey [data-fill]{fill:#f5f6fa;fill:var(--light_grey,#f5f6fa)}svg.fill_success [data-fill]{fill:#00d093;fill:var(--success,#00d093)}svg.fill_wrong [data-fill]{fill:#f12727;fill:var(--wrong,#f12727)}svg.fill_white [data-fill]{fill:#fff;fill:var(--white,#fff)}.border-radius{border-radius:3px}.transform{color:hsla(0,0%,80%,.1)}.lightness{background:#b3b3b3}',
       dataHk,
     );
     assert.equal(
-      'svg.fill_primary [data-fill]{fill:#ec06e5;fill:var(--primary,#ec06e5)}svg.fill_secondary [data-fill]{fill:#ffc200;fill:var(--secondary,#ffc200)}svg.fill_black [data-fill]{fill:#000;fill:var(--black,#000)}svg.fill_dark_grey [data-fill]{fill:#5b647d;fill:var(--dark_grey,#5b647d)}svg.fill_grey [data-fill]{fill:#cbcfd7;fill:var(--grey,#cbcfd7)}svg.fill_light_grey [data-fill]{fill:#f5f6fa;fill:var(--light_grey,#f5f6fa)}svg.fill_success [data-fill]{fill:#06ec0d;fill:var(--success,#06ec0d)}svg.fill_wrong [data-fill]{fill:#d00619;fill:var(--wrong,#d00619)}svg.fill_white [data-fill]{fill:#fff;fill:var(--white,#fff)}.border-radius{border-radius:3px}',
+      'svg.fill_primary [data-fill]{fill:#ec06e5;fill:var(--primary,#ec06e5)}svg.fill_secondary [data-fill]{fill:#ffc200;fill:var(--secondary,#ffc200)}svg.fill_black [data-fill]{fill:#000;fill:var(--black,#000)}svg.fill_dark_grey [data-fill]{fill:#5b647d;fill:var(--dark_grey,#5b647d)}svg.fill_grey [data-fill]{fill:#cbcfd7;fill:var(--grey,#cbcfd7)}svg.fill_light_grey [data-fill]{fill:#f5f6fa;fill:var(--light_grey,#f5f6fa)}svg.fill_success [data-fill]{fill:#06ec0d;fill:var(--success,#06ec0d)}svg.fill_wrong [data-fill]{fill:#d00619;fill:var(--wrong,#d00619)}svg.fill_white [data-fill]{fill:#fff;fill:var(--white,#fff)}.border-radius{border-radius:3px}.transform{color:hsla(0,0%,80%,.1)}.lightness{background:#b3b3b3}',
       dataFf,
     );
   });

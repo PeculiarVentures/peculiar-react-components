@@ -80,6 +80,8 @@ function createTheme(opts) {
         }),
         // for use `rgba(#fff, .1)`
         require('postcss-hexrgba'), // eslint-disable-line
+        // for use color functions
+        require('postcss-color-mod-function'), // eslint-disable-line
         // plugin to unwrap nested rules like how Sass does it
         require('postcss-nested'), // eslint-disable-line
         // autoprefixer

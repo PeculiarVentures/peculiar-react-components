@@ -1,6 +1,6 @@
 {
   "name": "lib-theme-contructor",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Theme constructor",
   "keywords": [
     "postcss",
@@ -39,6 +39,7 @@
     "cssnano": "^4.1.10",
     "fs-extra": "^5.0.0",
     "postcss": "^6.0.21",
+    "postcss-color-mod-function": "^3.0.3",
     "postcss-custom-properties": "^8.0.8",
     "postcss-hexrgba": "^1.0.0",
     "postcss-import": "^11.1.0",
