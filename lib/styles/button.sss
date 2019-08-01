@@ -36,14 +36,14 @@
         background-color: var(--$(key), $$(key))
         border-color: transparent   
         &:hover
-          background: color-mod(rgba($$(key), 1) lightness(60%))
+          background-color: color-mod(rgba($$(key), 1) lightness(60%))
           box-shadow: 0px 3px 10px rgba($$(key), 0.5)
         &:focus
-          background: var(--$(key), $$(key))
+          background-color: var(--$(key), $$(key))
           box-shadow: 0px 6px 10px rgba($$(key), 0.5), inset 0px 0px 7px rgba($grey_5_border, 0.9)
         &:active,
         &:visited
-          background: color-mod(rgba($$(key), 1) lightness(68%))
+          background-color: color-mod(rgba($$(key), 1) lightness(68%))
           box-shadow: -1px 4px 6px rgba($$(key), 0.5)
         
   &_stroke
@@ -64,10 +64,7 @@
   &_text
     @each $key in $colors
       &_$(key)
-        &[data-type="stroke"]
-          color: var(--black, $black)
-        &[data-type="fill"]
-          color: var(--white, $white)
+        color: var(--$(key), $$(key))
 
   &[disabled]
     cursor: default
