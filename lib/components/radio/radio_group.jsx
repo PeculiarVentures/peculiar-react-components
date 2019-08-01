@@ -1,10 +1,11 @@
 import React, { PureComponent, Children, isValidElement, cloneElement } from 'react';
 import PropTypes from 'prop-types';
+import withAnalytics from '../../containers/analytics_hoc';
 
 /**
  * RadioGroup component
  */
-export default class RadioGroup extends PureComponent {
+class RadioGroup extends PureComponent {
   static propTypes = {
     /**
      * The content of the component
@@ -104,3 +105,5 @@ export default class RadioGroup extends PureComponent {
     );
   }
 }
+
+export default withAnalytics(RadioGroup, 'onChange');

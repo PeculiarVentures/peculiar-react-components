@@ -2,6 +2,7 @@ import React, { PureComponent, Children, cloneElement, isValidElement } from 're
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import SelectDropdown from './select_dropdown';
+import withAnalytics from '../../containers/analytics_hoc';
 import SelectArrowIcon from '../icons/select_arrow';
 
 function prepareValue(value, defaultValue) {
@@ -19,7 +20,7 @@ function prepareValue(value, defaultValue) {
 /**
  * Select component
  */
-export default class Select extends PureComponent {
+class Select extends PureComponent {
   static propTypes = {
     /**
      * The option elements to populate the select with.
@@ -558,3 +559,5 @@ export default class Select extends PureComponent {
     );
   }
 }
+
+export default withAnalytics(Select, 'onChange');

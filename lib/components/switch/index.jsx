@@ -1,11 +1,12 @@
 import React from 'react';
 import classnames from 'classnames';
 import SwitchHandler from '../switch_handler';
+import withAnalytics from '../../containers/analytics_hoc';
 
 /**
  * Switch component
  */
-export default class Switch extends SwitchHandler {
+class Switch extends SwitchHandler {
   /**
    * render
    * @return {ReactElement} markup
@@ -76,3 +77,5 @@ export default class Switch extends SwitchHandler {
     );
   }
 }
+
+export default withAnalytics(Switch, 'onCheck');

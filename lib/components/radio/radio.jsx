@@ -1,12 +1,13 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import withAnalytics from '../../containers/analytics_hoc';
 import Typography from '../typography';
 
 /**
  * Radio component
  */
-export default class Radio extends PureComponent {
+class Radio extends PureComponent {
   static propTypes = {
     /**
      * If true, the component is checked
@@ -212,3 +213,5 @@ export default class Radio extends PureComponent {
     );
   }
 }
+
+export default withAnalytics(Radio, 'onChange');

@@ -83,6 +83,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   href?: string;
   children: React.ReactNode;
   ref?: React.Ref<HTMLElement>;
+  gaEventName?: string;
 }
 
 interface CheckboxProps extends SwitchHandler {
@@ -127,6 +128,7 @@ interface CounterProps {
   colorFocus?: Color;
   inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
   counterProps?: React.InputHTMLAttributes<HTMLDivElement>;
+  gaEventName?: string;
 }
 
 interface LinearProgressProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -162,6 +164,7 @@ interface RadioProps {
   iconColor?: Color;
   iconColorOn?: Color;
   ref?: React.Ref<HTMLElement>;
+  gaEventName?: string;
 }
 
 interface RadioGroupProps {
@@ -172,6 +175,7 @@ interface RadioGroupProps {
   onChange?: (e: Event, value: string) => void;
   className?: string;
   ref?: React.Ref<HTMLElement>;
+  gaEventName?: string;
 }
 
 interface SelectProps {
@@ -197,6 +201,7 @@ interface SelectProps {
   size?: 'medium' | 'large';
   placement?: 'top' | 'bottom';
   ref?: React.Ref<HTMLElement>;
+  gaEventName?: string;
 }
 
 interface SelectDropdownProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -240,6 +245,7 @@ interface SliderProps {
   progressColor?: Color;
   inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
   ref?: React.Ref<HTMLElement>;
+  gaEventName?: string;
 }
 
 interface SnackbarProps {
@@ -277,6 +283,7 @@ interface SwitchHandler {
   label?: string | number;
   labelPosition?: 'left' | 'right';
   labelProps?: TypographyBasicProps;
+  gaEventName?: string;
 }
 
 interface SwitchProps extends SwitchHandler {}
@@ -292,6 +299,7 @@ interface TabProps {
   color?: Color;
   colorOn?: Color;
   ref?: React.Ref<HTMLElement>;
+  gaEventName?: string;
 }
 
 interface TabsProps {
@@ -304,6 +312,7 @@ interface TabsProps {
   align?: 'left' | 'center' | 'right';
   className?: string;
   ref?: React.Ref<HTMLElement>;
+  gaEventName?: string;
 }
 
 interface InpuBasicProps {
@@ -463,6 +472,11 @@ interface SegueHandlerProps {
   defaultValue?: string | number;
 }
 
+interface AnalyticsProviderProps {
+  children: React.ReactNode;
+  onEvent: (eventName: string) => void
+}
+
 interface WindowSize {
   width: number;
   height: number;
@@ -525,8 +539,10 @@ declare const DeviceProvider: React.ComponentType<DeviceProviderProps>;
 declare const OfflineProvider: React.ComponentType<OfflineProviderProps>;
 declare const Portal: React.ComponentType<PortalProps>;
 declare const SegueHandler: React.ComponentType<SegueHandlerProps>;
+declare const AnalyticsProvider: React.ComponentType<AnalyticsProviderProps>;
 
 declare function getWindowSize(): WindowSize;
+declare function withAnalytics<T>(component: React.ComponentType<T>, trigger?: keyof T): React.ComponentType<T & { gaEventName?: string }>;
 declare function getDeviceInfo(): DeviceInfo;
 declare function uuid(): string;
 declare const regExps: RegExps;

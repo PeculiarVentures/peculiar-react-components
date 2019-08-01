@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import withAnalytics from '../../containers/analytics_hoc';
 import Input from '../text_field/input';
 import CounterTriangleIcon from '../icons/counter_arrow';
 
@@ -15,7 +16,7 @@ function prepareValue(value, defaultValue) {
   return '';
 }
 
-export default class Counter extends React.Component {
+class Counter extends React.Component {
   static propTypes = {
     value: PropTypes.number,
     defaultValue: PropTypes.number,
@@ -153,3 +154,5 @@ export default class Counter extends React.Component {
     );
   }
 }
+
+export default withAnalytics(Counter, 'onChange');

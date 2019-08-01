@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import withAnalytics from '../../containers/analytics_hoc';
 
 /**
  * Tab component
  */
-export default function Tab(props) {
+function Tab(props) {
   const {
     className,
     disabled,
@@ -105,3 +106,5 @@ Tab.defaultProps = {
   color: 'grey',
   colorOn: 'primary',
 };
+
+export default withAnalytics(Tab, 'onClick');
