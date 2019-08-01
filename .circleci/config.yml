@@ -67,19 +67,62 @@ jobs:
           at: ~/ci-build
       - run: npm run build && cd app && npm run deploy:gh-pages
 
+  pre-build-theme-constructor:
+    <<: *defaults
+    steps:
+      - checkout:
+          path: ~/ci-build/
+      - attach_workspace:
+          at: ~/ci-build/
+      - restore_cache:
+          key: dependency-cache-lib-{{ checksum "theme-contructor/package.json" }}
+      - run: cd theme-contructor && npm install
+      - save_cache:
+          key: dependency-cache-lib-{{ checksum "theme-contructor/package.json" }}
+          paths:
+            - node_modules
+      - persist_to_workspace:
+          root: ~/ci-build
+          paths:
+            - theme-contructor/node_modules
+
+  lint-theme-contructor:
+    <<: *defaults
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/ci-build
+      - run: cd theme-contructor && npm run lint
+
+  test-unit-theme-contructor:
+    <<: *defaults
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/ci-build
+      - run: cd theme-contructor && npm run test
+
 workflows:
   version: 2
   lint-test-deploy:
     jobs:
       - pre-build
+      - pre-build-theme-constructor
       - lint:
           requires:
             - pre-build
+      - lint-theme-contructor:
+          requires:
+            - pre-build-theme-constructor
       - test-unit:
           requires:
-            - lint
+            - pre-build
+      - test-unit-theme-contructor:
+          requires:
+            - pre-build-theme-constructor
       - pre-build-deploy-docs:
           requires:
+            - lint
             - test-unit
           filters:
             branches:
@@ -92,3 +135,11 @@ workflows:
             branches:
               only:
                 - 0.3.x
+
+      - pre-build-theme-constructor
+      - lint-theme-contructor:
+          requires:
+            - pre-build-theme-constructor
+      - test-unit-theme-contructor:
+          requires:
+            - pre-build-theme-constructor
