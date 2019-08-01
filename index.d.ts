@@ -542,7 +542,7 @@ declare const SegueHandler: React.ComponentType<SegueHandlerProps>;
 declare const AnalyticsProvider: React.ComponentType<AnalyticsProviderProps>;
 
 declare function getWindowSize(): WindowSize;
-declare function withAnalytics<T>(component: React.ComponentType<T>, trigger?: keyof T): React.ComponentType<T>;
+declare function withAnalytics<T>(component: React.ComponentType<T>, trigger?: keyof T): React.ComponentType<T & { gaEventName?: string }>;
 declare function getDeviceInfo(): DeviceInfo;
 declare function uuid(): string;
 declare const regExps: RegExps;
