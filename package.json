@@ -41,6 +41,7 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "lib-theme-contructor": "0.0.8",
+
     "prismjs": "^1.14.0",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
