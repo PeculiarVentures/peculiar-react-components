@@ -4,11 +4,11 @@
   position: relative
   display: inline-block
   vertical-align: top
+  transition: opacity 300ms
   .switch_label
     display: inline-block
     vertical-align: middle
     width: calc(100% - $checkbox-size)
-    transition: opacity 300ms
     &[data-position="left"]
       padding-right: 10px
     &[data-position="right"]
@@ -33,7 +33,7 @@
     display: inline-block
     vertical-align: middle
     box-sizing: border-box
-    transition: background 300ms, border-color 300ms, box-shadow 300ms, opacity 300ms
+    transition: background 300ms, border-color 300ms, box-shadow 300ms
     border: 1px solid transparent
     text-align: center
   &_icon_square, &_icon_checkmark
@@ -49,39 +49,17 @@
     transition: background 300ms
     border-radius: 1px
 
-  &[data-disabled="false"]
-    &:hover
-      .switch_label,
-      .checkbox_container
-        opacity: .5
+  &[data-type="stroke"]
+    .checkbox_container
+      background: transparent
 
-  &[data-checked="false"]
-    .checkbox_fill
-      @each $key in $colors
-        &_$(key)
-          fill: var(--$(key), $$(key))
-          &:not(svg)
-            background-color: var(--$(key), $$(key))
-            border-color: var(--$(key), $$(key))
-    .checkbox_stroke
-      @each $key in $colors
-        &_$(key)
-          border-color: var(--$(key), $$(key))
+  &:not([data-disabled="true"])
+    &:hover
+      opacity: .5
 
   &[data-checked="true"]
     .checkbox_icon_checkmark, .checkbox_icon_square
       display: inline-block
-    .checkbox_fill
-      @each $key in $colors
-        &_$(key)_checked
-          fill: var(--$(key), $$(key))
-          &:not(svg)
-            background-color: var(--$(key), $$(key))
-            border-color: var(--$(key), $$(key))
-    .checkbox_stroke
-      @each $key in $colors
-        &_$(key)_checked
-          border-color: var(--$(key), $$(key))
 
   &[data-disabled="true"]
     cursor: default

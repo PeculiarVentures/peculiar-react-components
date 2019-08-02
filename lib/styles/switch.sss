@@ -4,11 +4,11 @@
   position: relative
   display: inline-block
   vertical-align: top
+  transition: opacity 300ms
   .switch_label
     display: inline-block
     vertical-align: middle
     width: calc(100% - $switch-width)
-    transition: opacity 300ms
     &[data-position="left"]
       padding-right: 10px
     &[data-position="right"]
@@ -34,7 +34,7 @@
     display: inline-block
     vertical-align: middle
     box-sizing: border-box
-    transition: background 300ms, border-color 300ms, box-shadow 300ms, opacity 300ms
+    transition: background 300ms, border-color 300ms, box-shadow 300ms
     border: 1px solid transparent
   &_tumbler
     width: calc($switch-height - 6px)
@@ -43,35 +43,17 @@
     margin-left: 0
     transition: margin-left 300ms, background 300ms
 
-  &[data-disabled="false"]
-    &:hover
-      .switch_label,
-      .switch_container
-        opacity: .5
-
-  &[data-checked="false"]
-    .switch_fill
-      @each $key in $colors
-        &_$(key)
-          background-color: var(--$(key), $$(key))
-          border-color: var(--$(key), $$(key))
-    .switch_stroke
-      @each $key in $colors
-        &_$(key)
-          border-color: var(--$(key), $$(key))
+  &[data-type="stroke"]
+    .switch_container
+      background: transparent
 
   &[data-checked="true"]
     .switch_tumbler
       margin-left: calc(100% - $switch-height + 6px)
-    .switch_fill
-      @each $key in $colors
-        &_$(key)_checked
-          background-color: var(--$(key), $$(key))
-          border-color: var(--$(key), $$(key))
-    .switch_stroke
-      @each $key in $colors
-        &_$(key)_checked
-          border-color: var(--$(key), $$(key))
+
+  &:not([data-disabled="true"])
+    &:hover
+      opacity: .5
 
   &[data-disabled="true"]
     cursor: default

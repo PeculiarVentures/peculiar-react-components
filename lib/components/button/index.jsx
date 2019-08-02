@@ -124,4 +124,4 @@ class Button extends PureComponent {
   }
 }
 
-export default Button;
+export default withAnalytics(Button, 'onClick');

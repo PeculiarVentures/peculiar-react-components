@@ -59,16 +59,22 @@ class Switch extends SwitchHandler {
         <div
           className={classnames(
             'switch_container',
-            [`switch_${bgType}_${color}`],
-            [`switch_${bgType}_${colorOn}_checked`],
+            {
+              [`stroke_${color}`]: !checkedState,
+              [`fill_${color}`]: !checkedState,
+              [`stroke_${colorOn}`]: checkedState,
+              [`fill_${colorOn}`]: checkedState,
+            },
           )}
           data-component="switch_container"
         >
           <div
             className={classnames(
               'switch_tumbler',
-              [`switch_fill_${iconColor}`],
-              [`switch_fill_${iconColorOn}_checked`],
+              {
+                [`fill_${iconColor}`]: !checkedState,
+                [`fill_${iconColorOn}`]: checkedState,
+              },
             )}
           />
         </div>

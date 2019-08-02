@@ -47,36 +47,17 @@
     transition: background 300ms
     border-radius: 50%
 
-  &[data-disabled="false"]
-    &:hover
-      .radio_label,
-      .radio_container
-        opacity: .5
+  &[data-type="stroke"]
+    .radio_container
+      background: transparent
 
-  &[data-checked="false"]
-    .radio_fill
-      @each $key in $colors
-        &_$(key)
-          background-color: var(--$(key), $$(key))
-          border-color: var(--$(key), $$(key))
-    .radio_stroke
-      @each $key in $colors
-        &_$(key)
-          border-color: var(--$(key), $$(key))
+  &:not([data-disabled="true"])
+    &:hover
+      opacity: .5
 
   &[data-checked="true"]
     .radio_tumbler
       display: inline-block
-
-    .radio_fill
-      @each $key in $colors
-        &_$(key)_checked
-          background-color: var(--$(key), $$(key))
-          border-color: var(--$(key), $$(key))
-    .radio_stroke
-      @each $key in $colors
-        &_$(key)_checked
-          border-color: var(--$(key), $$(key))
 
   &[data-disabled="true"]
     cursor: default

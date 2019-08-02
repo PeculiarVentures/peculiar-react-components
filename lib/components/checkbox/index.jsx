@@ -73,8 +73,12 @@ class Checkbox extends SwitchHandler {
         <div
           className={classnames(
             'checkbox_container',
-            [`checkbox_${bgType}_${color}`],
-            [`checkbox_${bgType}_${colorOn}_checked`],
+            {
+              [`stroke_${color}`]: !checkedState,
+              [`fill_${color}`]: !checkedState,
+              [`stroke_${colorOn}`]: checkedState,
+              [`fill_${colorOn}`]: checkedState,
+            },
           )}
           data-component="checkbox_container"
         >
@@ -82,16 +86,20 @@ class Checkbox extends SwitchHandler {
             <div
               className={classnames(
                 'checkbox_icon_square',
-                [`checkbox_fill_${iconColor}`],
-                [`checkbox_fill_${iconColorOn}_checked`],
+                {
+                  [`fill_${iconColor}`]: !checkedState,
+                  [`fill_${iconColorOn}`]: checkedState,
+                },
               )}
             />
           ) : (
             <CheckmarkIcon
               className={classnames(
                 'checkbox_icon_checkmark',
-                [`checkbox_fill_${iconColor}`],
-                [`checkbox_fill_${iconColorOn}_checked`],
+                {
+                  [`fill_${iconColor}`]: !checkedState,
+                  [`fill_${iconColorOn}`]: checkedState,
+                },
               )}
             />
           )}

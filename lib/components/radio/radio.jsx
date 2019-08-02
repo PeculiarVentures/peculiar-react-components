@@ -196,15 +196,22 @@ class Radio extends PureComponent {
         <div
           className={classNames(
             'radio_container',
-            [`radio_${bgType}_${color}`],
-            [`radio_${bgType}_${colorOn}_checked`],
+            {
+              [`stroke_${color}`]: !checked,
+              [`fill_${color}`]: !checked,
+              [`stroke_${colorOn}`]: checked,
+              [`fill_${colorOn}`]: checked,
+            },
           )}
           data-component="radio_container"
         >
           <div
             className={classNames(
               'radio_tumbler',
-              [`radio_fill_${iconColorOn}_checked`],
+              {
+                [`fill_${iconColor}`]: !checked,
+                [`fill_${iconColorOn}`]: checked,
+              },
             )}
           />
         </div>
