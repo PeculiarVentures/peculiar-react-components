@@ -15,6 +15,7 @@ export default function Usage() {
       </Button>
       <Button
         bgType="stroke"
+        textColor="primary"
         disabled
       >
         Disabled

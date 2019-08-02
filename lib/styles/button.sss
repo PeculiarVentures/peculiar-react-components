@@ -33,33 +33,14 @@
     font-size: $button-large-fontSize
     font-weight: $button-large-fontWeight
 
-  &_fill
-    @each $key in $colors
-      &_$(key)
-        &:not([disabled])
-          background-color: var(--$(key), $$(key))
-          border-color: var(--$(key), $$(key))
-  &_stroke
-    @each $key in $colors
-      &_$(key)
-        &:not([disabled])
-          border-color: var(--$(key), $$(key))
   &_text
     @each $key in $colors
       &_$(key)
-        &:not([disabled])
-          color: var(--$(key), $$(key))
-          &:hover,
-          &:focus
-            color: rgba($$(key), .5)
+        &:hover,
+        &:focus
+          color: rgba($$(key), .5)
 
   &[disabled]
     cursor: default
     pointer-events: none
-    color: var(--grey, $grey)
-    &[data-type="stroke"]
-      border-color: var(--grey, $grey)
-    &[data-type="fill"]
-      background-color: var(--grey, $grey)
-      border-color: var(--grey, $grey)
-      color: var(--white, $white)
+    opacity: 0.7

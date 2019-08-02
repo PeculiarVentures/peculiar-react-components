@@ -108,8 +108,12 @@ class Button extends PureComponent {
           'round_small',
           [`text_${align}`],
           [`button_${size}`],
-          [`button_${bgType}_${color}`],
           [`button_text_${textColor}`],
+          {
+            [`fill_${color}`]: bgType === 'fill',
+            [`stroke_${color}`]: bgType === 'stroke',
+            [`text_${textColor}`]: textColor,
+          },
           className,
         )}
         {...other}
@@ -120,4 +124,4 @@ class Button extends PureComponent {
   }
 }
 
-export default withAnalytics(Button, 'onClick');
+export default Button;
