@@ -4,32 +4,26 @@
   line-height: 54px
   padding: 0 17px
   outline: none
-  border-bottom: 2px solid transparent
-  transition: color 300ms, border-color 300ms
+  transition: border-color 300ms, opacity 300ms
   background: transparent
   font-family: inherit
+  cursor: pointer
+  border-width: 0px 0px 2px 0px !important
+  border-style: solid
+  border-color: transparent
+  span
+    transition: color 300ms, opacity 300ms
 
-  &:not([disabled])
-    cursor: pointer
+  &:hover,
+  &:focus
+    span
+      opacity: .5
 
-    &[data-selected="false"]
-      @each $key in $colors
-        &.tab_$(key)
-          color: var(--$(key), $$(key))
-          &:hover,
-          &:focus
-            color: rgba($$(key), .5)
-
-    &[data-selected="true"]
-      @each $key in $colors
-        &.tab_$(key)_selected
-          color: var(--$(key), $$(key))
-          border-color: var(--$(key), $$(key))
-          &:hover,
-          &:focus
-            color: rgba($$(key), .5)
+  &[data-selected="true"]
+    &[disabled]
+      opacity: .8
 
   &[disabled]
     cursor: default
     pointer-events: none
-    color: var(--light_grey, $light_grey)
+    opacity: .5

@@ -38,14 +38,19 @@ function Tab(props) {
       className={classNames(
         'tab',
         'h5',
-        [`tab_${color}`],
-        [`tab_${colorOn}_selected`],
+        {
+          [`text_${color}`]: !selected,
+          [`text_${colorOn}`]: selected,
+          [`stroke_${colorOn}`]: selected,
+        },
         className,
       )}
-      disabled={disabled}
+      disabled={disabled || selected}
       {...other}
     >
-      {children}
+      <span>
+        {children}
+      </span>
     </button>
   );
 }
