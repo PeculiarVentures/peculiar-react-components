@@ -106,6 +106,7 @@ class Button extends PureComponent {
         className={classNames(
           'button',
           'round_small',
+          'truncate_text',
           [`text_${align}`],
           [`button_${size}`],
           [`button_text_${textColor}`],

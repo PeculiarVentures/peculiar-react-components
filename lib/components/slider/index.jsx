@@ -487,13 +487,13 @@ class Slider extends PureComponent {
           ref={(node) => { this.trackNode = node; }}
           className={classNames(
             'slider_track',
-            [`slider_${color}`],
+            [`fill_${color}`],
           )}
         />
         <div
           className={classNames(
             'slider_progress',
-            [`slider_${progressColor || color}`],
+            [`fill_${progressColor || color}`],
           )}
           style={{
             width: `${percent}%`,
@@ -503,7 +503,7 @@ class Slider extends PureComponent {
         <div
           className={classNames(
             'slider_tab',
-            [`slider_${iconColor}`],
+            [`fill_${iconColor}`],
           )}
           style={{
             left: `${percent}%`,

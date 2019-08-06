@@ -1,6 +1,7 @@
 .select
   position: relative
   transition: box-shadow 300ms
+
   &_open_button
     position: absolute
     right: 0
@@ -8,6 +9,7 @@
     height: 100%
     width: 30px
     pointer-events: none
+
   &_arrow_icon
     width: 7px
     fill: var(--grey, $grey)
@@ -16,17 +18,12 @@
     left: 50%
     display: block
     transform: translate(-50%, -50%)
+
   &_dropdown
     display: none
     position: absolute
     left: 0
-    width: 100%
-    border: 1px solid transparent
-    max-height: 150px
-    z-index: 2
-    overflow: auto
-    -webkit-overflow-scrolling: touch
-    transition: background 300ms, border-color 300ms
+
   &_field
     appearance: none
     font-family: inherit
@@ -40,39 +37,28 @@
     display: block
     background: none
     cursor: pointer
-    text-overflow: ellipsis
-    white-space: nowrap
-    overflow: hidden
     -webkit-tap-highlight-color: transparent
     margin: 0
+    span
+      transition: color 300ms, opacity 300ms
     &:focus
       box-shadow: 0 4px 10px 0 rgba(64,72,79, 0.1)
+
     &_medium
       height: $input-medium-height
       padding: 0 30px 0 10px
       font-size: $input-medium-fontSize
       line-height: calc($input-medium-height - 2px)
+
     &_large
       height: $input-large-height
       padding: 0 30px 0 13px
       font-size: $input-large-fontSize
       line-height: calc($input-large-height - 2px)
 
-    &_fill
-      @each $key in $colors
-        &_$(key)
-          border-color: var(--$(key), $$(key))
-          background-color: var(--$(key), $$(key))
-    &_stroke
-      @each $key in $colors
-        &_$(key)
-          border-color: var(--$(key), $$(key))
-    &_text
-      @each $key in $colors
-        &_$(key)
-          color: var(--$(key), $$(key))
-          &.select_field_empty
-            color: rgba($$(key), .5)
+    &_empty
+      span
+        opacity: .5
 
   &[data-placement="top"]
     .select_dropdown
@@ -106,18 +92,20 @@
     pointer-events: none
     cursor: default
     .select_field
-      color: rgba($black, .1)
+      span
+        opacity: .1
     .select_arrow_icon
       opacity: .3
         
-  &[data-disabled="false"]
+  &:not([data-disabled="true"])
     &:focus
       box-shadow: 0 4px 10px 0 rgba(64,72,79, 0.1)
       .select_field_focus
         @each $key in $colors
           &_$(key)
-            color: var(--$(key), $$(key))
             border-color: var(--$(key), $$(key))
+            span
+              color: var(--$(key), $$(key))
     .select_field_focus
       @each $key in $colors
         &_$(key)

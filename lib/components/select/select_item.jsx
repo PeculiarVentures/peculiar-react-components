@@ -28,9 +28,13 @@ export default function SelectItem(props) {
       data-value={value}
       className={classNames(
         'select_item',
+        'truncate_text',
         [`select_item_${size}`],
-        [`select_item_text_${textColor}`],
-        [`select_item_selected_${colorFocus}`],
+        {
+          [`select_item_focus_${colorFocus}`]: hasFocus,
+          [`text_${textColor}`]: !selected,
+          [`text_${colorFocus}`]: selected,
+        },
         className,
       )}
       {...other}

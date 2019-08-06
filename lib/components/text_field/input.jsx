@@ -170,7 +170,7 @@ export default class Input extends PureComponent {
 
     return required && (
       <RequiredIcon
-        className="input_required_icon"
+        className="input_required_icon fill_wrong"
       />
     );
   }
@@ -238,12 +238,15 @@ export default class Input extends PureComponent {
           type={multiLine ? null : type}
           className={classNames(
             'input_field',
-            { fill_white: bgType === 'stroke' },
-            [`input_field_${size}`],
-            [`input_field_${bgType}_${color}`],
-            [`input_field_text_${textColor}`],
-            [`input_field_focus_${colorFocus}`],
             'round_small',
+            [`input_field_${size}`],
+            [`stroke_${color}`],
+            {
+              fill_white: bgType === 'stroke',
+              [`fill_${color}`]: bgType === 'fill',
+              [`text_${textColor}`]: textColor,
+            },
+            [`input_field_focus_${colorFocus}`],
             classNameInput,
           )}
           tabIndex={tabIndex}

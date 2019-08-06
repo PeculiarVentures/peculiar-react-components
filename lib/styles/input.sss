@@ -8,7 +8,6 @@
     top: 2px
     right: 2px
     pointer-events: none
-    fill: var(--wrong, $wrong)
     width: 6px
     transition: opacity 300ms
   &_field
@@ -43,19 +42,9 @@
         padding: 0 13px
         font-size: $input-large-fontSize
 
-    &_fill
-      @each $key in $colors
-        &_$(key)
-          border-color: var(--$(key), $$(key))
-          background-color: var(--$(key), $$(key))
-    &_stroke
-      @each $key in $colors
-        &_$(key)
-          border-color: var(--$(key), $$(key))
     &_text
       @each $key in $colors
         &_$(key)
-          color: var(--$(key), $$(key))
           &::placeholder
             color: rgba($$(key), .5)
 

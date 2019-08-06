@@ -15,9 +15,23 @@
 @import "slider.sss"
 @import "select.sss"
 @import "select_item.sss"
+@import "select_dropdown.sss"
 @import "tab.sss"
 @import "highlight_code.sss"
 @import "snackbar.sss"
 @import "tooltip.sss"
 @import "counter.sss"
 @import "autocomplete.sss"
+
+.truncate_text
+  overflow: hidden
+  text-overflow: ellipsis
+  white-space: nowrap
+
+.tiny_align
+  &:before
+    display: inline-block
+    vertical-align: middle
+    width: 0
+    height: 100%
+    content: ''

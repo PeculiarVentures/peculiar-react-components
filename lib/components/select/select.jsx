@@ -441,11 +441,16 @@ class Select extends PureComponent {
             multiple={false}
             className={classNames(
               'select_field',
-              [`select_field_${size}`],
-              [`select_field_${bgType}_${color}`],
-              [`select_field_text_${textColor}`],
-              [`select_field_focus_${colorFocus}`],
               'round_small',
+              [`select_field_${size}`],
+              [`select_field_focus_${colorFocus}`],
+              [`stroke_${color}`],
+              {
+                [`fill_${color}`]: bgType === 'fill',
+                fill_white: bgType === 'stroke',
+                select_field_empty: !valueState,
+              },
+              // 'round_small',
             )}
             name={name}
             disabled={disabled}
@@ -521,19 +526,24 @@ class Select extends PureComponent {
           data-component="select_field"
           className={classNames(
             'select_field',
-            [`select_field_${size}`],
-            [`select_field_${bgType}_${color}`],
-            [`select_field_text_${textColor}`],
-            [`select_field_focus_${colorFocus}`],
+            'truncate_text',
             'round_small',
+            [`select_field_${size}`],
+            [`select_field_focus_${colorFocus}`],
+            [`stroke_${color}`],
             {
-              select_field_empty: !valueState,
+              [`fill_${color}`]: bgType === 'fill',
               fill_white: bgType === 'stroke',
+              select_field_empty: !valueState,
             },
           )}
           onClick={this._handleClick}
         >
-          {displayValue}
+          <span
+            className={classNames([`text_${textColor}`])}
+          >
+            {displayValue}
+          </span>
         </div>
         <input
           {...inputProps}

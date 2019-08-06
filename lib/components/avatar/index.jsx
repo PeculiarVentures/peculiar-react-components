@@ -35,6 +35,7 @@ export default function Avatar(props) {
         className={classNames(
           'avatar',
           'round_circle',
+          'truncate_text',
           {
             [`fill_${color}`]: bgType === 'fill',
           },
