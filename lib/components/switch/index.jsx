@@ -62,6 +62,8 @@ class Switch extends SwitchHandler {
             {
               [`stroke_${color}`]: !checkedState,
               [`fill_${color}`]: !checkedState,
+            },
+            {
               [`stroke_${colorOn}`]: checkedState,
               [`fill_${colorOn}`]: checkedState,
             },
@@ -73,6 +75,8 @@ class Switch extends SwitchHandler {
               'switch_tumbler',
               {
                 [`fill_${iconColor}`]: !checkedState,
+              },
+              {
                 [`fill_${iconColorOn}`]: checkedState,
               },
             )}

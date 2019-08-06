@@ -76,6 +76,8 @@ class Checkbox extends SwitchHandler {
             {
               [`stroke_${color}`]: !checkedState,
               [`fill_${color}`]: !checkedState,
+            },
+            {
               [`stroke_${colorOn}`]: checkedState,
               [`fill_${colorOn}`]: checkedState,
             },
@@ -88,6 +90,8 @@ class Checkbox extends SwitchHandler {
                 'checkbox_icon_square',
                 {
                   [`fill_${iconColor}`]: !checkedState,
+                },
+                {
                   [`fill_${iconColorOn}`]: checkedState,
                 },
               )}
@@ -98,6 +102,8 @@ class Checkbox extends SwitchHandler {
                 'checkbox_icon_checkmark',
                 {
                   [`fill_${iconColor}`]: !checkedState,
+                },
+                {
                   [`fill_${iconColorOn}`]: checkedState,
                 },
               )}

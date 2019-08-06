@@ -197,10 +197,12 @@ class Radio extends PureComponent {
           className={classNames(
             'radio_container',
             {
-              [`stroke_${color}`]: !checked,
-              [`fill_${color}`]: !checked,
               [`stroke_${colorOn}`]: checked,
               [`fill_${colorOn}`]: checked,
+            },
+            {
+              [`stroke_${color}`]: !checked,
+              [`fill_${color}`]: !checked,
             },
           )}
           data-component="radio_container"
@@ -210,6 +212,8 @@ class Radio extends PureComponent {
               'radio_tumbler',
               {
                 [`fill_${iconColor}`]: !checked,
+              },
+              {
                 [`fill_${iconColorOn}`]: checked,
               },
             )}

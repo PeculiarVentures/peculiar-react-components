@@ -40,6 +40,8 @@ function Tab(props) {
         'h5',
         {
           [`text_${color}`]: !selected,
+        },
+        {
           [`text_${colorOn}`]: selected,
           [`stroke_${colorOn}`]: selected,
         },

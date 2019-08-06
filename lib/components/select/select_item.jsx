@@ -33,6 +33,8 @@ export default function SelectItem(props) {
         {
           [`select_item_focus_${colorFocus}`]: hasFocus,
           [`text_${textColor}`]: !selected,
+        },
+        {
           [`text_${colorFocus}`]: selected,
         },
         className,

@@ -450,7 +450,6 @@ class Select extends PureComponent {
                 fill_white: bgType === 'stroke',
                 select_field_empty: !valueState,
               },
-              // 'round_small',
             )}
             name={name}
             disabled={disabled}
