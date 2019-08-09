@@ -129,7 +129,7 @@ export default class Tooltip extends Component {
     /**
      * Use React portal for render tooltip to another elemenet.
      */
-    usePortal: PropTypes.bool,
+    usePortal: PropTypes.oneOfType([PropTypes.bool, PropTypes.instanceOf(HTMLElement)]),
     /**
      * Use preventOverflow for prevent overflow on tooltip.
      */

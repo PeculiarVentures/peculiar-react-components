@@ -35,6 +35,7 @@ export default class Portal extends Component {
     container: PropTypes.oneOfType([ // eslint-disable-line
       PropTypes.object,
       PropTypes.func,
+      PropTypes.instanceOf(HTMLElement),
     ]),
     /**
      * Callback fired once the children has been mounted into the `container`.
