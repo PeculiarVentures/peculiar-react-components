@@ -39,12 +39,12 @@ module.exports = function docLoader(input) {
       let reactAPI;
 
       try {
-        reactAPI = reactDocgen.parse(src);
+        reactAPI = reactDocgen.parse(src, reactDocgen.resolver.findAllComponentDefinitions);
       } catch (error) {
         throw error;
       }
 
-      return generateProps(reactAPI);
+      return generateProps(reactAPI[0]);
     }
 
     return content;
