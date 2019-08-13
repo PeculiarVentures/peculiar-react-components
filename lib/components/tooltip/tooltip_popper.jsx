@@ -10,127 +10,150 @@ import Portal from '../../containers/portal';
  * @description
  *  All props for Popper you can found on https://github.com/FezVrasta/react-popper.
  */
-export default function TooltipPopper(props) {
-  const {
-    children,
-    arrow,
-    referenceElement,
-    open,
-    placement: placementProp,
-    positionFixed,
-    offset,
-    color,
-    zIndex,
-    usePortal,
-    preventOverflow,
-    classNameTooltip,
-    classNameTooltipContent,
-    showDelay,
-    ...other
-  } = props;
+export default class TooltipPopper extends React.Component {
+  static getDirection(placement) {
+    if (placement) {
+      if (placement.indexOf('right') === 0) {
+        return 'Left';
+      }
+      if (placement.indexOf('left') === 0) {
+        return 'Right';
+      }
+      if (placement.indexOf('bottom') === 0) {
+        return 'Top';
+      }
+      if (placement.indexOf('top') === 0) {
+        return 'Bottom';
+      }
+    }
 
-  if (!open) {
-    return null;
+    return '';
   }
 
-  const renderTooltip = (
-    <Popper
-      modifiers={{
-        computeStyle: {
-          gpuAcceleration: false,
-        },
-        preventOverflow: {
-          enabled: preventOverflow,
-        },
-        hide: {
-          enabled: preventOverflow,
-        },
-      }}
-      placement={placementProp}
-      referenceElement={referenceElement}
-      positionFixed={positionFixed}
-      {...other}
-    >
-      {({
-        ref,
-        style: { top, left, position },
-        placement,
-        arrowProps,
-      }) => {
-        let direction = '';
+  componentWillReceiveProps() {
+    // Make schedule to update tooltip, position if button position failed
+    this.scheduleUpdate();
+  }
 
-        if (placement) {
-          if (placement.indexOf('right') !== -1) {
-            direction = 'Left';
-          } else if (placement.indexOf('left') !== -1) {
-            direction = 'Right';
-          } else if (placement.indexOf('bottom') !== -1) {
-            direction = 'Top';
-          } else if (placement.indexOf('top') !== -1) {
-            direction = 'Bottom';
-          }
-        }
+  scheduleUpdate = () => null;
 
-        return (
-          <div
-            ref={ref}
-            style={{
-              top: 0,
-              left: 0,
-              position,
-              transform: `translate3d(${left}px, ${top}px, 0)`,
-              transformOrigin: 'top center',
-              [`padding${direction}`]: offset,
-              zIndex,
-            }}
-            data-component="tooltip_popper"
-            className={classNameTooltip}
-          >
-            <div
-              className={classnames(
-                'tooltip',
-                `fill_${color}`,
-                'shadow',
-                'round_small',
-                classNameTooltipContent,
-              )}
-              data-component="tooltip_content"
-              data-placement={placement}
-              style={{
-                animationDelay: `${showDelay}ms`,
-                MozAnimationDelay: `${showDelay}ms`,
-                WebkitAnimationDelay: `${showDelay}ms`,
-              }}
-            >
-              {arrow && (
-                <div
-                  ref={arrowProps.ref}
-                  style={arrowProps.style}
-                  data-component="tooltip_arrow"
-                  className="tooltip_arrow"
-                >
-                  <RightTriangleIcon
-                    className={classnames('tooltip_arrow_icon', `fill_${color}`)}
-                  />
-                </div>
-              )}
-              {children}
-            </div>
-          </div>
-        );
-      }}
-    </Popper>
-  );
+  renderTooltipBody = ({
+    ref,
+    style: { top, left, position },
+    placement,
+    arrowProps,
+    scheduleUpdate,
+  }) => {
+    const {
+      children,
+      arrow,
+      offset,
+      color,
+      zIndex,
+      classNameTooltip,
+      classNameTooltipContent,
+      showDelay,
+    } = this.props;
+    const direction = TooltipPopper.getDirection(placement);
 
-  if (usePortal) {
+    this.scheduleUpdate = scheduleUpdate;
+
     return (
-      <Portal>
-        {renderTooltip}
-      </Portal>
+      <div
+        ref={ref}
+        style={{
+          top: 0,
+          left: 0,
+          position,
+          transform: `translate3d(${left}px, ${top}px, 0)`,
+          transformOrigin: 'top center',
+          [`padding${direction}`]: offset,
+          zIndex,
+        }}
+        data-component="tooltip_popper"
+        className={classNameTooltip}
+      >
+        <div
+          className={classnames(
+            'tooltip',
+            `fill_${color}`,
+            'shadow',
+            'round_small',
+            classNameTooltipContent,
+          )}
+          data-component="tooltip_content"
+          data-placement={placement}
+          style={{
+            animationDelay: `${showDelay}ms`,
+            MozAnimationDelay: `${showDelay}ms`,
+            WebkitAnimationDelay: `${showDelay}ms`,
+          }}
+        >
+          {arrow && (
+            <div
+              ref={arrowProps.ref}
+              style={arrowProps.style}
+              data-component="tooltip_arrow"
+              className="tooltip_arrow"
+            >
+              <RightTriangleIcon
+                className={classnames('tooltip_arrow_icon', `fill_${color}`)}
+              />
+            </div>
+          )}
+          {children}
+        </div>
+      </div>
     );
   }
 
-  return renderTooltip;
+  render() {
+    const {
+      referenceElement,
+      open,
+      placement: placementProp,
+      positionFixed,
+      usePortal,
+      preventOverflow,
+      ...other
+    } = this.props;
+
+    if (!open) {
+      return null;
+    }
+
+    const renderTooltip = (
+      <Popper
+        modifiers={{
+          computeStyle: {
+            gpuAcceleration: false,
+          },
+          preventOverflow: {
+            enabled: preventOverflow,
+          },
+          hide: {
+            enabled: preventOverflow,
+          },
+        }}
+        placement={placementProp}
+        referenceElement={referenceElement}
+        positionFixed={positionFixed}
+        {...other}
+      >
+        {this.renderTooltipBody}
+      </Popper>
+    );
+
+    if (usePortal) {
+      return (
+        <Portal container={usePortal instanceof Element ? usePortal : null}>
+          {renderTooltip}
+        </Portal>
+      );
+    }
+
+    return renderTooltip;
+  }
 }
 
 TooltipPopper.propTypes = {
@@ -195,7 +218,7 @@ TooltipPopper.propTypes = {
   /**
    * Use React portal for render tooltip to another elemenet.
    */
-  usePortal: PropTypes.bool,
+  usePortal: PropTypes.oneOfType([PropTypes.bool, PropTypes.instanceOf(HTMLElement)]),
   /**
    * Use preventOverflow for prevent overflow on tooltip.
    */
