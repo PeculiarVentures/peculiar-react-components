@@ -9,14 +9,14 @@ describe('<Button />', () => {
     expect(wrapper.find('button').exists()).toBe(true);
   });
 
-  it('chack basic props', () => {
+  it('check basic props', () => {
     const wrapper = mount(<Button>1</Button>, global.defaultComponentOptions);
     const btn = wrapper.find('button');
 
     expect(btn.prop('disabled')).toBe(false);
     expect(btn.prop('data-component')).toBe('button');
     expect(btn.prop('className'))
-      .toBe('button round_small text_center button_medium button_text_white fill_primary text_white');
+      .toBe('button round_small truncate_text text_center button_medium button_text_white fill_primary text_white');
   });
 
   it('change theme', () => {
@@ -33,7 +33,7 @@ describe('<Button />', () => {
     );
 
     expect(wrapper.find('button').prop('className'))
-      .toBe('button round_small text_center button_medium button_text_black stroke_secondary text_black');
+      .toBe('button round_small truncate_text text_center button_medium button_text_black stroke_secondary text_black');
   });
 
   it('check link', () => {
@@ -86,7 +86,7 @@ describe('<Button />', () => {
     );
 
     expect(wrapper.find('button').prop('className'))
-      .toBe('button round_small text_center button_medium button_text_white fill_primary text_white custom');
+      .toBe('button round_small truncate_text text_center button_medium button_text_white fill_primary text_white custom');
   });
 
   it('handle events', () => {

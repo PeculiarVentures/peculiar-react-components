@@ -44,7 +44,7 @@ describe('<Avatar />', () => {
     );
 
     expect(wrapper.find('div').text()).toBe('A');
-    expect(wrapper.find('div').prop('className')).toBe('avatar round_circle fill_light_grey stroke_light_grey text_primary');
+    expect(wrapper.find('div').prop('className')).toBe('avatar round_circle truncate_text fill_light_grey stroke_light_grey text_primary');
     expect(wrapper.find('div').prop('style')).toHaveProperty('lineHeight', '38px');
   });
 
@@ -59,7 +59,7 @@ describe('<Avatar />', () => {
     );
 
     expect(wrapper.find('div').text()).toBe('U');
-    expect(wrapper.find('div').prop('className')).toBe('avatar round_circle stroke_secondary text_black');
+    expect(wrapper.find('div').prop('className')).toBe('avatar round_circle truncate_text stroke_secondary text_black');
   });
 
   it('with className', () => {
@@ -72,6 +72,6 @@ describe('<Avatar />', () => {
 
     expect(wrapper.find('div')
       .prop('className'))
-      .toBe('avatar round_circle fill_light_grey stroke_light_grey text_primary my_custom_class');
+      .toBe('avatar round_circle truncate_text fill_light_grey stroke_light_grey text_primary my_custom_class');
   });
 });

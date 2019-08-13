@@ -29,6 +29,8 @@ export default function withAnalytics(Component, firingEventProp = 'onClick') {
   const WrappedComponent = React.forwardRef((props, ref) => (
     <AnalyticsWrapper {...props} forwardRef={ref} />
   ));
+  // eslint-disable-next-line
+  const Element = typeof Element === "undefined" ? function() {} : Element;
 
   WrappedComponent.name = Component.name;
   AnalyticsWrapper.contextTypes = {
