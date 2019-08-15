@@ -115,6 +115,7 @@ export default class TooltipPopper extends React.Component {
       positionFixed,
       usePortal,
       preventOverflow,
+      preventFlip,
       ...other
     } = this.props;
 
@@ -133,6 +134,9 @@ export default class TooltipPopper extends React.Component {
           },
           hide: {
             enabled: preventOverflow,
+          },
+          flip: {
+            enabled: !preventFlip,
           },
         }}
         placement={placementProp}
@@ -224,6 +228,10 @@ TooltipPopper.propTypes = {
    */
   preventOverflow: PropTypes.bool,
   /**
+   * Use preventFlip for prevent flipping tooltip, when no space.
+   */
+  preventFlip: PropTypes.bool,
+  /**
    * Class name for tooltip popper root element
    */
   classNameTooltip: PropTypes.string,
@@ -247,6 +255,7 @@ TooltipPopper.defaultProps = {
   zIndex: 1,
   usePortal: false,
   preventOverflow: true,
+  preventFlip: false,
   classNameTooltip: '',
   classNameTooltipContent: '',
   showDelay: 0,

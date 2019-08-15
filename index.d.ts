@@ -410,6 +410,7 @@ interface TooltipProps extends React.HTMLAttributes<HTMLDivElement> {
   overlayProps?: React.HTMLAttributes<HTMLDivElement>;
   usePortal?: boolean | HTMLElement;
   preventOverflow?: boolean,
+  preventFlip?: boolean,
   classNameTooltip?: string;
   classNameTooltipContent?: string;
   showDelay?: number;
@@ -427,6 +428,7 @@ interface TooltipPopperProps {
   zIndex?: number;
   usePortal?: boolean | HTMLElement;
   preventOverflow?: boolean,
+  preventFlip?: boolean,
   classNameTooltip?: string;
   classNameTooltipContent?: string;
   showDelay?: number;
