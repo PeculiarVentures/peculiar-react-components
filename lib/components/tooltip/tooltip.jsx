@@ -135,6 +135,10 @@ export default class Tooltip extends Component {
      */
     preventOverflow: PropTypes.bool,
     /**
+     * Use preventFlip for prevent flipping tooltip, when no space.
+     */
+    preventFlip: PropTypes.bool,
+    /**
      * Class name for tooltip popper root element
      */
     classNameTooltip: PropTypes.string,
@@ -155,7 +159,7 @@ export default class Tooltip extends Component {
     positionFixed: true,
     component: 'div',
     offset: 10,
-    onClose() {},
+    onClose() { },
     autoHideDuration: 0,
     color: 'white',
     zIndex: 1,
@@ -166,6 +170,7 @@ export default class Tooltip extends Component {
     overlayProps: {},
     usePortal: false,
     preventOverflow: true,
+    preventFlip: false,
     classNameTooltip: '',
     classNameTooltipContent: '',
     showDelay: 0,
@@ -561,6 +566,7 @@ export default class Tooltip extends Component {
       overlayProps,
       usePortal,
       preventOverflow,
+      preventFlip,
       classNameTooltip,
       classNameTooltipContent,
       showDelay,
@@ -616,6 +622,7 @@ export default class Tooltip extends Component {
             zIndex={zIndex}
             usePortal={usePortal}
             preventOverflow={preventOverflow}
+            preventFlip={preventFlip}
             classNameTooltip={classNameTooltip}
             classNameTooltipContent={classNameTooltipContent}
             showDelay={showDelay}
