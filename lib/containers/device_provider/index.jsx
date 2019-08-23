@@ -11,6 +11,10 @@ export default class DeviceProvider extends PureComponent {
      * This is what will be displayed inside the DeviceProvider
      */
     children: PropTypes.node,
+    /**
+     * The root where app is rendered
+     */
+    rootElement: PropTypes.instanceOf(HTMLElement),
   };
 
   static childContextTypes = {
@@ -19,10 +23,11 @@ export default class DeviceProvider extends PureComponent {
 
   static defaultProps = {
     children: null,
+    rootElement: undefined,
   };
 
   state = {
-    device: getDeviceInfo(),
+    device: getDeviceInfo(this.props.rootElement),
   };
 
   getChildContext() {
@@ -44,7 +49,7 @@ export default class DeviceProvider extends PureComponent {
    */
   onResize() {
     this.setState({
-      device: getDeviceInfo(),
+      device: getDeviceInfo(this.props.rootElement),
     });
   }
 
