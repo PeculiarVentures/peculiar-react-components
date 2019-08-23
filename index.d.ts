@@ -456,6 +456,7 @@ interface SelectArrowIconProps extends React.SVGAttributes<SVGAElement> {}
 
 interface DeviceProviderProps {
   children: React.ReactNode;
+  rootElement?: HTMLElement;
 }
 
 interface OfflineProviderProps {
@@ -545,7 +546,7 @@ declare const AnalyticsProvider: React.ComponentType<AnalyticsProviderProps>;
 
 declare function getWindowSize(): WindowSize;
 declare function withAnalytics<T>(component: React.ComponentType<T>, trigger?: keyof T): React.ComponentType<T & { gaEventName?: string }>;
-declare function getDeviceInfo(): DeviceInfo;
+declare function getDeviceInfo(rootElement?: HTMLElement): DeviceInfo;
 declare function uuid(): string;
 declare const regExps: RegExps;
 declare function validator(
