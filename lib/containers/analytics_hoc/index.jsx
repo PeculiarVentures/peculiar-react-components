@@ -37,7 +37,7 @@ export default function withAnalytics(Component, firingEventProp = 'onClick') {
   AnalyticsWrapper.propTypes = {
     forwardRef: PropTypes.oneOfType([
       PropTypes.func,
-      PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+      PropTypes.shape({ current: PropTypes.any }),
     ]),
     gaEventName: PropTypes.string,
   };
