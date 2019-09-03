@@ -454,7 +454,6 @@ class Select extends PureComponent {
               {
                 [`fill_${color}`]: bgType === 'fill',
                 fill_white: bgType === 'stroke',
-                [`select_field_empty_${placeholderColor}`]: !valueState,
               },
             )}
             name={name}
@@ -539,13 +538,12 @@ class Select extends PureComponent {
             {
               [`fill_${color}`]: bgType === 'fill',
               fill_white: bgType === 'stroke',
-              [`select_field_empty_${placeholderColor}`]: !valueState,
             },
           )}
           onClick={this._handleClick}
         >
           <span
-            className={classNames([`text_${textColor}`])}
+            className={classNames({ [`text_${textColor}`]: valueState }, { [`text_${placeholderColor}`]: !valueState })}
           >
             {displayValue}
           </span>

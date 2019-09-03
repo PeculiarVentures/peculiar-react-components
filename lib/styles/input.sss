@@ -69,3 +69,9 @@
       &_$(key)
         &::placeholder
           color: var(--$(key), $$(key))
+
+@each $key in $colors
+  &_$(key)
+    .input_placeholder_$(key)
+      &::placeholder
+        color: var(--$(key), $$(key))
