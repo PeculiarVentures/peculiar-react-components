@@ -58,16 +58,14 @@ export default class Input extends PureComponent {
      * The short hint displayed in the input before the user enters a value.
      */
     placeholder: PropTypes.string,
+    /**
+     * Color for placeholder
+     */
+    placeholderColor: PropTypes.string,
     // label: PropTypes.string,
     /**
      * This is what will be displayed in wrapper component
      */
-
-    placeholderColor: PropTypes.string,
-    /**
-     * Color for placeholder
-     */
-
     children: PropTypes.node,
     /**
      * Name attribute of the input element.

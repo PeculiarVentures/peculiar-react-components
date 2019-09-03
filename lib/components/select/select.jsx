@@ -76,11 +76,11 @@ class Select extends PureComponent {
       PropTypes.number,
     ]),
     /**
-     * Properties applied to the input/select element.
+     * Color for placeholder
      */
     placeholderColor: PropTypes.string,
     /**
-     * Color for placeholder
+     * Properties applied to the input/select element.
      */
     inputProps: PropTypes.oneOfType([
       PropTypes.object,

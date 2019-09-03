@@ -103,11 +103,11 @@ export default class Autocomplete extends Component {
      */
     placeholder: PropTypes.string,
     /**
-     * Name attribute of the input element.
+     * Color for placeholder
      */
     placeholderColor: PropTypes.string,
     /**
-     * Color for placeholder
+     * Name attribute of the input element.
      */
     name: PropTypes.string,
     /**
