@@ -208,7 +208,6 @@ export default class TextField extends PureComponent {
     color: 'light_grey',
     textColor: 'black',
     colorFocus: 'primary',
-    placeholderColor: 'grey_4',
     size: 'medium',
     inputProps: {},
     autoComplete: undefined,
