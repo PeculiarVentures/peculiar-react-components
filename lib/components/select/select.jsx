@@ -78,6 +78,10 @@ class Select extends PureComponent {
     /**
      * Properties applied to the input/select element.
      */
+    placeholderColor: PropTypes.string,
+    /**
+     * Color for placeholder
+     */
     inputProps: PropTypes.oneOfType([
       PropTypes.object,
     ]),
@@ -123,6 +127,7 @@ class Select extends PureComponent {
     tabIndex: 0,
     className: '',
     placeholder: undefined,
+    placeholderColor: 'grey_4',
     inputProps: {},
     arrowComponent: null,
     bgType: 'fill',
@@ -414,6 +419,7 @@ class Select extends PureComponent {
       colorFocus,
       size,
       placement,
+      placeholderColor,
       ...other
     } = this.props;
     const {
@@ -448,7 +454,7 @@ class Select extends PureComponent {
               {
                 [`fill_${color}`]: bgType === 'fill',
                 fill_white: bgType === 'stroke',
-                select_field_empty: !valueState,
+                [`select_field_empty_${placeholderColor}`]: !valueState,
               },
             )}
             name={name}
@@ -533,7 +539,7 @@ class Select extends PureComponent {
             {
               [`fill_${color}`]: bgType === 'fill',
               fill_white: bgType === 'stroke',
-              select_field_empty: !valueState,
+              [`select_field_empty_${placeholderColor}`]: !valueState,
             },
           )}
           onClick={this._handleClick}

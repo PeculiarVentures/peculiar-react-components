@@ -138,6 +138,10 @@ export default class TextField extends PureComponent {
     /**
      * Name attribute of the input element.
      */
+    placeholderColor: PropTypes.string,
+    /**
+     * Color for placeholder
+     */
     name: PropTypes.string,
     /**
      * Component type one of `fill` or `stroke`.
@@ -198,11 +202,13 @@ export default class TextField extends PureComponent {
     required: false,
     valid: undefined,
     placeholder: undefined,
+    placeholderColor: 'grey_4',
     name: undefined,
     bgType: 'fill',
     color: 'light_grey',
     textColor: 'black',
     colorFocus: 'primary',
+    placeholderColor: 'grey_4',
     size: 'medium',
     inputProps: {},
     autoComplete: undefined,
@@ -438,6 +444,7 @@ export default class TextField extends PureComponent {
       autoFocus,
       children,
       validation,
+      placeholderColor,
       ...other
     } = this.props;
     const {
@@ -473,6 +480,7 @@ export default class TextField extends PureComponent {
           color={color}
           textColor={textColor}
           colorFocus={colorFocus}
+          placeholderColor={placeholderColor}
           size={size}
           inputProps={{
             ...inputProps,

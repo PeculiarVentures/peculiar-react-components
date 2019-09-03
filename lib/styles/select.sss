@@ -56,10 +56,6 @@
       font-size: $input-large-fontSize
       line-height: calc($input-large-height - 2px)
 
-    &_empty
-      span
-        opacity: .5
-
   &[data-placement="top"]
     .select_dropdown
       bottom: 100%
@@ -104,11 +100,15 @@
         @each $key in $colors
           &_$(key)
             border-color: var(--$(key), $$(key))
-            span
-              color: var(--$(key), $$(key))
+
     .select_field_focus
       @each $key in $colors
         &_$(key)
           &:focus
-            color: var(--$(key), $$(key))
             border-color: var(--$(key), $$(key))
+
+  .select_field_empty
+    @each $key in $colors
+      &_$(key)
+        span
+          color: var(--$(key), $$(key))

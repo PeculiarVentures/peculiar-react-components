@@ -105,6 +105,10 @@ export default class Autocomplete extends Component {
     /**
      * Name attribute of the input element.
      */
+    placeholderColor: PropTypes.string,
+    /**
+     * Color for placeholder
+     */
     name: PropTypes.string,
     /**
      * Component type one of `fill` or `stroke`.
@@ -153,6 +157,7 @@ export default class Autocomplete extends Component {
     required: false,
     valid: undefined,
     placeholder: undefined,
+    placeholderColor: 'grey_4',
     name: undefined,
     bgType: 'fill',
     color: 'light_grey',

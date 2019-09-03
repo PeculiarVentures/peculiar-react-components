@@ -62,6 +62,12 @@ export default class Input extends PureComponent {
     /**
      * This is what will be displayed in wrapper component
      */
+
+    placeholderColor: PropTypes.string,
+    /**
+     * Color for placeholder
+     */
+
     children: PropTypes.node,
     /**
      * Name attribute of the input element.
@@ -118,6 +124,7 @@ export default class Input extends PureComponent {
     required: false,
     valid: true,
     placeholder: undefined,
+    placeholderColor: 'grey_4',
     // label: undefined,
     children: null,
     name: undefined,
@@ -192,6 +199,7 @@ export default class Input extends PureComponent {
       required,
       valid,
       placeholder,
+      placeholderColor,
       // label,
       children,
       name,
@@ -247,6 +255,7 @@ export default class Input extends PureComponent {
               [`text_${textColor}`]: textColor,
             },
             [`input_field_focus_${colorFocus}`],
+            [`input_placeholder_color_${placeholderColor}`],
             classNameInput,
           )}
           tabIndex={tabIndex}
