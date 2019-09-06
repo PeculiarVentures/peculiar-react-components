@@ -543,7 +543,10 @@ class Select extends PureComponent {
           onClick={this._handleClick}
         >
           <span
-            className={classNames({ [`text_${textColor}`]: valueState }, { [`text_${placeholderColor}`]: !valueState })}
+            className={classNames({
+              [`text_${textColor}`]: valueState,
+              [`text_${placeholderColor}`]: !valueState,
+            })}
           >
             {displayValue}
           </span>

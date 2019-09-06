@@ -64,14 +64,7 @@
       color: var(--wrong, $wrong) !important
       border-color: var(--wrong, $wrong) !important
 
-  &_placeholder_color
-    @each $key in $colors
-      &_$(key)
-        &::placeholder
-          color: var(--$(key), $$(key))
-
 @each $key in $colors
-  &_$(key)
-    .input_placeholder_$(key)
-      &::placeholder
-        color: var(--$(key), $$(key))
+  .input_placeholder_color_$(key)
+    &::placeholder
+      color: var(--$(key), $$(key))
