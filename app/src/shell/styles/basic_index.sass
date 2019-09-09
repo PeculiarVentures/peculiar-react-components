@@ -17,6 +17,15 @@
 a
 	text-decoration: none
 
+*:focus:not(:active):not(:hover) 
+  outline-width: 2px
+  outline-style: solid
+  outline-offset: -2px
+
+input:focus, textarea:focus, *:active, *:hover
+  outline: none !important
+
+
 textarea
 	resize: none
 
