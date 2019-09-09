@@ -23,9 +23,10 @@
     left: 0
     top: 0
     z-index: 1
-    &:focus
+    &:focus:not(:active):not(:hover)
       ~ .checkbox_container
-        box-shadow: 0 4px 10px 0 rgba(64,72,79, 0.1)
+        outline-width: 2px
+        outline-style: solid
   &_container
     width: $checkbox-size
     height: $checkbox-size

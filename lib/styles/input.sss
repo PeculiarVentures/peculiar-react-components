@@ -42,12 +42,6 @@
         padding: 0 13px
         font-size: $input-large-fontSize
 
-    &_text
-      @each $key in $colors
-        &_$(key)
-          &::placeholder
-            color: rgba($$(key), .5)
-
   &[data-disabled="true"]
     pointer-events: none
     cursor: default
@@ -63,10 +57,14 @@
       @each $key in $colors
         &_$(key)
           &:focus
-            color: var(--$(key), $$(key))
             border-color: var(--$(key), $$(key))
 
   &[data-valid="false"]
     .input_field
       color: var(--wrong, $wrong) !important
       border-color: var(--wrong, $wrong) !important
+
+@each $key in $colors
+  .input_placeholder_color_$(key)
+    &::placeholder
+      color: var(--$(key), $$(key))

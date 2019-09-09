@@ -58,6 +58,10 @@ export default class Input extends PureComponent {
      * The short hint displayed in the input before the user enters a value.
      */
     placeholder: PropTypes.string,
+    /**
+     * Color for placeholder
+     */
+    placeholderColor: PropTypes.string,
     // label: PropTypes.string,
     /**
      * This is what will be displayed in wrapper component
@@ -118,6 +122,7 @@ export default class Input extends PureComponent {
     required: false,
     valid: true,
     placeholder: undefined,
+    placeholderColor: 'grey_4',
     // label: undefined,
     children: null,
     name: undefined,
@@ -192,6 +197,7 @@ export default class Input extends PureComponent {
       required,
       valid,
       placeholder,
+      placeholderColor,
       // label,
       children,
       name,
@@ -247,6 +253,7 @@ export default class Input extends PureComponent {
               [`text_${textColor}`]: textColor,
             },
             [`input_field_focus_${colorFocus}`],
+            [`input_placeholder_color_${placeholderColor}`],
             classNameInput,
           )}
           tabIndex={tabIndex}

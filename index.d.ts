@@ -6,6 +6,7 @@ type Color = 'primary'
   | 'dark_grey'
   | 'grey'
   | 'light_grey'
+  | 'grey_4'
   | 'success'
   | 'wrong'
   | 'white'
@@ -192,6 +193,7 @@ interface SelectProps {
   tabIndex?: number;
   className?: string;
   placeholder?: string | number;
+  placeholderColor?: Color;
   inputProps?: object;
   arrowComponent?: React.ReactNode;
   bgType?: Fill;
@@ -326,6 +328,7 @@ interface InpuBasicProps {
   required?: boolean;
   valid?: boolean;
   placeholder?: string;
+  placeholderColor?: Color;
   children?: React.ReactNode;
   name?: string;
   bgType?: Fill;
@@ -366,6 +369,7 @@ interface AutocompleteProps {
   required?: boolean;
   valid?: boolean;
   placeholder?: string;
+  placeholderColor?: Color;
   children?: React.ReactNode;
   name?: string;
   bgType?: Fill;
