@@ -27,7 +27,7 @@
   &_field
     appearance: none
     font-family: inherit
-    outline: none
+    outline-color: transparent
     box-sizing: border-box
     letter-spacing: 0.04em
     width: 100%
@@ -96,7 +96,7 @@
   &:not([data-disabled="true"])
     &:focus
       box-shadow: 0 4px 10px 0 rgba(64,72,79, 0.1)
-      outline: none
+      outline-color: transparent
       .select_field_focus
         @each $key in $colors
           &_$(key)
