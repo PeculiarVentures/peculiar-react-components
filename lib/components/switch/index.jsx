@@ -45,7 +45,6 @@ class Switch extends SwitchHandler {
         )}
         {...other}
       >
-        {labelPosition === 'left' ? this.renderLabel() : null}
         <input
           {...inputProps}
           tabIndex={tabIndex}
@@ -56,6 +55,7 @@ class Switch extends SwitchHandler {
           checked={checkedState}
           name={name}
         />
+        {labelPosition === 'left' ? this.renderLabel() : null}
         <div
           className={classnames(
             'switch_container',
