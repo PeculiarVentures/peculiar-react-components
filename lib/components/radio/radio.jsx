@@ -180,7 +180,6 @@ class Radio extends PureComponent {
         )}
         {...other}
       >
-        {labelPosition === 'left' ? this.renderLabel() : null}
         <input
           {...inputProps}
           tabIndex={tabIndex}
@@ -193,6 +192,7 @@ class Radio extends PureComponent {
           disabled={disabled}
           checked={checked}
         />
+        {labelPosition === 'left' ? this.renderLabel() : null}
         <div
           className={classNames(
             'radio_container',

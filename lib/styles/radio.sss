@@ -9,6 +9,7 @@
     vertical-align: middle
     width: calc(100% - $radio-size)
     transition: opacity 300ms
+    pointer-events: none
     &[data-position="left"]
       padding-right: 10px
     &[data-position="right"]
@@ -22,7 +23,6 @@
     height: 100%
     left: 0
     top: 0
-    z-index: 1
     &:focus:not(:hover):not(:active)
       ~ .radio_container
         outline-width: 2px
@@ -37,6 +37,7 @@
     transition: background 300ms, border-color 300ms, box-shadow 300ms, opacity 300ms
     border: 1px solid transparent
     text-align: center
+    pointer-events: none
   &_tumbler
     position: relative
     top: 50%
@@ -66,5 +67,3 @@
     .radio_label,
     .radio_container
       opacity: .5
-    .radio_input
-      z-index: -1
