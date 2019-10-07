@@ -267,7 +267,7 @@ interface SnackbarProps {
   ref?: React.Ref<HTMLElement>;
 }
 
-interface SwitchHandler {
+interface SwitchHandler extends React.HTMLAttributes<HTMLDivElement> {
   name?: string;
   defaultChecked?: boolean;
   disabled?: boolean;
