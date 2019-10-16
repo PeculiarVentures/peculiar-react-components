@@ -13,13 +13,13 @@ export default class AnalyticsProvider extends PureComponent {
     children: PropTypes.node,
   };
 
+  static childContextTypes = {
+    gaFireEvent: PropTypes.func,
+  };
+
   static defaultProps = {
     onEvent: () => null,
     children: null,
-  };
-
-  static childContextTypes = {
-    gaFireEvent: PropTypes.func,
   };
 
   getChildContext() {

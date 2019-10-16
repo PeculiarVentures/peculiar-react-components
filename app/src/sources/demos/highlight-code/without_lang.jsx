@@ -4,7 +4,7 @@ import { HighlightCode } from 'lib-react-components';
 export default function Usage() {
   return (
     <HighlightCode lang="none">
-      {'Some plain text'}
+      Some plain text
     </HighlightCode>
   );
 }
