@@ -85,6 +85,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   ref?: React.Ref<HTMLElement>;
   gaEventName?: string;
+  component?: (props: any) => JSX.Element;
 }
 
 interface CheckboxProps extends SwitchHandler {

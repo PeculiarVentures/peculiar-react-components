@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import withAnalytics from '../../containers/analytics_hoc';
 
 /**
@@ -54,6 +54,10 @@ class Button extends PureComponent {
      * The CSS class name of the root element
      */
     className: PropTypes.string,
+    /**
+     * The function component for render custom element
+     */
+    component: PropTypes.func,
   };
 
   static defaultProps = {
@@ -67,7 +71,37 @@ class Button extends PureComponent {
     onClick: null,
     disabled: false,
     className: '',
+    component: undefined,
   };
+
+  /**
+   * Construct class name for the root element using options from props
+   * @param {{
+   *  align: 'left' | 'center' | 'right';
+   *  size: 'small' | 'medium' | 'large';
+   *  textColor: string;
+   *  color: string;
+   *  bgType: 'fill' | 'stroke';
+   *  className: string;
+   * }} options
+   * @return {string}
+   */
+  static toClassName(options) {
+    return classnames(
+      'button',
+      'round_small',
+      'truncate_text',
+      [`text_${options.align}`],
+      [`button_${options.size}`],
+      [`button_text_${options.textColor}`],
+      {
+        [`fill_${options.color}`]: options.bgType === 'fill',
+        [`stroke_${options.color}`]: options.bgType === 'stroke',
+        [`text_${options.textColor}`]: options.textColor,
+      },
+      options.className,
+    );
+  }
 
   /**
    * If component is link
@@ -91,36 +125,29 @@ class Button extends PureComponent {
       textColor,
       size,
       href,
-      children,
       className,
+      component,
       ...other
     } = this.props;
+
+    const componentProps = Object.assign({
+      'data-component': 'button',
+      'data-type': bgType,
+      className: Button.toClassName(this.props),
+    }, other);
+
+    if (component) {
+      return component(componentProps);
+    }
+
     const isLink = this.isLink();
     const Component = isLink ? 'a' : 'button';
 
     return (
       <Component
-        data-component="button"
-        data-type={bgType}
         href={isLink ? href : null}
-        className={classNames(
-          'button',
-          'round_small',
-          'truncate_text',
-          [`text_${align}`],
-          [`button_${size}`],
-          [`button_text_${textColor}`],
-          {
-            [`fill_${color}`]: bgType === 'fill',
-            [`stroke_${color}`]: bgType === 'stroke',
-            [`text_${textColor}`]: textColor,
-          },
-          className,
-        )}
-        {...other}
-      >
-        {children}
-      </Component>
+        {...componentProps}
+      />
     );
   }
 }

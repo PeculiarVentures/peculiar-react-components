@@ -412,6 +412,7 @@ export default class Autocomplete extends Component {
       inputProps,
       children,
       validation,
+      placeholderColor,
       ...other
     } = this.props;
     const {
