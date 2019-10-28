@@ -7,6 +7,35 @@ import withAnalytics from '../../containers/analytics_hoc';
  * Button component
  */
 class Button extends PureComponent {
+  /**
+   * Construct class name for the root element using options from props
+   * @param {{
+   *  align: 'left' | 'center' | 'right';
+   *  size: 'small' | 'medium' | 'large';
+   *  textColor: string;
+   *  color: string;
+   *  bgType: 'fill' | 'stroke';
+   *  className: string;
+   * }} options
+   * @return {string}
+   */
+  static toClassName(options) {
+    return classnames(
+      'button',
+      'round_small',
+      'truncate_text',
+      [`text_${options.align}`],
+      [`button_${options.size}`],
+      [`button_text_${options.textColor}`],
+      {
+        [`fill_${options.color}`]: options.bgType === 'fill',
+        [`stroke_${options.color}`]: options.bgType === 'stroke',
+        [`text_${options.textColor}`]: options.textColor,
+      },
+      options.className,
+    );
+  }
+
   static propTypes = {
     /**
      * The tabIndex attribute for button
@@ -73,35 +102,6 @@ class Button extends PureComponent {
     className: '',
     component: undefined,
   };
-
-  /**
-   * Construct class name for the root element using options from props
-   * @param {{
-   *  align: 'left' | 'center' | 'right';
-   *  size: 'small' | 'medium' | 'large';
-   *  textColor: string;
-   *  color: string;
-   *  bgType: 'fill' | 'stroke';
-   *  className: string;
-   * }} options
-   * @return {string}
-   */
-  static toClassName(options) {
-    return classnames(
-      'button',
-      'round_small',
-      'truncate_text',
-      [`text_${options.align}`],
-      [`button_${options.size}`],
-      [`button_text_${options.textColor}`],
-      {
-        [`fill_${options.color}`]: options.bgType === 'fill',
-        [`stroke_${options.color}`]: options.bgType === 'stroke',
-        [`text_${options.textColor}`]: options.textColor,
-      },
-      options.className,
-    );
-  }
 
   /**
    * If component is link
