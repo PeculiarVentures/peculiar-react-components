@@ -91,11 +91,18 @@ class Tabs extends PureComponent {
     const { value, onChange } = this.props;
     const { value: valueState } = this.state;
 
-    if (value && value !== val) {
-      return onChange(e, val);
+    // Use `value` from props for check
+    if (
+      typeof value === 'number'
+      || value.length > 0
+    ) {
+      if (value !== val) {
+        return onChange(e, val);
+      }
     }
 
-    if (valueState && valueState !== val) {
+    // Use `value` from state for check
+    if (valueState !== val) {
       onChange(e, val);
     }
 
