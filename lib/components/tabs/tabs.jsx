@@ -58,9 +58,22 @@ class Tabs extends PureComponent {
     className: '',
   };
 
-  state = {
-    value: this.props.value || this.props.defaultValue,
-  };
+  constructor(props) {
+    super(props);
+
+    let defaultValue = props.defaultValue;
+
+    if (
+      typeof props.value === 'number'
+      || props.value.length > 0
+    ) {
+      defaultValue = props.value;
+    }
+
+    this.state = {
+      value: defaultValue,
+    };
+  }
 
   componentWillReceiveProps(nextProps) {
     const { value } = this.props;
