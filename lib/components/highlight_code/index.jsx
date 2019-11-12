@@ -42,7 +42,7 @@ export default class HighlightCode extends PureComponent {
    * https://github.com/PrismJS/prism/issues/832
    */
   componentWillMount() {
-    Prism.hooks.add('before-highlightall', (env) => {
+    Prism.hooks.add('before-highlight', (env) => {
       env.code = env.element.innerText;
     });
   }
