@@ -48,15 +48,14 @@ export default function Typography(props, context) {
 
   const basicClassNames = classNames(
     [`text_${color}`],
-    {
-      [`text_${align}`]: align !== 'auto',
-    },
+    { [`text_${align}`]: align !== 'auto' },
     className,
   );
   const Component = /h[1-6]/.test(type) ? type : 'p';
 
   return (
     <Component
+      {...other}
       data-component="typography"
       data-classnamemobile={mobileType ? classNames(basicClassNames, mobileType) : null}
       data-classnametablet={tabletType ? classNames(basicClassNames, tabletType) : null}
@@ -65,7 +64,6 @@ export default function Typography(props, context) {
         basicClassNames,
         type,
       )}
-      {...other}
     >
       {children}
     </Component>

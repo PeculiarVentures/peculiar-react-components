@@ -439,8 +439,8 @@ interface TooltipPopperProps {
   showDelay?: number;
 }
 
-interface TypographyBasicProps {
-  type?: TypographyType
+interface TypographyBasicProps extends React.HTMLAttributes<HTMLElement> {
+  type?: TypographyType;
   tabletType?: TypographyType;
   mobileType?: TypographyType;
   color?: Color;
