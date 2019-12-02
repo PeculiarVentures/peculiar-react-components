@@ -1,6 +1,6 @@
 {
   "name": "lib-theme-contructor",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Theme constructor",
   "keywords": [
     "postcss",
@@ -29,23 +29,23 @@
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.11.0",
-    "eslint-plugin-jest": "^22.14.1",
+    "eslint-plugin-jest": "^22.21.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.7.0",
+    "eslint-plugin-react": "^7.16.0",
     "mocha": "^5.1.1"
   },
   "dependencies": {
-    "autoprefixer": "^8.3.0",
+    "autoprefixer": "^9.7.2",
     "cssnano": "^4.1.10",
     "fs-extra": "^5.0.0",
-    "postcss": "^6.0.21",
+    "postcss": "^7.0.23",
     "postcss-color-mod-function": "^3.0.3",
-    "postcss-custom-properties": "^8.0.8",
-    "postcss-hexrgba": "^1.0.0",
-    "postcss-import": "^11.1.0",
-    "postcss-nested": "^3.0.0",
-    "postcss-simple-vars": "^4.1.0",
-    "sugarss": "^1.0.1",
+    "postcss-custom-properties": "^9.0.2",
+    "postcss-hexrgba": "^2.0.0",
+    "postcss-import": "^12.0.1",
+    "postcss-nested": "^4.2.1",
+    "postcss-simple-vars": "^5.0.2",
+    "sugarss": "^2.0.0",
     "traverse": "^0.6.6"
   },
   "files": [
