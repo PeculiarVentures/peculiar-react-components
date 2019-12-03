@@ -38,6 +38,10 @@ export default [
         title: 'Button',
       },
       {
+        pathname: '/demos/button_group',
+        title: 'Button Group',
+      },
+      {
         pathname: '/demos/checkbox',
         title: 'Checkbox',
       },
