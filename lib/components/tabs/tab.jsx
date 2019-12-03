@@ -14,9 +14,9 @@ function Tab(props) {
     children,
     selected,
     onClick,
-    tabIndex,
     color,
     colorOn,
+    component,
     ...other
   } = props;
 
@@ -25,35 +25,44 @@ function Tab(props) {
    * @param {SytheticEvent} e
    */
   function onClickHandler(e) {
-    if (!disabled) onClick(e, value);
+    if (!disabled) {
+      onClick(e, value);
+    }
+  }
+
+  const componentProps = Object.assign({
+    'data-component': 'tab',
+    'data-selected': selected,
+    onClick: onClickHandler,
+    className: classNames(
+      'tab',
+      'h5',
+      {
+        [`text_${color}`]: !selected,
+      },
+      {
+        [`text_${colorOn}`]: selected,
+        [`stroke_${colorOn}`]: selected,
+      },
+      className,
+    ),
+    disabled: disabled || selected,
+    children: (
+      <span>
+        {children}
+      </span>
+    ),
+  }, other);
+
+  if (component) {
+    return component(componentProps);
   }
 
   return (
     <button
-      data-component="tab"
-      data-selected={selected}
       type="button"
-      tabIndex={tabIndex}
-      onClick={onClickHandler}
-      className={classNames(
-        'tab',
-        'h5',
-        {
-          [`text_${color}`]: !selected,
-        },
-        {
-          [`text_${colorOn}`]: selected,
-          [`stroke_${colorOn}`]: selected,
-        },
-        className,
-      )}
-      disabled={disabled || selected}
-      {...other}
-    >
-      <span>
-        {children}
-      </span>
-    </button>
+      {...componentProps}
+    />
   );
 }
 
@@ -91,10 +100,6 @@ Tab.propTypes = {
    */
   onClick: PropTypes.func,
   /**
-   * The tabIndex of the root element
-   */
-  tabIndex: PropTypes.number,
-  /**
    * Component color from theme
    */
   color: PropTypes.string,
@@ -102,6 +107,10 @@ Tab.propTypes = {
    * Component checked color from theme
    */
   colorOn: PropTypes.string,
+  /**
+   * The function component for render custom element
+   */
+  component: PropTypes.func,
 };
 
 Tab.defaultProps = {
@@ -109,9 +118,9 @@ Tab.defaultProps = {
   disabled: false,
   selected: false,
   onClick() {},
-  tabIndex: 0,
   color: 'grey',
   colorOn: 'primary',
+  component: undefined,
 };
 
 export default withAnalytics(Tab, 'onClick');

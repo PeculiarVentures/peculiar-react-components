@@ -12,6 +12,10 @@
 
 {{"demo": "/demos/tabs/customized.jsx", "showCode": "true"}}
 
+## Custom element
+
+{{"demo": "/demos/tabs/custom_element.jsx", "showCode": "true"}}
+
 ## Props
 
 {{"props": "../lib/components/tabs/tabs.jsx"}}

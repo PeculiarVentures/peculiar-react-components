@@ -295,18 +295,19 @@ interface SwitchHandler extends React.HTMLAttributes<HTMLDivElement> {
 
 interface SwitchProps extends SwitchHandler {}
 
-interface TabProps {
+interface TabProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'onClick'> {
   className?: string;
   disabled?: boolean;
   value: string | number;
   children: React.ReactNode;
   selected?: boolean;
-  onClick?: (e: Event, value: string | number) => void;
   tabIndex?: number;
   color?: Color;
   colorOn?: Color;
   ref?: React.Ref<HTMLElement>;
   gaEventName?: string;
+  component?: (props: any) => JSX.Element;
+  onClick?: (e: Event, value: string | number) => void;
 }
 
 interface TabsProps {
