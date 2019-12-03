@@ -53,10 +53,6 @@
     .radio_container
       background: transparent
 
-  &:not([data-disabled="true"])
-    &:hover
-      opacity: .5
-
   &[data-checked="true"]
     .radio_tumbler
       display: inline-block
@@ -67,3 +63,11 @@
     .radio_label,
     .radio_container
       opacity: .5
+
+@media (hover: hover)
+  .radio
+    &:not([data-disabled="true"])
+      &:hover
+        opacity: .5
+      &:active
+        opacity: 1

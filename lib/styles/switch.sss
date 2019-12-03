@@ -53,13 +53,17 @@
     .switch_tumbler
       margin-left: calc(100% - $switch-height + 6px)
 
-  &:not([data-disabled="true"])
-    &:hover
-      opacity: .5
-
   &[data-disabled="true"]
     cursor: default
     pointer-events: none
     .switch_label,
     .switch_container
       opacity: .5
+
+@media (hover: hover)
+  .switch
+    &:not([data-disabled="true"])
+      &:hover
+        opacity: .5
+      &:active
+        opacity: 1

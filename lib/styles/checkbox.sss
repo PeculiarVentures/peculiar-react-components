@@ -55,10 +55,6 @@
     .checkbox_container
       background: transparent
 
-  &:not([data-disabled="true"])
-    &:hover
-      opacity: .5
-
   &[data-checked="true"]
     .checkbox_icon_checkmark, .checkbox_icon_square
       display: inline-block
@@ -69,3 +65,11 @@
     .switch_label,
     .checkbox_container
       opacity: .5
+
+@media (hover: hover)
+  .checkbox
+    &:not([data-disabled="true"])
+      &:hover
+        opacity: .5
+      &:active
+        opacity: 1

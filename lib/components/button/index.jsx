@@ -127,6 +127,7 @@ class Button extends PureComponent {
       href,
       className,
       component,
+      children,
       ...other
     } = this.props;
 
@@ -134,6 +135,11 @@ class Button extends PureComponent {
       'data-component': 'button',
       'data-type': bgType,
       className: Button.toClassName(this.props),
+      children: (
+        <span>
+          {children}
+        </span>
+      ),
     }, other);
 
     if (component) {

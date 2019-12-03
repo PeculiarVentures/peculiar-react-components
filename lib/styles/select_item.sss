@@ -25,6 +25,10 @@
         &_$(key)
           background-color: rgba($$(key), .05)
 
-  &:not([data-disabled="true"])
-    &:hover
-      opacity: .5
+@media (hover: hover)
+  .select_item
+    &:not([data-disabled="true"])
+      &:hover
+        opacity: .5
+      &:active
+        opacity: 1
