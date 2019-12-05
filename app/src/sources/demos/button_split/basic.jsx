@@ -29,7 +29,7 @@ export default function Usage() {
       bgType="fill"
       color="primary"
     >
-      Button text
+      Button
     </ButtonSplit>
   );
 }

@@ -1,14 +1,36 @@
 import React from 'react';
+import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
 
 import ButtonGroup from '../button_group';
 import Button from '../button';
-import Tooltip from '../tooltip';
+import TooltipPopper from '../tooltip/tooltip_popper';
 import Typography from '../typography';
 
 const { children: typoChildren, ...typographyProps } = Typography.propTypes;
-const { children: tooltipChildren, content: tooltipContent, ...tooltipProps } = Tooltip.propTypes;
+const {
+  children: tooltipChildren,
+  referenceElement: tooltipContent,
+  ...tooltipProps
+} = TooltipPopper.propTypes;
+
+/**
+ * Check if node is root element
+ * @param {object} root
+ * @param {object} n
+ */
+function contains(root, n) {
+  let node = n;
+
+  while (node) {
+    if (node === root) {
+      return true;
+    }
+    node = node.parentNode;
+  }
+
+  return false;
+}
 
 /**
  * ButtonSplit component
@@ -46,19 +68,70 @@ export default class ButtonSplit extends React.Component {
   constructor(props) {
     super(props);
 
-    this.tooltip = React.createRef();
+    this.state = {
+      open: false,
+    };
+
+    this.root = React.createRef();
   }
 
+  componentDidMount() {
+    window.document.addEventListener('mousedown', this.onDocumentClick);
+  }
+
+  componentWillUnmount() {
+    window.document.removeEventListener('mousedown', this.onDocumentClick);
+  }
+
+  /**
+   * onDocumentClick handler
+   * @param {SytheticEvent} e
+   */
+  onDocumentClick = (e) => {
+    const { open } = this.state;
+    const root = findDOMNode(this.root.current); // eslint-disable-line
+    const tooltipRoot = document.querySelector('[data-component="tooltip_popper"]');
+    const { target } = e;
+
+    if (tooltipRoot) {
+      const isInRoot = contains(root, target);
+      const isInTooltip = contains(tooltipRoot, target);
+
+      if ((!isInRoot && !isInTooltip) && open) {
+        this.setOpen(false);
+      }
+    }
+  }
+
+  /**
+   * onActionClick handler
+   * @param {object} action
+   * @param {SyntheticEvent} event
+   */
   onActionClick = (action, event) => {
     const { onClick } = action;
 
-    if (this.tooltip.current) {
-      this.tooltip.current.setOpen(false);
+    if (action.disabled) {
+      return null;
     }
 
     if (onClick) {
       onClick(event);
     }
+
+    this.setOpen(false);
+
+    return null;
+  }
+
+  /**
+   * setOpen handler
+   * @param {boolean} condition
+   */
+  setOpen = (condition) => {
+    this.setState({
+      open: condition,
+    });
   }
 
   renderActions = () => {
@@ -103,25 +176,37 @@ export default class ButtonSplit extends React.Component {
   }
 
   renderTooltip = () => {
+    const { open } = this.state;
     const { tooltip, actions } = this.props;
-    const { action, color, ...otherTooltip } = tooltip;
+    const {
+      action,
+      color,
+      placement,
+      ...otherTooltip
+    } = tooltip;
 
     if (!actions.length) {
       return null;
     }
 
     return (
-      <Tooltip
-        ref={this.tooltip}
-        action={action || 'click'}
-        content={this.renderActions()}
-        color={color || 'white'}
-        {...otherTooltip}
-      >
-        <Button>
+      <React.Fragment>
+        <Button onClick={() => this.setOpen(!open)}>
           icon
         </Button>
-      </Tooltip>
+        <TooltipPopper
+          open={open}
+          action={action || 'click'}
+          color={color || 'white'}
+          referenceElement={this.root.current || {}}
+          placement={placement || 'bottom-end'}
+          positionFixed
+          usePortal
+          {...otherTooltip}
+        >
+          {this.renderActions()}
+        </TooltipPopper>
+      </React.Fragment>
     );
   }
 
@@ -130,17 +215,22 @@ export default class ButtonSplit extends React.Component {
       className,
       actions,
       tooltip,
+      children,
       ...other
     } = this.props;
 
     return (
       <div
         data-component="button_split"
-        className={classnames('button-split', className)}
-        {...other}
+        ref={this.root}
+        style={{
+          display: 'inline-block',
+        }}
       >
         <ButtonGroup>
-          <Button {...other}>Button text</Button>
+          <Button {...other}>
+            {children}
+          </Button>
           {this.renderTooltip()}
         </ButtonGroup>
       </div>
