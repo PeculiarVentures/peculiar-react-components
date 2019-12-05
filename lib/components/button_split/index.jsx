@@ -314,7 +314,6 @@ export default class ButtonSplit extends React.Component {
 
   render() {
     const {
-      className,
       actions,
       tooltip,
       children,
@@ -322,8 +321,8 @@ export default class ButtonSplit extends React.Component {
     } = this.props;
 
     return (
-      <ButtonGroup>
-        <Button {...other}>
+      <ButtonGroup {...other}>
+        <Button>
           {children}
         </Button>
         {this.renderTooltip()}
