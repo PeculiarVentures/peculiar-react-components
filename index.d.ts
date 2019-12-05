@@ -92,6 +92,10 @@ interface ButtonGroupProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
+interface ButtonSplitProps extends React.HTMLAttributes<HTMLDivElement> {
+  children: React.ReactNode;
+}
+
 interface CheckboxProps extends SwitchHandler {
   iconType?: 'checkmark' | 'square';
 }
@@ -520,6 +524,7 @@ declare const Avatar: React.ComponentType<AvatarProps>;
 declare const Autocomplete: React.ComponentType<AutocompleteProps>;
 declare const Button: React.ComponentType<ButtonProps>;
 declare const ButtonGroup: React.ComponentType<ButtonGroupProps>;
+declare const ButtonSplit: React.ComponentType<ButtonSplitProps>;
 declare const Checkbox: React.ComponentType<CheckboxProps>;
 declare const ContentLoader: React.ComponentType<ContentLoaderProps>;
 declare const HighlightCode: React.ComponentType<HighlightCodeProps>;
