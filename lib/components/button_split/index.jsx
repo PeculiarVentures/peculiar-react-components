@@ -26,7 +26,7 @@ export default class ButtonSplit extends React.Component {
      */
     actions: PropTypes.arrayOf(PropTypes.shape({
       ...typographyProps,
-      text: PropTypes.string,
+      text: PropTypes.string.isRequired,
       href: PropTypes.string,
       icon: PropTypes.node,
       disabled: PropTypes.bool,
@@ -73,7 +73,7 @@ export default class ButtonSplit extends React.Component {
 
       return (
         <button onClick={onClick} disabled={disabled}>
-          {icon && <action.icon />}
+          {icon && icon}
           {Component}
         </button>
       );
