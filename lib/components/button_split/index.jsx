@@ -5,6 +5,10 @@ import classnames from 'classnames';
 import ButtonGroup from '../button_group';
 import Button from '../button';
 import Tooltip from '../tooltip';
+import Typography from '../typography';
+
+const { children: typoChildren, ...typographyProps } = Typography.propTypes;
+const { children: tooltipChildren, content: tooltipContent, ...tooltipProps } = Tooltip.propTypes;
 
 /**
  * ButtonSplit component
@@ -12,22 +16,99 @@ import Tooltip from '../tooltip';
 // eslint-disable-next-line react/prefer-stateless-function
 export default class ButtonSplit extends React.Component {
   static propTypes = {
-    /**
-     * This is what will be displayed inside the tooltip element.
-     */
-    children: PropTypes.node.isRequired,
+    ...Button.propTypes,
     /**
      * The CSS class name of the root element.
      */
     className: PropTypes.string,
+    /**
+     * Actions list to render in collapsed state.
+     */
+    actions: PropTypes.arrayOf(PropTypes.shape({
+      ...typographyProps,
+      text: PropTypes.string,
+      href: PropTypes.string,
+      icon: PropTypes.node,
+      disabled: PropTypes.bool,
+      onClick: PropTypes.func,
+    })),
+    /**
+     * Tooltip props if needed.
+     */
+    tooltip: PropTypes.shape(tooltipProps),
   }
 
   static defaultProps = {
     className: '',
+    actions: [],
+    tooltip: {},
+  }
+
+  renderActions = () => {
+    const { actions } = this.props;
+
+    return actions.map((action) => {
+      const {
+        text,
+        onClick,
+        disabled,
+        icon,
+        href,
+        ...other
+      } = action;
+
+      const TextComponent = (
+        <Typography
+          {...other}
+        >
+          {text}
+        </Typography>
+      );
+
+      const Component = href ? (
+        <a href={href}>
+          {TextComponent}
+        </a>
+      ) : TextComponent;
+
+      return (
+        <button onClick={onClick} disabled={disabled}>
+          {icon && <action.icon />}
+          {Component}
+        </button>
+      );
+    });
+  }
+
+  renderTooltip = () => {
+    const { tooltip, actions } = this.props;
+    const { action, color, ...otherTooltip } = tooltip;
+
+    if (!actions.length) {
+      return null;
+    }
+
+    return (
+      <Tooltip
+        action={action || 'click'}
+        content={this.renderActions()}
+        color={color || 'white'}
+        {...otherTooltip}
+      >
+        <button>
+          icon
+        </button>
+      </Tooltip>
+    );
   }
 
   render() {
-    const { className, children, ...other } = this.props;
+    const {
+      className,
+      actions,
+      tooltip,
+      ...other
+    } = this.props;
 
     return (
       <div
@@ -36,18 +117,8 @@ export default class ButtonSplit extends React.Component {
         {...other}
       >
         <ButtonGroup>
-          <Button>Button text</Button>
-          <Tooltip
-            action="click"
-            content={
-              <div>
-                {children}
-              </div>
-            }
-            color="grey"
-          >
-            <Button>Icon</Button>
-          </Tooltip>
+          <Button {...other}>Button text</Button>
+          {this.renderTooltip()}
         </ButtonGroup>
       </div>
     );
