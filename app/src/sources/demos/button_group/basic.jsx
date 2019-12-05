@@ -4,22 +4,13 @@ import { ButtonGroup, Button } from 'lib-react-components';
 export default function Usage() {
   return (
     <ButtonGroup>
-      <Button
-        bgType="stroke"
-        textColor="primary"
-      >
+      <Button>
         One
       </Button>
-      <Button
-        bgType="stroke"
-        textColor="primary"
-      >
+      <Button>
         Two
       </Button>
-      <Button
-        bgType="stroke"
-        textColor="primary"
-      >
+      <Button disabled>
         Three
       </Button>
     </ButtonGroup>

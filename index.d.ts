@@ -89,6 +89,11 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 interface ButtonGroupProps extends React.HTMLAttributes<HTMLDivElement> {
+  bgType?: Fill;
+  color?: Color;
+  textColor?: Color;
+  size?: 'small' | 'medium' | 'large';
+  disabled?: boolean;
   children: React.ReactNode;
 }
 

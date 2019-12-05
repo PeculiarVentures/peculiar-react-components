@@ -6,18 +6,67 @@ import classnames from 'classnames';
  * ButtonGroup component
  */
 export default function ButtonGroup(props) {
-  const { className, ...other } = props;
+  const {
+    className,
+    children,
+    bgType,
+    color,
+    textColor,
+    size,
+    disabled,
+    ...other
+  } = props;
 
   return (
     <div
       {...other}
       data-component="button_group"
       className={classnames('button_group', className)}
-    />
+    >
+      {React.Children.map(children, (child) => {
+        if (!React.isValidElement(child)) {
+          return null;
+        }
+
+        if (child.type.name === 'Button') {
+          return React.cloneElement(child, {
+            disabled: child.props.disabled || disabled,
+            textColor: child.props.textColor || textColor,
+            bgType,
+            color,
+            size,
+          });
+        }
+
+        return child;
+      })}
+    </div>
   );
 }
 
 ButtonGroup.propTypes = {
+  /**
+   * Button component type one of `fill` or `stroke`.
+   * If `fill` - component will be have background-color from `color` props.
+   * If `stroke` - component will be have border-color from `color` props.
+   */
+  bgType: PropTypes.oneOf(['fill', 'stroke']),
+  /**
+   * Button component color from theme
+   */
+  color: PropTypes.string,
+  /**
+   * Button component text color from theme
+   */
+  textColor: PropTypes.string,
+  /**
+   * Button component size
+   */
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
+  /**
+   * Disables the buttons if set to true
+   */
+  disabled: PropTypes.bool,
   /**
    * This is what will be displayed inside the root element.
    */
@@ -29,5 +78,10 @@ ButtonGroup.propTypes = {
 };
 
 ButtonGroup.defaultProps = {
-  className: '',
+  className: undefined,
+  bgType: 'fill',
+  color: 'primary',
+  textColor: 'white',
+  size: 'medium',
+  disabled: false,
 };
