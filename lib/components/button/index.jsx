@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import withAnalytics from '../../containers/analytics_hoc';
@@ -6,7 +6,7 @@ import withAnalytics from '../../containers/analytics_hoc';
 /**
  * Button component
  */
-class Button extends PureComponent {
+class Button extends React.Component {
   /**
    * Construct class name for the root element using options from props
    * @param {{
@@ -87,6 +87,10 @@ class Button extends PureComponent {
      * The function component for render custom element
      */
     component: PropTypes.func,
+    buttonRef: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.shape({ current: PropTypes.any }),
+    ]),
   };
 
   static defaultProps = {
@@ -101,6 +105,7 @@ class Button extends PureComponent {
     disabled: false,
     className: '',
     component: undefined,
+    buttonRef: undefined,
   };
 
   /**
@@ -128,6 +133,7 @@ class Button extends PureComponent {
       className,
       component,
       children,
+      buttonRef,
       ...other
     } = this.props;
 
@@ -151,6 +157,7 @@ class Button extends PureComponent {
 
     return (
       <Component
+        ref={buttonRef}
         href={isLink ? href : null}
         {...componentProps}
       />

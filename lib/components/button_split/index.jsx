@@ -261,6 +261,7 @@ export default class ButtonSplit extends React.Component {
 
       return (
         <Component
+          key={text}
           onClick={e => this.onActionClick(onClick, e)}
           href={href}
           disabled={disabled}
@@ -292,7 +293,7 @@ export default class ButtonSplit extends React.Component {
     return (
       <React.Fragment>
         <Button
-          ref={this.root}
+          buttonRef={this.root}
           onClick={() => this.setOpen(!open)}
         >
           icon
