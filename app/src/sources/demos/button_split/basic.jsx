@@ -25,9 +25,11 @@ export default function Usage() {
 
   return (
     <ButtonSplit
+      overlay
       actions={actions}
       bgType="fill"
       color="primary"
+      tooltip={{ placement: 'bottom-end' }}
     >
       Button
     </ButtonSplit>

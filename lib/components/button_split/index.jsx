@@ -1,10 +1,12 @@
 import React from 'react';
 import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 
 import ButtonGroup from '../button_group';
 import Button from '../button';
 import TooltipPopper from '../tooltip/tooltip_popper';
+import Portal from '../../containers/portal';
 import Typography, { textTypePropType } from '../typography';
 
 /**
@@ -168,6 +170,28 @@ export default class ButtonSplit extends React.Component {
        */
       showDelay: PropTypes.number,
     }),
+    /**
+     * If `true`, the tooltip overlay will show for opened tooltip.
+     */
+    overlay: PropTypes.bool,
+    /**
+     * Color for tooltip overlay background.
+     */
+    overlayColor: PropTypes.string,
+    /**
+     * Opacity for tooltip overlay.
+     */
+    overlayOpacity: PropTypes.number,
+    /**
+     * Z-index for tooltip overlay.
+     */
+    overlayZIndex: PropTypes.number,
+    /**
+     * HTML props for tooltip overlay.
+     */
+    overlayProps: PropTypes.oneOfType([
+      PropTypes.object,
+    ]),
   }
 
   static defaultProps = {
@@ -179,6 +203,11 @@ export default class ButtonSplit extends React.Component {
     textColor: 'white',
     size: 'medium',
     disabled: false,
+    overlay: false,
+    overlayColor: 'black',
+    overlayOpacity: 0.3,
+    overlayZIndex: 0,
+    overlayProps: {},
   }
 
   constructor(props) {
@@ -193,10 +222,12 @@ export default class ButtonSplit extends React.Component {
 
   componentDidMount() {
     window.document.addEventListener('mousedown', this.onDocumentClick);
+    window.document.addEventListener('keyup', this.onKeyUp);
   }
 
   componentWillUnmount() {
     window.document.removeEventListener('mousedown', this.onDocumentClick);
+    window.document.removeEventListener('keyup', this.onKeyUp);
   }
 
   /**
@@ -216,6 +247,14 @@ export default class ButtonSplit extends React.Component {
       if ((!isInRoot && !isInTooltip) && open) {
         this.setOpen(false);
       }
+    }
+  }
+
+  onKeyUp = (e) => {
+    const { open } = this.state;
+
+    if (e.code === 'Escape' && open) {
+      this.setOpen(false);
     }
   }
 
@@ -313,11 +352,56 @@ export default class ButtonSplit extends React.Component {
     );
   }
 
+  renderOverlay = () => {
+    const {
+      overlay,
+      overlayColor,
+      overlayOpacity,
+      overlayZIndex,
+      overlayProps,
+    } = this.props;
+    const { open } = this.state;
+
+    if (overlay) {
+      const {
+        className,
+        style,
+        ...other
+      } = overlayProps;
+
+      return (
+        <Portal>
+          <div
+            data-open={open}
+            className={classnames(
+              'tooltip_overlay',
+              `fill_${overlayColor}`,
+              className,
+            )}
+            style={{
+              opacity: open ? overlayOpacity : 0,
+              zIndex: overlayZIndex,
+              ...style,
+            }}
+            {...other}
+          />
+        </Portal>
+      );
+    }
+
+    return null;
+  }
+
   render() {
     const {
       actions,
       tooltip,
       children,
+      overlay,
+      overlayColor,
+      overlayOpacity,
+      overlayZIndex,
+      overlayProps,
       ...other
     } = this.props;
 
@@ -327,6 +411,7 @@ export default class ButtonSplit extends React.Component {
           {children}
         </Button>
         {this.renderTooltip()}
+        {this.renderOverlay()}
       </ButtonGroup>
     );
   }
