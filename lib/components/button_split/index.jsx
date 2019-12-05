@@ -9,7 +9,8 @@ import Tooltip from '../tooltip';
 /**
  * ButtonSplit component
  */
-export default class ButtonSplit {
+// eslint-disable-next-line react/prefer-stateless-function
+export default class ButtonSplit extends React.Component {
   static propTypes = {
     /**
      * This is what will be displayed inside the tooltip element.
