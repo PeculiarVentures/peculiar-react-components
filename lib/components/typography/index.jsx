@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-const textTypePropType = PropTypes.oneOfType([
+export const textTypePropType = PropTypes.oneOfType([
   PropTypes.oneOf([
     'h1',
     'h2',
