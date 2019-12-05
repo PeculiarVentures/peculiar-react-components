@@ -18,6 +18,7 @@ export default function Usage() {
       text: 'Two',
     },
     {
+      disabled: true,
       text: 'Three',
     },
   ];

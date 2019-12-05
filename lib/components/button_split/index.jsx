@@ -13,7 +13,6 @@ const { children: tooltipChildren, content: tooltipContent, ...tooltipProps } = 
 /**
  * ButtonSplit component
  */
-// eslint-disable-next-line react/prefer-stateless-function
 export default class ButtonSplit extends React.Component {
   static propTypes = {
     ...Button.propTypes,
@@ -44,6 +43,24 @@ export default class ButtonSplit extends React.Component {
     tooltip: {},
   }
 
+  constructor(props) {
+    super(props);
+
+    this.tooltip = React.createRef();
+  }
+
+  onActionClick = (action, event) => {
+    const { onClick } = action;
+
+    if (this.tooltip.current) {
+      this.tooltip.current.setOpen(false);
+    }
+
+    if (onClick) {
+      onClick(event);
+    }
+  }
+
   renderActions = () => {
     const { actions } = this.props;
 
@@ -66,13 +83,18 @@ export default class ButtonSplit extends React.Component {
       );
 
       const Component = href ? (
-        <a href={href}>
+        <a
+          href={href}
+        >
           {TextComponent}
         </a>
       ) : TextComponent;
 
       return (
-        <button onClick={onClick} disabled={disabled}>
+        <button
+          onClick={e => this.onActionClick(action, e)}
+          disabled={disabled}
+        >
           {icon && icon}
           {Component}
         </button>
@@ -90,14 +112,15 @@ export default class ButtonSplit extends React.Component {
 
     return (
       <Tooltip
+        ref={this.tooltip}
         action={action || 'click'}
         content={this.renderActions()}
         color={color || 'white'}
         {...otherTooltip}
       >
-        <button>
+        <Button>
           icon
-        </button>
+        </Button>
       </Tooltip>
     );
   }
