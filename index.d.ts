@@ -76,7 +76,7 @@ interface AvatarProps extends React.ImgHTMLAttributes<HTMLImageElement> {
 }
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  bgType?: Fill;
+  bgType?: Fill | 'clear';
   color?: Color;
   align?: 'left' | 'center' | 'right';
   textColor?: Color;
@@ -86,15 +86,17 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   ref?: React.Ref<HTMLElement>;
   gaEventName?: string;
   component?: (props: any) => JSX.Element;
+  full?: boolean;
 }
 
 interface ButtonGroupProps extends React.HTMLAttributes<HTMLDivElement> {
-  bgType?: Fill;
-  color?: Color;
-  textColor?: Color;
-  size?: 'small' | 'medium' | 'large';
+  bgType?: ButtonProps['bgType'];
+  color?: ButtonProps['color'];
+  textColor?: ButtonProps['textColor'];
+  size?: ButtonProps['size'];
   disabled?: boolean;
   children: React.ReactNode;
+  full?: boolean;
 }
 
 interface CheckboxProps extends SwitchHandler {
