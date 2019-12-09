@@ -35,18 +35,14 @@ export default function ButtonGroup(props) {
           return null;
         }
 
-        if (child.type.name === 'Button') {
-          return React.cloneElement(child, {
-            disabled: child.props.disabled || disabled,
-            textColor: child.props.textColor || textColor,
-            bgType,
-            color,
-            size,
-            full,
-          });
-        }
-
-        return child;
+        return React.cloneElement(child, {
+          disabled: child.props.disabled || disabled,
+          textColor: child.props.textColor || textColor,
+          bgType,
+          color,
+          size,
+          full,
+        });
       })}
     </div>
   );
