@@ -81,6 +81,10 @@ export default class ButtonSplit extends React.Component {
        */
       href: PropTypes.string,
       /**
+       * The target to link
+       */
+      target: PropTypes.string,
+      /**
        * Disables the button if set to true
        */
       disabled: PropTypes.bool,
@@ -217,6 +221,7 @@ export default class ButtonSplit extends React.Component {
         onClick,
         disabled,
         href,
+        target,
         ...other
       } = action;
 
@@ -229,6 +234,7 @@ export default class ButtonSplit extends React.Component {
           key={text}
           onClick={e => this.onClickAction(e, onClick)}
           href={href}
+          target={href ? target : undefined}
           disabled={disabled}
           className="button_split_action"
         >

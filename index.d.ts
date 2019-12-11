@@ -112,6 +112,7 @@ interface ButtonSplitProps extends React.ButtonHTMLAttributes<HTMLButtonElement>
   actions: {
     text: string;
     href?: string;
+    target?: string;
     disabled?: boolean;
     onClick?: (e: Event) => void;
     type?: TypographyBasicProps['type'];
