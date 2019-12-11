@@ -72,9 +72,21 @@ export default class ButtonSplit extends React.Component {
      * Actions list to render in collapsed state.
      */
     actions: PropTypes.arrayOf(PropTypes.shape({
+      /**
+       * This is what will be displayed inside the button
+       */
       text: PropTypes.string.isRequired,
+      /**
+       * The URL to link to when the button is clicked
+       */
       href: PropTypes.string,
+      /**
+       * Disables the button if set to true
+       */
       disabled: PropTypes.bool,
+      /**
+       * Callback function fired when the button is clicked
+       */
       onClick: PropTypes.func,
       /**
        * Typography type

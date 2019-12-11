@@ -99,8 +99,28 @@ interface ButtonGroupProps extends React.HTMLAttributes<HTMLDivElement> {
   full?: boolean;
 }
 
-interface ButtonSplitProps extends React.HTMLAttributes<HTMLDivElement> {
+interface ButtonSplitProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
+  bgType?: ButtonProps['bgType'];
+  color?: ButtonProps['color'];
+  textColor?: ButtonProps['textColor'];
+  size?: ButtonProps['size'];
+  disabled?: boolean;
+  full?: boolean;
+  className?: string;
+  overlay?: boolean;
+  actions: {
+    text: string;
+    href?: string;
+    disabled?: boolean;
+    onClick?: (e: Event) => void;
+    type?: TypographyBasicProps['type'];
+    tabletType?: TypographyBasicProps['tabletType'];
+    mobileType?: TypographyBasicProps['mobileType'];
+    color?: TypographyBasicProps['color'];
+    align?: TypographyBasicProps['align'];
+    className?: string;
+  }[];
 }
 
 interface CheckboxProps extends SwitchHandler {
