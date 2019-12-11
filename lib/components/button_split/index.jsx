@@ -8,6 +8,7 @@ import Button from '../button';
 import TooltipPopper from '../tooltip/tooltip_popper';
 import Portal from '../../containers/portal';
 import Typography, { textTypePropType } from '../typography';
+import SelectArrowIcon from '../icons/select_arrow';
 
 /**
  * Check if node is root element
@@ -41,11 +42,12 @@ export default class ButtonSplit extends React.Component {
      */
     className: PropTypes.string,
     /**
-     * Button component type one of `fill` or `stroke`.
-     * If `fill` - component will be have background-color from `color` props.
-     * If `stroke` - component will be have border-color from `color` props.
+     * Component type one of `fill` or `stroke`.
+     * If `fill` - component will have background and border from `color` props.
+     * If `stroke` - component will have border from `color` props and transparent background.
+     * If `clear` - component will have transparent border and transparent background.
      */
-    bgType: PropTypes.oneOf(['fill', 'stroke']),
+    bgType: PropTypes.oneOf(['fill', 'stroke', 'clear']),
     /**
      * Button component color from theme
      */
@@ -63,15 +65,15 @@ export default class ButtonSplit extends React.Component {
      */
     disabled: PropTypes.bool,
     /**
-     * This is what will be displayed inside the root element.
+     * Component full-width.
      */
+    full: PropTypes.bool,
     /**
      * Actions list to render in collapsed state.
      */
     actions: PropTypes.arrayOf(PropTypes.shape({
       text: PropTypes.string.isRequired,
       href: PropTypes.string,
-      icon: PropTypes.node,
       disabled: PropTypes.bool,
       onClick: PropTypes.func,
       /**
@@ -100,114 +102,21 @@ export default class ButtonSplit extends React.Component {
       className: PropTypes.string,
     })),
     /**
-     * Tooltip props if needed.
-     */
-    tooltip: PropTypes.shape({
-      /**
-       * If `true`, the popper arrow is shown.
-       */
-      arrow: PropTypes.bool,
-      /**
-       * The `referenceObject` is an object that provides an interface
-       * compatible with Popper.js and lets you use it as replacement of
-       * a real DOM node.
-       */
-      referenceElement: PropTypes.shape({
-        clientHeight: PropTypes.number,
-        clientWidth: PropTypes.number,
-        getBoundingClientRect: PropTypes.func,
-      }).isRequired,
-      /**
-       * If `true`, the popper is shown.
-       */
-      placement: PropTypes.oneOf([
-        'auto-start',
-        'auto',
-        'auto-end',
-        'top-start',
-        'top',
-        'top-end',
-        'right-start',
-        'right',
-        'right-end',
-        'bottom-end',
-        'bottom',
-        'bottom-start',
-        'left-end',
-        'left',
-        'left-start',
-      ]),
-      /**
-       * Set this to `true` if you want popper to position it self in `fixed` mode.
-       */
-      offset: PropTypes.number,
-      /**
-       * Color for tooltip component.
-       */
-      color: PropTypes.string,
-      /**
-       * Z-index for tooltip component.
-       */
-      zIndex: PropTypes.number,
-      /**
-       * Use React portal for render tooltip to another elemenet.
-       */
-      preventOverflow: PropTypes.bool,
-      /**
-       * Use preventFlip for prevent flipping tooltip, when no space.
-       */
-      preventFlip: PropTypes.bool,
-      /**
-       * Class name for tooltip popper root element
-       */
-      classNameTooltip: PropTypes.string,
-      /**
-       * Class name for tooltip popper content element
-       */
-      classNameTooltipContent: PropTypes.string,
-      /**
-       * The number of milliseconds to wait before showing the tooltip.
-       */
-      showDelay: PropTypes.number,
-    }),
-    /**
      * If `true`, the tooltip overlay will show for opened tooltip.
      */
     overlay: PropTypes.bool,
-    /**
-     * Color for tooltip overlay background.
-     */
-    overlayColor: PropTypes.string,
-    /**
-     * Opacity for tooltip overlay.
-     */
-    overlayOpacity: PropTypes.number,
-    /**
-     * Z-index for tooltip overlay.
-     */
-    overlayZIndex: PropTypes.number,
-    /**
-     * HTML props for tooltip overlay.
-     */
-    overlayProps: PropTypes.oneOfType([
-      PropTypes.object,
-    ]),
   }
 
   static defaultProps = {
     className: undefined,
     actions: [],
-    tooltip: {},
     bgType: 'fill',
     color: 'primary',
     textColor: 'white',
     size: 'medium',
     disabled: false,
     overlay: false,
-    overlayColor: 'black',
-    overlayOpacity: 0.3,
-    overlayZIndex: 0,
-    overlayProps: {},
+    full: false,
   }
 
   constructor(props) {
@@ -263,12 +172,18 @@ export default class ButtonSplit extends React.Component {
    * @param {function} handler
    * @param {SyntheticEvent} event
    */
-  onActionClick = (handler, event) => {
+  onClickAction(event, handler) {
     if (handler) {
       handler(event);
     }
 
     this.setOpen(false);
+  }
+
+  onClickButtonSplit = () => {
+    const { open } = this.state;
+
+    this.setOpen(!open);
   }
 
   /**
@@ -289,7 +204,6 @@ export default class ButtonSplit extends React.Component {
         text,
         onClick,
         disabled,
-        icon,
         href,
         ...other
       } = action;
@@ -301,12 +215,13 @@ export default class ButtonSplit extends React.Component {
       return (
         <Component
           key={text}
-          onClick={e => this.onActionClick(onClick, e)}
+          onClick={e => this.onClickAction(e, onClick)}
           href={href}
           disabled={disabled}
+          className="button_split_action"
         >
-          {icon}
           <Typography
+            type="b2"
             {...other}
           >
             {text}
@@ -318,12 +233,7 @@ export default class ButtonSplit extends React.Component {
 
   renderTooltip = () => {
     const { open } = this.state;
-    const { tooltip, actions } = this.props;
-    const {
-      color,
-      placement,
-      ...otherTooltip
-    } = tooltip;
+    const { actions, disabled } = this.props;
 
     if (!actions.length) {
       return null;
@@ -332,19 +242,25 @@ export default class ButtonSplit extends React.Component {
     return (
       <React.Fragment>
         <Button
-          buttonRef={this.root}
-          onClick={() => this.setOpen(!open)}
+          componentRef={this.root}
+          onClick={this.onClickButtonSplit}
+          className="button_split"
+          disabled={disabled}
         >
-          icon
+          <SelectArrowIcon
+            className="button_split_action_icon"
+          />
         </Button>
         <TooltipPopper
+          placement="bottom-end"
+          color="white"
+          classNameTooltip="button_split_tooltip"
+          classNameTooltipContent="button_split_tooltip_content"
           open={open}
-          color={color || 'white'}
           referenceElement={this.root.current || {}}
-          placement={placement || 'bottom-end'}
           positionFixed
           usePortal
-          {...otherTooltip}
+          preventOverflow={false}
         >
           {this.renderActions()}
         </TooltipPopper>
@@ -353,37 +269,21 @@ export default class ButtonSplit extends React.Component {
   }
 
   renderOverlay = () => {
-    const {
-      overlay,
-      overlayColor,
-      overlayOpacity,
-      overlayZIndex,
-      overlayProps,
-    } = this.props;
+    const { overlay } = this.props;
     const { open } = this.state;
 
     if (overlay) {
-      const {
-        className,
-        style,
-        ...other
-      } = overlayProps;
-
       return (
         <Portal>
           <div
             data-open={open}
             className={classnames(
               'tooltip_overlay',
-              `fill_${overlayColor}`,
-              className,
+              'fill_black',
             )}
             style={{
-              opacity: open ? overlayOpacity : 0,
-              zIndex: overlayZIndex,
-              ...style,
+              opacity: open ? 0.3 : 0,
             }}
-            {...other}
           />
         </Portal>
       );
@@ -395,19 +295,31 @@ export default class ButtonSplit extends React.Component {
   render() {
     const {
       actions,
-      tooltip,
       children,
       overlay,
-      overlayColor,
-      overlayOpacity,
-      overlayZIndex,
-      overlayProps,
+      className,
+      bgType,
+      color,
+      textColor,
+      size,
+      disabled,
+      full,
       ...other
     } = this.props;
 
     return (
-      <ButtonGroup {...other}>
-        <Button>
+      <ButtonGroup
+        className={className}
+        bgType={bgType}
+        color={color}
+        textColor={textColor}
+        size={size}
+        disabled={disabled}
+        full={full}
+      >
+        <Button
+          {...other}
+        >
           {children}
         </Button>
         {this.renderTooltip()}

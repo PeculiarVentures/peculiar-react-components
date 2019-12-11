@@ -86,7 +86,10 @@ class Button extends React.Component {
      * The function component for render custom element
      */
     component: PropTypes.func,
-    buttonRef: PropTypes.oneOfType([
+    /**
+     * Component ref.
+     */
+    componentRef: PropTypes.oneOfType([
       PropTypes.func,
       PropTypes.shape({ current: PropTypes.any }),
     ]),
@@ -107,7 +110,7 @@ class Button extends React.Component {
     disabled: false,
     className: '',
     component: undefined,
-    buttonRef: undefined,
+    componentRef: undefined,
     full: false,
   };
 
@@ -136,7 +139,7 @@ class Button extends React.Component {
       className,
       component,
       children,
-      buttonRef,
+      componentRef,
       full,
       ...other
     } = this.props;
@@ -161,7 +164,7 @@ class Button extends React.Component {
 
     return (
       <Component
-        ref={buttonRef}
+        ref={componentRef}
         href={isLink ? href : null}
         {...componentProps}
       />
