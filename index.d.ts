@@ -99,6 +99,30 @@ interface ButtonGroupProps extends React.HTMLAttributes<HTMLDivElement> {
   full?: boolean;
 }
 
+interface ButtonSplitProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  children: React.ReactNode;
+  bgType?: ButtonProps['bgType'];
+  color?: ButtonProps['color'];
+  textColor?: ButtonProps['textColor'];
+  size?: ButtonProps['size'];
+  disabled?: boolean;
+  full?: boolean;
+  className?: string;
+  overlay?: boolean;
+  actions: {
+    text: string;
+    href?: string;
+    disabled?: boolean;
+    onClick?: (e: Event) => void;
+    type?: TypographyBasicProps['type'];
+    tabletType?: TypographyBasicProps['tabletType'];
+    mobileType?: TypographyBasicProps['mobileType'];
+    color?: TypographyBasicProps['color'];
+    align?: TypographyBasicProps['align'];
+    className?: string;
+  }[];
+}
+
 interface CheckboxProps extends SwitchHandler {
   iconType?: 'checkmark' | 'square';
 }
@@ -527,6 +551,7 @@ declare const Avatar: React.ComponentType<AvatarProps>;
 declare const Autocomplete: React.ComponentType<AutocompleteProps>;
 declare const Button: React.ComponentType<ButtonProps>;
 declare const ButtonGroup: React.ComponentType<ButtonGroupProps>;
+declare const ButtonSplit: React.ComponentType<ButtonSplitProps>;
 declare const Checkbox: React.ComponentType<CheckboxProps>;
 declare const ContentLoader: React.ComponentType<ContentLoaderProps>;
 declare const HighlightCode: React.ComponentType<HighlightCodeProps>;

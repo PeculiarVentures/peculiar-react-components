@@ -42,6 +42,10 @@ export default [
         title: 'Button Group',
       },
       {
+        pathname: '/demos/button_split',
+        title: 'Button Split',
+      },
+      {
         pathname: '/demos/checkbox',
         title: 'Checkbox',
       },
