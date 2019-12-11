@@ -16,6 +16,7 @@ class Button extends React.Component {
    *  color: string;
    *  bgType: 'fill' | 'stroke';
    *  className: string;
+   *  full: boolean;
    * }} options
    * @return {string}
    */
@@ -31,6 +32,7 @@ class Button extends React.Component {
         [`fill_${options.color}`]: options.bgType === 'fill',
         [`stroke_${options.color}`]: options.bgType === 'stroke',
         [`text_${options.textColor}`]: options.textColor,
+        button_full: options.full,
       },
       options.className,
     );
@@ -38,15 +40,12 @@ class Button extends React.Component {
 
   static propTypes = {
     /**
-     * The tabIndex attribute for button
-     */
-    tabIndex: PropTypes.number,
-    /**
      * Component type one of `fill` or `stroke`.
-     * If `fill` - component will be have background-color from `color` props.
-     * If `stroke` - component will be have border-color from `color` props.
+     * If `fill` - component will have background and border from `color` props.
+     * If `stroke` - component will have border from `color` props and transparent background.
+     * If `clear` - component will have transparent border and transparent background.
      */
-    bgType: PropTypes.oneOf(['fill', 'stroke']),
+    bgType: PropTypes.oneOf(['fill', 'stroke', 'clear']),
     /**
      * Component color from theme
      */
@@ -91,10 +90,13 @@ class Button extends React.Component {
       PropTypes.func,
       PropTypes.shape({ current: PropTypes.any }),
     ]),
+    /**
+     * Component full-width.
+     */
+    full: PropTypes.bool,
   };
 
   static defaultProps = {
-    tabIndex: 0,
     bgType: 'fill',
     color: 'primary',
     align: 'center',
@@ -106,6 +108,7 @@ class Button extends React.Component {
     className: '',
     component: undefined,
     buttonRef: undefined,
+    full: false,
   };
 
   /**
@@ -134,6 +137,7 @@ class Button extends React.Component {
       component,
       children,
       buttonRef,
+      full,
       ...other
     } = this.props;
 

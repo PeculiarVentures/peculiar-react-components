@@ -1,12 +1,8 @@
 # Button
 
-## Stroke
+## Types
 
-{{"demo": "/demos/button/stroke.jsx", "showCode": "true"}}
-
-## Fill
-
-{{"demo": "/demos/button/fill.jsx", "showCode": "true"}}
+{{"demo": "/demos/button/types.jsx", "showCode": "true"}}
 
 ## Sizes
 

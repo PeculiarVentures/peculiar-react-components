@@ -14,6 +14,7 @@ export default function ButtonGroup(props) {
     textColor,
     size,
     disabled,
+    full,
     ...other
   } = props;
 
@@ -21,24 +22,27 @@ export default function ButtonGroup(props) {
     <div
       {...other}
       data-component="button_group"
-      className={classnames('button_group', className)}
+      className={classnames(
+        'button_group',
+        {
+          button_group_full: full,
+        },
+        className,
+      )}
     >
       {React.Children.map(children, (child) => {
         if (!React.isValidElement(child)) {
           return null;
         }
 
-        if (child.type.name === 'Button') {
-          return React.cloneElement(child, {
-            disabled: child.props.disabled || disabled,
-            textColor: child.props.textColor || textColor,
-            bgType,
-            color,
-            size,
-          });
-        }
-
-        return child;
+        return React.cloneElement(child, {
+          disabled: child.props.disabled || disabled,
+          textColor: child.props.textColor || textColor,
+          bgType,
+          color,
+          size,
+          full,
+        });
       })}
     </div>
   );
@@ -46,11 +50,12 @@ export default function ButtonGroup(props) {
 
 ButtonGroup.propTypes = {
   /**
-   * Button component type one of `fill` or `stroke`.
-   * If `fill` - component will be have background-color from `color` props.
-   * If `stroke` - component will be have border-color from `color` props.
+   * Component type one of `fill` or `stroke`.
+   * If `fill` - component will have background and border from `color` props.
+   * If `stroke` - component will have border from `color` props and transparent background.
+   * If `clear` - component will have transparent border and transparent background.
    */
-  bgType: PropTypes.oneOf(['fill', 'stroke']),
+  bgType: PropTypes.oneOf(['fill', 'stroke', 'clear']),
   /**
    * Button component color from theme
    */
@@ -75,6 +80,10 @@ ButtonGroup.propTypes = {
    * The CSS class name of the root element.
    */
   className: PropTypes.string,
+  /**
+   * Component full-width.
+   */
+  full: PropTypes.bool,
 };
 
 ButtonGroup.defaultProps = {
@@ -84,4 +93,5 @@ ButtonGroup.defaultProps = {
   textColor: 'white',
   size: 'medium',
   disabled: false,
+  full: false,
 };

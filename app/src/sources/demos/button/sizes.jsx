@@ -22,6 +22,11 @@ export default function Usage() {
       <Button size="large">
         Large
       </Button>
+      <br />
+      <br />
+      <Button full>
+        Full
+      </Button>
     </div>
   );
 }
