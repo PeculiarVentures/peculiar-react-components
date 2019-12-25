@@ -1,4 +1,4 @@
-import React, { PureComponent, Children, cloneElement, isValidElement } from 'react';
+import React, { Component, Children, cloneElement, isValidElement } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import SelectDropdown from './select_dropdown';
@@ -20,7 +20,7 @@ function prepareValue(value, defaultValue) {
 /**
  * Select component
  */
-class Select extends PureComponent {
+class Select extends Component {
   static propTypes = {
     /**
      * The option elements to populate the select with.
@@ -109,6 +109,10 @@ class Select extends PureComponent {
      */
     size: PropTypes.oneOf(['medium', 'large']),
     /**
+     * Component size for mobile.
+     */
+    mobileSize: PropTypes.oneOf(['medium', 'large']),
+    /**
      * Select dropdown opened place
      */
     placement: PropTypes.oneOf(['top', 'bottom']),
@@ -135,7 +139,12 @@ class Select extends PureComponent {
     textColor: 'black',
     colorFocus: 'primary',
     size: 'medium',
+    mobileSize: undefined,
     placement: 'bottom',
+  };
+
+  static contextTypes = {
+    device: PropTypes.object,
   };
 
   state = {
@@ -417,7 +426,8 @@ class Select extends PureComponent {
       color,
       textColor,
       colorFocus,
-      size,
+      size: propsSize,
+      mobileSize,
       placement,
       placeholderColor,
       ...other
@@ -427,6 +437,15 @@ class Select extends PureComponent {
       value: valueState,
       valueSelected,
     } = this.state;
+    const { device } = this.context;
+
+    let size = propsSize || Select.defaultProps.size;
+
+    if (device && mobileSize) {
+      if (device.type === 'mobile') {
+        size = mobileSize;
+      }
+    }
 
     if (native) {
       return (

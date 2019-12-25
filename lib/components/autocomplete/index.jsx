@@ -129,9 +129,13 @@ export default class Autocomplete extends Component {
      */
     colorFocus: PropTypes.string,
     /**
-     * Component size
+     * Component size.
      */
     size: PropTypes.oneOf(['medium', 'large']),
+    /**
+     * Component size for mobile.
+     */
+    mobileSize: PropTypes.oneOf(['medium', 'large']),
     /**
      * Properties applied to the input element.
      */
@@ -164,6 +168,7 @@ export default class Autocomplete extends Component {
     textColor: 'black',
     colorFocus: 'primary',
     size: 'medium',
+    mobileSize: undefined,
     inputProps: {},
     validation: undefined,
   }
@@ -409,6 +414,7 @@ export default class Autocomplete extends Component {
       textColor,
       colorFocus,
       size,
+      mobileSize,
       inputProps,
       children,
       validation,
@@ -466,6 +472,7 @@ export default class Autocomplete extends Component {
           onChange={this._onChangeInput}
           onKeyDown={this._onKeyDownInput}
           size={size}
+          mobileSize={mobileSize}
           textColor={textColor}
           colorFocus={colorFocus}
           bgType={bgType}

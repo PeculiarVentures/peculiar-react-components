@@ -90,9 +90,13 @@ export default class Input extends PureComponent {
      */
     colorFocus: PropTypes.string,
     /**
-     * Component size
+     * Component size.
      */
     size: PropTypes.oneOf(['medium', 'large']),
+    /**
+     * Component size for mobile.
+     */
+    mobileSize: PropTypes.oneOf(['medium', 'large']),
     /**
      * Properties applied to the input element.
      */
@@ -131,9 +135,14 @@ export default class Input extends PureComponent {
     textColor: 'black',
     colorFocus: 'primary',
     size: 'medium',
+    mobileSize: undefined,
     inputProps: {},
     autoComplete: undefined,
     autoFocus: false,
+  };
+
+  static contextTypes = {
+    device: PropTypes.object,
   };
 
   /**
@@ -205,12 +214,14 @@ export default class Input extends PureComponent {
       color,
       textColor,
       colorFocus,
-      size,
+      size: propsSize,
+      mobileSize,
       inputProps,
       autoComplete,
       autoFocus,
       ...other
     } = this.props;
+    const { device } = this.context;
     const {
       className: classNameInput,
       ...otherInputProps
@@ -226,6 +237,14 @@ export default class Input extends PureComponent {
     //     {label}
     //   </div>
     // )}
+
+    let size = propsSize || Input.defaultProps.size;
+
+    if (device && mobileSize) {
+      if (device.type === 'mobile') {
+        size = mobileSize;
+      }
+    }
 
     return (
       <div

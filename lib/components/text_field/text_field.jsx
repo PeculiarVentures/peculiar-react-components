@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Input from './input';
@@ -53,7 +53,7 @@ function validationPropType(props, propName, componentName, ...rest) {
 /**
  * TextField component
  */
-export default class TextField extends PureComponent {
+export default class TextField extends Component {
   /**
    * Validate string
    * @param {string} value
@@ -162,9 +162,13 @@ export default class TextField extends PureComponent {
      */
     colorFocus: PropTypes.string,
     /**
-     * Component size
+     * Component size.
      */
     size: PropTypes.oneOf(['medium', 'large']),
+    /**
+     * Component size for mobile.
+     */
+    mobileSize: PropTypes.oneOf(['medium', 'large']),
     /**
      * Properties applied to the input element.
      */
@@ -209,6 +213,7 @@ export default class TextField extends PureComponent {
     textColor: 'black',
     colorFocus: 'primary',
     size: 'medium',
+    mobileSize: undefined,
     inputProps: {},
     autoComplete: undefined,
     autoFocus: false,
@@ -438,6 +443,7 @@ export default class TextField extends PureComponent {
       textColor,
       colorFocus,
       size,
+      mobileSize,
       inputProps,
       autoComplete,
       autoFocus,
@@ -481,6 +487,7 @@ export default class TextField extends PureComponent {
           colorFocus={colorFocus}
           placeholderColor={placeholderColor}
           size={size}
+          mobileSize={mobileSize}
           inputProps={{
             ...inputProps,
             className: classNames(

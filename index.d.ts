@@ -238,6 +238,7 @@ interface SelectProps {
   textColor?: Color;
   colorFocus?: Color;
   size?: 'medium' | 'large';
+  mobileSize?: 'medium' | 'large';
   placement?: 'top' | 'bottom';
   ref?: React.Ref<HTMLElement>;
   gaEventName?: string;
@@ -374,6 +375,7 @@ interface InpuBasicProps {
   textColor?: Color;
   colorFocus?: Color;
   size?: 'medium' | 'large';
+  mobileSize?: 'medium' | 'large';
   inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
   autoComplete?: string;
   autoFocus?: boolean;
@@ -415,6 +417,7 @@ interface AutocompleteProps {
   textColor?: Color;
   colorFocus?: Color;
   size?: 'medium' | 'large';
+  mobileSize?: 'medium' | 'large';
   inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
   autoComplete?: string;
   ref?: React.Ref<HTMLElement>;
