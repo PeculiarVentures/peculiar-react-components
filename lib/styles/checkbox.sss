@@ -38,7 +38,8 @@
     border: 1px solid transparent
     text-align: center
     pointer-events: none
-  &_icon_square, &_icon_checkmark
+  &_icon_square,
+  &_icon_checkmark
     position: relative
     top: 50%
     vertical-align: top
@@ -50,6 +51,8 @@
     height: $checkbox-iconSize
     transition: background 300ms
     border-radius: 1px
+  &_icon_checkmark
+    height: calc($checkbox-iconSize * 0.7)
 
   &[data-type="stroke"]
     .checkbox_container
