@@ -64,11 +64,14 @@ export default {
     }),
     new FaviconsWebpackPlugin({
       logo: path.join(__dirname, `../../${CONFIG.SRC_FOLDER}/assets/logo.png`),
-      appName: CONFIG.APP_NAME,
-      start_url: PUBLIC_PATH,
-      path: PUBLIC_PATH,
-      persistentCache: false,
-      orientation: 'portrait',
+      prefix: 'favicons/',
+      mode: 'light',
+      favicons: {
+        appName: CONFIG.APP_NAME,
+        path: PUBLIC_PATH,
+        start_url: PUBLIC_PATH,
+        orientation: 'portrait',
+      },
     }),
   ],
   module: {
