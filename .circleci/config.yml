@@ -1,7 +1,7 @@
 version: 2.1
 
 defaults: &defaults
-  working_directory: ~/ci-build
+  working_directory: ~/repo
   docker:
     - image: circleci/node:8.9.3
 
@@ -9,98 +9,101 @@ jobs:
   pre-build:
     <<: *defaults
     steps:
-      - checkout:
-          path: ~/ci-build/
-      - attach_workspace:
-          at: ~/ci-build/
+      - checkout
+
       - restore_cache:
-          key: dependency-cache-lib-{{ checksum "package.json" }}
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
       - run: npm install
       - save_cache:
-          key: dependency-cache-lib-{{ checksum "package.json" }}
           paths:
             - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
       - persist_to_workspace:
-          root: ~/ci-build
-          paths:
-            - node_modules
+          root: ~/repo
+          paths: .
 
   lint:
     <<: *defaults
     steps:
-      - checkout
       - attach_workspace:
-          at: ~/ci-build
+          at: ~/repo
       - run: npm run lint
 
   test-unit:
     <<: *defaults
     steps:
-      - checkout
       - attach_workspace:
-          at: ~/ci-build
+          at: ~/repo
       - run: npm run test
 
-  pre-build-deploy-docs:
+  pre-build-docs:
     <<: *defaults
     steps:
-      - checkout
       - attach_workspace:
-          at: ~/ci-build/
+          at: ~/repo
       - restore_cache:
-          key: dependency-cache-docs-{{ checksum "app/package.json" }}
+          keys:
+          - v1-dependencies-docs-{{ checksum "app/package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-docs-
+  
       - run: cd app && npm install
       - save_cache:
-          key: dependency-cache-docs-{{ checksum "app/package.json" }}
           paths:
             - app/node_modules
+          key: v1-dependencies-docs-{{ checksum "app/package.json" }}
+
       - persist_to_workspace:
-          root: ~/ci-build
+          root: ~/repo
           paths:
-            - app/node_modules
+            - .
 
   deploy-docs:
     <<: *defaults
     steps:
-      - checkout
       - attach_workspace:
-          at: ~/ci-build
+          at: ~/repo
       - run: npm run build && cd app && npm run deploy:gh-pages
 
-  pre-build-theme-constructor:
-    <<: *defaults
-    steps:
-      - checkout:
-          path: ~/ci-build/
-      - attach_workspace:
-          at: ~/ci-build/
-      - restore_cache:
-          key: dependency-cache-lib-{{ checksum "theme-contructor/package.json" }}
-      - run: cd theme-contructor && npm install
-      - save_cache:
-          key: dependency-cache-lib-{{ checksum "theme-contructor/package.json" }}
-          paths:
-            - node_modules
-      - persist_to_workspace:
-          root: ~/ci-build
-          paths:
-            - theme-contructor/node_modules
+  # pre-build-theme-constructor:
+  #   <<: *defaults
+  #   steps:
+  #     - checkout:
+  #         path: ~/ci-build/
+  #     - attach_workspace:
+  #         at: ~/ci-build/
+  #     - restore_cache:
+  #         key: dependency-cache-lib-{{ checksum "theme-contructor/package.json" }}
+  #     - run: cd theme-contructor && npm install
+  #     - save_cache:
+  #         key: dependency-cache-lib-{{ checksum "theme-contructor/package.json" }}
+  #         paths:
+  #           - node_modules
+  #     - persist_to_workspace:
+  #         root: ~/ci-build
+  #         paths:
+  #           - theme-contructor/node_modules
 
-  lint-theme-contructor:
-    <<: *defaults
-    steps:
-      - checkout
-      - attach_workspace:
-          at: ~/ci-build
-      - run: cd theme-contructor && npm run lint
+  # lint-theme-contructor:
+  #   <<: *defaults
+  #   steps:
+  #     - checkout
+  #     - attach_workspace:
+  #         at: ~/ci-build
+  #     - run: cd theme-contructor && npm run lint
 
-  test-unit-theme-contructor:
-    <<: *defaults
-    steps:
-      - checkout
-      - attach_workspace:
-          at: ~/ci-build
-      - run: cd theme-contructor && npm run test
+  # test-unit-theme-contructor:
+  #   <<: *defaults
+  #   steps:
+  #     - checkout
+  #     - attach_workspace:
+  #         at: ~/ci-build
+  #     - run: cd theme-contructor && npm run test
 
 workflows:
   version: 2
@@ -113,7 +116,7 @@ workflows:
       - test-unit:
           requires:
             - pre-build
-      - pre-build-deploy-docs:
+      - pre-build-docs:
           requires:
             - lint
             - test-unit
@@ -123,16 +126,16 @@ workflows:
                 - 0.3.x
       - deploy-docs:
           requires:
-            - pre-build-deploy-docs
+            - pre-build-docs
           filters:
             branches:
               only:
                 - 0.3.x
 
-      - pre-build-theme-constructor
-      - lint-theme-contructor:
-          requires:
-            - pre-build-theme-constructor
-      - test-unit-theme-contructor:
-          requires:
-            - pre-build-theme-constructor
+      # - pre-build-theme-constructor
+      # - lint-theme-contructor:
+      #     requires:
+      #       - pre-build-theme-constructor
+      # - test-unit-theme-contructor:
+      #     requires:
+      #       - pre-build-theme-constructor
