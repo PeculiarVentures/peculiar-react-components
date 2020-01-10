@@ -2,7 +2,6 @@
 .vscode
 .DS_Store
 node_modules
-package-lock.json
 *.log
 app/dst
 **/compiled_env.json
