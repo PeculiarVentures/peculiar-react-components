@@ -41,7 +41,7 @@ jobs:
           at: ~/repo
       - run: npm run test
 
-  pre-build-docs:
+  pre-build-deploy-docs:
     <<: *defaults
     steps:
       - attach_workspace:
@@ -58,16 +58,6 @@ jobs:
             - app/node_modules
           key: v1-dependencies-docs-{{ checksum "app/package.json" }}
 
-      - persist_to_workspace:
-          root: ~/repo
-          paths:
-            - .
-
-  deploy-docs:
-    <<: *defaults
-    steps:
-      - attach_workspace:
-          at: ~/repo
       - run: npm run build && cd app && npm run deploy:gh-pages
 
   # pre-build-theme-constructor:
@@ -116,17 +106,10 @@ workflows:
       - test-unit:
           requires:
             - pre-build
-      - pre-build-docs:
+      - pre-build-deploy-docs:
           requires:
             - lint
             - test-unit
-          filters:
-            branches:
-              only:
-                - 0.3.x
-      - deploy-docs:
-          requires:
-            - pre-build-docs
           filters:
             branches:
               only:
