@@ -10,7 +10,6 @@ jobs:
     <<: *defaults
     steps:
       - checkout
-      - add_ssh_keys
 
       - restore_cache:
           keys:
@@ -26,11 +25,12 @@ jobs:
 
       - persist_to_workspace:
           root: ~/repo
-          paths: .
+          paths: ./node_modules
 
   lint:
     <<: *defaults
     steps:
+      - checkout
       - attach_workspace:
           at: ~/repo
       - run: npm run lint
@@ -38,6 +38,7 @@ jobs:
   test-unit:
     <<: *defaults
     steps:
+      - checkout
       - attach_workspace:
           at: ~/repo
       - run: npm run test
@@ -45,6 +46,7 @@ jobs:
   pre-build-deploy-docs:
     <<: *defaults
     steps:
+      - checkout
       - attach_workspace:
           at: ~/repo
       - restore_cache:
