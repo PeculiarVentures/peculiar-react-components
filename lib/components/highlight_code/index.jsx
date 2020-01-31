@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import 'prismjs/components/prism-jsx';
 import 'prismjs/components/prism-bash';
 import 'prismjs/components/prism-glsl';
+import 'prismjs/components/prism-json';
 
 /**
  * Highlight component
@@ -30,6 +31,7 @@ export default class HighlightCode extends PureComponent {
       'bash',
       'glsl',
       'none',
+      'json',
     ]),
   };
 

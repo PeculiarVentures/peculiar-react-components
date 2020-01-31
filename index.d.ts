@@ -62,7 +62,8 @@ type CodeType = 'css'
   | 'xml'
   | 'bash'
   | 'glsl'
-  | 'none';
+  | 'none'
+  | 'json';
 
 interface AvatarProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   letters?: string;
