@@ -23,8 +23,8 @@ class Counter extends React.Component {
     minValue: PropTypes.number,
     maxValue: PropTypes.number,
     onChange: PropTypes.func,
-    minValuePaceholder: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    maxValuePaceholder: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    minValuePlaceholder: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    maxValuePlaceholder: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     disabled: PropTypes.bool,
     bgType: PropTypes.oneOf(['fill', 'stroke']),
     color: PropTypes.string,
@@ -44,8 +44,8 @@ class Counter extends React.Component {
     minValue: undefined,
     maxValue: undefined,
     onChange() {},
-    minValuePaceholder: undefined,
-    maxValuePaceholder: undefined,
+    minValuePlaceholder: undefined,
+    maxValuePlaceholder: undefined,
     disabled: false,
     bgType: 'fill',
     color: 'light_grey',
@@ -106,9 +106,9 @@ class Counter extends React.Component {
       textColor,
       colorFocus,
       minValue,
-      minValuePaceholder,
+      minValuePlaceholder,
       maxValue,
-      maxValuePaceholder,
+      maxValuePlaceholder,
       disabled,
       inputProps,
       counterProps,
@@ -116,8 +116,8 @@ class Counter extends React.Component {
 
     let inputValue = value;
 
-    if (minValue === value && minValuePaceholder) inputValue = minValuePaceholder;
-    if (maxValue === value && maxValuePaceholder) inputValue = maxValuePaceholder;
+    if (minValue === value && minValuePlaceholder) inputValue = minValuePlaceholder;
+    if (maxValue === value && maxValuePlaceholder) inputValue = maxValuePlaceholder;
 
     return (
       <Input

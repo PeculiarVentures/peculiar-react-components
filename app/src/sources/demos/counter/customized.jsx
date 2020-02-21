@@ -20,8 +20,8 @@ export default function Usage() {
       <Counter
         minValue={0}
         maxValue={5}
-        minValuePaceholder="Min"
-        maxValuePaceholder="Max"
+        minValuePlaceholder="Min"
+        maxValuePlaceholder="Max"
         color="secondary"
         textColor="white"
         counterProps={{

@@ -158,8 +158,8 @@ interface CounterProps {
   minValue: number;
   maxValue: number;
   onChange: (value: number) => void;
-  minValueLabel?: number | string;
-  maxValueLabel?: number | string;
+  minValuePlaceholder?: number | string;
+  maxValuePlaceholder?: number | string;
   disabled?: boolean;
   bgType?: Fill;
   color?: Color;
