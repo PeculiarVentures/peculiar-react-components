@@ -587,7 +587,7 @@ export default class Tooltip extends Component {
     }
 
     if (this.isMouseEnterToShow()) {
-      newWrapperProps.onMouseEnter = this.onMouseEnter;
+      newWrapperProps.onMouseOver = this.onMouseEnter;
     }
 
     if (this.isMouseLeaveToHide()) {
