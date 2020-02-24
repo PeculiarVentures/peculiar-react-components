@@ -7,23 +7,34 @@ Please refer to each component's [demo page](/demos/button) to see how they shou
 
 Here's a quick example to get you started, **it's literally all you need**:
 
-Add styles file to your html:
-```html
-<link rel="stylesheet" href="path/to/css/theme/file">
-```
-
 ```jsx
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Button } from 'lib-react-components';
 
-function App() {
-  return (
-    <Button>
-      I am Button
-    </Button>
-  );
-}
+const App = () => (
+  <Button>
+    I am Button
+  </Button>
+);
 
 ReactDOM.render(<App />, document.querySelector('#root'));
 ```
+
+And add styles file to your <head> element.
+
+```html
+<link rel="stylesheet" href="https://unpkg.com/browse/lib-react-components@latest/lib/themes/default.css">
+```
+
+### Responsive meta tag
+
+To ensure proper rendering and touch zooming for all devices, add the responsive viewport meta tag to your <head> element.
+
+```html
+<meta
+  name="viewport"
+  content="minimum-scale=1, initial-scale=1, width=device-width"
+/>
+```
+

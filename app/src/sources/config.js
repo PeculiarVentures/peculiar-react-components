@@ -13,16 +13,25 @@ export default [
     ],
   },
   {
-    title: 'Style',
+    title: 'Styles',
     children: [
       {
-        pathname: '/style/color',
-        title: 'Color',
+        pathname: '/styles/basics',
+        title: 'Basics',
       },
     ],
   },
   {
-    title: 'Component Demos',
+    title: 'System',
+    children: [
+      {
+        pathname: '/system/palette',
+        title: 'Palette',
+      },
+    ],
+  },
+  {
+    title: 'Components',
     value: 'demos',
     children: [
       {
