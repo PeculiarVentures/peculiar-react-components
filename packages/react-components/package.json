@@ -1,0 +1,54 @@
+{
+  "name": "@pv/react-components",
+  "version": "0.0.0",
+  "private": false,
+  "description": "React components & styles",
+  "keywords": [
+    "react",
+    "components",
+    "styles",
+    "theme",
+    "ui"
+  ],
+  "author": "PeculiarVentures Team",
+  "homepage": "https://github.com/PeculiarVentures/react-components#readme",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PeculiarVentures/react-components.git"
+  },
+  "scripts": {
+    "compile": "npm-run-all clean compile:*",
+    "compile:esm": "tsc -p .",
+    "compile:cjs": "tsc -p . -m commonjs --outDir dist/cjs",
+    "compile:esnext": "tsc -p . -t esnext --outDir dist/esnext",
+    "compile:css": "node ./scripts/sassCompile.js",
+    "clean": "rimraf css && rimraf dist"
+  },
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "esnext": "dist/esnext/index.js",
+  "typings": "dist/types/index.d.ts",
+  "style": "css/index.css",
+  "bugs": {
+    "url": "https://github.com/PeculiarVentures/react-components/issues"
+  },
+  "devDependencies": {
+    "@pv/components-theme": "file:../components-theme",
+    "@types/react": "^16.9.22",
+    "npm-run-all": "^4.1.5",
+    "react": "^16.12.0",
+    "rimraf": "^3.0.2",
+    "typescript": "^3.8.2"
+  },
+  "dependencies": {
+    "tslib": "^1.11.0"
+  },
+  "peerDependencies": {
+    "react": "^16.12.0"
+  },
+  "files": [
+    "dist/",
+    "css/"
+  ]
+}

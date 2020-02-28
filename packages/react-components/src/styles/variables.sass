@@ -1,0 +1,5 @@
+@import "common/palette"
+
+:root
+  @each $name, $value in $palette
+    --pv-#{$name}: #{$value}
