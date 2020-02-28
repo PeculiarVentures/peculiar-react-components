@@ -1,0 +1,16 @@
+{
+  "name": "@pv/webpack-build-scripts",
+  "version": "0.0.0",
+  "private": false,
+  "description": "Webpack build scripts",
+  "author": "PeculiarVentures Team",
+  "homepage": "https://github.com/PeculiarVentures/react-components#readme",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PeculiarVentures/react-components.git"
+  },
+  "bugs": {
+    "url": "https://github.com/PeculiarVentures/react-components/issues"
+  }
+}
