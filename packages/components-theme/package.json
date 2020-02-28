@@ -1,0 +1,40 @@
+{
+  "name": "@pv/components-theme",
+  "version": "0.0.0",
+  "private": false,
+  "description": "Components theme constructor",
+  "author": "PeculiarVentures Team",
+  "homepage": "https://github.com/PeculiarVentures/react-components#readme",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PeculiarVentures/react-components.git"
+  },
+  "scripts": {
+    "compile": "npm-run-all clean compile:*",
+    "compile:esm": "tsc -p .",
+    "compile:cjs": "tsc -p . -m commonjs --outDir dist/cjs",
+    "compile:esnext": "tsc -p . -t esnext --outDir dist/esnext",
+    "clean": "rimraf dist"
+  },
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "esnext": "dist/esnext/index.js",
+  "typings": "dist/types/index.d.ts",
+  "bugs": {
+    "url": "https://github.com/PeculiarVentures/react-components/issues"
+  },
+  "devDependencies": {
+    "@types/sass": "^1.16.0",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.2",
+    "typescript": "^3.8.2"
+  },
+  "dependencies": {
+    "sass": "^1.26.1",
+    "tslib": "^1.11.0"
+  },
+  "files": [
+    "dist/"
+  ]
+}
