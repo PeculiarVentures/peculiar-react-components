@@ -1,7 +1,5 @@
 import * as React from 'react';
-import { storiesOf } from '@storybook/react';
 import { select, boolean, text } from '@storybook/addon-knobs';
-
 import Button from './index';
 import { IButtonProps } from './AbstractButton';
 
@@ -28,24 +26,21 @@ const size: Record<IButtonProps['size'], IButtonProps['size']> = {
   large: 'large',
 };
 
-const props = {
-  default: () => ({
+export default {
+  title: 'Button',
+};
+
+export const Default = () => {
+  const props = {
     bgType: select('bgType', bgType, Button.defaultProps.bgType),
     color: select('color', color, Button.defaultProps.color),
     colorText: select('colorText', color, Button.defaultProps.colorText),
     size: select<IButtonProps['size']>('size', size, Button.defaultProps.size),
     children: text('children', 'I am Button'),
     disabled: boolean('disabled', false),
-  }),
-};
-
-const DefaultButton = () => {
-  const regularProps = props.default();
+  };
 
   return (
-    <Button {...regularProps} />
+    <Button {...props} />
   );
 };
-
-storiesOf('Components|Button', module)
-  .add('default', DefaultButton);

@@ -26,9 +26,9 @@ module.exports = ({ config }) => {
   });
 
   config.module.rules.push({
-    test: /\.story\.(ts|tsx)$/,
+    test: /\.stories\.(ts|tsx)$/,
     loaders: [{
-      loader: require.resolve('@storybook/addon-storysource/loader'),
+      loader: require.resolve('@storybook/source-loader'),
       options: { parser: 'typescript' }
     }],
     enforce: 'pre',
