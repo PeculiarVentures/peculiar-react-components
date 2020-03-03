@@ -11,6 +11,7 @@ log.txt
 .idea/
 .vscode/
 .sass-cache/
+.awcache/
 .versions/
 coverage/
 collection/

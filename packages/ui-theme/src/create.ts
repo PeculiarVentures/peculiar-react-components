@@ -32,7 +32,7 @@ export default function create(options: IOptions): void {
    * Compile and move styles to css/ directory
    */
   files.forEach((file) => {
-    const isSuppotedFile = /\.sass$/.test(file);
+    const isSuppotedFile = /\.scss$/.test(file);
 
     if (!isSuppotedFile) {
       return;
@@ -47,7 +47,7 @@ export default function create(options: IOptions): void {
     compileTime += result.stats.duration;
 
     fs.writeFileSync(
-      path.join(options.outputDir, `${file.replace(/\.sass$/, '.css')}`),
+      path.join(options.outputDir, `${file.replace(/\.scss$/, '.css')}`),
       result.css,
     );
   });

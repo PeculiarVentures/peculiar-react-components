@@ -1,30 +1,19 @@
-import React from 'react';
+import * as React from 'react';
+import AbstractButton from './AbstractButton';
 
-export interface IButtonProps {
-  children: React.ReactNode;
-  bgType?: 'fill' | 'stroke' | 'clear';
-  color?: string;
-  colorText?: string;
-  alignText?: 'left' | 'center' | 'right';
-  size?: 'small' | 'medium' | 'large';
-  disabled?: boolean;
-  className?: string;
+export default class Button extends AbstractButton<React.ButtonHTMLAttributes<HTMLButtonElement>> {
+  static displayName = 'Button';
+
+  render() {
+    const props = this.getProps();
+
+    return (
+      <button
+        type="button"
+        {...props}
+      >
+        {this.renderChildren()}
+      </button>
+    );
+  }
 }
-
-const Button = React.forwardRef<HTMLButtonElement, IButtonProps>((props, ref) => {
-  const { children, ...other } = props;
-
-  return (
-    <button
-      type="button"
-      ref={ref}
-      {...other}
-    >
-      <span key="text">
-        {children}
-      </span>
-    </button>
-  );
-});
-
-export default Button;

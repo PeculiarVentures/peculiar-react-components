@@ -22,8 +22,10 @@
     "compile:esm": "tsc -p .",
     "compile:cjs": "tsc -p . -m commonjs --outDir dist/cjs",
     "compile:esnext": "tsc -p . -t esnext --outDir dist/esnext",
-    "compile:css": "node ./scripts/sassCompile.js",
-    "clean": "rimraf css && rimraf dist"
+    "compile:css": "node ./scripts/stylesCompile.js",
+    "clean": "rimraf css && rimraf dist",
+    "storybook": "start-storybook -p 3000 -s ./css",
+    "dev": "npm run compile:css && npm run storybook"
   },
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -34,14 +36,25 @@
     "url": "https://github.com/PeculiarVentures/react-components/issues"
   },
   "devDependencies": {
-    "@pv/components-theme": "file:../components-theme",
+    "@pv/ui-theme": "file:../ui-theme",
+    "@storybook/addon-info": "^5.3.14",
+    "@storybook/addon-knobs": "^5.3.14",
+    "@storybook/addon-storysource": "^5.3.14",
+    "@storybook/react": "^5.3.14",
+    "@types/classnames": "^2.2.9",
     "@types/react": "^16.9.22",
+    "@types/storybook__addon-info": "^5.2.1",
+    "@types/storybook__react": "^5.2.1",
+    "awesome-typescript-loader": "^5.2.1",
     "npm-run-all": "^4.1.5",
     "react": "^16.12.0",
+    "react-docgen-typescript-loader": "^3.6.0",
     "rimraf": "^3.0.2",
+    "ts-loader": "^6.2.1",
     "typescript": "^3.8.2"
   },
   "dependencies": {
+    "classnames": "^2.2.6",
     "tslib": "^1.11.0"
   },
   "peerDependencies": {

@@ -1,8 +1,8 @@
 const path = require('path');
-const componentsTheme = require('@pv/components-theme').default;
+const uiTheme = require('@pv/ui-theme').default;
 
-componentsTheme.create({
+uiTheme.create({
   inputDir: path.join(__dirname, '../src/styles'),
   outputDir: path.join(__dirname, '../css'),
-  outputStyle: 'compressed',
+  outputStyle: 'expanded',
 });

@@ -3,7 +3,7 @@
 ## Installation
 
 ```bash
-npm install @pv/components-theme --save-dev
+npm install @pv/ui-theme --save-dev
 ```
 
 ## Usage
