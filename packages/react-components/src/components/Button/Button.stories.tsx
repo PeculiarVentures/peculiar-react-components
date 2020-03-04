@@ -26,10 +26,6 @@ const size: Record<IButtonProps['size'], IButtonProps['size']> = {
   large: 'large',
 };
 
-export default {
-  title: 'Button',
-};
-
 const baseProps = () => ({
   bgType: select('bgType', bgType, Button.defaultProps.bgType),
   color: select('color', color, Button.defaultProps.color),
@@ -59,4 +55,8 @@ export const Anchor = () => {
       {...props}
     />
   );
+};
+
+export default {
+  title: 'Button',
 };
