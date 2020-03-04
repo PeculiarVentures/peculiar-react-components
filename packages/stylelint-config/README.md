@@ -6,21 +6,12 @@
 npm install @peculiar/stylelint-config --save-dev
 ```
 
-<!-- ## Usage
+## Usage
 
-`.eslintrc.js`
+`.stylelintrc.js`
 ```js
 module.exports = {
-  extends: ['@peculiar/eslint-config'],
-};
-```
-
-## Usage (without React)
-
-`.eslintrc.js`
-```js
-module.exports = {
-  extends: ['@peculiar/eslint-config/base'],
+  extends: ['@peculiar/stylelint-config'],
 };
 ```
 
@@ -29,7 +20,7 @@ module.exports = {
 ```json
 {
   "scripts": {
-    "lint": "eslint --ext .js,.jsx,.ts,.tsx ./"
+    "lint": "stylelint '**/*.scss'"
   }
 }
-``` -->
+```
