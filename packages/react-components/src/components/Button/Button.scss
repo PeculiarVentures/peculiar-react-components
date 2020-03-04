@@ -1,6 +1,28 @@
 .button {
   background: transparent;
-  cursor: pointer;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 1px;
   display: inline-block;
-  font-family: inherit;
+
+  &_small {
+    font-size: variable('button.small.fontSize');
+    font-weight: variable('button.small.fontWeight');
+    height: variable('button.small.height');
+    padding: 0 10px;
+  }
+
+  &_medium {
+    font-size: variable('button.medium.fontSize');
+    font-weight: variable('button.medium.fontWeight');
+    height: variable('button.medium.height');
+    padding: 0 16px;
+  }
+
+  &_large {
+    font-size: variable('button.large.fontSize');
+    font-weight: variable('button.large.fontWeight');
+    height: variable('button.large.height');
+    padding: 0 36px;
+  }
 }

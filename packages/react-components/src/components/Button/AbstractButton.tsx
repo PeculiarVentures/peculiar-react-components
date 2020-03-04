@@ -38,6 +38,7 @@ IButtonProps & T
 
     const newClassName = classnames(
       'button',
+      [`button_${size}`],
       className,
     );
 

@@ -2,6 +2,6 @@
 
 :root {
   @each $name, $value in $palette {
-    --pv-#{$name}: #{$value};
+    --pv-#{$name}: #{red($value), green($value), blue($value)};
   }
 }

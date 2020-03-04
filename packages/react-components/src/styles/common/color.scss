@@ -1,0 +1,6 @@
+@each $name, $value in $palette {
+  .color-#{$name} {
+    color: rgb(red($value), green($value), blue($value));
+    color: rgb(var(--pv-#{$name}));
+  }
+}
