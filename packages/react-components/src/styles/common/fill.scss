@@ -1,3 +1,6 @@
+/**
+ * Fill
+ */
 @each $name, $value in $palette {
   .fill_#{$name} {
     background-color: rgb(red($value), green($value), blue($value));

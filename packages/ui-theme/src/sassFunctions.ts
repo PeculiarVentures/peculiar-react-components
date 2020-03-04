@@ -6,8 +6,16 @@ interface IButton {
   fontWeight: number;
 }
 
+interface ITypography {
+  weight: number;
+  size: string;
+  height: number;
+  spacing: string | number;
+}
+
 interface IOptions {
   palette: Record<string, string>;
+  typography: Record<string, ITypography>;
   button: {
     small: IButton;
     medium: IButton;
@@ -52,20 +60,20 @@ export default function sassFunctions(options: IOptions) {
   return {
     'palette()': () => {
       const keys = Object.keys(options.palette);
-      const paletteMap = new sass.types.Map(keys.length);
+      const map = new sass.types.Map(keys.length);
 
       keys.forEach((name: keyof typeof options.palette, index) => {
         const value = options.palette[name];
         const rgb = colorToRgb(value);
 
-        paletteMap.setKey(index, new sass.types.String(name));
-        paletteMap.setValue(index, new sass.types.Color(rgb.r, rgb.g, rgb.b));
+        map.setKey(index, new sass.types.String(name));
+        map.setValue(index, new sass.types.Color(rgb.r, rgb.g, rgb.b));
       });
 
-      return paletteMap;
+      return map;
     },
-    'variable($name)': (name: sass.types.String) => {
-      const value = name.getValue();
+    'variable($path)': (path: sass.types.String) => {
+      const value = path.getValue();
       const valueVariable = eval(`options.${value}`);
 
       if (typeof valueVariable === 'string') {
@@ -76,7 +84,18 @@ export default function sassFunctions(options: IOptions) {
         return new sass.types.Number(valueVariable);
       }
 
-      throw new Error(`Can't get variable ${name}`);
+      if (typeof valueVariable === 'object') {
+        const keys = Object.keys(valueVariable);
+        const list = new sass.types.List(keys.length);
+
+        keys.forEach((name, index) => {
+          list.setValue(index, new sass.types.String(name));
+        });
+
+        return list;
+      }
+
+      throw new Error(`Can't get variable ${path}`);
     },
   };
 }

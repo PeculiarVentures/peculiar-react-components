@@ -1,3 +1,6 @@
+/**
+ * Color
+ */
 @each $name, $value in $palette {
   .color_#{$name} {
     color: rgb(red($value), green($value), blue($value));

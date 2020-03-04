@@ -1,3 +1,6 @@
+/**
+ * Stroke
+ */
 @each $name, $value in $palette {
   .stroke_#{$name} {
     border-color: rgb(red($value), green($value), blue($value));
