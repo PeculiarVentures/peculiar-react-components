@@ -42,9 +42,9 @@ const colorToRgb = (color: string) => {
   const result = color.split(',');
 
   return {
-    r: parseInt(result[0], 16),
-    g: parseInt(result[1], 16),
-    b: parseInt(result[2], 16),
+    r: parseInt(result[0], 10),
+    g: parseInt(result[1], 10),
+    b: parseInt(result[2], 10),
   };
 };
 
@@ -76,7 +76,7 @@ export default function sassFunctions(options: IOptions) {
         return new sass.types.Number(valueVariable);
       }
 
-      throw new Error(`Can't get variable "${name}"`);
+      throw new Error(`Can't get variable ${name}`);
     },
   };
 }
