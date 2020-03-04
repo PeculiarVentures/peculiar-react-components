@@ -8,7 +8,24 @@ const defaultOptions = {
     light_grey: '245, 246, 250',
     success: '0, 208, 147',
     wrong: '241, 39, 39',
-    white: '255, 255, 255',
+    white: '#fff',
+  },
+  button: {
+    small: {
+      height: '24px',
+      fontSize: '12px',
+      fontWeight: 600,
+    },
+    medium: {
+      height: '30px',
+      fontSize: '13px',
+      fontWeight: 600,
+    },
+    large: {
+      height: '40px',
+      fontSize: '13px',
+      fontWeight: 600,
+    },
   },
 };
 

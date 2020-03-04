@@ -4,7 +4,8 @@
     "lint": "eslint --ext .js,.jsx,.ts,.tsx ./",
     "clean": "lerna run --parallel clean",
     "compile": "lerna run compile",
-    "lint:css": "stylelint '**/*.scss'"
+    "lint:css": "stylelint '**/*.scss'",
+    "lint:css:fix": "stylelint '**/*.scss' --fix"
   },
   "devDependencies": {
     "@pv/eslint-config": "file:packages/eslint-config",

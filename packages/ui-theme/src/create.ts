@@ -40,7 +40,7 @@ export default function create(options: IOptions): void {
 
     const result = sass.renderSync({
       file: path.join(options.inputDir, file),
-      functions: sassFunctions({ palette: defaultOptions.palette }),
+      functions: sassFunctions(defaultOptions),
       outputStyle: options.outputStyle,
     });
 
