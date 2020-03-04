@@ -1,6 +1,10 @@
 @each $name, $value in $palette {
-  .stroke-#{$name} {
+  .stroke_#{$name} {
     border-color: rgb(red($value), green($value), blue($value));
     border-color: rgb(var(--pv-#{$name}));
   }
+}
+
+.stroke_transparent {
+  border-color: transparent;
 }

@@ -1,28 +1,74 @@
 .button {
-  background: transparent;
-  border-color: transparent;
   border-style: solid;
   border-width: 1px;
   display: inline-block;
+  text-align: center;
+  text-decoration: none;
 
-  &_small {
+  > span {
+    display: inline-block;
+    transition: opacity 200ms;
+    vertical-align: middle;
+  }
+
+  &.small {
     font-size: variable('button.small.fontSize');
     font-weight: variable('button.small.fontWeight');
     height: variable('button.small.height');
     padding: 0 10px;
   }
 
-  &_medium {
+  &.medium {
     font-size: variable('button.medium.fontSize');
     font-weight: variable('button.medium.fontWeight');
     height: variable('button.medium.height');
     padding: 0 16px;
   }
 
-  &_large {
+  &.large {
     font-size: variable('button.large.fontSize');
     font-weight: variable('button.large.fontWeight');
     height: variable('button.large.height');
     padding: 0 36px;
+  }
+
+  &.rounded.small {
+    border-radius: calc(#{variable('button.small.height')} / 2);
+  }
+
+  &.rounded.medium {
+    border-radius: calc(#{variable('button.medium.height')} / 2);
+  }
+
+  &.rounded.large {
+    border-radius: calc(#{variable('button.large.height')} / 2);
+  }
+
+  &.full {
+    display: block;
+    width: 100%;
+  }
+
+  &[disabled] {
+    opacity: 0.7;
+    pointer-events: none;
+  }
+
+  &[role='button']::before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    width: 0;
+  }
+}
+
+@media (hover: hover) {
+  .button {
+    &:hover {
+      > span {
+        opacity: 0.5;
+      }
+    }
   }
 }

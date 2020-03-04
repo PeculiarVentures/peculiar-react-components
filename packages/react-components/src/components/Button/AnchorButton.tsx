@@ -14,7 +14,6 @@ React.AnchorHTMLAttributes<HTMLAnchorElement>
         role="button"
         {...props}
         href={props.disabled ? undefined : props.href}
-        tabIndex={props.disabled ? -1 : props.tabIndex}
       >
         {this.renderChildren()}
       </a>

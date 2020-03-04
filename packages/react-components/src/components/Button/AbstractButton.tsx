@@ -7,8 +7,9 @@ export interface IButtonProps {
   bgType?: BgTypeBase | 'clear';
   color?: string;
   colorText?: string;
-  alignText?: 'left' | 'center' | 'right';
   size?: 'small' | 'medium' | 'large';
+  full?: boolean;
+  rounded?: boolean;
   disabled?: boolean;
   className?: string;
 }
@@ -17,10 +18,9 @@ abstract class AbstractButton<T extends React.HTMLAttributes<any>> extends React
 IButtonProps & T
 > {
   static defaultProps: Omit<IButtonProps, 'children'> = {
-    bgType: 'fill',
-    color: 'primary',
-    colorText: 'white',
-    alignText: 'center',
+    bgType: 'stroke',
+    color: 'grey',
+    colorText: 'black',
     size: 'medium',
   };
 
@@ -29,16 +29,27 @@ IButtonProps & T
       bgType,
       color,
       colorText,
-      alignText,
       children,
       size,
+      full,
+      rounded,
       className,
       ...other
     } = this.props;
 
     const newClassName = classnames(
       'button',
-      [`button_${size}`],
+      size,
+      {
+        [`fill_${color}`]: bgType === 'fill',
+        fill_transparent: bgType !== 'fill',
+        [`stroke_${color}`]: bgType !== 'clear',
+        stroke_transparent: bgType === 'clear',
+        [`color_${colorText}`]: colorText,
+        round_small: !rounded,
+        full,
+        rounded,
+      },
       className,
     );
 
