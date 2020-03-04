@@ -1,4 +1,4 @@
-# Stylelint configuration
+# StyleLint configuration
 
 ## Installation
 

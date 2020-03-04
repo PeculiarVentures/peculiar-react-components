@@ -2,7 +2,7 @@
   "name": "@peculiar/stylelint-config",
   "version": "0.0.0",
   "private": false,
-  "description": "Stylelint configuration for @peculiar packages",
+  "description": "StyleLint configuration for @peculiar packages",
   "author": "PeculiarVentures Team",
   "homepage": "https://github.com/PeculiarVentures/react-components#readme",
   "license": "MIT",
