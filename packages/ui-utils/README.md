@@ -3,13 +3,13 @@
 ## Installation
 
 ```bash
-npm install @pv/ui-utils
+npm install @peculiar/ui-utils
 ```
 
 ## Usage
 
 ```ts
-import utils from '@pv/ui-utils';
+import utils from '@peculiar/ui-utils';
 
 console.log(utils.uuid());
 ```

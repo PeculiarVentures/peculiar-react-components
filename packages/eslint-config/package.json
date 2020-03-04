@@ -1,8 +1,8 @@
 {
-  "name": "@pv/eslint-config",
+  "name": "@peculiar/eslint-config",
   "version": "0.0.0",
   "private": false,
-  "description": "ESLint configuration for @pv packages",
+  "description": "ESLint configuration for @peculiar packages",
   "author": "PeculiarVentures Team",
   "homepage": "https://github.com/PeculiarVentures/react-components#readme",
   "license": "MIT",

@@ -3,5 +3,5 @@
 ## Installation
 
 ```bash
-npm install @pv/webpack-build-scripts --save-dev
+npm install @peculiar/webpack-build-scripts --save-dev
 ```

@@ -1,12 +1,12 @@
-# ESLint configuration
+# Stylelint configuration
 
 ## Installation
 
 ```bash
-npm install @peculiar/eslint-config --save-dev
+npm install @peculiar/stylelint-config --save-dev
 ```
 
-## Usage
+<!-- ## Usage
 
 `.eslintrc.js`
 ```js
@@ -32,4 +32,4 @@ module.exports = {
     "lint": "eslint --ext .js,.jsx,.ts,.tsx ./"
   }
 }
-```
+``` -->

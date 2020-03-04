@@ -1,8 +1,8 @@
 {
-  "name": "@pv/docs-react-components",
+  "name": "@peculiar/docs-react-components",
   "version": "0.0.0",
   "private": true,
-  "description": "Documentation for @pv/react-components",
+  "description": "Documentation for @peculiar/react-components",
   "author": "PeculiarVentures Team",
   "homepage": "https://github.com/PeculiarVentures/react-components#readme",
   "license": "MIT",

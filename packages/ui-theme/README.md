@@ -3,7 +3,7 @@
 ## Installation
 
 ```bash
-npm install @pv/ui-theme --save-dev
+npm install @peculiar/ui-theme --save-dev
 ```
 
 ## Usage

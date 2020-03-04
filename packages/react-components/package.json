@@ -1,5 +1,5 @@
 {
-  "name": "@pv/react-components",
+  "name": "@peculiar/react-components",
   "version": "0.0.0",
   "private": false,
   "description": "React components & styles",
@@ -36,7 +36,7 @@
     "url": "https://github.com/PeculiarVentures/react-components/issues"
   },
   "devDependencies": {
-    "@pv/ui-theme": "file:../ui-theme",
+    "@peculiar/ui-theme": "file:../ui-theme",
     "@storybook/addon-actions": "^5.3.14",
     "@storybook/addon-info": "^5.3.14",
     "@storybook/addon-knobs": "^5.3.14",

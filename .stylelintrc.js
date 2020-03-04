@@ -1,5 +1,3 @@
 module.exports = {
-  extends: [
-    'stylelint-config-sass-guidelines',
-  ],
+  extends: ['@peculiar/stylelint-config'],
 };

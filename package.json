@@ -1,18 +1,18 @@
 {
   "private": true,
   "scripts": {
-    "lint": "eslint --ext .js,.jsx,.ts,.tsx ./",
     "clean": "lerna run --parallel clean",
     "compile": "lerna run compile",
+    "lint:js": "eslint --ext .js,.jsx,.ts,.tsx ./",
     "lint:css": "stylelint '**/*.scss'",
-    "lint:css:fix": "stylelint '**/*.scss' --fix"
+    "bootstrap": "lerna exec npm install"
   },
   "devDependencies": {
-    "@pv/eslint-config": "file:packages/eslint-config",
+    "@peculiar/eslint-config": "file:packages/eslint-config",
+    "@peculiar/stylelint-config": "file:packages/stylelint-config",
     "eslint": "^6.8.0",
     "lerna": "^3.20.2",
     "stylelint": "^13.2.0",
-    "stylelint-config-sass-guidelines": "^7.0.0",
     "typescript": "^3.8.2"
   },
   "dependencies": {}

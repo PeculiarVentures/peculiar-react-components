@@ -3,7 +3,7 @@
 ## Installation
 
 ```bash
-npm install @pv/react-components
+npm install @peculiar/react-components
 ```
 
 ## Usage
@@ -11,7 +11,7 @@ npm install @pv/react-components
 ```tsx
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { Button } from '@pv/react-components';
+import { Button } from '@peculiar/react-components';
 
 const App = () => (
   <Button>

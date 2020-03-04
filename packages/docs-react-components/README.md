@@ -1,1 +1,1 @@
-# Documentation for @pv/react-components
+# Documentation for @peculiar/react-components

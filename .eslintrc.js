@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ['@pv/eslint-config'],
+  extends: ['@peculiar/eslint-config'],
   parserOptions: {
     project: './tsconfig.json',
   },

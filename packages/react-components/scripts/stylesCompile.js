@@ -1,5 +1,5 @@
 const path = require('path');
-const uiTheme = require('@pv/ui-theme').default;
+const uiTheme = require('@peculiar/ui-theme').default;
 
 uiTheme.create({
   inputDir: path.join(__dirname, '../src/styles'),
