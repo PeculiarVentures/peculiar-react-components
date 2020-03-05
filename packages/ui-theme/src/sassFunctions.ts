@@ -15,6 +15,7 @@ interface ITypography {
 
 interface IOptions {
   palette: Record<string, string>;
+  borderRadius: string;
   typography: Record<string, ITypography>;
   button: {
     small: IButton;

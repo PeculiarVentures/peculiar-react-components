@@ -10,6 +10,7 @@ export default {
     wrong: '241, 39, 39',
     white: '#fff',
   },
+  borderRadius: '3px',
   typography: {
     h1: {
       weight: 700,
