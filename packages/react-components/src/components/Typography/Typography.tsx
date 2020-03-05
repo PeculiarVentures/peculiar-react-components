@@ -7,6 +7,7 @@ export interface ITypographyProps extends React.HTMLAttributes<HTMLElement> {
   color?: string;
   className?: string;
   align?: 'left' | 'center' | 'right';
+  ellipsis?: boolean;
 }
 
 export default class Typography extends React.PureComponent<ITypographyProps> {
@@ -23,12 +24,17 @@ export default class Typography extends React.PureComponent<ITypographyProps> {
       color,
       align,
       className,
+      ellipsis,
       ...other
     } = this.props;
 
     const newClassName = classnames(
       type,
       [`color_${color}`],
+      {
+        ellipsis,
+        [`align_${align}`]: align,
+      },
       className,
     );
 

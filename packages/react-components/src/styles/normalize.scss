@@ -8,14 +8,6 @@ html {
 }
 
 /**
- * Remove the margin in all browsers.
- */
-
-body {
-  margin: 0;
-}
-
-/**
  * Remove the gray background on active links in IE 10.
  */
 
@@ -108,7 +100,6 @@ button::-moz-focus-inner,
 [type='reset']::-moz-focus-inner,
 [type='submit']::-moz-focus-inner {
   border-style: none;
-  padding: 0;
 }
 
 /**
@@ -121,13 +112,11 @@ textarea {
 
 /**
  * 1. Add the correct box sizing in IE 10.
- * 2. Remove the padding in IE 10.
  */
 
 [type='checkbox'],
 [type='radio'] {
   box-sizing: border-box; /* 1 */
-  padding: 0; /* 2 */
 }
 
 /**
@@ -170,9 +159,4 @@ textarea {
 table {
   border-collapse: collapse;
   border-spacing: 0;
-}
-
-td,
-th {
-  padding: 0;
 }

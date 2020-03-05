@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { select, text } from '@storybook/addon-knobs';
+import { select, boolean, text } from '@storybook/addon-knobs';
 import Typography from './index';
+import { ITypographyProps } from './Typography';
 
 const color = {
   primary: 'primary',
@@ -11,6 +12,12 @@ const color = {
   wrong: 'wrong',
   white: 'white',
   light_grey: 'light_grey',
+};
+
+const align: Record<ITypographyProps['align'], ITypographyProps['align']> = {
+  left: 'left',
+  center: 'center',
+  right: 'right',
 };
 
 const types = [
@@ -28,6 +35,8 @@ const types = [
 
 const baseProps = () => ({
   color: select('color', color, Typography.defaultProps.color),
+  align: select('align', align, Typography.defaultProps.align),
+  ellipsis: boolean('ellipsis', false),
   children: text('children', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
 });
 
