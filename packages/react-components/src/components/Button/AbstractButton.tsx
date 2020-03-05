@@ -3,18 +3,42 @@ import classnames from 'classnames';
 import { BgTypeBase } from '../../common/props';
 
 export interface IButtonProps {
+  /**
+   * This is what will be displayed inside the component.
+   */
   children: React.ReactNode;
+  /**
+   * Component type one of `fill` | `stroke` | `clear`.
+   * If `fill` - component will have background-color from `color` props.
+   * If `stroke` - component will have border-color from `color` props.
+   * If `clear` - component will have transparent border-color and background-color.
+   */
   bgType?: BgTypeBase | 'clear';
+  /**
+   * Component color from theme.
+   */
   color?: string;
+  /**
+   * Component text color from theme.
+   */
   colorText?: string;
+  /**
+   * Component size.
+   */
   size?: 'small' | 'medium' | 'large';
   full?: boolean;
   rounded?: boolean;
+  /**
+   * Disables the button if set to `true`.
+   */
   disabled?: boolean;
+  /**
+   * The CSS class name of the root element.
+   */
   className?: string;
 }
 
-abstract class AbstractButton<T extends React.HTMLAttributes<any>> extends React.PureComponent<
+abstract class AbstractButton<T> extends React.PureComponent<
 IButtonProps & T
 > {
   static defaultProps: Omit<IButtonProps, 'children'> = {

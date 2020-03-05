@@ -2,10 +2,25 @@ import * as React from 'react';
 import classnames from 'classnames';
 
 export interface ITypographyProps extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * This is what will be displayed inside the component.
+   */
   children: React.ReactNode;
+  /**
+   * Typography type.
+   */
   type?: string;
+  /**
+   * Component color from theme.
+   */
   color?: string;
+  /**
+   * The CSS class name of the root element.
+   */
   className?: string;
+  /**
+   * Text align.
+   */
   align?: 'left' | 'center' | 'right';
   ellipsis?: boolean;
 }

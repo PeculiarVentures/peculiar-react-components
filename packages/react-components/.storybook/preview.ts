@@ -10,7 +10,18 @@ addParameters({
       brandUrl: 'https://github.com/PeculiarVentures/react-components',
     } as any,
   },
-  info: {},
+  info: {
+    header: false,
+    inline: true,
+    source: true,
+    styles: {
+      source: {
+        h1: {
+          fontSize: 30,
+        },
+      },
+    },
+  },
 });
 
 addDecorator(withKnobs);
