@@ -1,6 +1,12 @@
 import * as React from 'react';
 import classnames from 'clsx';
-import { BgTypeBase } from '../../common/props';
+import { EBgType, EColor } from '../../common/props';
+
+export enum ESize {
+  small = 'small',
+  medium = 'medium',
+  large = 'large',
+}
 
 export interface IButtonProps {
   /**
@@ -13,7 +19,7 @@ export interface IButtonProps {
    * If `stroke` - component will have border-color from `color` props.
    * If `clear` - component will have transparent border-color and background-color.
    */
-  bgType?: BgTypeBase | 'clear';
+  bgType?: keyof typeof EBgType | 'clear';
   /**
    * Component color from theme.
    */
@@ -25,7 +31,7 @@ export interface IButtonProps {
   /**
    * Component size.
    */
-  size?: 'small' | 'medium' | 'large';
+  size?: keyof typeof ESize;
   full?: boolean;
   rounded?: boolean;
   /**
@@ -42,10 +48,10 @@ abstract class AbstractButton<T> extends React.PureComponent<
 IButtonProps & T
 > {
   static defaultProps: Omit<IButtonProps, 'children'> = {
-    bgType: 'stroke',
-    color: 'grey',
-    colorText: 'black',
-    size: 'medium',
+    bgType: EBgType.stroke,
+    color: EColor.grey,
+    colorText: EColor.black,
+    size: ESize.medium,
   };
 
   protected getProps() {
@@ -65,8 +71,8 @@ IButtonProps & T
       'button',
       size,
       {
-        [`fill_${color}`]: bgType === 'fill',
-        fill_transparent: bgType !== 'fill',
+        [`fill_${color}`]: bgType === EBgType.fill,
+        fill_transparent: bgType !== EBgType.fill,
         [`stroke_${color}`]: bgType !== 'clear',
         stroke_transparent: bgType === 'clear',
         [`color_${colorText}`]: colorText,

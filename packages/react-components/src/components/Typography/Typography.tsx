@@ -1,7 +1,8 @@
 import * as React from 'react';
 import classnames from 'clsx';
+import { EColor, EAlign } from '../../common/props';
 
-export interface ITypographyProps extends React.HTMLAttributes<HTMLElement> {
+export interface ITypographyProps {
   /**
    * This is what will be displayed inside the component.
    */
@@ -21,19 +22,21 @@ export interface ITypographyProps extends React.HTMLAttributes<HTMLElement> {
   /**
    * Text align.
    */
-  align?: 'left' | 'center' | 'right';
+  align?: keyof typeof EAlign;
   ellipsis?: boolean;
 }
 
-export default class Typography extends React.PureComponent<ITypographyProps> {
+export default class Typography extends React.PureComponent<
+ITypographyProps & React.HTMLAttributes<HTMLElement>
+> {
   static displayName = 'Typography';
 
   static defaultProps: Omit<ITypographyProps, 'children'> = {
     type: 'c1',
-    color: 'black',
+    color: EColor.black,
   };
 
-  private getProps() {
+  private getProps(): React.HTMLAttributes<HTMLElement> {
     const {
       type,
       color,

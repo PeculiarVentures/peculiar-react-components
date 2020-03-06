@@ -1,25 +1,13 @@
 import * as React from 'react';
 import { select, boolean, text } from '@storybook/addon-knobs';
 import Typography from './index';
-import { ITypographyProps } from './Typography';
+import { EColor, EAlign } from '../../common/props';
 
-const color = {
-  primary: 'primary',
-  secondary: 'secondary',
-  black: 'black',
-  grey: 'grey',
-  success: 'success',
-  wrong: 'wrong',
-  white: 'white',
-  light_grey: 'light_grey',
-};
-
-const align: Record<ITypographyProps['align'], ITypographyProps['align']> = {
-  left: 'left',
-  center: 'center',
-  right: 'right',
-};
-
+const color = Object.keys(EColor);
+const align = [
+  '',
+  ...Object.keys(EAlign),
+] as (keyof typeof EAlign)[];
 const types = [
   'h1',
   'h2',
