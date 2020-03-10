@@ -25,13 +25,11 @@
     "url": "https://github.com/PeculiarVentures/react-components/issues"
   },
   "devDependencies": {
-    "@types/sass": "^1.16.0",
     "npm-run-all": "^4.1.5",
     "rimraf": "^3.0.2",
     "typescript": "^3.8.2"
   },
   "dependencies": {
-    "sass": "^1.26.1",
     "tslib": "^1.11.0"
   },
   "files": [
