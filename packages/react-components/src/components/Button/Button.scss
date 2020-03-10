@@ -12,36 +12,36 @@
   }
 
   &.small {
-    font-size: variable('button.small.fontSize');
-    font-weight: variable('button.small.fontWeight');
-    height: variable('button.small.height');
+    font-size: var(--pv-button-small-fontSize);
+    font-weight: var(--pv-button-small-fontWeight);
+    height: var(--pv-button-small-height);
     padding: 0 10px;
   }
 
   &.medium {
-    font-size: variable('button.medium.fontSize');
-    font-weight: variable('button.medium.fontWeight');
-    height: variable('button.medium.height');
+    font-size: var(--pv-button-medium-fontSize);
+    font-weight: var(--pv-button-medium-fontWeight);
+    height: var(--pv-button-medium-height);
     padding: 0 16px;
   }
 
   &.large {
-    font-size: variable('button.large.fontSize');
-    font-weight: variable('button.large.fontWeight');
-    height: variable('button.large.height');
+    font-size: var(--pv-button-large-fontSize);
+    font-weight: var(--pv-button-large-fontWeight);
+    height: var(--pv-button-large-height);
     padding: 0 36px;
   }
 
   &.rounded.small {
-    border-radius: calc(#{variable('button.small.height')} / 2);
+    border-radius: calc(var(--pv-button-small-height) / 2);
   }
 
   &.rounded.medium {
-    border-radius: calc(#{variable('button.medium.height')} / 2);
+    border-radius: calc(var(--pv-button-medium-height) / 2);
   }
 
   &.rounded.large {
-    border-radius: calc(#{variable('button.large.height')} / 2);
+    border-radius: calc(var(--pv-button-large-height) / 2);
   }
 
   &.full {

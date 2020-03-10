@@ -1,12 +1,12 @@
-/**
- * Typography
- */
-@each $name in variable('typography') {
-  #{$name},
-  .#{$name} {
-    font-size: variable('typography.#{$name}.size');
-    font-weight: variable('typography.#{$name}.weight');
-    letter-spacing: variable('typography.#{$name}.spacing');
-    line-height: variable('typography.#{$name}.height');
-  }
-}
+// /**
+//  * Typography
+//  */
+// @each $name in variable('typography') {
+//   #{$name},
+//   .#{$name} {
+//     font-size: variable('typography.#{$name}.size');
+//     font-weight: variable('typography.#{$name}.weight');
+//     letter-spacing: variable('typography.#{$name}.spacing');
+//     line-height: variable('typography.#{$name}.height');
+//   }
+// }

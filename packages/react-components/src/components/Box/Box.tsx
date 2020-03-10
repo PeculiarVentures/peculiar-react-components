@@ -99,10 +99,10 @@ IBoxProps & React.HTMLAttributes<HTMLElement>
     const newStyle = {
       ...style,
       backgroundColor: fill
-        ? `rgba(var(--pv-${fill}), ${Box.getOpacity(fillOpacity)})`
+        ? `rgba(var(--pv-color-${fill}-rgb), ${Box.getOpacity(fillOpacity)})`
         : undefined,
       borderColor: stroke
-        ? `rgba(var(--pv-${stroke}), ${Box.getOpacity(strokeOpacity)})`
+        ? `rgba(var(--pv-color-${stroke}-rgb), ${Box.getOpacity(strokeOpacity)})`
         : undefined,
       borderWidth: stroke
         ? Box.getBorderWidth(strokeType, strokeWidth)

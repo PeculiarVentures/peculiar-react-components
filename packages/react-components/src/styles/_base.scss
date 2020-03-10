@@ -2,7 +2,7 @@
  * Base classes
  */
 .round_small {
-  border-radius: variable('borderRadius');
+  border-radius: var(--pv-borderRadius);
 }
 
 .ellipsis {
@@ -31,4 +31,12 @@
     vertical-align: middle;
     width: 0;
   }
+}
+
+.stroke_transparent {
+  border-color: transparent;
+}
+
+.fill_transparent {
+  background-color: transparent;
 }
