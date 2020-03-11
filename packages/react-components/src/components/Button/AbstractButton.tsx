@@ -69,7 +69,7 @@ IButtonProps & T
 
     const newClassName = classnames(
       'button',
-      size,
+      [`size_${size}`],
       {
         [`fill_${color}`]: bgType === EBgType.fill,
         fill_transparent: bgType !== EBgType.fill,

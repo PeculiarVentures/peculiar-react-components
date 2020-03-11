@@ -11,37 +11,28 @@
     vertical-align: middle;
   }
 
-  &.small {
-    font-size: var(--pv-button-small-fontSize);
-    font-weight: var(--pv-button-small-fontWeight);
-    height: var(--pv-button-small-height);
+  &.size_small {
     padding: 0 10px;
   }
 
-  &.medium {
-    font-size: var(--pv-button-medium-fontSize);
-    font-weight: var(--pv-button-medium-fontWeight);
-    height: var(--pv-button-medium-height);
+  &.size_medium {
     padding: 0 16px;
   }
 
-  &.large {
-    font-size: var(--pv-button-large-fontSize);
-    font-weight: var(--pv-button-large-fontWeight);
-    height: var(--pv-button-large-height);
+  &.size_large {
     padding: 0 36px;
   }
 
-  &.rounded.small {
-    border-radius: calc(var(--pv-button-small-height) / 2);
+  &.rounded.size_small {
+    border-radius: calc(var(--pv-size-small) / 2);
   }
 
-  &.rounded.medium {
-    border-radius: calc(var(--pv-button-medium-height) / 2);
+  &.rounded.size_medium {
+    border-radius: calc(var(--pv-size-medium) / 2);
   }
 
-  &.rounded.large {
-    border-radius: calc(var(--pv-button-large-height) / 2);
+  &.rounded.size_large {
+    border-radius: calc(var(--pv-size-large) / 2);
   }
 
   &.full {
