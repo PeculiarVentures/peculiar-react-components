@@ -13,11 +13,6 @@
   "bugs": {
     "url": "https://github.com/PeculiarVentures/react-components/issues"
   },
-  "devDependencies": {
-    "typescript": "^3.8.2",
-    "eslint": "^6.8.0",
-    "react": "^16.12.0"
-  },
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^2.21.0",
     "eslint-config-airbnb-typescript": "^7.0.0",

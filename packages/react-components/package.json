@@ -26,7 +26,7 @@
     "compile:theme": "node scripts/themeCreate",
     "clean": "rimraf css && rimraf dist",
     "storybook": "start-storybook -p 3000 -s ./css",
-    "dev": "npm run compile:css && npm run storybook"
+    "dev": "npm run storybook"
   },
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -37,22 +37,16 @@
     "url": "https://github.com/PeculiarVentures/react-components/issues"
   },
   "devDependencies": {
-    "@peculiar/ui-theme": "file:../ui-theme",
     "@storybook/addon-actions": "^5.3.14",
     "@storybook/addon-info": "^5.3.14",
     "@storybook/addon-knobs": "^5.3.14",
     "@storybook/react": "^5.3.14",
-    "@types/react": "^16.9.22",
     "@types/storybook__addon-info": "^5.2.1",
     "@types/storybook__react": "^5.2.1",
     "awesome-typescript-loader": "^5.2.1",
-    "npm-run-all": "^4.1.5",
-    "react": "^16.12.0",
     "react-docgen-typescript-loader": "^3.6.0",
-    "rimraf": "^3.0.2",
     "sass": "^1.26.2",
-    "ts-loader": "^6.2.1",
-    "typescript": "^3.8.2"
+    "ts-loader": "^6.2.1"
   },
   "dependencies": {
     "clsx": "^1.1.0",

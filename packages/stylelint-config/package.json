@@ -13,7 +13,6 @@
   "bugs": {
     "url": "https://github.com/PeculiarVentures/react-components/issues"
   },
-  "devDependencies": {},
   "dependencies": {
     "stylelint-config-sass-guidelines": "^7.0.0"
   },

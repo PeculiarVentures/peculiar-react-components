@@ -2,9 +2,9 @@ import fs from 'fs';
 import path from 'path';
 import defaultOptions from './defaultOptions';
 
-interface IButton {
-  fontWeight: number;
-}
+// interface IButton {
+//   fontWeight: number;
+// }
 
 interface ISize {
   height: string;
