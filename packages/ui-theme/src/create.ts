@@ -3,9 +3,12 @@ import path from 'path';
 import defaultOptions from './defaultOptions';
 
 interface IButton {
+  fontWeight: number;
+}
+
+interface ISize {
   height: string;
   fontSize: string;
-  fontWeight: number;
 }
 
 interface ITypography {
@@ -19,10 +22,15 @@ interface IOptions {
   palette: Record<string, string>;
   borderRadius: string;
   typography: Record<string, ITypography>;
-  button: {
-    small: IButton;
-    medium: IButton;
-    large: IButton;
+  // button: {
+  //   small: IButton;
+  //   medium: IButton;
+  //   large: IButton;
+  // };
+  sizes: {
+    small: ISize;
+    medium: ISize;
+    large: ISize;
   };
 }
 
@@ -65,7 +73,13 @@ const colorToRgb = (color: string) => {
   };
 };
 
-const camelToStyleCase = (value: string) => (
+/**
+ * Transform camelCase to kebab-case
+ * @example
+ *  camelCaseToKebalCase('fontSize') // => 'font-size'
+ *  camelCaseToKebalCase('height') // => 'height'
+ */
+const camelCaseToKebalCase = (value: string) => (
   value
     .replace(
       /[A-Z]/g,
@@ -79,6 +93,7 @@ export default function create(outputPath: string, options: IOptions = defaultOp
   let strokeClasses = '';
   let colorClasses = '';
   let typographyClasses = '';
+  let sizeClasses = '';
   let cssVariables = '';
 
   /**
@@ -98,18 +113,27 @@ export default function create(outputPath: string, options: IOptions = defaultOp
   });
 
   /**
-   * Button variables
+   * Size classes
    */
-  Object.keys(options.button).forEach((keyNameType: keyof IOptions['button']) => {
-    const typeValue = options.button[keyNameType];
+  Object.keys(options.sizes).forEach((keyNameType: keyof IOptions['sizes']) => {
+    const typeValue = options.sizes[keyNameType];
+    let typeStyles = '';
 
-    Object.keys(typeValue).forEach((keyNameProperty: keyof IButton) => {
-      const variableName = `--${PREFIX_NAME}-button-${keyNameType}-${keyNameProperty}`;
+    Object.keys(typeValue).forEach((keyNameProperty: keyof ISize) => {
       const variableValue = typeValue[keyNameProperty];
 
-      cssVariables += `\n\t${variableName}: ${variableValue};`;
+      typeStyles += `\n\t${camelCaseToKebalCase(keyNameProperty)}: ${variableValue};`;
     });
+
+    sizeClasses += `\n.size_${keyNameType} {${typeStyles}\n}`;
   });
+
+  /**
+   * Size variables
+   */
+  cssVariables += `\n\t--${PREFIX_NAME}-size-small: ${options.sizes.small.height};`;
+  cssVariables += `\n\t--${PREFIX_NAME}-size-medium: ${options.sizes.medium.height};`;
+  cssVariables += `\n\t--${PREFIX_NAME}-size-large: ${options.sizes.large.height};`;
 
   /**
    * Typography classes
@@ -121,7 +145,7 @@ export default function create(outputPath: string, options: IOptions = defaultOp
     Object.keys(typeValue).forEach((keyNameProperty: keyof ITypography) => {
       const variableValue = typeValue[keyNameProperty];
 
-      typeStyles += `\n\t${camelToStyleCase(keyNameProperty)}: ${variableValue};`;
+      typeStyles += `\n\t${camelCaseToKebalCase(keyNameProperty)}: ${variableValue};`;
     });
 
     typographyClasses += `\n${keyNameType},\n.${keyNameType} {${typeStyles}\n}`;
@@ -130,12 +154,12 @@ export default function create(outputPath: string, options: IOptions = defaultOp
   /**
    * Border-radius variable
    */
-  cssVariables += `\n\t--${PREFIX_NAME}-borderRadius: ${options.borderRadius};`;
+  cssVariables += `\n\t--${PREFIX_NAME}-border-radius: ${options.borderRadius};`;
 
   /**
    * Combine styles to single css string
    */
-  styles += `:root {${cssVariables}\n}\n${fillClasses}\n${strokeClasses}\n${colorClasses}\n${typographyClasses}`;
+  styles += `:root {${cssVariables}\n}\n${fillClasses}\n${strokeClasses}\n${colorClasses}\n${typographyClasses}\n${sizeClasses}`;
 
   const outputPathParsed = path.parse(outputPath);
 

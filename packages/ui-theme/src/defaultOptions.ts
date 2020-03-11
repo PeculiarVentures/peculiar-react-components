@@ -73,21 +73,29 @@ export default {
       letterSpacing: '0.5px',
     },
   },
-  button: {
+  // button: {
+  //   small: {
+  //     fontWeight: 600,
+  //   },
+  //   medium: {
+  //     fontWeight: 600,
+  //   },
+  //   large: {
+  //     fontWeight: 600,
+  //   },
+  // },
+  sizes: {
     small: {
       height: '24px',
       fontSize: '12px',
-      fontWeight: 600,
     },
     medium: {
       height: '30px',
       fontSize: '13px',
-      fontWeight: 600,
     },
     large: {
       height: '40px',
       fontSize: '13px',
-      fontWeight: 600,
     },
   },
 };
