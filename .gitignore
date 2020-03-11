@@ -30,3 +30,4 @@ UserInterfaceState.xcuserstate
 .env
 
 .package.tmp.json
+package-lock.json
