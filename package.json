@@ -5,13 +5,13 @@
     "compile": "lerna run compile",
     "lint:js": "eslint --ext .js,.jsx,.ts,.tsx ./",
     "lint:css": "stylelint '**/*.scss'",
-    "install_all_dependencies": "lerna bootstrap",
-    "remove_all_dependencies": "lerna clean --yes"
+    "dependencies:install": "lerna bootstrap --hoist",
+    "dependencies:remove": "lerna clean --yes"
   },
   "devDependencies": {
     "@peculiar/eslint-config": "file:packages/eslint-config",
     "@peculiar/stylelint-config": "file:packages/stylelint-config",
-    "@peculiar/ui-theme": "file:packages/ui-theme",
+    "@peculiar/ui-theming": "file:packages/ui-theming",
     "@types/react": "^16.9.22",
     "eslint": "^6.8.0",
     "lerna": "^3.20.2",
@@ -19,6 +19,6 @@
     "react": "^16.13.0",
     "rimraf": "^3.0.2",
     "stylelint": "^13.2.0",
-    "typescript": "^3.8.2"
+    "typescript": "^3.8.3"
   }
 }

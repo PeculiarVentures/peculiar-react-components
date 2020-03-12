@@ -1,4 +1,4 @@
 const path = require('path');
-const uiTheme = require('@peculiar/ui-theme').default;
+const uiTheme = require('@peculiar/ui-theming').default;
 
 uiTheme.create(path.join(__dirname, '../css/theme.css'));

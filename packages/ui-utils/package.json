@@ -6,9 +6,6 @@
   "author": "PeculiarVentures Team",
   "homepage": "https://github.com/PeculiarVentures/react-components#readme",
   "license": "MIT",
-  "files": [
-    "dist/"
-  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/PeculiarVentures/react-components.git"
@@ -29,5 +26,13 @@
   },
   "dependencies": {
     "tslib": "^1.11.1"
-  }
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.2",
+    "typescript": "^3.8.3"
+  },
+  "files": [
+    "dist/"
+  ]
 }

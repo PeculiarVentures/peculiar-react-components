@@ -1,8 +1,8 @@
 {
-  "name": "@peculiar/docs-react-components",
+  "name": "@peculiar/webpack-scripts",
   "version": "0.0.0",
-  "private": true,
-  "description": "Documentation for @peculiar/react-components",
+  "private": false,
+  "description": "Webpack scripts",
   "author": "PeculiarVentures Team",
   "homepage": "https://github.com/PeculiarVentures/react-components#readme",
   "license": "MIT",

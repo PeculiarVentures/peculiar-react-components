@@ -1,8 +1,8 @@
 {
-  "name": "@peculiar/webpack-build-scripts",
+  "name": "@peculiar/enzyme-utilities",
   "version": "0.0.0",
   "private": false,
-  "description": "Webpack build scripts",
+  "description": "Enzyme utilities",
   "author": "PeculiarVentures Team",
   "homepage": "https://github.com/PeculiarVentures/react-components#readme",
   "license": "MIT",
