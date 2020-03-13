@@ -36,9 +36,16 @@ interface IOptions {
 }
 
 
+// TODO: Need to check outputPath and outputFileName args
+// TODO: Need to check options required params
+// TODO: Need to add options merging strategy
+// TODO: Need to add tests
+// TODO: Need to add possibility minify output
+// TODO: Need to expand options (options for checkbox, textarea, switch, highlight code)
+// TODO: Need to add README
 export default function create(
   outputPath: string,
-  outputFileName: string,
+  outputFileName: string = 'default',
   options: IOptions = defaultOptions,
 ): void {
   const styles = new Styles();

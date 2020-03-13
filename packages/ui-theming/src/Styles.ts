@@ -67,8 +67,8 @@ export default class Styles {
    *  camelCaseToKebalCase('fontSize') // => 'font-size'
    *  camelCaseToKebalCase('height') // => 'height'
    */
-  static camelCaseToKebalCase(value: string) {
-    return value
+  static camelCaseToKebalCase(name: string) {
+    return name
       .replace(
         /[A-Z]/g,
         (letter: string) => `-${letter.toLowerCase()}`,
@@ -171,6 +171,9 @@ export default class Styles {
     return this;
   }
 
+  /**
+   * Generate styles string from `variables` property
+   */
   toStringVariables(): string {
     let outputString = '';
 
@@ -189,6 +192,9 @@ export default class Styles {
     return `:root {\n${outputString}}`;
   }
 
+  /**
+   * Generate styles string from `styles` property
+   */
   toStringStyles(): string {
     let outputString = '';
 
