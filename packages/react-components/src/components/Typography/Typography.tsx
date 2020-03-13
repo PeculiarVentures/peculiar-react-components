@@ -23,6 +23,9 @@ export interface ITypographyProps {
    * Text align.
    */
   align?: keyof typeof EAlign;
+  /**
+   * If `true`, the text will not wrap, but instead will truncate with a text overflow ellipsis.
+   */
   ellipsis?: boolean;
 }
 

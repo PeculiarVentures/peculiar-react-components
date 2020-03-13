@@ -1,11 +1,10 @@
 import * as React from 'react';
 import classnames from 'clsx';
-import { EBgType, EColor } from '../../common/props';
+import { EBgType, EColor, ESize } from '../../common/props';
 
-export enum ESize {
-  small = 'small',
-  medium = 'medium',
-  large = 'large',
+export enum EShape {
+  circle = 'circle',
+  round = 'round',
 }
 
 export interface IButtonProps {
@@ -32,8 +31,14 @@ export interface IButtonProps {
    * Component size.
    */
   size?: keyof typeof ESize;
-  full?: boolean;
-  rounded?: boolean;
+  /**
+   * If `true`, the button will take up the full width of its container.
+   */
+  fullWidth?: boolean;
+  /**
+   * Component shape.
+   */
+  shape?: keyof typeof EShape;
   /**
    * Disables the button if set to `true`.
    */
@@ -61,14 +66,15 @@ IButtonProps & T
       colorText,
       children,
       size,
-      full,
-      rounded,
+      fullWidth,
+      shape,
       className,
       ...other
     } = this.props;
 
     const newClassName = classnames(
       'button',
+      'ellipsis',
       [`size_${size}`],
       {
         [`fill_${color}`]: bgType === EBgType.fill,
@@ -76,9 +82,9 @@ IButtonProps & T
         [`stroke_${color}`]: bgType !== 'clear',
         stroke_transparent: bgType === 'clear',
         [`color_${colorText}`]: colorText,
-        round_small: !rounded,
-        full,
-        rounded,
+        full_width: fullWidth && shape !== 'circle',
+        [`shape_${shape}`]: shape,
+        round_small: !shape,
       },
       className,
     );

@@ -19,3 +19,9 @@ export enum EAlign {
   center = 'center',
   right = 'right',
 }
+
+export enum ESize {
+  small = 'small',
+  medium = 'medium',
+  large = 'large',
+}

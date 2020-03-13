@@ -16,15 +16,46 @@ export enum EStrokeType {
 }
 
 export interface IBoxProps {
+  /**
+   * This is what will be displayed inside the component.
+   */
   children?: React.ReactNode;
+  /**
+   * The component used for the root node.
+   * Either a string to use a DOM element.
+   */
   tagType?: keyof React.ReactHTML;
+  /**
+   * Component background-color from theme.
+   */
   fill?: string;
+  /**
+   * Component background-color opacity.
+   */
   fillOpacity?: number;
+  /**
+   * Component border-color from theme.
+   */
   stroke?: string;
+  /**
+   * Component border width.
+   */
   strokeWidth?: number;
+  /**
+   * Component border-color opacity.
+   */
   strokeOpacity?: number;
+  /**
+   * Component border style.
+   */
   strokeStyle?: keyof typeof EStrokeStyle;
+  /**
+   * Component border position.
+   */
   strokeType?: keyof typeof EStrokeType;
+  /**
+   * The CSS class name of the root element.
+   */
   className?: string;
 }
 
