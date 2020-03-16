@@ -10,6 +10,7 @@
   },
   "devDependencies": {
     "@peculiar/eslint-config": "file:packages/eslint-config",
+    "@peculiar/karma-scripts": "file:packages/karma-scripts",
     "@peculiar/stylelint-config": "file:packages/stylelint-config",
     "@peculiar/ui-theming": "file:packages/ui-theming",
     "@types/react": "^16.9.22",
