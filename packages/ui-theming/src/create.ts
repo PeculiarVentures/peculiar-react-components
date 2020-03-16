@@ -43,6 +43,7 @@ interface IOptions {
 // TODO: Need to add possibility minify output
 // TODO: Need to expand options (options for checkbox, textarea, switch, highlight code)
 // TODO: Need to add README
+// TODO: Need to add options for using with CLI
 export default function create(
   outputPath: string,
   outputFileName: string = 'default',
