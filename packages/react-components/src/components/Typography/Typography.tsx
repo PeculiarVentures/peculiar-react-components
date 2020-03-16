@@ -6,7 +6,7 @@ export interface ITypographyProps {
   /**
    * This is what will be displayed inside the component.
    */
-  children: React.ReactNode;
+  children: React.ReactText;
   /**
    * Typography type.
    */
@@ -46,6 +46,7 @@ ITypographyProps & React.HTMLAttributes<HTMLElement>
       align,
       className,
       ellipsis,
+      children,
       ...other
     } = this.props;
 
@@ -60,8 +61,10 @@ ITypographyProps & React.HTMLAttributes<HTMLElement>
     );
 
     return {
-      ...other,
+      title: ellipsis ? children.toString() : undefined,
+      children,
       className: newClassName,
+      ...other,
     };
   }
 
