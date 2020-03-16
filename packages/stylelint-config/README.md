@@ -15,8 +15,7 @@ module.exports = {
 };
 ```
 
-## Usage (package.json)
-
+`package.json`
 ```json
 {
   "scripts": {
