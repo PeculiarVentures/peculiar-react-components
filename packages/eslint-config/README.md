@@ -15,17 +15,14 @@ module.exports = {
 };
 ```
 
-## Usage (without React)
-
-`.eslintrc.js`
+`.eslintrc.js` (without React)
 ```js
 module.exports = {
   extends: ['@peculiar/eslint-config/base'],
 };
 ```
 
-## Usage (package.json)
-
+`package.json`
 ```json
 {
   "scripts": {
