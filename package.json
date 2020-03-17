@@ -13,6 +13,7 @@
     "@peculiar/karma-scripts": "file:packages/karma-scripts",
     "@peculiar/stylelint-config": "file:packages/stylelint-config",
     "@peculiar/ui-theming": "file:packages/ui-theming",
+    "@peculiar/webpack-scripts": "file:packages/webpack-scripts",
     "@types/react": "^16.9.22",
     "eslint": "^6.8.0",
     "lerna": "^3.20.2",
