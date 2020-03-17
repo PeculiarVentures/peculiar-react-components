@@ -2,7 +2,7 @@
   "extends": "../../tsconfig",
   "compilerOptions": {
     "outDir": "./dist/esm",
-    "declarationDir": "./dist/types",
+    "declarationDir": "./dist/types"
   },
   "include": [
     "src/**/*.ts",
