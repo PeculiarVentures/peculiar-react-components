@@ -12,5 +12,11 @@
   },
   "bugs": {
     "url": "https://github.com/PeculiarVentures/react-components/issues"
+  },
+  "dependencies": {
+    "awesome-typescript-loader": "^5.2.1",
+    "istanbul-instrumenter-loader": "^3.0.1",
+    "source-map-loader": "^0.2.4",
+    "webpack": "^4.42.0"
   }
 }
