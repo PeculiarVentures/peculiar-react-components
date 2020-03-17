@@ -1,3 +1,6 @@
+const path = require('path');
+const webpackConfig = require('@peculiar/webpack-scripts/webpack.config.karma');
+
 const COVERAGE_PERCENT = 80;
 const COVERAGE_PERCENT_HIGH = 90;
 const KARMA_SERVER_PORT = 9876;
@@ -9,7 +12,6 @@ module.exports = function createKarmaConfig({
     basePath: dirname,
     frameworks: [
       'mocha',
-      'karma-typescript',
     ],
     browsers: [
       'ChromeHeadlessWithGPU',
@@ -30,14 +32,10 @@ module.exports = function createKarmaConfig({
     colors: true,
     port: KARMA_SERVER_PORT,
     files: [
-      {
-        pattern: 'src/**/*.ts',
-      },
+      path.join(dirname, 'test/index.ts'),
     ],
     preprocessors: {
-      '**/*.ts': [
-        'karma-typescript',
-      ],
+      [path.join(dirname, 'test/index.ts')]: ['webpack'],
     },
     reporters: [
       'mocha',
@@ -59,12 +57,19 @@ module.exports = function createKarmaConfig({
       },
     },
     singleRun: true,
+    webpack: webpackConfig,
+    webpackMiddleware: {
+      noInfo: true,
+      stats: {
+        children: false,
+        chunks: false,
+      },
+    },
   };
 
   if (coverage) {
     config.reporters.push(
       'coverage',
-      'karma-typescript',
     );
   }
 

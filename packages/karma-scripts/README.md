@@ -25,6 +25,18 @@ module.exports = (config) => {
 };
 ```
 
+`test/index.ts`
+```ts
+import '../src/my.spec';
+```
+
+`test/index.ts` (with React)
+```ts
+import '@peculiar/karma-scripts/enzymeAdapter';
+
+import '../src/my.spec';
+```
+
 `package.json`
 ```json
 {
