@@ -79,6 +79,7 @@ export default class TooltipPopper extends React.Component {
             `fill_${color}`,
             'shadow',
             'round_small',
+            'break_word',
             classNameTooltipContent,
           )}
           data-component="tooltip_content"
