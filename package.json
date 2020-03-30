@@ -69,7 +69,8 @@
     "jsdom": "^11.6.2",
     "jsdom-global": "^3.0.2",
     "rimraf": "^2.6.2",
-    "traverse": "^0.6.6"
+    "traverse": "^0.6.6",
+    "faker": "^4.1.0"
   },
   "files": [
     "LICENSE.md",
