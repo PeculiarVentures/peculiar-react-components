@@ -22,7 +22,7 @@
     "compile:esm": "tsc -p .",
     "compile:cjs": "tsc -p . -m commonjs --outDir dist/cjs",
     "compile:esnext": "tsc -p . -t esnext --outDir dist/esnext",
-    "compile:css": "sass src/styles/:./css --no-source-map",
+    "compile:css": "sass src/styles/:./css --no-source-map --style=compressed",
     "compile:theme": "node scripts/themeCreate",
     "clean": "rimraf css && rimraf dist",
     "storybook": "start-storybook -p 3000 -s ./css",

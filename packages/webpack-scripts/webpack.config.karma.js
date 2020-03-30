@@ -25,6 +25,7 @@ module.exports = {
         options: {
           esModules: true,
         },
+        exclude: /node_modules|\.(spec|stories)\.tsx?$/,
       },
     ],
   },
