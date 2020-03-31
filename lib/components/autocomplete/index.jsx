@@ -17,7 +17,6 @@ function validationPropType(props, propName, componentName, ...rest) {
   if (typeof value === 'string') {
     const error = PropTypes.oneOf([
       'password',
-      'name',
       'fullName',
       'email',
       'phone',
