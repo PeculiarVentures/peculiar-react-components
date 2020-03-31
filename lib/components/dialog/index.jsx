@@ -356,7 +356,7 @@ export default class Dialog extends PureComponent {
                 {title}
               </h3>
             )}
-            <div className={classNames(s.content, 'break_word')}>
+            <div className={s.content}>
               {children}
             </div>
             {this.renderButtons()}
