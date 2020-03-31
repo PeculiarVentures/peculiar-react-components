@@ -538,7 +538,6 @@ interface DeviceInfo extends WindowSize {
 
 interface RegExps {
   password: RegExp;
-  name: RegExp;
   fullName: RegExp;
   email: RegExp;
   phone: RegExp;
