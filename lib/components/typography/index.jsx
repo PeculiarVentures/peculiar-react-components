@@ -47,6 +47,7 @@ export default function Typography(props, context) {
   }
 
   const basicClassNames = classNames(
+    'break_word',
     [`text_${color}`],
     { [`text_${align}`]: align !== 'auto' },
     className,

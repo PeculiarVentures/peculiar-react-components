@@ -262,6 +262,7 @@ export default class Snackbar extends PureComponent {
           <div
             className={classNames(
               'snackbar_content',
+              'break_word',
               [`text_${textColor}`],
             )}
           >

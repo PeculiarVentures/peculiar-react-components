@@ -25,6 +25,7 @@ class Button extends React.Component {
       'button',
       'round_small',
       'truncate_text',
+      'break_word',
       [`text_${options.align}`],
       [`button_${options.size}`],
       [`button_text_${options.textColor}`],

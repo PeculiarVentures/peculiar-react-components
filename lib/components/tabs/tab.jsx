@@ -37,6 +37,7 @@ function Tab(props) {
     className: classNames(
       'tab',
       'h5',
+      'break_word',
       {
         [`text_${color}`]: !selected,
       },
