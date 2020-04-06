@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { Popper } from 'react-popper';
+
 import RightTriangleIcon from '../icons/right_triangle';
 import Portal from '../../containers/portal';
 
@@ -117,6 +118,7 @@ export default class TooltipPopper extends React.Component {
       usePortal,
       preventOverflow,
       preventFlip,
+      modifyers,
       ...other
     } = this.props;
 
@@ -124,22 +126,25 @@ export default class TooltipPopper extends React.Component {
       return null;
     }
 
+    const combinedModifyers = {
+      computeStyle: {
+        gpuAcceleration: false,
+      },
+      preventOverflow: {
+        enabled: preventOverflow,
+      },
+      hide: {
+        enabled: preventOverflow,
+      },
+      flip: {
+        enabled: !preventFlip,
+      },
+      ...modifyers,
+    };
+
     const renderTooltip = (
       <Popper
-        modifiers={{
-          computeStyle: {
-            gpuAcceleration: false,
-          },
-          preventOverflow: {
-            enabled: preventOverflow,
-          },
-          hide: {
-            enabled: preventOverflow,
-          },
-          flip: {
-            enabled: !preventFlip,
-          },
-        }}
+        modifiers={combinedModifyers}
         placement={placementProp}
         referenceElement={referenceElement}
         positionFixed={positionFixed}
@@ -244,6 +249,21 @@ TooltipPopper.propTypes = {
    * The number of milliseconds to wait before showing the tooltip.
    */
   showDelay: PropTypes.number,
+  /*
+    Optional modifie
+  */
+ modifyers: PropTypes.shape({
+  shift: PropTypes.object,
+  offset: PropTypes.object,
+  preventOverflow: PropTypes.object,
+  keepTogether: PropTypes.object,
+  arrow: PropTypes.object,
+  flip: PropTypes.object,
+  inner: PropTypes.object,
+  hide: PropTypes.object,
+  applyStyle: PropTypes.object,
+  computeStyle: PropTypes.object,
+ }),
 };
 
 TooltipPopper.defaultProps = {

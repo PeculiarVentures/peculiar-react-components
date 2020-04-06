@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as PopperJS from "popper.js";
 
 type Color = 'primary'
   | 'secondary'
@@ -478,6 +479,7 @@ interface TooltipPopperProps {
   classNameTooltip?: string;
   classNameTooltipContent?: string;
   showDelay?: number;
+  modifyers?: PopperJS.Modifiers;
 }
 
 interface TypographyBasicProps extends React.HTMLAttributes<HTMLElement> {
