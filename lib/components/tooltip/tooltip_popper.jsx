@@ -118,7 +118,7 @@ export default class TooltipPopper extends React.Component {
       usePortal,
       preventOverflow,
       preventFlip,
-      modifyers,
+      modifiers,
       ...other
     } = this.props;
 
@@ -126,7 +126,7 @@ export default class TooltipPopper extends React.Component {
       return null;
     }
 
-    const combinedModifyers = {
+    const combinedmodifiers = {
       computeStyle: {
         gpuAcceleration: false,
       },
@@ -139,12 +139,12 @@ export default class TooltipPopper extends React.Component {
       flip: {
         enabled: !preventFlip,
       },
-      ...modifyers,
+      ...modifiers,
     };
 
     const renderTooltip = (
       <Popper
-        modifiers={combinedModifyers}
+        modifiers={combinedmodifiers}
         placement={placementProp}
         referenceElement={referenceElement}
         positionFixed={positionFixed}
@@ -249,21 +249,21 @@ TooltipPopper.propTypes = {
    * The number of milliseconds to wait before showing the tooltip.
    */
   showDelay: PropTypes.number,
-  /*
-    Optional modifie
-  */
- modifyers: PropTypes.shape({
-  shift: PropTypes.object,
-  offset: PropTypes.object,
-  preventOverflow: PropTypes.object,
-  keepTogether: PropTypes.object,
-  arrow: PropTypes.object,
-  flip: PropTypes.object,
-  inner: PropTypes.object,
-  hide: PropTypes.object,
-  applyStyle: PropTypes.object,
-  computeStyle: PropTypes.object,
- }),
+  /**
+   * Optional modifie
+   */
+  modifiers: PropTypes.shape({
+    shift: PropTypes.object,
+    offset: PropTypes.object,
+    preventOverflow: PropTypes.object,
+    keepTogether: PropTypes.object,
+    arrow: PropTypes.object,
+    flip: PropTypes.object,
+    inner: PropTypes.object,
+    hide: PropTypes.object,
+    applyStyle: PropTypes.object,
+    computeStyle: PropTypes.object,
+  }),
 };
 
 TooltipPopper.defaultProps = {
@@ -280,4 +280,5 @@ TooltipPopper.defaultProps = {
   classNameTooltip: '',
   classNameTooltipContent: '',
   showDelay: 0,
+  modifiers: {},
 };
