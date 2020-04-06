@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { Popper } from 'react-popper';
 
+import { deepMerge } from '../../utils';
 import RightTriangleIcon from '../icons/right_triangle';
 import Portal from '../../containers/portal';
 
@@ -126,7 +127,7 @@ export default class TooltipPopper extends React.Component {
       return null;
     }
 
-    const combinedmodifiers = {
+    const interfaceModifiers = {
       computeStyle: {
         gpuAcceleration: false,
       },
@@ -139,12 +140,15 @@ export default class TooltipPopper extends React.Component {
       flip: {
         enabled: !preventFlip,
       },
-      ...modifiers,
     };
-
+    const combinedMoifiers = deepMerge(
+      {},
+      interfaceModifiers,
+      modifiers,
+    );
     const renderTooltip = (
       <Popper
-        modifiers={combinedmodifiers}
+        modifiers={combinedMoifiers}
         placement={placementProp}
         referenceElement={referenceElement}
         positionFixed={positionFixed}

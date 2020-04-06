@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as PopperJS from "popper.js";
+import * as PopperJS from 'popper.js';
 
 type Color = 'primary'
   | 'secondary'
