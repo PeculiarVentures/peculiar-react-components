@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { Popper } from 'react-popper';
-
-import { deepMerge } from '../../utils';
 import RightTriangleIcon from '../icons/right_triangle';
 import Portal from '../../containers/portal';
 
@@ -119,7 +117,7 @@ export default class TooltipPopper extends React.Component {
       usePortal,
       preventOverflow,
       preventFlip,
-      modifiers,
+      flipBoundaryElement,
       ...other
     } = this.props;
 
@@ -127,28 +125,24 @@ export default class TooltipPopper extends React.Component {
       return null;
     }
 
-    const interfaceModifiers = {
-      computeStyle: {
-        gpuAcceleration: false,
-      },
-      preventOverflow: {
-        enabled: preventOverflow,
-      },
-      hide: {
-        enabled: preventOverflow,
-      },
-      flip: {
-        enabled: !preventFlip,
-      },
-    };
-    const combinedMoifiers = deepMerge(
-      {},
-      interfaceModifiers,
-      modifiers,
-    );
     const renderTooltip = (
       <Popper
-        modifiers={combinedMoifiers}
+        modifiers={{
+          computeStyle: {
+            gpuAcceleration: false,
+          },
+          preventOverflow: {
+            enabled: preventOverflow,
+            escapeWithReference: true,
+          },
+          hide: {
+            enabled: preventOverflow,
+          },
+          flip: {
+            enabled: !preventFlip,
+            boundariesElement: flipBoundaryElement,
+          },
+        }}
         placement={placementProp}
         referenceElement={referenceElement}
         positionFixed={positionFixed}
@@ -254,20 +248,9 @@ TooltipPopper.propTypes = {
    */
   showDelay: PropTypes.number,
   /**
-   * Optional modifie
+   * Flip boundary element modifier
    */
-  modifiers: PropTypes.shape({
-    shift: PropTypes.object,
-    offset: PropTypes.object,
-    preventOverflow: PropTypes.object,
-    keepTogether: PropTypes.object,
-    arrow: PropTypes.object,
-    flip: PropTypes.object,
-    inner: PropTypes.object,
-    hide: PropTypes.object,
-    applyStyle: PropTypes.object,
-    computeStyle: PropTypes.object,
-  }),
+  flipBoundaryElement: PropTypes.string,
 };
 
 TooltipPopper.defaultProps = {
@@ -284,5 +267,5 @@ TooltipPopper.defaultProps = {
   classNameTooltip: '',
   classNameTooltipContent: '',
   showDelay: 0,
-  modifiers: {},
+  flipBoundaryElement: 'viewport',
 };

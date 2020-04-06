@@ -479,7 +479,7 @@ interface TooltipPopperProps {
   classNameTooltip?: string;
   classNameTooltipContent?: string;
   showDelay?: number;
-  modifiers?: PopperJS.Modifiers;
+  flipBoundaryElement?: PopperJS.Boundary | Element;
 }
 
 interface TypographyBasicProps extends React.HTMLAttributes<HTMLElement> {
