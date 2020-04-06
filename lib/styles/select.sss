@@ -13,7 +13,7 @@
   &_arrow_icon
     width: 8px
     height: 6px
-    fill: var(--grey, $grey)
+    fill: var(--grey)
     position: absolute
     top: 50%
     left: 50%
@@ -101,10 +101,10 @@
       .select_field_focus
         @each $key in $colors
           &_$(key)
-            border-color: var(--$(key), $$(key))
+            border-color: var(--$(key))
 
     .select_field_focus
       @each $key in $colors
         &_$(key)
           &:focus
-            border-color: var(--$(key), $$(key))
+            border-color: var(--$(key))

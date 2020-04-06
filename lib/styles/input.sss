@@ -58,14 +58,14 @@
       @each $key in $colors
         &_$(key)
           &:focus
-            border-color: var(--$(key), $$(key))
+            border-color: var(--$(key))
 
   &[data-valid="false"]
     .input_field
-      color: var(--wrong, $wrong) !important
-      border-color: var(--wrong, $wrong) !important
+      color: var(--wrong) !important
+      border-color: var(--wrong) !important
 
 @each $key in $colors
   .input_placeholder_color_$(key)
     &::placeholder
-      color: var(--$(key), $$(key))
+      color: var(--$(key))
