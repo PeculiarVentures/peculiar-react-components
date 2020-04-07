@@ -153,7 +153,7 @@ export default class Tooltip extends Component {
     /**
      * Flip boundary element modifier
      */
-    flipBoundaryElement: PropTypes.string,
+    flipBoundaryElement: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(HTMLElement)]),
   }
 
   static defaultProps = {
