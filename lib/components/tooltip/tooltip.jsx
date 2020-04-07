@@ -150,6 +150,10 @@ export default class Tooltip extends Component {
      * The number of milliseconds to wait before showing the tooltip.
      */
     showDelay: PropTypes.number,
+    /**
+     * Flip boundary element modifier
+     */
+    flipBoundaryElement: PropTypes.string,
   }
 
   static defaultProps = {
@@ -174,6 +178,7 @@ export default class Tooltip extends Component {
     classNameTooltip: '',
     classNameTooltipContent: '',
     showDelay: 0,
+    flipBoundaryElement: 'viewport',
   }
 
   constructor(props) {
@@ -570,6 +575,7 @@ export default class Tooltip extends Component {
       classNameTooltip,
       classNameTooltipContent,
       showDelay,
+      flipBoundaryElement,
       ...other
     } = this.props;
     const { open } = this.state;
@@ -626,6 +632,7 @@ export default class Tooltip extends Component {
             classNameTooltip={classNameTooltip}
             classNameTooltipContent={classNameTooltipContent}
             showDelay={showDelay}
+            flipBoundaryElement={flipBoundaryElement}
           >
             {content}
           </TooltipPopper>
