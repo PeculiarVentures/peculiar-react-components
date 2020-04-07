@@ -435,32 +435,20 @@ interface AutocompleteProps {
   validation?: (ValidationType|((value: string | number) => boolean))[];
 }
 
-interface TooltipProps extends React.HTMLAttributes<HTMLDivElement> {
+interface TooltipProps extends React.HTMLAttributes<HTMLDivElement>, Omit<TooltipPopperProps, 'referenceElement' | 'children' | 'open'> {
   children: React.ReactNode;
   content: React.ReactNode;
   action?: 'click' | 'hover' | 'focus' | 'none';
-  arrow?: boolean;
-  placement?: PlacementType;
-  positionFixed?: boolean;
   component?: string;
-  offset?: number;
   ref?: React.Ref<HTMLElement>;
   open?: boolean;
   onClose?: () => void;
   autoHideDuration?: number;
-  color?: Color;
-  zIndex?: number;
   overlay?: boolean;
   overlayColor?: Color;
   overlayOpacity?: number;
   overlayZIndex?: number;
   overlayProps?: React.HTMLAttributes<HTMLDivElement>;
-  usePortal?: boolean | HTMLElement;
-  preventOverflow?: boolean,
-  preventFlip?: boolean,
-  classNameTooltip?: string;
-  classNameTooltipContent?: string;
-  showDelay?: number;
 }
 
 interface TooltipPopperProps {
