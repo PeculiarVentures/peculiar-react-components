@@ -250,7 +250,7 @@ TooltipPopper.propTypes = {
   /**
    * Flip boundary element modifier
    */
-  flipBoundaryElement: PropTypes.string,
+  flipBoundaryElement: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(HTMLElement)]),
 };
 
 TooltipPopper.defaultProps = {
