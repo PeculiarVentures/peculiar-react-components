@@ -117,6 +117,7 @@ export default class TooltipPopper extends React.Component {
       usePortal,
       preventOverflow,
       preventFlip,
+      flipBoundaryElement,
       ...other
     } = this.props;
 
@@ -132,12 +133,14 @@ export default class TooltipPopper extends React.Component {
           },
           preventOverflow: {
             enabled: preventOverflow,
+            escapeWithReference: true,
           },
           hide: {
             enabled: preventOverflow,
           },
           flip: {
             enabled: !preventFlip,
+            boundariesElement: flipBoundaryElement,
           },
         }}
         placement={placementProp}
@@ -244,6 +247,10 @@ TooltipPopper.propTypes = {
    * The number of milliseconds to wait before showing the tooltip.
    */
   showDelay: PropTypes.number,
+  /**
+   * Flip boundary element modifier
+   */
+  flipBoundaryElement: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(HTMLElement)]),
 };
 
 TooltipPopper.defaultProps = {
@@ -260,4 +267,5 @@ TooltipPopper.defaultProps = {
   classNameTooltip: '',
   classNameTooltipContent: '',
   showDelay: 0,
+  flipBoundaryElement: 'viewport',
 };
