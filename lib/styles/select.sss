@@ -13,7 +13,7 @@
   &_arrow_icon
     width: 8px
     height: 6px
-    fill: var(--grey)
+    fill: rgb(var(--grey))
     position: absolute
     top: 50%
     left: 50%
@@ -43,7 +43,7 @@
     span
       transition: color 300ms, opacity 300ms
     &:focus
-      box-shadow: 0 4px 10px 0 rgba(64,72,79, 0.1)
+      box-shadow: 0 4px 10px 0 rgba(var(--black), 0.1)
 
     &_medium
       height: $input-medium-height
@@ -96,15 +96,15 @@
         
   &:not([data-disabled="true"])
     &:focus
-      box-shadow: 0 4px 10px 0 rgba(64,72,79, 0.1)
+      box-shadow: 0 4px 10px 0 rgba(var(--black), 0.1)
       outline-color: transparent
       .select_field_focus
         @each $key in $colors
           &_$(key)
-            border-color: var(--$(key))
+            border-color: rgb(var(--$(key)))
 
     .select_field_focus
       @each $key in $colors
         &_$(key)
           &:focus
-            border-color: var(--$(key))
+            border-color: rgb(var(--$(key)))

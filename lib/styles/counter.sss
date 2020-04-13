@@ -4,10 +4,10 @@
     @each $key in $colors
       &_$(key)
         & [data-fill]
-          fill: var(--$(key))
+          fill: rgb(var(--$(key)))
 
 .counter_triangle
-  fill: var(--grey)
+  fill: rgb(var(--grey))
   position: absolute
   width: 6px
   height: 4px
