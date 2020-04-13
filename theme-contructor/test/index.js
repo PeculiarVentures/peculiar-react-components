@@ -5,33 +5,36 @@ const themeConstructor = require('../');
 
 describe('Theme constructor', () => {
   before(async () => {
-    await fs.remove(path.join(__dirname, './expected'));
+    await fs.remove(path.join(__dirname, './out'));
+  });
+
+  after(async () => {
+    await fs.remove(path.join(__dirname, './out'));
   });
 
   it('create default theme', async () => {
     await themeConstructor.createThemes([
       {
-        name: 'df',
+        name: 'default',
         entry: path.join(__dirname, './assets/index.sss'),
-        out: path.join(__dirname, './expected'),
+        out: path.join(__dirname, './out'),
         options: {},
+        minify: false,
       },
     ]);
 
-    const data = await fs.readFile(path.join(__dirname, './expected/df.css'), 'utf8');
+    const outFile = await fs.readFile(path.join(__dirname, './out/default.css'), 'utf8');
+    const expectedFile = await fs.readFile(path.join(__dirname, './expected/default.css'), 'utf8');
 
-    assert.equal(
-      'svg.fill_primary [data-fill]{fill:#3d7dff;fill:var(--primary,#3d7dff)}svg.fill_secondary [data-fill]{fill:#ffc200;fill:var(--secondary,#ffc200)}svg.fill_black [data-fill]{fill:#222d47;fill:var(--black,#222d47)}svg.fill_dark_grey [data-fill]{fill:#5b647d;fill:var(--dark_grey,#5b647d)}svg.fill_grey [data-fill]{fill:#cbcfd7;fill:var(--grey,#cbcfd7)}svg.fill_light_grey [data-fill]{fill:#f5f6fa;fill:var(--light_grey,#f5f6fa)}svg.fill_success [data-fill]{fill:#00d093;fill:var(--success,#00d093)}svg.fill_wrong [data-fill]{fill:#f12727;fill:var(--wrong,#f12727)}svg.fill_white [data-fill]{fill:#fff;fill:var(--white,#fff)}svg.fill_grey_1 [data-fill]{fill:#fbfcfd;fill:var(--grey_1,#fbfcfd)}svg.fill_grey_2 [data-fill]{fill:#f4f7fc;fill:var(--grey_2,#f4f7fc)}svg.fill_grey_5_border [data-fill]{fill:#7c8589;fill:var(--grey_5_border,#7c8589)}.border-radius{border-radius:3px}.transform{color:hsla(0,0%,80%,.1)}.lightness{background:#b3b3b3}',
-      data,
-    );
+    assert.equal(expectedFile, outFile);
   });
 
-  it('create single theme', async () => {
+  it('create theme with options', async () => {
     await themeConstructor.createThemes([
       {
-        name: 'if',
+        name: 'options',
         entry: path.join(__dirname, './assets/index.sss'),
-        out: path.join(__dirname, './expected'),
+        out: path.join(__dirname, './out'),
         options: {
           palette: {
             primary: '#3D7DFF',
@@ -48,23 +51,22 @@ describe('Theme constructor', () => {
             borderRadius: '4px',
           },
         },
+        minify: false,
       },
     ]);
 
-    const data = await fs.readFile(path.join(__dirname, './expected/if.css'), 'utf8');
+    const outFile = await fs.readFile(path.join(__dirname, './out/options.css'), 'utf8');
+    const expectedFile = await fs.readFile(path.join(__dirname, './expected/options.css'), 'utf8');
 
-    assert.equal(
-      'svg.fill_primary [data-fill]{fill:#3d7dff;fill:var(--primary,#3d7dff)}svg.fill_secondary [data-fill]{fill:#ffc200;fill:var(--secondary,#ffc200)}svg.fill_black [data-fill]{fill:#222d47;fill:var(--black,#222d47)}svg.fill_dark_grey [data-fill]{fill:#95a0ba;fill:var(--dark_grey,#95a0ba)}svg.fill_grey [data-fill]{fill:#cbcfd7;fill:var(--grey,#cbcfd7)}svg.fill_light_grey [data-fill]{fill:#f5f6fa;fill:var(--light_grey,#f5f6fa)}svg.fill_success [data-fill]{fill:#00d093;fill:var(--success,#00d093)}svg.fill_wrong [data-fill]{fill:#f12727;fill:var(--wrong,#f12727)}svg.fill_white [data-fill]{fill:#fff;fill:var(--white,#fff)}svg.fill_grey_1 [data-fill]{fill:#fbfcfd;fill:var(--grey_1,#fbfcfd)}svg.fill_grey_2 [data-fill]{fill:#f4f7fc;fill:var(--grey_2,#f4f7fc)}svg.fill_grey_5_border [data-fill]{fill:#7c8589;fill:var(--grey_5_border,#7c8589)}.border-radius{border-radius:4px}.transform{color:hsla(0,0%,80%,.1)}.lightness{background:#b3b3b3}',
-      data,
-    );
+    assert.equal(expectedFile, outFile);
   });
 
-  it('create multiple themes', async () => {
+  it('create multiple themes with options', async () => {
     await themeConstructor.createThemes([
       {
-        name: 'hk',
+        name: 'multiple1',
         entry: path.join(__dirname, './assets/index.sss'),
-        out: path.join(__dirname, './expected'),
+        out: path.join(__dirname, './out'),
         options: {
           palette: {
             primary: '#3D7DFF',
@@ -76,11 +78,12 @@ describe('Theme constructor', () => {
             white: '#FFFFFF',
           },
         },
+        minify: false,
       },
       {
-        name: 'ff',
+        name: 'multiple2',
         entry: path.join(__dirname, './assets/index.sss'),
-        out: path.join(__dirname, './expected'),
+        out: path.join(__dirname, './out'),
         options: {
           palette: {
             primary: '#ec06e5',
@@ -92,20 +95,17 @@ describe('Theme constructor', () => {
             white: '#FFFFFF',
           },
         },
+        minify: false,
       },
     ]);
 
-    const dataHk = await fs.readFile(path.join(__dirname, './expected/hk.css'), 'utf8');
-    const dataFf = await fs.readFile(path.join(__dirname, './expected/ff.css'), 'utf8');
+    const outFile1 = await fs.readFile(path.join(__dirname, './out/multiple1.css'), 'utf8');
+    const outFile2 = await fs.readFile(path.join(__dirname, './out/multiple2.css'), 'utf8');
+    const expectedFile1 = await fs.readFile(path.join(__dirname, './expected/multiple1.css'), 'utf8');
+    const expectedFile2 = await fs.readFile(path.join(__dirname, './expected/multiple2.css'), 'utf8');
 
-    assert.equal(
-      'svg.fill_primary [data-fill]{fill:#3d7dff;fill:var(--primary,#3d7dff)}svg.fill_secondary [data-fill]{fill:#ffc200;fill:var(--secondary,#ffc200)}svg.fill_black [data-fill]{fill:#222d47;fill:var(--black,#222d47)}svg.fill_dark_grey [data-fill]{fill:#5b647d;fill:var(--dark_grey,#5b647d)}svg.fill_grey [data-fill]{fill:#cbcfd7;fill:var(--grey,#cbcfd7)}svg.fill_light_grey [data-fill]{fill:#f5f6fa;fill:var(--light_grey,#f5f6fa)}svg.fill_success [data-fill]{fill:#00d093;fill:var(--success,#00d093)}svg.fill_wrong [data-fill]{fill:#f12727;fill:var(--wrong,#f12727)}svg.fill_white [data-fill]{fill:#fff;fill:var(--white,#fff)}svg.fill_grey_1 [data-fill]{fill:#fbfcfd;fill:var(--grey_1,#fbfcfd)}svg.fill_grey_2 [data-fill]{fill:#f4f7fc;fill:var(--grey_2,#f4f7fc)}svg.fill_grey_5_border [data-fill]{fill:#7c8589;fill:var(--grey_5_border,#7c8589)}.border-radius{border-radius:3px}.transform{color:hsla(0,0%,80%,.1)}.lightness{background:#b3b3b3}',
-      dataHk,
-    );
-    assert.equal(
-      'svg.fill_primary [data-fill]{fill:#ec06e5;fill:var(--primary,#ec06e5)}svg.fill_secondary [data-fill]{fill:#ffc200;fill:var(--secondary,#ffc200)}svg.fill_black [data-fill]{fill:#000;fill:var(--black,#000)}svg.fill_dark_grey [data-fill]{fill:#5b647d;fill:var(--dark_grey,#5b647d)}svg.fill_grey [data-fill]{fill:#cbcfd7;fill:var(--grey,#cbcfd7)}svg.fill_light_grey [data-fill]{fill:#f5f6fa;fill:var(--light_grey,#f5f6fa)}svg.fill_success [data-fill]{fill:#06ec0d;fill:var(--success,#06ec0d)}svg.fill_wrong [data-fill]{fill:#d00619;fill:var(--wrong,#d00619)}svg.fill_white [data-fill]{fill:#fff;fill:var(--white,#fff)}svg.fill_grey_1 [data-fill]{fill:#fbfcfd;fill:var(--grey_1,#fbfcfd)}svg.fill_grey_2 [data-fill]{fill:#f4f7fc;fill:var(--grey_2,#f4f7fc)}svg.fill_grey_5_border [data-fill]{fill:#7c8589;fill:var(--grey_5_border,#7c8589)}.border-radius{border-radius:3px}.transform{color:hsla(0,0%,80%,.1)}.lightness{background:#b3b3b3}',
-      dataFf,
-    );
+    assert.equal(expectedFile1, outFile1);
+    assert.equal(expectedFile2, outFile2);
   });
 
   it('with empty themes', async () => {
@@ -120,9 +120,9 @@ describe('Theme constructor', () => {
     try {
       await themeConstructor.createThemes([
         {
-          name: 'if',
+          name: 'not_correct',
           entry: path.join(__dirname, './assets/main.sss'),
-          out: path.join(__dirname, './expected'),
+          out: path.join(__dirname, './out'),
           options: {
             palette: {
               primary: '#3D7DFF',
@@ -150,7 +150,7 @@ describe('Theme constructor', () => {
     try {
       await themeConstructor.createThemes([
         {
-          name: 'if',
+          name: 'not_correct',
           entry: path.join(__dirname, './assets/index.sss'),
           out: '',
           options: {
@@ -170,7 +170,7 @@ describe('Theme constructor', () => {
       ]);
     } catch (error) {
       assert.equal(
-        error.message.indexOf('permission denied, open \'/if.css\'') !== -1,
+        error.message.indexOf('read-only file system, open \'/not_correct.css\'') !== -1,
         true,
       );
     }
@@ -180,17 +180,13 @@ describe('Theme constructor', () => {
     try {
       await themeConstructor.createThemes([
         {
-          name: 'if',
+          name: 'not_correct',
           entry: path.join(__dirname, './assets/index.sss'),
-          out: path.join(__dirname, './expected'),
+          out: path.join(__dirname, './out'),
         },
       ]);
     } catch (error) {
       assert.equal(error.message, 'Cannot read property \'palette\' of undefined');
     }
-  });
-
-  after(async () => {
-    await fs.remove(path.join(__dirname, './expected'));
   });
 });

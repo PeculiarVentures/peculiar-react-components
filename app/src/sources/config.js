@@ -35,12 +35,16 @@ export default [
     value: 'demos',
     children: [
       {
+        pathname: '/demos/autocomplete',
+        title: 'Autocomplete',
+      },
+      {
         pathname: '/demos/avatar',
         title: 'Avatar',
       },
       {
-        pathname: '/demos/autocomplete',
-        title: 'Autocomplete',
+        pathname: '/demos/box',
+        title: 'Box',
       },
       {
         pathname: '/demos/button',

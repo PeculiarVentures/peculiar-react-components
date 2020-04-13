@@ -36,7 +36,7 @@
   &[data-disabled="false"]
     &:focus
       .slider_tab
-        box-shadow: 0 4px 10px 0 rgba(64,72,79, 0.1)
+        box-shadow: 0 4px 10px 0 rgba(var(--black), 0.1)
     &:hover,
     &:active
       outline-color: transparent
@@ -46,9 +46,9 @@
     pointer-events: none
     .slider_track,
     .slider_progress
-      background-color: var(--light_grey, $light_grey)
+      background-color: rgb(var(--light_grey))
     .slider_tab
-      background-color: var(--grey, $grey)
+      background-color: rgb(var(--grey))
 
 @media (hover: hover)
   .slider

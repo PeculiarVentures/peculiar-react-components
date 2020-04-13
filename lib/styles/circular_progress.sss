@@ -28,4 +28,4 @@
 	&_stroke
 		@each $key in $colors
 			&_$(key)
-				stroke: var(--$(key), $$(key))
+				stroke: rgb(var(--$(key)))

@@ -1,4 +1,4 @@
 @each $key in $colors
 	.fill_$(key)
 		svg& [data-fill]
-			fill: var(--$(key), $$(key))
+			fill: rgb(var(--$(key)))

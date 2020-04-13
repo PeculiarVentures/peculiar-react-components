@@ -22,7 +22,7 @@
     border: 1px solid transparent
     transition: color 300ms, border-color 300ms, box-shadow 300ms
     &:focus
-      box-shadow: 0 4px 10px 0 rgba(64,72,79, 0.1)
+      box-shadow: 0 4px 10px 0 rgba(var(--black), 0.1)
 
     &_medium
       textarea&
@@ -47,9 +47,9 @@
     pointer-events: none
     cursor: default
     .input_field
-      color: rgba($black, .1)
+      color: rgba(var(--black), .1)
       &::placeholder
-        color: rgba($black, .1)
+        color: rgba(var(--black), .1)
     .input_required_icon
       opacity: .3
 
@@ -58,14 +58,14 @@
       @each $key in $colors
         &_$(key)
           &:focus
-            border-color: var(--$(key), $$(key))
+            border-color: rgb(var(--$(key)))
 
   &[data-valid="false"]
     .input_field
-      color: var(--wrong, $wrong) !important
-      border-color: var(--wrong, $wrong) !important
+      color: rgb(var(--wrong)) !important
+      border-color: rgb(var(--wrong)) !important
 
 @each $key in $colors
   .input_placeholder_color_$(key)
     &::placeholder
-      color: var(--$(key), $$(key))
+      color: rgb(var(--$(key)))
