@@ -133,7 +133,6 @@ export default class TooltipPopper extends React.Component {
           },
           preventOverflow: {
             enabled: preventOverflow,
-            escapeWithReference: true,
           },
           hide: {
             enabled: preventOverflow,
