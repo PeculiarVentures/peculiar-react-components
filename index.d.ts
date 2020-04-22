@@ -91,6 +91,19 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   full?: boolean;
 }
 
+interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
+  children?: React.ReactNode;
+  tagType?: keyof React.ReactHTML;
+  fill?: Color;
+  fillOpacity?: number;
+  stroke?: Color;
+  strokeWidth?: number;
+  strokeOpacity?: number;
+  strokeStyle?: 'solid' | 'dashed' | 'dotted' | 'none';
+  strokeType?: 'horizontal' | 'vertical' | 'top' | 'right' | 'bottom' | 'left';
+  className?: string;
+}
+
 interface ButtonGroupProps extends React.HTMLAttributes<HTMLDivElement> {
   bgType?: ButtonProps['bgType'];
   color?: ButtonProps['color'];
@@ -543,6 +556,7 @@ interface RegExps {
 
 declare const Avatar: React.ComponentType<AvatarProps>;
 declare const Autocomplete: React.ComponentType<AutocompleteProps>;
+declare const Box: React.ComponentType<BoxProps>;
 declare const Button: React.ComponentType<ButtonProps>;
 declare const ButtonGroup: React.ComponentType<ButtonGroupProps>;
 declare const ButtonSplit: React.ComponentType<ButtonSplitProps>;
