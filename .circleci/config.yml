@@ -1,7 +1,6 @@
 version: 2.1
 
 defaults: &defaults
-  working_directory: ~/repo
   docker:
     - image: circleci/node:10.17.0
 
@@ -27,7 +26,7 @@ jobs:
           command: cd packages/theme-constructor && npm test
 
 workflows:
-  version: 2
+  version: 2.1
   theme-constructor-flow:
     jobs:
       - theme-constructor
