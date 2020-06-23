@@ -3,9 +3,8 @@
 .DS_Store
 node_modules
 *.log
-app/dst
 **/compiled_env.json
-dist
-/commonjs
-/esm
-/coverage
+**/dist
+**/commonjs
+**/esm
+**/coverage

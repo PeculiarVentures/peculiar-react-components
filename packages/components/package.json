@@ -1,0 +1,79 @@
+{
+  "name": "lib-react-components",
+  "version": "0.3.85",
+  "description": "React components",
+  "keywords": [
+    "react",
+    "react-components",
+    "components",
+    "ui",
+    "javascript"
+  ],
+  "main": "commonjs/index.js",
+  "module": "esm/index.js",
+  "sideEffects": false,
+  "scripts": {
+    "test": "BABEL_ENV=test NODE_ENV=test jest",
+    "lint": "eslint --ext .js,.jsx lib test",
+    "build:css": "node lib/utils/build_theme.js",
+    "build:commonjs": "BABEL_ENV=commonjs babel lib --out-dir commonjs --ignore *.css,*.sss,*.spec.js,*.spec.jsx --source-maps",
+    "build:esm": "BABEL_ENV=esm babel lib --out-dir esm --ignore *.css,*.sss,*.spec.js,*.spec.jsx --source-maps",
+    "build": "npm run build:css && npm run build:commonjs && npm run build:esm",
+    "prebuild": "npm run clean",
+    "clean": "rimraf commonjs esm"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PeculiarVentures/react-components.git"
+  },
+  "author": "PeculiarVentures Team",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/PeculiarVentures/react-components/issues"
+  },
+  "homepage": "https://PeculiarVentures.github.io/react-components/",
+  "peerDependencies": {
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
+  },
+  "dependencies": {
+    "classnames": "^2.2.5",
+    "lib-theme-contructor": "^0.1.0",
+    "prismjs": "^1.14.0",
+    "prop-types": "^15.6.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-popper": "^1.0.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.2.2",
+    "babel-jest": "^23.6.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "eslint": "4.18.2",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-jest": "^21.27.1",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.9.1",
+    "ignore-styles": "^5.0.1",
+    "jest": "^23.6.0",
+    "jsdom": "^11.6.2",
+    "jsdom-global": "^3.0.2",
+    "rimraf": "^2.6.2",
+    "traverse": "^0.6.6",
+    "faker": "^4.1.0"
+  },
+  "files": [
+    "lib/",
+    "commonjs/",
+    "esm/",
+    "index.d.ts"
+  ]
+}
