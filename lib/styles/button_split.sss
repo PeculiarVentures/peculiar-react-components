@@ -1,0 +1,35 @@
+.button_split
+  width: 30px
+  padding: 0
+  position: relative
+
+  &_action
+    display: block
+    width: 100%
+    cursor: pointer
+    transition: opacity 200ms
+    &:disabled
+      cursor: default
+      pointer-events: none
+      opacity: 0.5
+
+  &_action_icon
+    width: 8px
+    height: 6px
+    fill: rgb(var(--white))
+    position: absolute
+    top: 50%
+    left: 50%
+    display: block
+    transform: translate(-50%, -50%)
+
+  &_tooltip
+    .button_split_tooltip_content
+      padding: 7px 20px
+      min-width: 100px
+
+@media (hover: hover)
+  .button_split
+    &_action
+      &:hover
+        opacity: .7

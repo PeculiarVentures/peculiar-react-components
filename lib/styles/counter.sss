@@ -1,0 +1,23 @@
+.counter
+  cursor: default
+
+  &_triangle
+    fill: rgb(var(--grey))
+    position: absolute
+    width: 6px
+    height: 4px
+    right: 5px
+    cursor: pointer
+    z-index: 1
+    [data-fill]
+      transition: opacity .3s, fill 300ms
+    &[data-id="increase-triangle"]
+      top: 9px
+    &[data-id="decrease-triangle"]
+      bottom: 9px
+      transform: rotate(180deg)
+
+@media (hover: hover)
+  .counter_triangle
+    &:hover
+      opacity: 0.7

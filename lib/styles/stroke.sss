@@ -1,0 +1,9 @@
+@each $key in $colors
+	.stroke_$(key)
+		&:not(svg)
+			border: 1px solid rgb(var(--$(key)))
+		svg& [data-stroke]
+			stroke: rgb(var(--$(key)))
+
+.stroke_dashed
+	border-style: dashed

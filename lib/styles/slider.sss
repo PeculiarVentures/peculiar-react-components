@@ -1,0 +1,57 @@
+.slider
+  user-select: none
+  cursor: default
+  position: relative
+  height: 20px
+  transition: opacity 300ms
+  &_track
+    position: absolute
+    height: 2px
+    left: 0
+    width: 100%
+    top: 50%
+    transform: translate(0, -50%)
+    border-radius: 1px
+    transition: background 300ms
+  &_tab
+    height: 20px
+    width: 20px
+    border-radius: 50%
+    cursor: pointer
+    position: relative
+    left: 0
+    transform: translate(-50%, 0)
+    transition: background 300ms, box-shadow 300ms
+  &_progress
+    height: 100%
+    width: 0
+    height: 14px
+    border-radius: 7px
+    position: absolute
+    left: 0
+    top: 50%
+    transform: translate(0, -50%)
+    transition: background 300ms
+
+  &[data-disabled="false"]
+    &:focus
+      .slider_tab
+        box-shadow: 0 4px 10px 0 rgba(var(--black), 0.1)
+    &:hover,
+    &:active
+      outline-color: transparent
+
+  &[data-disabled="true"]
+    cursor: default
+    pointer-events: none
+    .slider_track,
+    .slider_progress
+      background-color: rgb(var(--light_grey))
+    .slider_tab
+      background-color: rgb(var(--grey))
+
+@media (hover: hover)
+  .slider
+    &[data-disabled="false"]
+      &:hover
+        opacity: .7

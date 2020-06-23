@@ -1,0 +1,78 @@
+.checkbox
+  cursor: pointer
+  font-size: 0
+  position: relative
+  display: inline-block
+  vertical-align: top
+  transition: opacity 300ms
+  .switch_label
+    display: inline-block
+    vertical-align: middle
+    width: calc(100% - $checkbox-size)
+    pointer-events: none
+    &[data-position="left"]
+      padding-right: 20px
+    &[data-position="right"]
+      padding-left: 20px
+  &_input
+    position: absolute
+    cursor: inherit
+    opacity: 0
+    width: 100%
+    height: 100%
+    left: 0
+    top: 0
+    &:focus:not(:active):not(:hover)
+      ~ .checkbox_container
+        outline-width: 2px
+        outline-style: solid
+  &_container
+    width: $checkbox-size
+    height: $checkbox-size
+    border-radius: $borderRadius
+    display: inline-block
+    vertical-align: middle
+    box-sizing: border-box
+    transition: background 300ms, border-color 300ms, box-shadow 300ms, opacity 300ms
+    border: 1px solid transparent
+    text-align: center
+    pointer-events: none
+  &_icon_square,
+  &_icon_checkmark
+    position: relative
+    top: 50%
+    vertical-align: top
+    transform: translateY(-50%)
+    display: none
+    transition: fill 300ms
+    width: $checkbox-iconSize
+  &_icon_square
+    height: $checkbox-iconSize
+    transition: background 300ms
+    border-radius: 1px
+  &_icon_checkmark
+    height: calc($checkbox-iconSize * 0.7)
+
+  &[data-type="stroke"]
+    .checkbox_container
+      background: transparent
+
+  &[data-checked="true"]
+    .checkbox_icon_checkmark,
+    .checkbox_icon_square
+      display: inline-block
+
+  &[data-disabled="true"]
+    cursor: default
+    pointer-events: none
+    .switch_label,
+    .checkbox_container
+      opacity: .5
+
+@media (hover: hover)
+  .checkbox
+    &:not([data-disabled="true"])
+      &:hover
+        opacity: .5
+      &:active
+        opacity: 1

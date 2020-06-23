@@ -1,0 +1,110 @@
+.select
+  position: relative
+  transition: box-shadow 300ms
+
+  &_open_button
+    position: absolute
+    right: 0
+    top: 0
+    height: 100%
+    width: 30px
+    pointer-events: none
+
+  &_arrow_icon
+    width: 8px
+    height: 6px
+    fill: rgb(var(--grey))
+    position: absolute
+    top: 50%
+    left: 50%
+    display: block
+    transform: translate(-50%, -50%)
+
+  &_dropdown
+    display: none
+    position: absolute
+    left: 0
+
+  &_field
+    appearance: none
+    font-family: inherit
+    outline-color: transparent
+    box-sizing: border-box
+    letter-spacing: 0.04em
+    width: 100%
+    border: 1px solid transparent
+    transition: color 300ms, border-color 300ms, box-shadow 300ms
+    user-select: none
+    display: block
+    background: none
+    cursor: pointer
+    -webkit-tap-highlight-color: transparent
+    margin: 0
+    span
+      transition: color 300ms, opacity 300ms
+    &:focus
+      box-shadow: 0 4px 10px 0 rgba(var(--black), 0.1)
+
+    &_medium
+      height: $input-medium-height
+      padding: 0 30px 0 10px
+      font-size: $input-medium-fontSize
+      line-height: calc($input-medium-height - 2px)
+
+    &_large
+      height: $input-large-height
+      padding: 0 30px 0 13px
+      font-size: $input-large-fontSize
+      line-height: calc($input-large-height - 2px)
+
+  &[data-placement="top"]
+    .select_dropdown
+      bottom: 100%
+      border-bottom: none !important
+      border-bottom-right-radius: 0
+      border-bottom-left-radius: 0
+
+  &[data-placement="bottom"]
+    .select_dropdown
+      top: 100%
+      border-top: none !important
+      border-top-right-radius: 0
+      border-top-left-radius: 0
+
+  &[data-open="true"]
+    .select_dropdown
+      display: block
+    &[data-placement="top"]
+      .select_field
+        border-top: none
+        border-top-right-radius: 0
+        border-top-left-radius: 0
+    &[data-placement="bottom"]
+      .select_field
+        border-bottom: none
+        border-bottom-right-radius: 0
+        border-bottom-left-radius: 0
+
+  &[data-disabled="true"]
+    pointer-events: none
+    cursor: default
+    .select_field
+      span
+        opacity: .1
+    .select_arrow_icon
+      opacity: .3
+        
+  &:not([data-disabled="true"])
+    &:focus
+      box-shadow: 0 4px 10px 0 rgba(var(--black), 0.1)
+      outline-color: transparent
+      .select_field_focus
+        @each $key in $colors
+          &_$(key)
+            border-color: rgb(var(--$(key)))
+
+    .select_field_focus
+      @each $key in $colors
+        &_$(key)
+          &:focus
+            border-color: rgb(var(--$(key)))

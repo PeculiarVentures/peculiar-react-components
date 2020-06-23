@@ -1,0 +1,59 @@
+@keyframes fadeIn
+  0%
+    opacity: 0
+  100%
+    opacity: 1
+  
+.c_dialog_wrapper
+  height: 100%
+  width: 100%
+  overflow: hidden
+  position: relative
+  animation: fadeIn 300ms
+  z-index: $dialog-z-index
+  &.m_smooth
+    animation: none
+    .container
+      animation: fadeIn 300ms
+  .overlay
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    background: var(--dialog-overlay-background, $dialog-overlay-background)
+  .container
+    height: 100%
+    padding: 20px
+    overflow: auto
+    font-size: 0
+    text-align: center
+    &:before
+      content: ''
+      width: 0
+      height: 100%
+      display: inline-block
+      vertical-align: middle
+  .dialog
+    display: inline-block
+    vertical-align: middle
+    position: relative
+    background: var(--dialog-background, $dialog-background)
+    border-radius: $dialog-border-radius
+    padding: $dialog-padding
+    max-width: $dialog-max-width
+  .title
+    margin-bottom: $dialog-title-margin-bottom
+    font-size: $dialog-title-font-size
+    line-height: $dialog-title-line-height
+    color: var(--dialog-title-color, $dialog-title-color)
+  .buttons
+    margin-top: $dialog-buttons-margin-top
+  .button
+    margin-left: $dialog-buttons-margin-left
+    &:first-child
+      margin-left: 0
+  .content
+    font-size: $dialog-content-font-size
+    line-height: $dialog-content-line-height
+    color: var(--dialog-content-color, $dialog-content-color)

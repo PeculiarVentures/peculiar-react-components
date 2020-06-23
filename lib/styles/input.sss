@@ -1,0 +1,71 @@
+.input
+  position: relative
+  textarea
+    resize: none
+    display: block
+  &_required_icon
+    position: absolute
+    top: 2px
+    right: 2px
+    pointer-events: none
+    width: 6px
+    height: 6px
+    transition: opacity 300ms
+  &_field
+    appearance: none
+    font-family: inherit
+    outline-color: transparent
+    box-sizing: border-box
+    letter-spacing: 0.04em
+    width: 100%
+    line-height: 1.4
+    border: 1px solid transparent
+    transition: color 300ms, border-color 300ms, box-shadow 300ms
+    &:focus
+      box-shadow: 0 4px 10px 0 rgba(var(--black), 0.1)
+
+    &_medium
+      textarea&
+        height: $textareaMediumHeight
+        padding: 10px
+        font-size: $input-medium-fontSize
+      input&
+        height: $input-medium-height
+        padding: 0 10px
+        font-size: $input-medium-fontSize
+    &_large
+      textarea&
+        height: $textareaLargeHeight
+        padding: 13px
+        font-size: $input-large-fontSize
+      input&
+        height: $input-large-height
+        padding: 0 13px
+        font-size: $input-large-fontSize
+
+  &[data-disabled="true"]
+    pointer-events: none
+    cursor: default
+    .input_field
+      color: rgba(var(--black), .1)
+      &::placeholder
+        color: rgba(var(--black), .1)
+    .input_required_icon
+      opacity: .3
+
+  &[data-disabled="false"]
+    .input_field_focus
+      @each $key in $colors
+        &_$(key)
+          &:focus
+            border-color: rgb(var(--$(key)))
+
+  &[data-valid="false"]
+    .input_field
+      color: rgb(var(--wrong)) !important
+      border-color: rgb(var(--wrong)) !important
+
+@each $key in $colors
+  .input_placeholder_color_$(key)
+    &::placeholder
+      color: rgb(var(--$(key)))

@@ -1,0 +1,34 @@
+.select_item
+  letter-spacing: 0.04em
+  cursor: pointer
+  width: auto
+  transition: color 300ms, background-color 300ms, opacity 300ms
+
+  &_medium
+    padding: 0 10px
+    font-size: $input-medium-fontSize
+    line-height: calc($input-medium-height - 2px)
+  &_large
+    padding: 0 13px
+    font-size: $input-large-fontSize
+    line-height: calc($input-large-height - 2px)
+
+  &[data-disabled="true"]
+    pointer-events: none
+    cursor: default
+    color: rgb(var(--grey))
+    opacity: .4
+
+  &[data-has-focus="true"]
+    &.select_item_focus
+      @each $key in $colors
+        &_$(key)
+          background-color: rgba(var(--$(key)), .05)
+
+@media (hover: hover)
+  .select_item
+    &:not([data-disabled="true"])
+      &:hover
+        opacity: .5
+      &:active
+        opacity: 1

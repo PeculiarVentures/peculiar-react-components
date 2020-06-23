@@ -1,0 +1,23 @@
+.text_field
+  display: block
+  &_type_password
+    padding-right: 46px !important
+  &_button_password
+    position: absolute
+    top: 50%
+    width: 18px
+    right: 14px
+    opacity: 1
+    transform: translate(0, -50%)
+    transition: opacity 300ms
+    cursor: pointer
+  &_icon_password
+    display: block
+    width: 100%
+    transition: fill 300ms
+    fill: rgb(var(--grey))
+    max-height: 13px
+
+  &[data-disabled="true"]
+    .text_field_icon_password
+      fill: rgba(var(--grey), .3)

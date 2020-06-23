@@ -1,0 +1,10 @@
+@each $key in $colors
+	.fill_$(key)
+		&:not(svg)
+			background-color: rgb(var(--$(key)))
+		svg& [data-fill]
+			fill: rgb(var(--$(key)))
+
+.shadow
+	border: 1px solid rgba(var(--grey), 0.15)
+	box-shadow: 0 4px 10px 0 rgba(var(--black), 0.05)

@@ -1,0 +1,50 @@
+.button
+  display: inline-block
+  vertical-align: top
+  outline-color: transparent
+  cursor: pointer
+  text-decoration: none
+  font-family: inherit
+  transition: color 200ms, background 300ms, border-color 300ms, box-shadow 300ms, opacity 200ms
+  border: 1px solid transparent
+  background: transparent
+  > span
+    transition: opacity 200ms
+
+  &_small
+    height: $button-small-height
+    line-height: calc($button-small-height - 2px)
+    padding: 0 10px
+    font-size: $button-small-fontSize
+    font-weight: $button-small-fontWeight
+  &_medium
+    height: $button-medium-height
+    line-height: calc($button-medium-height - 2px)
+    padding: 0 16px
+    font-size: $button-medium-fontSize
+    font-weight: $button-medium-fontWeight
+  &_large
+    height: $button-large-height
+    line-height: calc($button-large-height - 2px)
+    padding: 0 36px
+    font-size: $button-large-fontSize
+    font-weight: $button-large-fontWeight
+  &_full
+    width: 100%
+
+  &:focus
+    box-shadow: 0 4px 10px 0 rgba(var(--black), 0.1)
+
+  &[disabled]
+    cursor: default
+    pointer-events: none
+    opacity: 0.7
+
+@media (hover: hover)
+  .button
+    &:hover
+      > span
+        opacity: 0.5
+    &:active
+      > span
+        opacity: 1

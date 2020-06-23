@@ -1,0 +1,20 @@
+@each $key in $colors
+	.text_$(key)
+		color: rgb(var(--$(key)))
+
+.text_left
+	text-align: left
+
+.text_right
+	text-align: right
+
+.text_center
+	text-align: center
+
+@each $key in $fonts
+	$(key),
+	.$(key)
+		font-weight: $fonts-$(key)-weight
+		font-size: $fonts-$(key)-size
+		line-height: $fonts-$(key)-height
+		letter-spacing: $fonts-$(key)-spacing
