@@ -26,8 +26,6 @@
     "type": "git",
     "url": "git+https://github.com/PeculiarVentures/react-components.git"
   },
-  "author": "PeculiarVentures Team",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/PeculiarVentures/react-components/issues"
   },
@@ -75,5 +73,7 @@
     "commonjs/",
     "esm/",
     "index.d.ts"
-  ]
+  ],
+  "author": "PeculiarVentures Team",
+  "license": "AGPL-3.0"
 }

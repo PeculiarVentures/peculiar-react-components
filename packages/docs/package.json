@@ -13,8 +13,6 @@
     "deploy:gh-pages": "babel-node bundler/deploy",
     "clean": "rimraf dst"
   },
-  "author": "PeculiarVentures Team",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/PeculiarVentures/react-components/issues"
   },
@@ -75,5 +73,7 @@
     "react-loadable": "^5.3.1",
     "react-markdown": "^3.3.4",
     "react-router-dom": "^4.2.2"
-  }
+  },
+  "author": "PeculiarVentures Team",
+  "license": "AGPL-3.0"
 }
