@@ -1,6 +1,6 @@
 {
   "name": "lib-react-components",
-  "version": "0.3.85",
+  "version": "0.4.0",
   "private": false,
   "description": "React components",
   "keywords": [
@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
-    "lib-theme-contructor": "^0.1.0",
+    "lib-theme-contructor": "^0.2.0",
     "prismjs": "^1.14.0",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
@@ -60,13 +60,13 @@
     "eslint-plugin-jest": "^21.27.1",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.9.1",
+    "faker": "^4.1.0",
     "ignore-styles": "^5.0.1",
     "jest": "^23.6.0",
     "jsdom": "^11.6.2",
     "jsdom-global": "^3.0.2",
     "rimraf": "^2.6.2",
-    "traverse": "^0.6.6",
-    "faker": "^4.1.0"
+    "traverse": "^0.6.6"
   },
   "files": [
     "lib/",
