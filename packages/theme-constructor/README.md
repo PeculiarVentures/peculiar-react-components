@@ -1,14 +1,18 @@
 # `lib-theme-constructor`
 
-Theme constructor for [react components](https://www.npmjs.com/package/lib-react-components)
+This package contains a code for generate theme for the lib-react-components package.
 
 ## Installation
 
 ```bash
-npm install lib-theme-contructor --D
+npm install --save-dev lib-theme-contructor
 ```
 
-## Configure
+## Usage
+
+
+### Prepare theme file
+
 ```js
 // index.js
 const path = require('path');
@@ -18,8 +22,8 @@ const themeConstructor = require('lib-theme-contructor');
   await themeConstructor.createThemes([
     {
       name: 'theme-name',
-      entry: path.join(__dirname, '../entry/path/to/index.sss'),
-      out: path.join(__dirname, '../output/dir/name'),
+      entry: path.join(__dirname, './entry/path/to/index.sss'),
+      out: path.join(__dirname, './output/dir/name'),
       options: {
         palette: {
           primary: '#3D7DFF',
@@ -53,14 +57,10 @@ const themeConstructor = require('lib-theme-contructor');
 })();
 ```
 
-## Run
+### Run theme file
+
 ```bash
 node index.js
 ```
 
-Now in your `../output/dir/name` you have `theme-name.css` file with new theme.
-
-### Run test
-```bash
-npm run test
-```
+Now in your `./output/dir/name` you have `theme-name.css` file with new CSS theme.

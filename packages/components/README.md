@@ -1,11 +1,13 @@
 # `lib-react-components`
 
+This package contains UI components as CSS and React code.
+
 ## Installation
 
 To install and save in your `package.json` dependencies, run:
 
 ```bash
-npm install lib-react-components
+npm install --save lib-react-components
 ```
 
 ## Quick start
@@ -23,7 +25,10 @@ const App = () => (
   </Button>
 );
 
-ReactDOM.render(<App />, document.querySelector('#root'));
+ReactDOM.render(
+  <App />,
+  document.querySelector('#root'),
+);
 ```
 
 And add styles file to your <head> element.
@@ -42,11 +47,3 @@ To ensure proper rendering and touch zooming for all devices, add the responsive
   content="minimum-scale=1, initial-scale=1, width=device-width"
 />
 ```
-
-## Documentation
-
-Check out our [documentation website](https://peculiarventures.github.io/react-components/).
-
-## Development Workflow
-
-See [docs package](https://github.com/PeculiarVentures/react-components/tree/master/packages/docs).

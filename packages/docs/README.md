@@ -1,21 +1,12 @@
 # `docs`
 
-Documentation for [react components](https://www.npmjs.com/package/lib-react-components)
+This project generates and aggregates the documentation from the lib-react-components package.
 
-## Development Workflow
+## Quick start
 
-```bash
-# Install dependencies for components
-cd packages/components && npm install
+From the root of the repo:
 
-# Build components
-cd packages/components && npm run build
-
-# Install dependencies for docs
-cd packages/docs && npm install
-
-# Run depelopment mode
-cd packages/docs && npm run development
-
-# Open browser on http://localhost:3000
-```
+1. Run `yarn bootstrap`
+1. Run `yarn build`
+1. Run `yarn dev:docs`
+1. Open your browser to http://localhost:3000/
