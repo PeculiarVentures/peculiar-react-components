@@ -94,16 +94,16 @@ workflows:
           requires: [
             checkout-code
           ]
-      - test
+      - test:
           requires: [
             checkout-code
           ]
-      - build
+      - build:
           requires: [
             lint,
             test
           ]
-      - deploy
+      - deploy:
           requires: [
             build
           ]
