@@ -56,6 +56,8 @@ jobs:
     <<: *defaults
     steps:
       - checkout
+      - attach_workspace:
+          at: ~/ci-build
       - restore_cache:
           key: docs-dependencies-{{ checksum "packages/docs/package.json" }}
       - run: cd packages/docs && npm install
