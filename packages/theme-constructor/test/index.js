@@ -170,7 +170,7 @@ describe('Theme constructor', () => {
       ]);
     } catch (error) {
       assert.equal(
-        error.message.indexOf('read-only file system, open \'/not_correct.css\'') !== -1,
+        error.message === 'out option can\'t be empty',
         true,
       );
     }

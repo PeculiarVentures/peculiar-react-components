@@ -11,6 +11,10 @@ const readFileAsync = promisify(fs.readFile);
 const outputFileAsync = promisify(fs.outputFile);
 
 async function createTheme(opts) {
+  if (!opts.out) {
+    throw new Error('out option can\'t be empty');
+  }
+
   opts.options.palette = Object.assign({}, palette, opts.options.palette);
   opts.options.variables = Object.assign({}, variables, opts.options.variables);
 
