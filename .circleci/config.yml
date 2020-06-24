@@ -10,23 +10,23 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: constructor-dependencies-{{ checksum "packages/theme-constructor/package.json" }}
+          key: constructor-dependencies-{{ checksum "./packages/theme-constructor/package.json" }}
       - run:
           name: Install dependencies
-          command: cd packages/theme-constructor && npm install
+          command: cd ./packages/theme-constructor && npm install
       - save_cache:
-          key: constructor-dependencies-{{ checksum "packages/theme-constructor/package.json" }}
+          key: constructor-dependencies-{{ checksum "./packages/theme-constructor/package.json" }}
           paths:
             - ./packages/theme-constructor/node_modules
       - run:
           name: Lint
-          command: cd packages/theme-constructor && npm lint
+          command: cd ./packages/theme-constructor && npm lint
       - run:
           name: Test
-          command: cd packages/theme-constructor && npm test
+          command: cd ./packages/theme-constructor && npm test
 
 workflows:
-  version: 2.1
+  version: 2
   theme-constructor-flow:
     jobs:
       - theme-constructor
