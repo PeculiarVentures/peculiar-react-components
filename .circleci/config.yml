@@ -19,10 +19,10 @@ jobs:
             - packages/theme-constructor/node_modules
       - run:
           name: Lint
-          command: cd packages/theme-constructor && npm lint
+          command: cd packages/theme-constructor && npm run lint
       - run:
           name: Test
-          command: cd packages/theme-constructor && npm test
+          command: cd packages/theme-constructor && npm run test
 
 workflows:
   version: 2
