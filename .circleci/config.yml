@@ -1,127 +1,85 @@
 version: 2.1
 
 defaults: &defaults
-  working_directory: ~/repo
+  working_directory: ~/ci-build
   docker:
     - image: circleci/node:10.17.0
 
 jobs:
-  pre-build:
+  theme-constructor:
     <<: *defaults
     steps:
       - checkout
-
       - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
-
-      - run: npm install
+          key: constructor-dependencies-{{ checksum "packages/theme-constructor/package.json" }}
+      - run: cd packages/theme-constructor && npm install
       - save_cache:
+          key: constructor-dependencies-{{ checksum "packages/theme-constructor/package.json" }}
           paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
+            - packages/theme-constructor/node_modules
+      - run:
+          name: Lint
+          command: cd packages/theme-constructor && npm run lint
+      - run:
+          name: Test
+          command: cd packages/theme-constructor && npm run test
 
+  components:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          key: components-dependencies-{{ checksum "packages/components/package.json" }}
+      - run: cd packages/components && npm install
+      - save_cache:
+          key: components-dependencies-{{ checksum "packages/components/package.json" }}
+          paths:
+            - packages/components/node_modules
+      - run:
+          name: Lint
+          command: cd packages/components && npm run lint
+      - run:
+          name: Test
+          command: cd packages/components && npm run test
+      - run:
+          name: Build
+          command: cd packages/components && npm run build
       - persist_to_workspace:
-          root: ~/repo
-          paths: ./node_modules
-
-  lint:
-    <<: *defaults
-    steps:
-      - checkout
-      - attach_workspace:
-          at: ~/repo
-      - run: npm run lint
-
-  test-unit:
-    <<: *defaults
-    steps:
-      - checkout
-      - attach_workspace:
-          at: ~/repo
-      - run: npm run test
-
-  pre-build-deploy-docs:
-    <<: *defaults
-    steps:
-      - checkout
-      - attach_workspace:
-          at: ~/repo
-      - restore_cache:
-          keys:
-          - v1-dependencies-docs-{{ checksum "app/package.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-docs-
-  
-      - run: cd app && npm install
-      - save_cache:
+          root: ~/ci-build
           paths:
-            - app/node_modules
-          key: v1-dependencies-docs-{{ checksum "app/package.json" }}
+            - packages/components/node_modules
+            - packages/components/commonjs
+            - packages/components/esm
+            - packages/components/index.d.ts
 
-      - run: npm run build && cd app && npm run deploy:gh-pages
-
-  # pre-build-theme-constructor:
-  #   <<: *defaults
-  #   steps:
-  #     - checkout:
-  #         path: ~/ci-build/
-  #     - attach_workspace:
-  #         at: ~/ci-build/
-  #     - restore_cache:
-  #         key: dependency-cache-lib-{{ checksum "theme-contructor/package.json" }}
-  #     - run: cd theme-contructor && npm install
-  #     - save_cache:
-  #         key: dependency-cache-lib-{{ checksum "theme-contructor/package.json" }}
-  #         paths:
-  #           - node_modules
-  #     - persist_to_workspace:
-  #         root: ~/ci-build
-  #         paths:
-  #           - theme-contructor/node_modules
-
-  # lint-theme-contructor:
-  #   <<: *defaults
-  #   steps:
-  #     - checkout
-  #     - attach_workspace:
-  #         at: ~/ci-build
-  #     - run: cd theme-contructor && npm run lint
-
-  # test-unit-theme-contructor:
-  #   <<: *defaults
-  #   steps:
-  #     - checkout
-  #     - attach_workspace:
-  #         at: ~/ci-build
-  #     - run: cd theme-contructor && npm run test
+  docs:
+    <<: *defaults
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/ci-build
+      - restore_cache:
+          key: docs-dependencies-{{ checksum "packages/docs/package.json" }}
+      - run: cd packages/docs && npm install
+      - save_cache:
+          key: docs-dependencies-{{ checksum "packages/docs/package.json" }}
+          paths:
+            - packages/docs/node_modules
+      - run:
+          name: Deploy to gh-pages
+          command: cd packages/docs && npm run deploy:gh-pages
 
 workflows:
   version: 2
-  lint-test-deploy:
+  test-build-deploy:
     jobs:
-      - pre-build
-      - lint:
+      - theme-constructor
+      - components
+      - docs:
           requires:
-            - pre-build
-      - test-unit:
-          requires:
-            - pre-build
-      - pre-build-deploy-docs:
-          requires:
-            - lint
-            - test-unit
+            - theme-constructor
+            - components
           filters:
             branches:
               only:
-                - 0.3.x
-
-      # - pre-build-theme-constructor
-      # - lint-theme-contructor:
-      #     requires:
-      #       - pre-build-theme-constructor
-      # - test-unit-theme-contructor:
-      #     requires:
-      #       - pre-build-theme-constructor
+                - master

@@ -5,7 +5,7 @@
 
 To install and save in your `package.json` dependencies, run:
 
-```sh
+```bash
 npm install lib-react-components
 ```
 
