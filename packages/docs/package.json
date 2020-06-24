@@ -1,7 +1,6 @@
 {
   "name": "docs",
   "version": "0.0.7",
-  "description": "",
   "private": true,
   "repository": {
     "type": "git",

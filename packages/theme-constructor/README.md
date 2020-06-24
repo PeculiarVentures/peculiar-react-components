@@ -1,9 +1,8 @@
-# Lib theme constructor
+# `lib-theme-constructor`
 
 Theme constructor for [react components](https://www.npmjs.com/package/lib-react-components)
 
-
-## Install
+## Installation
 
 ```bash
 npm install lib-theme-contructor --D
