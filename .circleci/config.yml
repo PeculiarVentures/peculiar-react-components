@@ -1,6 +1,7 @@
 version: 2.1
 
 defaults: &defaults
+  working_directory: ~/ci-build
   docker:
     - image: circleci/node:10.17.0
 
@@ -10,20 +11,18 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: constructor-dependencies-{{ checksum "./packages/theme-constructor/package.json" }}
-      - run:
-          name: Install dependencies
-          command: cd ./packages/theme-constructor && npm install
+          key: constructor-dependencies-{{ checksum "packages/theme-contructor/package.json" }}
+      - run: cd packages/theme-constructor && npm install
       - save_cache:
-          key: constructor-dependencies-{{ checksum "./packages/theme-constructor/package.json" }}
+          key: constructor-dependencies-{{ checksum "packages/theme-contructor/package.json" }}
           paths:
-            - ./packages/theme-constructor/node_modules
+            - packages/theme-constructor/node_modules
       - run:
           name: Lint
-          command: cd ./packages/theme-constructor && npm lint
+          command: cd packages/theme-constructor && npm lint
       - run:
           name: Test
-          command: cd ./packages/theme-constructor && npm test
+          command: cd packages/theme-constructor && npm test
 
 workflows:
   version: 2
