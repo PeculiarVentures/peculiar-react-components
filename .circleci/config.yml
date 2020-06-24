@@ -44,7 +44,14 @@ jobs:
       - run:
           name: Build
           command: cd packages/components && npm run build
-    
+      - persist_to_workspace:
+          root: ~/ci-build
+          paths:
+            - packages/components/node_modules
+            - packages/components/commonjs
+            - packages/components/esm
+            - packages/components/index.d.ts
+
   docs:
     <<: *defaults
     steps:
