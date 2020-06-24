@@ -67,12 +67,12 @@ jobs:
       - attach_workspace: { at: "." }
       - run: yarn build
       - persist_to_workspace:
-        root: "."
-        paths: [
-          packages/components/esm,
-          packages/components/commonjs,
-          packages/components/index.d.ts,
-        ]
+          root: "."
+          paths: [
+            packages/components/esm,
+            packages/components/commonjs,
+            packages/components/index.d.ts,
+          ]
 
   deploy:
     docker: *docker-node-lts
