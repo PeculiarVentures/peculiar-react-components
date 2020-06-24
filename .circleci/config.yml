@@ -24,8 +24,32 @@ jobs:
           name: Test
           command: cd packages/theme-constructor && npm run test
 
+  components:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          key: components-dependencies-{{ checksum "packages/components/package.json" }}
+      - run: cd packages/components && npm install
+      - save_cache:
+          key: components-dependencies-{{ checksum "packages/components/package.json" }}
+          paths:
+            - packages/components/node_modules
+      - run:
+          name: Lint
+          command: cd packages/components && npm run lint
+      - run:
+          name: Test
+          command: cd packages/components && npm run test
+      - run:
+          name: Build
+          command: cd packages/components && npm run build
+
 workflows:
   version: 2
   theme-constructor-flow:
     jobs:
       - theme-constructor
+  components-flow:
+    jobs:
+      - components
