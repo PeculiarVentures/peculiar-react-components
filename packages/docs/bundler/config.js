@@ -19,7 +19,3 @@ export const URL = env('URL');
 // ======== App ========
 export const APP_NAME = 'Alternative UI';
 export const GIT_URL = env('GIT_URL', 'null') !== 'null' ? env('GIT_URL') : '';
-
-// ======== Deployment Configuration ========
-export const AWS_DEPLOY_BUCKET_NAME = env('AWS_DEPLOY_BUCKET_NAME', 'null') !== 'null' ? env('AWS_DEPLOY_BUCKET_NAME') : '';
-export const AWS_DEPLOY_REGION = env('AWS_DEPLOY_REGION', 'null') !== 'null' ? env('AWS_DEPLOY_REGION') : '';

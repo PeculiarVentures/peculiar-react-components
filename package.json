@@ -10,8 +10,5 @@
   "bugs": {
     "url": "https://github.com/PeculiarVentures/react-components/issues"
   },
-  "homepage": "https://github.com/PeculiarVentures/react-components#readme",
-  "dependencies": {
-    "lib-react-components": "file:./packages/components"
-  }
+  "homepage": "https://github.com/PeculiarVentures/react-components#readme"
 }

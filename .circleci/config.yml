@@ -44,12 +44,31 @@ jobs:
       - run:
           name: Build
           command: cd packages/components && npm run build
+    
+  docs:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          key: docs-dependencies-{{ checksum "packages/docs/package.json" }}
+      - run: cd packages/docs && npm install
+      - save_cache:
+          key: docs-dependencies-{{ checksum "packages/docs/package.json" }}
+          paths:
+            - packages/docs/node_modules
+      - deploy: cd packages/docs && npm run deploy:gh-pages
 
 workflows:
   version: 2
-  theme-constructor-flow:
+  test-build-deploy:
     jobs:
       - theme-constructor
-  components-flow:
-    jobs:
       - components
+      - docs
+          requires:
+            - theme-constructor
+            - components
+          filters:
+            branches:
+              only:
+                - monorepo

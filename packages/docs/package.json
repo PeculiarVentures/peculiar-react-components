@@ -13,8 +13,6 @@
     "build": "cross-env ENV_FILE=./env/production NODE_ENV=build babel-node bundler/run --no-source-map",
     "deploy:gh-pages": "babel-node bundler/deploy",
     "predeploy:gh-pages": "npm run build",
-    "deploy:aws": "babel-node bundler/deploy --aws",
-    "predeploy:aws": "npm run build",
     "clear": "babel-node bundler/run --clear"
   },
   "author": "PeculiarVentures Team",
@@ -24,7 +22,6 @@
   },
   "homepage": "https://PeculiarVentures.github.io/react-components/",
   "devDependencies": {
-    "aws-sdk": "^2.205.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.3",
@@ -73,7 +70,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
-    "lib-react-components": "latest",
+    "lib-react-components": "file:../components",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
