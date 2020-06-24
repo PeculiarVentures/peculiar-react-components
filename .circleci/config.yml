@@ -56,7 +56,9 @@ jobs:
           key: docs-dependencies-{{ checksum "packages/docs/package.json" }}
           paths:
             - packages/docs/node_modules
-      - deploy: cd packages/docs && npm run deploy:gh-pages
+      - run:
+          name: Deploy to gh-pages
+          command: cd packages/docs && npm run deploy:gh-pages
 
 workflows:
   version: 2
