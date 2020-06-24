@@ -1,14 +1,21 @@
 {
-  "name": "react-components",
-  "version": "0.0.1",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/PeculiarVentures/react-components.git"
-  },
+  "name": "react-components-monorepo",
+  "private": true,
   "author": "PeculiarVentures Team",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/PeculiarVentures/react-components/issues"
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "lerna run build",
+    "clean": "lerna run --parallel clean",
+    "lint": "lerna run --parallel lint",
+    "test": "lerna run --parallel test",
+    "dev:docs": "yarn --cwd packages/docs development",
+    "prebootstrap": "yarn",
+    "bootstrap": "lerna bootstrap",
+    "bootstrap:undo": "lerna clean --yes"
   },
-  "homepage": "https://github.com/PeculiarVentures/react-components#readme"
+  "devDependencies": {
+    "lerna": "^3.22.1"
+  }
 }

@@ -118,6 +118,10 @@ class Select extends Component {
     placement: PropTypes.oneOf(['top', 'bottom']),
   };
 
+  static contextTypes = {
+    device: PropTypes.object,
+  };
+
   static defaultProps = {
     native: false,
     name: undefined,
@@ -141,10 +145,6 @@ class Select extends Component {
     size: 'medium',
     mobileSize: undefined,
     placement: 'bottom',
-  };
-
-  static contextTypes = {
-    device: PropTypes.object,
   };
 
   state = {

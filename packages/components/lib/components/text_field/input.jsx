@@ -114,6 +114,10 @@ export default class Input extends PureComponent {
     autoFocus: PropTypes.bool,
   };
 
+  static contextTypes = {
+    device: PropTypes.object,
+  };
+
   static defaultProps = {
     tabIndex: 0,
     className: '',
@@ -139,10 +143,6 @@ export default class Input extends PureComponent {
     inputProps: {},
     autoComplete: undefined,
     autoFocus: false,
-  };
-
-  static contextTypes = {
-    device: PropTypes.object,
   };
 
   /**

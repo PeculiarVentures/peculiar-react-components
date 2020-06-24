@@ -1,7 +1,8 @@
 {
   "name": "lib-theme-contructor",
   "version": "0.1.0",
-  "description": "Theme constructor",
+  "private": false,
+  "description": "Theme constructor for lib-react-components",
   "keywords": [
     "postcss",
     "css",

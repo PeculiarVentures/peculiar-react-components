@@ -1,85 +1,110 @@
 version: 2.1
 
-defaults: &defaults
-  working_directory: ~/ci-build
-  docker:
-    - image: circleci/node:10.17.0
+aliases:
+  - &docker-node-lts
+    - image: circleci/node:lts
+
+  - &restore-node-modules-cache
+    name: Restore node_modules cache
+    key: yarn-deps-{{ checksum "yarn.lock" }}
+
+  - &restore-yarn-cache
+    name: Restore yarnpkg cache
+    key: yarn-cache
+
+  - &save-node-modules-cache
+    name: Save node_modules cache
+    paths:
+      - node_modules
+    key: yarn-deps-{{ checksum "yarn.lock" }}
+
+  - &save-yarn-cache
+    name: Save yarnpkg cache
+    paths:
+      - ~/.cache/yarn
+    key: yarn-cache
 
 jobs:
-  theme-constructor:
-    <<: *defaults
+  checkout-code:
+    docker: *docker-node-lts
     steps:
       - checkout
-      - restore_cache:
-          key: constructor-dependencies-{{ checksum "packages/theme-constructor/package.json" }}
-      - run: cd packages/theme-constructor && npm install
-      - save_cache:
-          key: constructor-dependencies-{{ checksum "packages/theme-constructor/package.json" }}
-          paths:
-            - packages/theme-constructor/node_modules
+      - restore_cache: *restore-yarn-cache
+      - restore_cache: *restore-node-modules-cache
+      - run: yarn install --non-interactive --cache-folder ~/.cache/yarn
       - run:
-          name: Lint
-          command: cd packages/theme-constructor && npm run lint
-      - run:
-          name: Test
-          command: cd packages/theme-constructor && npm run test
-
-  components:
-    <<: *defaults
-    steps:
-      - checkout
-      - restore_cache:
-          key: components-dependencies-{{ checksum "packages/components/package.json" }}
-      - run: cd packages/components && npm install
-      - save_cache:
-          key: components-dependencies-{{ checksum "packages/components/package.json" }}
-          paths:
-            - packages/components/node_modules
-      - run:
-          name: Lint
-          command: cd packages/components && npm run lint
-      - run:
-          name: Test
-          command: cd packages/components && npm run test
-      - run:
-          name: Build
-          command: cd packages/components && npm run build
+          name: Check if yarn.lock changed during install
+          command: git diff --exit-code
+      - save_cache: *save-node-modules-cache
+      - save_cache: *save-yarn-cache
       - persist_to_workspace:
-          root: ~/ci-build
-          paths:
-            - packages/components/node_modules
-            - packages/components/commonjs
-            - packages/components/esm
-            - packages/components/index.d.ts
+          root: "."
+          paths: [
+            packages/*/node_modules
+          ]
 
-  docs:
-    <<: *defaults
+  lint:
+    docker: *docker-node-lts
     steps:
       - checkout
-      - attach_workspace:
-          at: ~/ci-build
-      - restore_cache:
-          key: docs-dependencies-{{ checksum "packages/docs/package.json" }}
-      - run: cd packages/docs && npm install
-      - save_cache:
-          key: docs-dependencies-{{ checksum "packages/docs/package.json" }}
-          paths:
-            - packages/docs/node_modules
-      - run:
-          name: Deploy to gh-pages
-          command: cd packages/docs && npm run deploy:gh-pages
+      - restore_cache: *restore-node-modules-cache
+      - attach_workspace: { at: "." }
+      - run: yarn lint
+
+  test:
+    docker: *docker-node-lts
+    steps:
+      - checkout
+      - restore_cache: *restore-node-modules-cache
+      - attach_workspace: { at: "." }
+      - run: yarn test
+
+  build:
+    docker: *docker-node-lts
+    steps:
+      - checkout
+      - restore_cache: *restore-node-modules-cache
+      - attach_workspace: { at: "." }
+      - run: yarn build
+      - persist_to_workspace:
+        root: "."
+        paths: [
+          packages/components/esm,
+          packages/components/commonjs,
+          packages/components/index.d.ts,
+        ]
+
+  deploy:
+    docker: *docker-node-lts
+    steps:
+      - checkout
+      - restore_cache: *restore-node-modules-cache
+      - attach_workspace: { at: "." }
+      - run: |
+          cd packages/docs 
+          yarn build
+          yarn deploy:gh-pages
 
 workflows:
   version: 2
-  test-build-deploy:
+  compile_lint_test_dist_deploy:
     jobs:
-      - theme-constructor
-      - components
-      - docs:
-          requires:
-            - theme-constructor
-            - components
-          filters:
-            branches:
-              only:
-                - master
+      - checkout-code
+      - lint:
+          requires: [
+            checkout-code
+          ]
+      - test
+          requires: [
+            checkout-code
+          ]
+      - build
+          requires: [
+            lint,
+            test
+          ]
+      - deploy
+          requires: [
+            build
+          ]
+

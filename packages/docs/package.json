@@ -11,8 +11,7 @@
     "production": "cross-env ENV_FILE=./env/production NODE_ENV=production babel-node bundler/run",
     "build": "cross-env ENV_FILE=./env/production NODE_ENV=build babel-node bundler/run --no-source-map",
     "deploy:gh-pages": "babel-node bundler/deploy",
-    "predeploy:gh-pages": "npm run build",
-    "clear": "babel-node bundler/run --clear"
+    "clean": "rimraf dst"
   },
   "author": "PeculiarVentures Team",
   "license": "MIT",
@@ -69,7 +68,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
-    "lib-react-components": "file:../components",
+    "lib-react-components": "^0.3.85",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",

@@ -8,3 +8,4 @@ node_modules
 **/commonjs
 **/esm
 **/coverage
+**/dst
