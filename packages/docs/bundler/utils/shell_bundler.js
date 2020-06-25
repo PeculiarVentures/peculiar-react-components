@@ -6,14 +6,13 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin'); // eslint-disa
 const md5File = require('md5-file'); // eslint-disable-line
 const path = require('path');
 const evaluate = require('eval'); // eslint-disable-line
-const { IntlWrapper } = require('lib-pintl'); // eslint-disable-line
 const beautify = require('js-beautify'); // eslint-disable-line
 const uuid = require('./uuid').default;
 
 const beautifyHtml = beautify.html;
 
 const renderToStaticDocument = (Component, props) => (
-  renderToStaticMarkup(<IntlWrapper inShell><Component {...props} /></IntlWrapper>) // eslint-disable-line
+  renderToStaticMarkup(<Component {...props} />) // eslint-disable-line
 );
 
 const applyLocalizationReplace = (markup = '') => (

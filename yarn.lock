@@ -8320,11 +8320,6 @@ levn@^0.3.0, levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
-lib-pintl@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/lib-pintl/-/lib-pintl-0.0.2.tgz#112f4ba6f07a269ed55dea8d949d8c6de0781904"
-  integrity sha512-nBe36Qs+an4GRYATSshphbyCnijNdZSTesS8cKIijlXJvyv62ZW80gzcXWbFEww35l7/Wl5Q6AHNKw3bSGCy6w==
-
 lines-and-columns@^1.1.6:
   version "1.1.6"
   resolved "https://registry.yarnpkg.com/lines-and-columns/-/lines-and-columns-1.1.6.tgz#1c00c743b433cd0a4e80758f7b64a57440d9ff00"
