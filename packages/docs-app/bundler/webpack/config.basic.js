@@ -18,7 +18,7 @@ export default (mode) => {
       }),
       new CopyWebpackPlugin([
         {
-          from: path.join(__dirname, '../../../components/src/themes/default.css'),
+          from: path.join(__dirname, '../../../components/themes/default.css'),
           to: './assets/css',
         },
       ]),

@@ -15,7 +15,7 @@
   "scripts": {
     "test": "BABEL_ENV=test NODE_ENV=test jest",
     "lint": "eslint --ext .js,.jsx ./",
-    "build:css": "node src/utils/build_theme.js",
+    "build:css": "node scripts/build_theme.js",
     "build:commonjs": "BABEL_ENV=commonjs babel src --out-dir commonjs --ignore *.css,*.sss,*.spec.js,*.spec.jsx --source-maps",
     "build:esm": "BABEL_ENV=esm babel src --out-dir esm --ignore *.css,*.sss,*.spec.js,*.spec.jsx --source-maps",
     "build": "yarn run build:css && yarn run build:commonjs && yarn run build:esm",
@@ -72,6 +72,8 @@
     "src/",
     "commonjs/",
     "esm/",
+    "styles/",
+    "themes/",
     "index.d.ts"
   ],
   "author": "PeculiarVentures Team",
