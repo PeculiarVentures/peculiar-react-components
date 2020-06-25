@@ -19,7 +19,7 @@ yarn build
 A typical contributor workflow looks like this:
 
 1. Create a new feature branch.
-1. Run `yarn dev:docs` in the root to watch all the code and run the dev app at http://localhost:3000.
+1. Run `yarn dev:docs-app` in the root to watch all the code and run the dev app at http://localhost:3000.
 1. Write some code.
 1. Ensure your code is **tested** and **linted**.
   - Add unit tests as necessary when fixing bugs or adding features; run them with `yarn test` in the relevant `packages/` directory.

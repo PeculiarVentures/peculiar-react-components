@@ -81,7 +81,7 @@ jobs:
       - restore_cache: *restore-node-modules-cache
       - attach_workspace: { at: "." }
       - run: |
-          cd packages/docs 
+          cd packages/docs-app
           yarn build
           yarn deploy:gh-pages
 
