@@ -41,5 +41,5 @@ export function getContents(markdown) {
 export function getTitle(markdown) {
   const matches = markdown.match(titleRegExp);
 
-  return matches ? matches[1] : 'Alternative-UI';
+  return matches ? matches[1] : 'Peculiar React Components';
 }

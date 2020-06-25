@@ -17,5 +17,5 @@ export const PORT = env('PORT');
 export const URL = env('URL');
 
 // ======== App ========
-export const APP_NAME = 'Alternative UI';
+export const APP_NAME = 'Peculiar React Components';
 export const GIT_URL = env('GIT_URL', 'null') !== 'null' ? env('GIT_URL') : '';

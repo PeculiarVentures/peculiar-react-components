@@ -24,12 +24,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/PeculiarVentures/react-components.git"
+    "url": "git+https://github.com/PeculiarVentures/peculiar-react-components.git"
   },
   "bugs": {
-    "url": "https://github.com/PeculiarVentures/react-components/issues"
+    "url": "https://github.com/PeculiarVentures/peculiar-react-components/issues"
   },
-  "homepage": "https://PeculiarVentures.github.io/react-components/",
+  "homepage": "https://PeculiarVentures.github.io/peculiar-react-components/",
   "peerDependencies": {
     "react": "^16.0.0",
     "react-dom": "^16.0.0"

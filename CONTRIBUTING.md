@@ -4,12 +4,12 @@
 
 First, ensure you have Node v10+ and the latest [yarn](https://yarnpkg.com) installed on your machine.
 
-As an external contributor, you will have to fork AlternativeUI in order to contribute code.
+As an external contributor, you will have to fork Peculiar React Components in order to contribute code.
 Clone your fork onto your machine and then run the following commands to install dependencies:
 
 ```sh
-gie clone git@github.com:<username>/react-components.git
-cd react-components
+gie clone git@github.com:<username>/peculiar-react-components.git
+cd peculiar-react-components
 yarn bootstrap
 yarn build
 ```

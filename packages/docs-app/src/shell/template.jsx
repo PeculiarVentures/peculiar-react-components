@@ -14,8 +14,8 @@ const RootShell = props => (
       <title>
         {props.title}
       </title>
-      <meta name="description" content="React Components" />
-      <meta name="keywords" content="react, components, ui, alternative" />
+      <meta name="description" content="Peculiar React Components" />
+      <meta name="keywords" content="peculiar, react, components, ui" />
       <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;subset=cyrillic" rel="stylesheet" />
       <style dangerouslySetInnerHTML={{ __html: props.inlineStyles }} />
       <link

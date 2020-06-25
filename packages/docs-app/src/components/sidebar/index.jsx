@@ -61,7 +61,7 @@ export default function Sidebar(props) {
           activeClassName={s.logo_active}
           exact
         >
-          Alternative UI
+          Peculiar React Components
         </NavLink>
         <Typography
           type="c1"

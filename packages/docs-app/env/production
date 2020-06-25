@@ -1,4 +1,4 @@
 NODE_ENV=production
 URL=http://localhost
 PORT=3000
-GIT_URL=https://PeculiarVentures.github.io/react-components
+GIT_URL=https://PeculiarVentures.github.io/peculiar-react-components

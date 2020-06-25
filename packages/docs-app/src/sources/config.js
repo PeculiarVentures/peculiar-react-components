@@ -130,6 +130,6 @@ export default [
   },
   {
     title: 'GitHub',
-    pathname: 'https://github.com/PeculiarVentures/react-components',
+    pathname: 'https://github.com/PeculiarVentures/peculiar-react-components',
   },
 ];

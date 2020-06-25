@@ -4,7 +4,7 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/PeculiarVentures/react-components.git"
+    "url": "git+https://github.com/PeculiarVentures/peculiar-react-components.git"
   },
   "scripts": {
     "development": "cross-env NODE_ENV=development babel-node bundler/run",
@@ -14,9 +14,9 @@
     "clean": "rimraf dst"
   },
   "bugs": {
-    "url": "https://github.com/PeculiarVentures/react-components/issues"
+    "url": "https://github.com/PeculiarVentures/peculiar-react-components/issues"
   },
-  "homepage": "https://PeculiarVentures.github.io/react-components/",
+  "homepage": "https://PeculiarVentures.github.io/peculiar-react-components/",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
