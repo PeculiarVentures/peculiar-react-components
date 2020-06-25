@@ -187,6 +187,11 @@ module.exports = {
       template: path.resolve(__dirname, '../../src/index.ejs'),
       publicPath,
     }),
+    new HtmlWebpackPlugin({
+      filename: '404.html',
+      template: path.resolve(__dirname, '../../src/index.ejs'),
+      publicPath,
+    }),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new MiniCssExtractPlugin({
       filename: 'assets/css/[name].[contenthash:8].css',
