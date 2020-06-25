@@ -1,6 +1,6 @@
 {
   "name": "docs-app",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "repository": {
     "type": "git",
@@ -65,7 +65,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
-    "lib-react-components": "^0.4.0",
+    "lib-react-components": "^1.0.0",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
