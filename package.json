@@ -9,7 +9,7 @@
     "clean": "lerna run --parallel clean",
     "lint": "lerna run --parallel lint",
     "test": "lerna run --parallel test",
-    "dev:docs-app": "yarn --cwd packages/docs-app development",
+    "dev:docs-app": "yarn --cwd packages/docs-app start",
     "bootstrap": "yarn",
     "bootstrap:undo": "lerna clean --yes"
   },

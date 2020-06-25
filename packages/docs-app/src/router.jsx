@@ -22,7 +22,7 @@ export default function Router() {
     g.children && g.children.forEach(p => routes.push(
       <Route
         key={p.pathname}
-        path={`${publicPath}${p.pathname}`}
+        path={p.pathname}
         render={() => (
           <Content>
             <Example
@@ -37,7 +37,7 @@ export default function Router() {
   ));
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={publicPath}>
       <div
         style={{
           height: '100%',
@@ -50,7 +50,7 @@ export default function Router() {
         <Switch>
           <Route
             exact
-            path={`${publicPath}/`}
+            path="/"
             render={() => (
               <Content>
                 <Landing
@@ -60,7 +60,7 @@ export default function Router() {
             )}
           />
           {routes}
-          <Redirect to={`${publicPath}/`} />
+          <Redirect to="/" />
         </Switch>
       </div>
     </BrowserRouter>

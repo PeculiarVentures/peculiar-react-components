@@ -3,7 +3,7 @@ const titleRegExp = /# (.*)[\r\n]/;
 const headerKeyValueRegExp = /(.*): (.*)/g;
 const emptyRegExp = /^\s*$/;
 
-export function getHeaders(markdown) {
+function getHeaders(markdown) {
   let header = markdown.match(headerRegExp);
 
   if (!header) {
@@ -31,15 +31,21 @@ export function getHeaders(markdown) {
   return headers;
 }
 
-export function getContents(markdown) {
+function getContents(markdown) {
   return markdown
     .replace(headerRegExp, '') // Remove header information
     .split(/^{{|}}$/gm) // Split markdown into an array, separating demos
     .filter(content => !emptyRegExp.test(content)); // Remove empty lines
 }
 
-export function getTitle(markdown) {
+function getTitle(markdown) {
   const matches = markdown.match(titleRegExp);
 
   return matches ? matches[1] : 'Peculiar React Components';
 }
+
+module.exports = {
+  getHeaders,
+  getContents,
+  getTitle,
+};

@@ -10,7 +10,6 @@ import {
   Typography,
   validator,
 } from 'lib-react-components';
-import publicPath from '../../utils/get_build_path';
 import s from './styles/index.sass';
 
 export default function Example(props) {
@@ -19,7 +18,7 @@ export default function Example(props) {
   function Data({ data }) { // eslint-disable-line
     return (
       <div className={s.example_wrapper}>
-        {data.map((d, index) => {  // eslint-disable-line
+        {data.default.map((d, index) => {  // eslint-disable-line
           if (d.type === 'demo') {
             let DemoComponent = () => null;
             let DemoCode = () => null;
@@ -105,8 +104,8 @@ export default function Example(props) {
 
                   return (
                     <Link
-                      to={`${publicPath}${elProps.href}`}
-                      href={`${publicPath}${elProps.href}`}
+                      to={elProps.href}
+                      href={elProps.href}
                       className="text_primary"
                     >
                       {elProps.children}

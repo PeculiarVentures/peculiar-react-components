@@ -1,9 +1,9 @@
-import path from 'path';
-import { readFileSync } from 'fs';
-import * as reactDocgen from 'react-docgen'; // eslint-disable-line
-import loaderUtils from 'loader-utils'; // eslint-disable-line
-import { getContents } from './parseMarkdown';
-import generateProps from './generateProps';
+const path = require('path');
+const { readFileSync } = require('fs');
+const reactDocgen = require('react-docgen');
+const loaderUtils = require('loader-utils');
+const { getContents } = require('./parseMarkdown');
+const { generateProps } = require('./generateProps');
 
 const demoRegexp = /^"demo": "(.*)"/;
 const propsRegexp = /^"props": "(.*)"/;

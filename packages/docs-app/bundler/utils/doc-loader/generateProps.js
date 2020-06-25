@@ -76,7 +76,7 @@ function getProp(props, key) {
   }
 }
 
-export default function generateProps(reactAPI) {
+function generateProps(reactAPI) {
   let text = `
 | Name | Type | Default | Description |
 |:-----|:-----|:--------|:------------|\n`;
@@ -118,3 +118,7 @@ export default function generateProps(reactAPI) {
 
   return text;
 }
+
+module.exports = {
+  generateProps,
+};

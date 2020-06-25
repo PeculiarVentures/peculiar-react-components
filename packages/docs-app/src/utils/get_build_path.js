@@ -1,13 +1,10 @@
-import * as CONFIG from '../../bundler/config';
+import CONFIG from '../../env/production.json';
 
-const getPath = () => {
-  const gitUrlRegexp = /https:\/\/([a-z-A-Z])\w+.github.io/g;
+const isProduction = process.env.NODE_ENV === 'production';
+let buildPath = '/';
 
-  if (gitUrlRegexp.test(CONFIG.GIT_URL)) {
-    return CONFIG.GIT_URL.replace(/https:\/\/([a-z-A-Z])\w+.github.io/g, '');
-  }
+if (isProduction && CONFIG.PUBLIC_PATH) {
+  buildPath = CONFIG.PUBLIC_PATH;
+}
 
-  return '';
-};
-
-export default getPath();
+export default buildPath;

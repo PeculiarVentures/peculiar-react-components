@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ItemPlate from '../item_plate';
-import publicPath from '../../utils/get_build_path';
 import s from './styles/index.sass';
 
 const Landing = ({ pages }) => (
@@ -12,7 +11,7 @@ const Landing = ({ pages }) => (
         className={s.item}
       >
         <ItemPlate
-          to={`${publicPath}${p.pathname}`}
+          to={p.pathname}
           name={p.title}
         />
       </div>

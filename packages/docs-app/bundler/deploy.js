@@ -1,5 +1,5 @@
-import deployToGhPages from './utils/deploy_to_gh_pages';
-import * as CONFIG from './config';
+const { deployToGhPages } = require('./utils/deploy_to_gh_pages');
+const CONFIG = require('./config');
 
 deployToGhPages(CONFIG.DST_PATH)
   .catch(() => {

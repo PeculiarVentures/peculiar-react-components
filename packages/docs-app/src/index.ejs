@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+  <meta httpEquiv="X-UA-Compatible" content="ie=edge" />
+  <title>
+    Peculiar React Components
+  </title>
+  <meta name="description" content="Peculiar React Components" />
+  <meta name="keywords" content="peculiar, react, components, ui" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      border: 0;
+      border-radius: 0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-size-adjust: none;
+      -webkit-text-size-adjust: none;
+      -webkit-tap-highlight-color: transparent;
+      outline-color: #c4d8f7;
+    }
+
+    *:after, *:before {
+      box-sizing: border-box;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    *:focus:not(:active):not(:hover) {
+      outline-width: 2px;
+      outline-style: solid;
+      outline-offset: -2px;
+    }
+
+    input:focus, textarea:focus, *:active, *:hover {
+      outline: none !important;
+    }
+
+    textarea {
+      resize: none;
+    }
+
+    input, textarea {
+      -webkit-appearance: none !important;
+      -moz-appearance: none;
+      -ms-appearance: none;
+      appearance: none !important;
+      font-family: "Open Sans", Arial, sans-serif !important;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+    }
+
+    html, body {
+      width: 100%;
+      font-family: "Open Sans", Arial, sans-serif;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    table {
+      cellspacing: 0 !important;
+      border-spacing: 0 !important;
+    }
+
+    .clear:after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+
+    #root {
+      height: 100%;
+    }
+  </style>
+
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;subset=cyrillic" rel="stylesheet" />
+  <link
+    rel="stylesheet"
+    href="<%= htmlWebpackPlugin.options.publicPath %>assets/css/default.css"
+  />
+  <noscript>
+    We use Javascript to provide a rich, interactive and secure user experience. Turn Javascript on and try again. <a href="https://enable-javascript.com" rel="noopener noreferrer" target="_blank">Learn more.</a>
+  </noscript>
+</head>
+<body>
+  <div id="root"></div>
+</body>
+</html>

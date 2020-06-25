@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import { validator, Typography } from 'lib-react-components';
 import classNames from 'classnames';
-import publicPath from '../../utils/get_build_path';
 import packageJson from '../../../../components/package.json';
 import s from './styles/index.sass';
 
@@ -34,8 +33,8 @@ export default function Sidebar(props) {
 
     return (
       <NavLink
-        to={`${publicPath}${pathname}`}
-        href={`${publicPath}${pathname}`}
+        to={pathname}
+        href={pathname}
         exact
         {..._props}
       >
@@ -53,7 +52,7 @@ export default function Sidebar(props) {
     >
       <div className={s.logo_container}>
         <NavLink
-          to={`${publicPath}/`}
+          to="/"
           className={classNames(
             s.logo,
             'text_success',
