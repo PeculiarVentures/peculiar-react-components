@@ -15,7 +15,7 @@ module.exports = {
     '**/*.spec.(js|jsx)',
   ],
   collectCoverageFrom: [
-    'lib/**.{js|jsx}',
+    'src/**.{js|jsx}',
   ],
   coverageDirectory: 'coverage',
   coverageReporters: ['lcov', 'html'],
