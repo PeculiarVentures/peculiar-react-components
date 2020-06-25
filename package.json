@@ -10,8 +10,7 @@
     "lint": "lerna run --parallel lint",
     "test": "lerna run --parallel test",
     "dev:docs-app": "yarn --cwd packages/docs-app development",
-    "prebootstrap": "yarn",
-    "bootstrap": "lerna bootstrap",
+    "bootstrap": "yarn",
     "bootstrap:undo": "lerna clean --yes"
   },
   "devDependencies": {
