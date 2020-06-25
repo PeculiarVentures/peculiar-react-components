@@ -34,7 +34,7 @@ ReactDOM.render(
 And add styles file to your <head> element.
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/browse/lib-react-components@latest/lib/themes/default.css">
+<link rel="stylesheet" href="https://unpkg.com/lib-react-components@latest/lib/themes/default.css">
 ```
 
 ### Responsive meta tag

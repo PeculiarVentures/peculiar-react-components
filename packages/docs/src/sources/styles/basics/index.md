@@ -7,7 +7,7 @@ You can use one of these methods for styling components
 Add styles file to your <head> element using styles from npm
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/browse/lib-react-components@latest/lib/themes/default.css">
+<link rel="stylesheet" href="https://unpkg.com/lib-react-components@latest/lib/themes/default.css">
 ```
 
 Or using local npm package:
