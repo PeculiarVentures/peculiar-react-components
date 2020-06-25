@@ -4,4 +4,4 @@
 
 ## Props
 
-{{"props": "../components/lib/components/button_split/index.jsx"}}
+{{"props": "../components/src/components/button_split/index.jsx"}}

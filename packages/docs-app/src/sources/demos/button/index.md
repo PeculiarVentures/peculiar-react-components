@@ -18,4 +18,4 @@
 
 ## Props
 
-{{"props": "../components/lib/components/button/index.jsx"}}
+{{"props": "../components/src/components/button/index.jsx"}}

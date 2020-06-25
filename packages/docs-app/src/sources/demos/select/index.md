@@ -28,8 +28,8 @@ Select components are used for collecting user provided information from a list 
 
 ## Props
 
-{{"props": "../components/lib/components/select/select.jsx"}}
+{{"props": "../components/src/components/select/select.jsx"}}
 
 ## Props SelectItem
 
-{{"props": "../components/lib/components/select/select_item.jsx"}}
+{{"props": "../components/src/components/select/select_item.jsx"}}

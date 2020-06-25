@@ -10,4 +10,4 @@
 
 ## Props
 
-{{"props": "../components/lib/components/slider/index.jsx"}}
+{{"props": "../components/src/components/slider/index.jsx"}}

@@ -6,4 +6,4 @@
 
 ## Props
 
-{{"props": "../components/lib/containers/portal/index.jsx"}}
+{{"props": "../components/src/containers/portal/index.jsx"}}

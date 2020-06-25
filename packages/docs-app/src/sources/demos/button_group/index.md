@@ -4,4 +4,4 @@
 
 ## Props
 
-{{"props": "../components/lib/components/button_group/index.jsx"}}
+{{"props": "../components/src/components/button_group/index.jsx"}}

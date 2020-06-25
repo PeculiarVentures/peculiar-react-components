@@ -10,4 +10,4 @@
 
 ## Props
 
-{{"props": "../components/lib/components/progress/circular_progress.jsx"}}
+{{"props": "../components/src/components/progress/circular_progress.jsx"}}

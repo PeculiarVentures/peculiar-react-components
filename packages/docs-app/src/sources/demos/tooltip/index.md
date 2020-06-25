@@ -10,8 +10,8 @@
 
 ## Props
 
-{{"props": "../components/lib/components/tooltip/tooltip.jsx"}}
+{{"props": "../components/src/components/tooltip/tooltip.jsx"}}
 
 ## Props TooltipPopper
 
-{{"props": "../components/lib/components/tooltip/tooltip_popper.jsx"}}
+{{"props": "../components/src/components/tooltip/tooltip_popper.jsx"}}

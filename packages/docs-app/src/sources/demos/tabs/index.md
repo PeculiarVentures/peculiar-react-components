@@ -18,8 +18,8 @@
 
 ## Props
 
-{{"props": "../components/lib/components/tabs/tabs.jsx"}}
+{{"props": "../components/src/components/tabs/tabs.jsx"}}
 
 ## Props Tab
 
-{{"props": "../components/lib/components/tabs/tab.jsx"}}
+{{"props": "../components/src/components/tabs/tab.jsx"}}

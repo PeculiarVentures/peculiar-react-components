@@ -22,4 +22,4 @@
 
 ## Props
 
-{{"props": "../components/lib/components/switch_handler/index.jsx"}}
+{{"props": "../components/src/components/switch_handler/index.jsx"}}

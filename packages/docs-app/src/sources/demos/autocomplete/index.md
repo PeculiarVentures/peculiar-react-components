@@ -6,4 +6,4 @@
 
 ## Props
 
-{{"props": "../components/lib/components/autocomplete/index.jsx"}}
+{{"props": "../components/src/components/autocomplete/index.jsx"}}

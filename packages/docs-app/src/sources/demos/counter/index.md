@@ -10,4 +10,4 @@
 
 ## Props
 
-{{"props": "../components/lib/components/counter/index.jsx"}}
+{{"props": "../components/src/components/counter/index.jsx"}}

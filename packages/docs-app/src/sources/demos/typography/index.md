@@ -22,4 +22,4 @@
 
 ## Props
 
-{{"props": "../components/lib/components/typography/index.jsx"}}
+{{"props": "../components/src/components/typography/index.jsx"}}

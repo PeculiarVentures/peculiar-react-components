@@ -10,4 +10,4 @@
 
 ## Props
 
-{{"props": "../components/lib/components/highlight_code/index.jsx"}}
+{{"props": "../components/src/components/highlight_code/index.jsx"}}

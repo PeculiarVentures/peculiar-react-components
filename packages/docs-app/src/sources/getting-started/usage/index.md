@@ -18,13 +18,16 @@ const App = () => (
   </Button>
 );
 
-ReactDOM.render(<App />, document.querySelector('#root'));
+ReactDOM.render(
+  <App />,
+  document.querySelector('#root'),
+);
 ```
 
 And add styles file to your <head> element.
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/lib-react-components@latest/lib/themes/default.css">
+<link rel="stylesheet" href="https://unpkg.com/lib-react-components@latest/src/themes/default.css">
 ```
 
 ### Responsive meta tag

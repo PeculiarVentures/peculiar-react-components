@@ -6,4 +6,4 @@
 
 ## Props
 
-{{"props": "../components/lib/components/progressive_image/index.jsx"}}
+{{"props": "../components/src/components/progressive_image/index.jsx"}}

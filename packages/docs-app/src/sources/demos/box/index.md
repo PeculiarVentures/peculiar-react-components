@@ -14,4 +14,4 @@
 
 ## Props
 
-{{"props": "../components/lib/components/box/index.jsx"}}
+{{"props": "../components/src/components/box/index.jsx"}}

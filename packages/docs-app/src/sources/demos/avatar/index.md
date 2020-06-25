@@ -16,4 +16,4 @@ Avatars containing simple characters can be created by passing your string as `l
 
 ## Props
 
-{{"props": "../components/lib/components/avatar/index.jsx"}}
+{{"props": "../components/src/components/avatar/index.jsx"}}

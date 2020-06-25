@@ -22,8 +22,8 @@
 
 ## Props
 
-{{"props": "../components/lib/components/radio/radio.jsx"}}
+{{"props": "../components/src/components/radio/radio.jsx"}}
 
 ## Props RadioGroup
 
-{{"props": "../components/lib/components/radio/radio_group.jsx"}}
+{{"props": "../components/src/components/radio/radio_group.jsx"}}

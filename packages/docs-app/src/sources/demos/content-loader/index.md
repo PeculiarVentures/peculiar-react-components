@@ -10,4 +10,4 @@
 
 ## Props
 
-{{"props": "../components/lib/components/content_loader/index.jsx"}}
+{{"props": "../components/src/components/content_loader/index.jsx"}}

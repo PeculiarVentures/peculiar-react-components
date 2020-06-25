@@ -30,4 +30,4 @@
 
 ## Props
 
-{{"props": "../components/lib/components/text_field/text_field.jsx"}}
+{{"props": "../components/src/components/text_field/text_field.jsx"}}

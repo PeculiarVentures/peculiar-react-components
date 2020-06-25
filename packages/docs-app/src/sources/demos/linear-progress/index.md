@@ -10,4 +10,4 @@
 
 ## Props
 
-{{"props": "../components/lib/components/progress/linear_progress.jsx"}}
+{{"props": "../components/src/components/progress/linear_progress.jsx"}}

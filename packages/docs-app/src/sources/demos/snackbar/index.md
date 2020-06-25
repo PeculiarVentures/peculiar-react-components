@@ -14,4 +14,4 @@
 
 ## Props
 
-{{"props": "../components/lib/components/snackbar/index.jsx"}}
+{{"props": "../components/src/components/snackbar/index.jsx"}}
