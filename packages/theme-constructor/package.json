@@ -9,10 +9,10 @@
     "theme",
     "constructor"
   ],
-  "main": "lib/index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "NODE_ENV=test mocha --opts ./mocha.opts",
-    "lint": "eslint --ext .js lib test"
+    "lint": "eslint --ext .js ./"
   },
   "repository": {
     "type": "git",
@@ -46,7 +46,7 @@
     "traverse": "^0.6.6"
   },
   "files": [
-    "lib/"
+    "src/"
   ],
   "author": "PeculiarVentures Team",
   "license": "AGPL-3.0"
