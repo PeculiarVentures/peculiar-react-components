@@ -89,10 +89,12 @@ async function createTheme(opts) {
   ];
 
   if (opts.minify !== false) {
+    // for minification
     postcssPlugins.push(
-      // for minification
       require('cssnano')({ // eslint-disable-line
-        preset: 'default',
+        preset: ['default', {
+          mergeLonghand: false,
+        }],
       }),
     );
   }
