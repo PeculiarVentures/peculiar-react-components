@@ -1,5 +1,13 @@
 ## June 25, 2020
 
+### `lib-react-components 1.0.1`
+
+- updated theme using latest theme-constructor.
+
+### `lib-theme-contructor 0.3.1`
+
+- disable "mergeLonghand" setting for minify styles.
+
 ### `lib-react-components 1.0.0`
 
 - renamed input directory "lib" -> "src".
