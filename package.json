@@ -12,7 +12,8 @@
     "dev:docs-app": "yarn --cwd packages/docs-app start",
     "bootstrap": "yarn",
     "bootstrap:undo": "lerna clean --yes",
-    "update:version": "lerna version --no-push"
+    "prepare": "yarn build",
+    "publish:version": "lerna publish"
   },
   "devDependencies": {
     "lerna": "^3.22.1"
