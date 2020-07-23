@@ -1,7 +1,9 @@
 @each $key in $colors
 	.stroke_$(key)
 		&:not(svg)
-			border: 1px solid rgb(var(--$(key)))
+			border-width: 1px
+			border-style: solid
+			border-color: rgb(var(--$(key)))
 		svg& [data-stroke]
 			stroke: rgb(var(--$(key)))
 
