@@ -11,7 +11,8 @@
     "test": "lerna run --parallel test",
     "dev:docs-app": "yarn --cwd packages/docs-app start",
     "bootstrap": "yarn",
-    "bootstrap:undo": "lerna clean --yes"
+    "bootstrap:undo": "lerna clean --yes",
+    "update:version": "lerna version --no-push"
   },
   "devDependencies": {
     "lerna": "^3.22.1"
