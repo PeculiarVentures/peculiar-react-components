@@ -33,55 +33,31 @@ export default class HighlightCode extends PureComponent {
       'none',
       'json',
     ]),
+    /**
+     * Component root element class name.
+     */
+    className: PropTypes.string,
   };
 
   static defaultProps = {
     lang: 'js',
+    className: undefined,
+  };
+
+  componentDidMount() {
+    this._highlight();
   }
 
-  /**
-   * Fix Prism removes <br/> on Prism.highlightAll()
-   * https://github.com/PrismJS/prism/issues/832
-   */
-  componentWillMount() {
-    Prism.hooks.add('before-highlight', (env) => {
-      env.code = env.element.innerText;
-    });
+  componentDidUpdate() {
+    this._highlight();
   }
 
-  _getPlainCode() {
-    const children = this.props.children;
+  codeRef = React.createRef();
 
-    if (Array.isArray(children)) {
-      return children.join(' ');
+  _highlight() {
+    if (this.codeRef && this.codeRef.current) {
+      Prism.highlightElement(this.codeRef.current);
     }
-
-    return String(children);
-  }
-
-  /**
-   * Hightlight element
-   */
-  _hightlight() {
-    const { lang } = this.props;
-    const grammar = Prism.languages[lang];
-    let _html = this._getPlainCode();
-
-    if (grammar) {
-      try {
-        _html = Prism.highlight(_html, grammar, lang);
-      } catch (err) {
-        console.warn(`React Components Highlighter: There is an error highlighting lang ${lang}`, err);
-      }
-    } else {
-      _html = _html.replace(/[<>]/g, s => `&#${s.charCodeAt(0)};`);
-    }
-
-    // Treat iOS whie-space: pre; behavior
-    return _html
-      .replace(/\n/g, '<br>')
-      .replace(/<br>[ ]+/g, str => `<br>${'&nbsp;'.repeat(str.length - 5)}`)
-      .replace(/^[ ]+/g, str => '&nbsp;'.repeat(str.length));
   }
 
   /**
@@ -92,26 +68,25 @@ export default class HighlightCode extends PureComponent {
     const {
       children,
       lang,
+      className,
       ...other
     } = this.props;
 
     return (
       <pre
         data-component="highlight_code"
-        {...other}
         className={classNames(
-          other.className,
+          className,
           `language-${lang}`,
         )}
+        {...other}
       >
         <code
-          style={{
-            whiteSpace: 'nowrap',
-          }}
-          ref={(node) => { this.rootNode = node; }}
+          ref={this.codeRef}
           className={`language-${lang}`}
-          dangerouslySetInnerHTML={{ __html: this._hightlight() }}
-        />
+        >
+          {children}
+        </code>
       </pre>
     );
   }
