@@ -92,7 +92,10 @@ class Button extends React.Component {
      */
     componentRef: PropTypes.oneOfType([
       PropTypes.func,
-      PropTypes.shape({ current: PropTypes.any }),
+      PropTypes.shape({
+        // eslint-disable-next-line
+        current: PropTypes.any,
+      }),
     ]),
     /**
      * Component full-width.

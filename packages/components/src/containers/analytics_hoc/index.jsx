@@ -37,7 +37,10 @@ export default function withAnalytics(Component, firingEventProp = 'onClick') {
   AnalyticsWrapper.propTypes = {
     forwardRef: PropTypes.oneOfType([
       PropTypes.func,
-      PropTypes.shape({ current: PropTypes.any }),
+      PropTypes.shape({
+        // eslint-disable-next-line
+        current: PropTypes.any,
+      }),
     ]),
     gaEventName: PropTypes.string,
   };
