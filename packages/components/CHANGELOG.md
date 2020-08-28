@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/PeculiarVentures/peculiar-react-components/compare/lib-react-components@1.0.4...lib-react-components@1.1.0) (2020-08-28)
+
+
+### Features
+
+* **components:** update "prismjs" dependency ([854cbb7](https://github.com/PeculiarVentures/peculiar-react-components/commit/854cbb70c66f93d912c809320af034d7a3e885bc))
+
+
+
+
+
 ## [1.0.4](https://github.com/PeculiarVentures/peculiar-react-components/compare/lib-react-components@1.0.3...lib-react-components@1.0.4) (2020-07-29)
 
 
