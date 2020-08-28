@@ -11,6 +11,7 @@
     "test": "lerna run --parallel test",
     "dev:docs-app": "yarn --cwd packages/docs-app start",
     "bootstrap": "yarn",
+    "bootstrap:upgrade": "yarn upgrade-interactive --latest",
     "bootstrap:undo": "lerna clean --yes",
     "prepare": "yarn build",
     "publish:version": "lerna publish"
