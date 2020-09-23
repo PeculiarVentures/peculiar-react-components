@@ -1,6 +1,6 @@
 {
   "name": "lib-theme-contructor",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "private": false,
   "description": "Theme constructor for lib-react-components",
   "keywords": [
