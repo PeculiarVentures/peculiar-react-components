@@ -38,7 +38,7 @@
     "cssnano": "^4.1.10",
     "fs-extra": "^5.0.0",
     "postcss": "^7.0.23",
-    "postcss-custom-properties": "^9.0.2",
+    "postcss-custom-properties": "^10.0.0",
     "postcss-import": "^12.0.1",
     "postcss-nested": "^4.2.1",
     "postcss-simple-vars": "^5.0.2",
