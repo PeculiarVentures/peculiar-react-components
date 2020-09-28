@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/PeculiarVentures/peculiar-react-components/compare/lib-theme-contructor@0.3.2...lib-theme-contructor@0.4.0) (2020-09-28)
+
+
+### Features
+
+* **theme-constructor:** add node version requirements ([3a6d03d](https://github.com/PeculiarVentures/peculiar-react-components/commit/3a6d03d97b69555c10498ba0c333e327b0e01fd3))
+
+
+
+
+
 ## [0.3.2](https://github.com/PeculiarVentures/peculiar-react-components/compare/lib-theme-contructor@0.3.1...lib-theme-contructor@0.3.2) (2020-09-23)
 
 
