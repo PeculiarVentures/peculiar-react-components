@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/PeculiarVentures/peculiar-react-components/compare/lib-react-components@1.1.2...lib-react-components@1.2.0) (2020-09-28)
+
+
+### Features
+
+* **components:** add node version requirements ([6a5f6cc](https://github.com/PeculiarVentures/peculiar-react-components/commit/6a5f6cc99cfac53b740b9fbb8646363e5a750e73))
+
+
+
+
+
 ## [1.1.2](https://github.com/PeculiarVentures/peculiar-react-components/compare/lib-react-components@1.1.1...lib-react-components@1.1.2) (2020-09-28)
 
 **Note:** Version bump only for package lib-react-components
