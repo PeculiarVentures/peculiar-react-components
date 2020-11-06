@@ -254,7 +254,6 @@ interface SelectProps {
   colorFocus?: Color;
   size?: 'medium' | 'large';
   mobileSize?: 'medium' | 'large';
-  placement?: 'top' | 'bottom';
   ref?: React.Ref<HTMLElement>;
   gaEventName?: string;
 }

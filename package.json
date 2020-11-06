@@ -14,7 +14,8 @@
     "bootstrap:upgrade": "yarn upgrade-interactive --latest",
     "bootstrap:undo": "lerna clean --yes",
     "prepare": "yarn build",
-    "publish:version": "lerna publish"
+    "publish:version": "lerna publish",
+    "publish:canary": "lerna publish --canary"
   },
   "devDependencies": {
     "lerna": "^3.22.1"

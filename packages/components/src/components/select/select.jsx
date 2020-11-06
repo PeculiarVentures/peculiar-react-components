@@ -1,6 +1,7 @@
 import React, { Component, Children, cloneElement, isValidElement } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { Popper } from 'react-popper';
 import SelectDropdown from './select_dropdown';
 import withAnalytics from '../../containers/analytics_hoc';
 import SelectArrowIcon from '../icons/select_arrow';
@@ -112,10 +113,6 @@ class Select extends Component {
      * Component size for mobile.
      */
     mobileSize: PropTypes.oneOf(['medium', 'large']),
-    /**
-     * Select dropdown opened place
-     */
-    placement: PropTypes.oneOf(['top', 'bottom']),
   };
 
   static contextTypes = {
@@ -144,7 +141,6 @@ class Select extends Component {
     colorFocus: 'primary',
     size: 'medium',
     mobileSize: undefined,
-    placement: 'bottom',
   };
 
   state = {
@@ -189,6 +185,7 @@ class Select extends Component {
   _childrenValues = [];
   inputNode = null;
   dropdownNode = null;
+  _rootNode = null;
 
   /**
    * onClick select item handler
@@ -428,7 +425,6 @@ class Select extends Component {
       colorFocus,
       size: propsSize,
       mobileSize,
-      placement,
       placeholderColor,
       ...other
     } = this.props;
@@ -458,6 +454,7 @@ class Select extends Component {
             className,
           )}
           {...other}
+          ref={(node) => { this._rootNode = node; }}
         >
           <select
             data-component="select_field"
@@ -525,6 +522,37 @@ class Select extends Component {
       });
     });
     const mustOpen = open && options && options.length > 0;
+    const dropdownBody = ({
+      ref,
+      style: { top, left, position },
+      placement,
+    }) => {
+      this._rootNode.setAttribute('data-placement', placement);
+
+      return (
+        <div
+          ref={ref}
+          style={{
+            top: 0,
+            left: 0,
+            position,
+            transform: `translate3d(${left}px, ${top}px, 0)`,
+            transformOrigin: 'top center',
+          }}
+          className="select_dropdown_container"
+        >
+          <SelectDropdown
+            className="select_dropdown"
+            ref={(node) => { this.dropdownNode = node; }}
+            bgType={bgType}
+            color={color}
+            colorFocus={colorFocus}
+          >
+            {options}
+          </SelectDropdown>
+        </div>
+      );
+    };
 
     return (
       <div
@@ -532,7 +560,6 @@ class Select extends Component {
         data-type={bgType}
         data-disabled={disabled}
         data-open={mustOpen}
-        data-placement={placement}
         className={classNames(
           'select',
           className,
@@ -544,6 +571,7 @@ class Select extends Component {
         {...Object.assign(disabled ? {} : {
           tabIndex,
         })}
+        ref={(node) => { this._rootNode = node; }}
       >
         <div
           data-component="select_field"
@@ -579,16 +607,28 @@ class Select extends Component {
           disabled={disabled}
         />
         {this._renderOpenButton()}
-        {(options && options.length > 0) && (
-          <SelectDropdown
-            className="select_dropdown"
-            ref={(node) => { this.dropdownNode = node; }}
-            bgType={bgType}
-            color={color}
-            colorFocus={colorFocus}
+        {mustOpen && (
+          <Popper
+            modifiers={{
+              computeStyle: {
+                gpuAcceleration: false,
+              },
+              preventOverflow: {
+                enabled: false,
+              },
+              hide: {
+                enabled: false,
+              },
+              flip: {
+                enabled: true,
+              },
+            }}
+            positionFixed={false}
+            referenceElement={this._rootNode}
+            placement="bottom"
           >
-            {options}
-          </SelectDropdown>
+            {dropdownBody}
+          </Popper>
         )}
       </div>
     );

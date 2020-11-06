@@ -1,6 +1,7 @@
 import React, { Component, Children, cloneElement, isValidElement } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import { Popper } from 'react-popper';
 import TextField from '../text_field';
 import SelectDropdown from '../select/select_dropdown';
 
@@ -189,6 +190,7 @@ export default class Autocomplete extends Component {
   _overlayHasFocus = false;
   _childrenValues = [];
   textFieldNode = null;
+  _rootNode = null;
 
   _onBlurInput = (e) => {
     const { onBlur } = this.props;
@@ -452,6 +454,40 @@ export default class Autocomplete extends Component {
       });
     });
     const mustOpen = open && options && options.length > 0;
+    const dropdownBody = ({
+      ref,
+      style: { top, left, position },
+      placement,
+    }) => {
+      this._rootNode.setAttribute('data-placement', placement);
+
+      return (
+        <div
+          ref={ref}
+          style={{
+            top: 0,
+            left: 0,
+            position,
+            transform: `translate3d(${left}px, ${top}px, 0)`,
+            transformOrigin: 'top center',
+          }}
+          className="autocomplete_dropdown_container"
+        >
+          <SelectDropdown
+            className="autocomplete_dropdown"
+            bgType={bgType}
+            color={color}
+            colorFocus={colorFocus}
+            ref={(node) => { this.dropdownNode = node; }}
+            tabIndex={0}
+            onFocus={this._onFocusOverlay}
+            onBlur={this._onBlurOverlay}
+          >
+            {options}
+          </SelectDropdown>
+        </div>
+      );
+    };
 
     return (
       <div
@@ -463,6 +499,7 @@ export default class Autocomplete extends Component {
           className,
         )}
         {...other}
+        ref={(node) => { this._rootNode = node; }}
       >
         <TextField
           placeholder={placeholder}
@@ -488,19 +525,28 @@ export default class Autocomplete extends Component {
           autoComplete="off"
           validation={validation}
         />
-        {(options && options.length > 0) && (
-          <SelectDropdown
-            className="autocomplete_dropdown"
-            bgType={bgType}
-            color={color}
-            colorFocus={colorFocus}
-            ref={(node) => { this.dropdownNode = node; }}
-            tabIndex={0}
-            onFocus={this._onFocusOverlay}
-            onBlur={this._onBlurOverlay}
+        {mustOpen && (
+          <Popper
+            modifiers={{
+              computeStyle: {
+                gpuAcceleration: false,
+              },
+              preventOverflow: {
+                enabled: false,
+              },
+              hide: {
+                enabled: false,
+              },
+              flip: {
+                enabled: true,
+              },
+            }}
+            positionFixed={false}
+            referenceElement={this._rootNode}
+            placement="bottom"
           >
-            {options}
-          </SelectDropdown>
+            {dropdownBody}
+          </Popper>
         )}
       </div>
     );
