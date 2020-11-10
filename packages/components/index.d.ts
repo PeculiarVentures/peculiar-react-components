@@ -256,6 +256,8 @@ interface SelectProps {
   mobileSize?: 'medium' | 'large';
   ref?: React.Ref<HTMLElement>;
   gaEventName?: string;
+  placement?: 'bottom' | 'top';
+  flip?: boolean;
 }
 
 interface SelectDropdownProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -445,6 +447,8 @@ interface AutocompleteProps {
     | 'tel'
     | 'date';
   validation?: (ValidationType|((value: string | number) => boolean))[];
+  placement?: 'bottom' | 'top';
+  flip?: boolean;
 }
 
 interface TooltipProps extends React.HTMLAttributes<HTMLDivElement>, Omit<TooltipPopperProps, 'referenceElement' | 'children' | 'open'> {

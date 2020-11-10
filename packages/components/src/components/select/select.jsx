@@ -113,6 +113,14 @@ class Select extends Component {
      * Component size for mobile.
      */
     mobileSize: PropTypes.oneOf(['medium', 'large']),
+    /**
+     * Component dropdown start opened direction.
+     */
+    placement: PropTypes.oneOf(['top', 'bottom']),
+    /**
+     * If `true`, component will automatically calc possible dropdown opened direction.
+     */
+    flip: PropTypes.bool,
   };
 
   static contextTypes = {
@@ -141,6 +149,8 @@ class Select extends Component {
     colorFocus: 'primary',
     size: 'medium',
     mobileSize: undefined,
+    placement: 'bottom',
+    flip: true,
   };
 
   state = {
@@ -426,6 +436,8 @@ class Select extends Component {
       size: propsSize,
       mobileSize,
       placeholderColor,
+      placement,
+      flip,
       ...other
     } = this.props;
     const {
@@ -522,21 +534,17 @@ class Select extends Component {
       });
     });
     const mustOpen = open && options && options.length > 0;
-    const dropdownBody = ({
-      ref,
-      style: { top, position },
-      placement,
-    }) => {
-      this._rootNode.setAttribute('data-placement', placement);
+    const dropdownBody = (dropDownProps) => {
+      this._rootNode.setAttribute('data-placement', dropDownProps.placement);
 
       return (
         <div
-          ref={ref}
+          ref={dropDownProps.ref}
           style={{
             top: 0,
             left: 0,
-            position,
-            transform: `translate3d(0px, ${top}px, 0px)`,
+            position: dropDownProps.style.position,
+            transform: `translate3d(0px, ${dropDownProps.style.top}px, 0px)`,
             transformOrigin: 'top center',
           }}
           className="select_dropdown_container"
@@ -620,12 +628,12 @@ class Select extends Component {
                 enabled: false,
               },
               flip: {
-                enabled: true,
+                enabled: flip,
               },
             }}
             positionFixed={false}
             referenceElement={this._rootNode}
-            placement="bottom"
+            placement={placement}
           >
             {dropdownBody}
           </Popper>

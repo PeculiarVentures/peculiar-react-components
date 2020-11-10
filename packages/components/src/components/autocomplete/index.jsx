@@ -146,6 +146,14 @@ export default class Autocomplete extends Component {
      * Array with validation types.
      */
     validation: PropTypes.arrayOf(validationPropType),
+    /**
+     * Component dropdown start opened direction.
+     */
+    placement: PropTypes.oneOf(['top', 'bottom']),
+    /**
+     * If `true`, component will automatically calc possible dropdown opened direction.
+     */
+    flip: PropTypes.bool,
   }
 
   static defaultProps = {
@@ -171,6 +179,8 @@ export default class Autocomplete extends Component {
     mobileSize: undefined,
     inputProps: {},
     validation: undefined,
+    placement: 'bottom',
+    flip: true,
   }
 
   state = {
@@ -420,6 +430,8 @@ export default class Autocomplete extends Component {
       children,
       validation,
       placeholderColor,
+      placement,
+      flip,
       ...other
     } = this.props;
     const {
@@ -454,21 +466,17 @@ export default class Autocomplete extends Component {
       });
     });
     const mustOpen = open && options && options.length > 0;
-    const dropdownBody = ({
-      ref,
-      style: { top, position },
-      placement,
-    }) => {
-      this._rootNode.setAttribute('data-placement', placement);
+    const dropdownBody = (dropDownProps) => {
+      this._rootNode.setAttribute('data-placement', dropDownProps.placement);
 
       return (
         <div
-          ref={ref}
+          ref={dropDownProps.ref}
           style={{
             top: 0,
             left: 0,
-            position,
-            transform: `translate3d(0px, ${top}px, 0px)`,
+            position: dropDownProps.style.position,
+            transform: `translate3d(0px, ${dropDownProps.style.top}px, 0px)`,
             transformOrigin: 'top center',
           }}
           className="autocomplete_dropdown_container"
@@ -538,12 +546,12 @@ export default class Autocomplete extends Component {
                 enabled: false,
               },
               flip: {
-                enabled: true,
+                enabled: flip,
               },
             }}
             positionFixed={false}
             referenceElement={this._rootNode}
-            placement="bottom"
+            placement={placement}
           >
             {dropdownBody}
           </Popper>
