@@ -456,7 +456,7 @@ export default class Autocomplete extends Component {
     const mustOpen = open && options && options.length > 0;
     const dropdownBody = ({
       ref,
-      style: { top, left, position },
+      style: { top, position },
       placement,
     }) => {
       this._rootNode.setAttribute('data-placement', placement);
@@ -468,7 +468,7 @@ export default class Autocomplete extends Component {
             top: 0,
             left: 0,
             position,
-            transform: `translate3d(${left}px, ${top}px, 0)`,
+            transform: `translate3d(0px, ${top}px, 0px)`,
             transformOrigin: 'top center',
           }}
           className="autocomplete_dropdown_container"

@@ -524,7 +524,7 @@ class Select extends Component {
     const mustOpen = open && options && options.length > 0;
     const dropdownBody = ({
       ref,
-      style: { top, left, position },
+      style: { top, position },
       placement,
     }) => {
       this._rootNode.setAttribute('data-placement', placement);
@@ -536,7 +536,7 @@ class Select extends Component {
             top: 0,
             left: 0,
             position,
-            transform: `translate3d(${left}px, ${top}px, 0)`,
+            transform: `translate3d(0px, ${top}px, 0px)`,
             transformOrigin: 'top center',
           }}
           className="select_dropdown_container"
