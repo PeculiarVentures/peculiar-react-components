@@ -1,21 +1,29 @@
 .counter
   cursor: default
+  padding-right: 20px !important
+
+  &_button
+    cursor: pointer
+    border: none
+    background-color: transparent
+    padding: 4px 5px
+    position: absolute
+    right: 4px
+    z-index: 1
+    &[data-id="increase-triangle"]
+      bottom: 50%
+    &[data-id="decrease-triangle"]
+      top: 50%
+      svg
+        transform: rotate(180deg)
 
   &_triangle
+    display: inherit
     fill: rgb(var(--grey))
-    position: absolute
     width: 6px
     height: 4px
-    right: 5px
-    cursor: pointer
-    z-index: 1
     [data-fill]
       transition: opacity .3s, fill 300ms
-    &[data-id="increase-triangle"]
-      top: 9px
-    &[data-id="decrease-triangle"]
-      bottom: 9px
-      transform: rotate(180deg)
 
 @media (hover: hover)
   .counter_triangle
