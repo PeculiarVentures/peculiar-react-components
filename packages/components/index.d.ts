@@ -372,7 +372,7 @@ interface TabsProps {
   gaEventName?: string;
 }
 
-interface InpuBasicProps {
+interface InputBasicProps {
   tabIndex?: number;
   className?: string;
   defaultValue?: string | number;
@@ -398,13 +398,13 @@ interface InpuBasicProps {
   ref?: React.Ref<HTMLElement>;
 }
 
-interface InputProps extends InpuBasicProps {
+interface InputProps extends InputBasicProps {
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }
 
-interface TextFieldProps extends InpuBasicProps {
-  onChange?: (e: Event, valid: boolean) => void;
-  onBlur?: (e: Event) => void;
+interface TextFieldProps extends InputBasicProps {
+  onChange?: (e: React.ChangeEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLInputElement>, valid: boolean) => void;
+  onBlur?: (e:  React.FocusEvent<HTMLTextAreaElement> |  React.FocusEvent<HTMLInputElement>) => void;
   onChangeType?: (type: string) => void;
   onKeyUp?: React.KeyboardEventHandler<HTMLInputElement>;
   onEnterPress?: React.KeyboardEventHandler<HTMLInputElement>;
