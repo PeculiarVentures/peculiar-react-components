@@ -56,6 +56,7 @@ export default function Box(props) {
     fillOpacity,
     stroke,
     strokeWidth,
+    borderRadius,
     strokeOpacity,
     strokeStyle,
     strokeType,
@@ -77,6 +78,7 @@ export default function Box(props) {
     borderStyle: stroke
       ? strokeStyle
       : undefined,
+    borderRadius: `${borderRadius}px`,
   };
 
   const Component = tagType;
@@ -116,6 +118,10 @@ Box.propTypes = {
    */
   strokeWidth: PropTypes.number,
   /**
+   * Component border-radius.
+   */
+  borderRadius: PropTypes.number,
+  /**
    * Component border-color opacity.
    */
   strokeOpacity: PropTypes.number,
@@ -141,6 +147,7 @@ Box.defaultProps = {
   stroke: undefined,
   strokeStyle: 'solid',
   strokeWidth: 1,
+  borderRadius: 0,
   strokeOpacity: undefined,
   strokeType: undefined,
   className: undefined,
