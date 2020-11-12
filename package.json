@@ -20,6 +20,6 @@
   "devDependencies": {
     "lerna": "^3.22.1"
   },
-  "author": "PeculiarVentures Team",
+  "author": "PeculiarVentures",
   "license": "AGPL-3.0"
 }
