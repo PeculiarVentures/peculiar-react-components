@@ -99,6 +99,7 @@ interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
   stroke?: Color;
   strokeWidth?: number;
   strokeOpacity?: number;
+  borderRadius?: number;
   strokeStyle?: 'solid' | 'dashed' | 'dotted' | 'none';
   strokeType?: 'horizontal' | 'vertical' | 'top' | 'right' | 'bottom' | 'left';
   className?: string;
@@ -372,7 +373,7 @@ interface TabsProps {
   gaEventName?: string;
 }
 
-interface InpuBasicProps {
+interface InputBasicProps {
   tabIndex?: number;
   className?: string;
   defaultValue?: string | number;
@@ -398,16 +399,16 @@ interface InpuBasicProps {
   ref?: React.Ref<HTMLElement>;
 }
 
-interface InputProps extends InpuBasicProps {
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+interface InputProps extends InputBasicProps {
+  onChange?: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
 }
 
-interface TextFieldProps extends InpuBasicProps {
-  onChange?: (e: Event, valid: boolean) => void;
-  onBlur?: (e: Event) => void;
+interface TextFieldProps extends InputBasicProps {
+  onChange?: (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>, valid: boolean) => void;
+  onBlur?: React.FocusEventHandler<HTMLTextAreaElement | HTMLInputElement>;
   onChangeType?: (type: string) => void;
-  onKeyUp?: React.KeyboardEventHandler<HTMLInputElement>;
-  onEnterPress?: React.KeyboardEventHandler<HTMLInputElement>;
+  onKeyUp?: React.KeyboardEventHandler<HTMLInputElement | HTMLTextAreaElement>;
+  onEnterPress?: React.KeyboardEventHandler<HTMLInputElement | HTMLTextAreaElement>;
   type?: 'text'
     | 'password'
     | 'email'

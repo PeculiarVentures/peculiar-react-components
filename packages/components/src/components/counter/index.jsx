@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import withAnalytics from '../../containers/analytics_hoc';
 import Input from '../text_field/input';
 import CounterTriangleIcon from '../icons/counter_arrow';
@@ -18,27 +19,71 @@ function prepareValue(value, defaultValue) {
 
 class Counter extends React.Component {
   static propTypes = {
+    /**
+     * The input value, required for a controlled component.
+     */
     value: PropTypes.number,
+    /**
+     * The default input value, useful when not controlling the component.
+     */
     defaultValue: PropTypes.number,
+    /**
+     * Maximum input value
+     */
     minValue: PropTypes.number,
+    /**
+     * Minimum input value
+     */
     maxValue: PropTypes.number,
+    /**
+     * Callback fired when the value is changed.
+     */
     onChange: PropTypes.func,
+    /**
+     * Placeholder that will show if current value equal to minimum value
+     */
     minValuePlaceholder: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.number,
     ]),
+    /**
+     * Placeholder that will show if current value equal to maximum value
+     */
     maxValuePlaceholder: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.number,
     ]),
+    /**
+     * If true, the input will be disabled.
+     */
     disabled: PropTypes.bool,
+    /**
+     * Component type one of `fill` or `stroke`.
+     * If `fill` - component will be have background-color from `color` props.
+     * If `stroke` - component will be have border-color from `color` props.
+     */
     bgType: PropTypes.oneOf(['fill', 'stroke']),
+    /**
+     * Component color from theme
+     */
     color: PropTypes.string,
+    /**
+     * Component text color from theme
+     */
     textColor: PropTypes.string,
+    /**
+     * Component focus color from theme
+     */
     colorFocus: PropTypes.string,
+    /**
+     * Properties applied to the input element.
+     */
     inputProps: PropTypes.oneOfType([
       PropTypes.object,
     ]),
+    /**
+     * Additional custom properties applied to the component.
+     */
     counterProps: PropTypes.oneOfType([
       PropTypes.object,
     ]),
@@ -145,24 +190,37 @@ class Counter extends React.Component {
         name="counter"
         inputProps={{
           readOnly: true,
-          className: 'counter',
+          className: classNames(
+            'counter',
+            inputProps.className,
+          ),
           ...inputProps,
         }}
         {...counterProps}
       >
-        <CounterTriangleIcon
-          className="counter_triangle"
-          onClick={() => this.onChange(1)}
+        <button
+          className="counter_button"
           data-id="increase-triangle"
-        />
-        <CounterTriangleIcon
-          className="counter_triangle"
+          tabIndex="-1"
+          onClick={() => this.onChange(1)}
+        >
+          <span>
+            <CounterTriangleIcon className="counter_triangle" />
+          </span>
+        </button>
+        <button
+          className="counter_button"
+          data-id="decrease-triangle"
+          tabIndex="-1"
           onClick={(e) => {
             e.stopPropagation();
             this.onChange(-1);
           }}
-          data-id="decrease-triangle"
-        />
+        >
+          <span>
+            <CounterTriangleIcon className="counter_triangle" />
+          </span>
+        </button>
       </Input>
     );
   }

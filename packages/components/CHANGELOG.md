@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.1](https://github.com/PeculiarVentures/peculiar-react-components/compare/lib-react-components@1.3.0...lib-react-components@1.3.1) (2020-11-12)
+
+**Note:** Version bump only for package lib-react-components
+
+
+
+
+
+# [1.3.0](https://github.com/PeculiarVentures/peculiar-react-components/compare/lib-react-components@1.2.0...lib-react-components@1.3.0) (2020-11-12)
+
+
+### Bug Fixes
+
+* **components:** fix select dropdown left position ([59df5af](https://github.com/PeculiarVentures/peculiar-react-components/commit/59df5afe26804a6653ee842c58cfa86c6b607282))
+
+
+### Features
+
+* **components:** add autoplacing for autocomplete ([7e66a39](https://github.com/PeculiarVentures/peculiar-react-components/commit/7e66a391b56fa97f5dc37b023d01b0afb1c9fe9b))
+* **components:** add autoplacing for select ([cf8aa32](https://github.com/PeculiarVentures/peculiar-react-components/commit/cf8aa32f1c0fc3ea37589d9ad70d52f3586c26af))
+* **components:** add props "flip" and "placement" for select/autocomplete ([418e729](https://github.com/PeculiarVentures/peculiar-react-components/commit/418e729d0863ecdef8430af7076d4e5c32b45db1))
+
+
+
+
+
 # [1.2.0](https://github.com/PeculiarVentures/peculiar-react-components/compare/lib-react-components@1.1.2...lib-react-components@1.2.0) (2020-09-28)
 
 
