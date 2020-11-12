@@ -202,24 +202,24 @@ class Counter extends React.Component {
           className="counter_button"
           data-id="increase-triangle"
           tabIndex="-1"
+          onClick={() => this.onChange(1)}
         >
-          <CounterTriangleIcon
-            className="counter_triangle"
-            onClick={() => this.onChange(1)}
-          />
+          <span>
+            <CounterTriangleIcon className="counter_triangle" />
+          </span>
         </button>
         <button
           className="counter_button"
           data-id="decrease-triangle"
           tabIndex="-1"
+          onClick={(e) => {
+            e.stopPropagation();
+            this.onChange(-1);
+          }}
         >
-          <CounterTriangleIcon
-            className="counter_triangle"
-            onClick={(e) => {
-              e.stopPropagation();
-              this.onChange(-1);
-            }}
-          />
+          <span>
+            <CounterTriangleIcon className="counter_triangle" />
+          </span>
         </button>
       </Input>
     );

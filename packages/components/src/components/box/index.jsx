@@ -118,7 +118,7 @@ Box.propTypes = {
    */
   strokeWidth: PropTypes.number,
   /**
-   * Component border-radius.
+   * Component border-radius in pixels.
    */
   borderRadius: PropTypes.number,
   /**

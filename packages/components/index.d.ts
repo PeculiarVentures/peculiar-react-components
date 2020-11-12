@@ -99,6 +99,7 @@ interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
   stroke?: Color;
   strokeWidth?: number;
   strokeOpacity?: number;
+  borderRadius?: number;
   strokeStyle?: 'solid' | 'dashed' | 'dotted' | 'none';
   strokeType?: 'horizontal' | 'vertical' | 'top' | 'right' | 'bottom' | 'left';
   className?: string;

@@ -3,22 +3,28 @@
   padding-right: 20px !important
 
   &_button
+    display: flex
+    align-items: flex-start
     cursor: pointer
     border: none
     background-color: transparent
-    padding: 4px 5px
+    height: 50%
+    padding: 3px 7px
     position: absolute
-    right: 4px
+    right: 0
     z-index: 1
     &[data-id="increase-triangle"]
-      bottom: 50%
+      align-items: flex-end
+      top: 0
     &[data-id="decrease-triangle"]
-      top: 50%
+      bottom: 0
       svg
         transform: rotate(180deg)
+    span
+      display: inherit
 
   &_triangle
-    display: inherit
+    display: inline
     fill: rgb(var(--grey))
     width: 6px
     height: 4px
