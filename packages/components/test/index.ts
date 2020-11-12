@@ -1,7 +1,7 @@
 import '@peculiar/karma-scripts/enzymeAdapter';
 
 // utils
-import '../src/utils/validator/reg_exps.spec';
+import '../src/utils/validator/validator.spec';
 
 // components
 import '../src/components/avatar/index.spec';
