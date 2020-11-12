@@ -400,7 +400,7 @@ interface InputBasicProps {
 }
 
 interface InputProps extends InputBasicProps {
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  onChange?: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
 }
 
 interface TextFieldProps extends InputBasicProps {
