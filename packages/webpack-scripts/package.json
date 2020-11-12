@@ -1,0 +1,22 @@
+{
+  "name": "@peculiar/webpack-scripts",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Webpack scripts",
+  "author": "PeculiarVentures",
+  "license": "AGPL-3.0",
+  "homepage": "https://github.com/PeculiarVentures/peculiar-react-components#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PeculiarVentures/peculiar-react-components.git"
+  },
+  "bugs": {
+    "url": "https://github.com/PeculiarVentures/peculiar-react-components/issues"
+  },
+  "dependencies": {
+    "awesome-typescript-loader": "^5.2.1",
+    "istanbul-instrumenter-loader": "^3.0.1",
+    "source-map-loader": "^1.1.2",
+    "webpack": "^5.4.0"
+  }
+}
