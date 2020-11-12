@@ -404,11 +404,11 @@ interface InputProps extends InputBasicProps {
 }
 
 interface TextFieldProps extends InputBasicProps {
-  onChange?: (e: React.ChangeEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLInputElement>, valid: boolean) => void;
-  onBlur?: (e:  React.FocusEvent<HTMLTextAreaElement> |  React.FocusEvent<HTMLInputElement>) => void;
+  onChange?: (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>, valid: boolean) => void;
+  onBlur?: React.FocusEventHandler<HTMLTextAreaElement | HTMLInputElement>;
   onChangeType?: (type: string) => void;
-  onKeyUp?: React.KeyboardEventHandler<HTMLInputElement>;
-  onEnterPress?: React.KeyboardEventHandler<HTMLInputElement>;
+  onKeyUp?: React.KeyboardEventHandler<HTMLInputElement | HTMLTextAreaElement>;
+  onEnterPress?: React.KeyboardEventHandler<HTMLInputElement | HTMLTextAreaElement>;
   type?: 'text'
     | 'password'
     | 'email'
