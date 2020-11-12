@@ -1,4 +1,5 @@
 import faker from 'faker';
+import { expect } from 'chai';
 import regexp from './reg_exps';
 
 describe('regExps', () => {
@@ -9,7 +10,7 @@ describe('regExps', () => {
       it(`"${randomEmail}" email`, () => {
         const isValid = regexp.email.test(randomEmail);
 
-        expect(isValid).toBe(true);
+        expect(isValid).to.be.true;
       });
     }
   });
@@ -27,7 +28,7 @@ describe('regExps', () => {
           it(`"${randomName}" name`, () => {
             const isValid = regexp.fullName.test(randomName);
 
-            expect(isValid).toBe(true);
+            expect(isValid).to.be.true;
           });
         }
       });
