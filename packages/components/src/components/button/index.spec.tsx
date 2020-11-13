@@ -1,122 +1,123 @@
 import * as React from 'react';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import { expect } from 'chai';
 import { spy } from 'sinon';
 // @ts-ignore
-import Button from './index';
+import AnalyticsProvider from '../../containers/analytics_provider';
+import ButtonWithAnalytics, { Button } from './index';
 
 describe('<Button />', () => {
-  it('render without errors', () => {
-    const wrapper = mount(<Button>1</Button>);
-
-    expect(wrapper.find('button').exists()).to.be.true;
-  });
-
-  it('check basic props', () => {
-    const wrapper = mount(<Button>1</Button>);
-    const btn = wrapper.find('button');
-
-    expect(btn.prop('disabled')).to.be.false;
-    expect(btn.prop('data-component')).to.equal('button');
-    expect(btn.prop('className'))
-      .to.equal('button round_small truncate_text break_word text_center button_medium button_text_white fill_primary text_white');
-  });
-
-  it('change theme', () => {
-    const wrapper = mount(
-      <Button
-        bgType="stroke"
-        color="secondary"
-        textColor="black"
-        size="medium"
-      >
-        1
-      </Button>,
+  function button(props: any, useMount = false) {
+    const element = (
+      <Button {...props} />
     );
 
-    expect(wrapper.find('button').prop('className'))
-      .to.equal('button round_small truncate_text break_word text_center button_medium button_text_black stroke_secondary text_black');
+    return useMount ? mount(element) : shallow(element);
+  }
+
+  it('renders the button contents', () => {
+    const wrapper = button({});
+
+    expect(wrapper.is('button')).to.be.true;
+    expect(wrapper.prop('disabled')).to.be.false;
+    expect(wrapper.prop('data-component')).to.equal('button');
+    expect(wrapper.prop('className')).to.equal('button round_small truncate_text break_word text_center button_medium button_text_white fill_primary text_white');
   });
 
-  it('check link', () => {
+  it('renders the button children prop like a text', () => {
+    const wrapper = button({
+      children: 'test',
+    })
+
+    expect(wrapper.text()).to.equal('test');
+  });
+
+  it('renders the button children prop like a node', () => {
+    const wrapper = button({
+      children: (
+        <p>
+          test
+        </p>
+      ),
+    })
+
+    expect(wrapper.children().html()).to.equal('<span><p>test</p></span>');
+  });
+
+  it('renders the button theme props', () => {
+    const wrapper = button({
+      bgType: 'stroke',
+      color: 'secondary',
+      textColor: 'black',
+      size: 'medium',
+    });
+
+    expect(wrapper.prop('className')).to.equal('button round_small truncate_text break_word text_center button_medium button_text_black stroke_secondary text_black');
+  });
+
+  it('renders the button component prop', () => {
+    const wrapper = button({
+      children: 'test',
+      component: (props: any) => (
+        <div {...props} />
+      ),
+    });
+
+    expect(wrapper.is('div')).to.be.true;
+    expect(wrapper.text()).to.equal('test');
+    expect(wrapper.prop('disabled')).to.be.false;
+    expect(wrapper.prop('data-component')).to.equal('button');
+    expect(wrapper.prop('className')).to.equal('button round_small truncate_text break_word text_center button_medium button_text_white fill_primary text_white');
+  });
+
+  it('clicking on the button triggers onClick prop', () => {
+    const onClick = spy();
+
+    button({ onClick }).simulate('click');
+
+    expect(onClick.callCount).to.equal(1);
+  });
+
+  it('clicking on the disabled button does not triggers onClick prop', () => {
+    const onClick = spy();
+
+    button({ disabled: true, onClick }, true).simulate('click');
+
+    expect(onClick.callCount).to.equal(0);
+  });
+
+  it('renders the anchor contents', () => {
+    const wrapper = button({ href: '/link' });
+
+    expect(wrapper.is('a')).to.be.true;
+    expect(wrapper.prop('href')).to.equal('/link');
+    expect(wrapper.prop('disabled')).to.be.false;
+    expect(wrapper.prop('data-component')).to.equal('button');
+    expect(wrapper.prop('className')).to.equal('button round_small truncate_text break_word text_center button_medium button_text_white fill_primary text_white');
+  });
+
+  it('renders the disabled anchor should use button', () => {
+    const wrapper = button({ disabled: true, href: '/link' });
+
+    expect(wrapper.is('button')).to.be.true;
+    expect(wrapper.prop('href')).to.be.null;
+  });
+
+  it('clicking on the analytics button triggers onEvent prop', () => {
+    const onEvent = spy();
     const wrapper = mount(
-      <Button
-        href="/"
+      <AnalyticsProvider
+        onEvent={onEvent}
       >
-        1
-      </Button>,
-    );
-
-    expect(wrapper.find('a').prop('href')).to.equal('/');
-  });
-
-  it('disable button', () => {
-    const wrapper = mount(
-      <Button
-        href="/"
-        disabled
-      >
-        1
-      </Button>,
-    );
-
-    expect(wrapper.find('button').prop('href')).to.be.null;
-    expect(wrapper.find('button').prop('disabled')).to.be.true;
-  });
-
-  it('render with children', () => {
-    const wrapper = mount(
-      <Button>
-        <p>1</p>
-      </Button>,
-    );
-
-    expect(wrapper.find('button').children().html()).to.equal('<span><p>1</p></span>');
-  });
-
-  it('with classNames', () => {
-    const wrapper = mount(
-      <Button
-        className="custom"
-      >
-        1
-      </Button>,
-    );
-
-    expect(wrapper.find('button').prop('className'))
-      .to.equal('button round_small truncate_text break_word text_center button_medium button_text_white fill_primary text_white custom');
-  });
-
-  it('handle events', () => {
-    const click = spy();
-    const wrapper = mount(
-      <Button
-        onClick={click}
-      >
-        1
-      </Button>,
+        <ButtonWithAnalytics
+          gaEventName="test"
+        />
+      </AnalyticsProvider>
     );
 
     wrapper.find('button').simulate('click');
-    wrapper.update();
 
-    expect(click.callCount).to.equal(1);
-  });
-
-  it('handle events on disabled btn', () => {
-    const click = spy();
-    const wrapper = mount(
-      <Button
-        onClick={click}
-        disabled
-      >
-        1
-      </Button>,
-    );
-
-    wrapper.find('button').simulate('click');
-    wrapper.update();
-
-    expect(click.callCount).to.equal(0);
+    expect(onEvent.callCount).to.equal(1);
+    expect(onEvent.args).to.deep.equal([['test']]);
   });
 });
