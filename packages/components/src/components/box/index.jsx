@@ -78,7 +78,9 @@ export default function Box(props) {
     borderStyle: stroke
       ? strokeStyle
       : undefined,
-    borderRadius: `${borderRadius}px`,
+    borderRadius: typeof borderRadius === 'number'
+      ? `${borderRadius}px`
+      : undefined,
   };
 
   const Component = tagType;
@@ -147,7 +149,7 @@ Box.defaultProps = {
   stroke: undefined,
   strokeStyle: 'solid',
   strokeWidth: 1,
-  borderRadius: 0,
+  borderRadius: undefined,
   strokeOpacity: undefined,
   strokeType: undefined,
   className: undefined,
