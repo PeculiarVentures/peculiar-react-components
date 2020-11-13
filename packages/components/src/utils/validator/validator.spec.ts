@@ -1,4 +1,4 @@
-import faker, { fake } from 'faker';
+import faker from 'faker';
 import { expect } from 'chai';
 import validator from './validator';
 
