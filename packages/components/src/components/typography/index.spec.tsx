@@ -1,73 +1,113 @@
 import * as React from 'react';
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import { expect } from 'chai';
 // @ts-ignore
 import Typography from './index';
 
 describe('<Typography />', () => {
-  it('render without errors', () => {
-    const wrapper = mount(<Typography>Lorem</Typography>);
-
-    expect(wrapper.find('p').exists()).to.be.true;
-  });
-
-  it('check basic attributes', () => {
-    const wrapper = mount(<Typography>Lorem</Typography>);
-
-    expect(wrapper.find('p').text()).to.equal('Lorem');
-    expect(wrapper.find('p').prop('className')).to.equal('break_word text_black text_left b1');
-    expect(wrapper.find('[data-component="typography"]').exists()).to.be.true;
-  });
-
-  it('pass classname', () => {
-    const wrapper = mount(
-      <Typography
-        className="custom"
-      >
-        Lorem
-      </Typography>,
+  it('renders the typography contents', () => {
+    const wrapper = shallow(
+      <Typography />
     );
 
-    expect(wrapper.find('p').prop('className')).to.equal('break_word text_black text_left custom b1');
+    expect(wrapper.is('p')).to.be.true;
+    expect(wrapper.text()).to.equal('');
+    expect(wrapper.prop('data-component')).to.equal('typography');
+    expect(wrapper.prop('className')).to.equal('break_word text_black text_left b1');
   });
 
-  it('pass type', () => {
-    const wrapper = mount(
-      <Typography
-        type="h1"
-      >
-        Lorem
-      </Typography>,
+  it('renders the typography children prop like a text', () => {
+    const wrapper = shallow(
+      <Typography>
+        Hello
+      </Typography>
     );
 
-    expect(wrapper.find('h1').prop('className')).to.equal('break_word text_black text_left h1');
+    expect(wrapper.text()).to.equal('Hello');
   });
 
-  it('change theme', () => {
-    const wrapper = mount(
+  it('renders the typography children prop like a node', () => {
+    const wrapper = shallow(
+      <Typography>
+        <span>
+          Hello
+        </span>
+      </Typography>
+    );
+
+    expect(wrapper.children().html()).to.equal('<span>Hello</span>');
+  });
+
+  it('renders the typography className prop', () => {
+    const wrapper = shallow(
       <Typography
-        align="center"
+        className="test"
+      />
+    );
+
+    expect(wrapper.prop('className')).to.equal('break_word text_black text_left test b1');
+  });
+
+  const typesTagsH = [
+    'h1',
+    'h2',
+    'h3',
+    'h4',
+    'h5',
+    'h6',
+  ];
+  const typesTagsP = [
+    'b1',
+    'b2',
+    'b3',
+    'c1',
+  ];
+
+  for (const type of typesTagsH) {
+    it(`renders the typography "${type}" prop`, () => {
+      const wrapper = shallow(
+        <Typography
+          type={type}
+        />
+      );
+
+      expect(wrapper.is(type)).to.be.true;
+    });
+  }
+
+  for (const type of typesTagsP) {
+    it(`renders the typography "${type}" prop`, () => {
+      const wrapper = shallow(
+        <Typography
+          type={type}
+        />
+      );
+
+      expect(wrapper.is('p')).to.be.true;
+    });
+  }
+
+  it('renders the typography theme props', () => {
+    const wrapper = shallow(
+      <Typography
         color="wrong"
-      >
-        Lorem
-      </Typography>,
+        align="center"
+      />
     );
 
-    expect(wrapper.find('p').prop('className')).to.equal('break_word text_wrong text_center b1');
+    expect(wrapper.prop('className')).to.equal('break_word text_wrong text_center b1');
   });
 
-  it('device attributes', () => {
-    const wrapper = mount(
+  it('renders the typography device props', () => {
+    const wrapper = shallow(
       <Typography
         tabletType="h1"
         mobileType="c1"
-      >
-        Lorem
-      </Typography>,
+      />
     );
 
-    expect(wrapper.find('p').prop('data-classnamedesktop')).to.equal('break_word text_black text_left');
-    expect(wrapper.find('p').prop('data-classnametablet')).to.equal('break_word text_black text_left h1');
-    expect(wrapper.find('p').prop('data-classnamemobile')).to.equal('break_word text_black text_left c1');
+    expect(wrapper.prop('data-classnamedesktop')).to.equal('break_word text_black text_left');
+    expect(wrapper.prop('data-classnametablet')).to.equal('break_word text_black text_left h1');
+    expect(wrapper.prop('data-classnamemobile')).to.equal('break_word text_black text_left c1');
   });
 });
