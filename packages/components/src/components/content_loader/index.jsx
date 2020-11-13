@@ -13,10 +13,6 @@ export default class ContentLoader extends PureComponent {
      */
     color: PropTypes.string,
     /**
-     * Animation duration
-     */
-    duration: PropTypes.number,
-    /**
      * The CSS class name of the root element
      */
     className: PropTypes.string,
@@ -36,7 +32,6 @@ export default class ContentLoader extends PureComponent {
 
   static defaultProps = {
     color: 'grey',
-    duration: 2,
     className: '',
     height: 300,
     width: 300,
@@ -48,7 +43,6 @@ export default class ContentLoader extends PureComponent {
   render() {
     const {
       color,
-      duration,
       className,
       height,
       width,

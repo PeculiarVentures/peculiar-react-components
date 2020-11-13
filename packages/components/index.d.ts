@@ -146,7 +146,6 @@ interface CheckboxProps extends SwitchHandler {
 
 interface ContentLoaderProps extends React.SVGAttributes<SVGAElement> {
   color?: Color;
-  duration?: number;
   height?: number;
   width?: number;
   children: React.ReactNode;

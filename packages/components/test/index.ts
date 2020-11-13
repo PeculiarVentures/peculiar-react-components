@@ -8,4 +8,5 @@ import '../src/utils/uuid.spec';
 import '../src/components/avatar/index.spec';
 import '../src/components/box/index.spec';
 import '../src/components/button/index.spec';
+import '../src/components/content_loader/index.spec';
 import '../src/components/typography/index.spec';
