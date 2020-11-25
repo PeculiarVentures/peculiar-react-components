@@ -8,10 +8,10 @@ import React from 'react';
 export default function RightTriangleIcon(props) {
   return (
     <svg
-      viewBox="0 0 20 10"
+      viewBox="0 0 20 20"
       {...props}
     >
-      <path data-fill="true" d="M10 0l10 10H0z" fillRule="evenodd" />
+      <path data-fill="true" d="M10 12 l8 8 H2z" fillRule="evenodd" />
     </svg>
   );
 }
