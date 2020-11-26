@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.2](https://github.com/PeculiarVentures/peculiar-react-components/compare/lib-react-components@1.3.1...lib-react-components@1.3.2) (2020-11-26)
+
+
+### Bug Fixes
+
+* **tooltip-arrow-fix:** add pointer events for arrow ([9088faf](https://github.com/PeculiarVentures/peculiar-react-components/commit/9088faf5d978592451957400709c3cde50b45bdd))
+* **tooltip-arrow-fix:** fixed bug with icon rotate ([fea8496](https://github.com/PeculiarVentures/peculiar-react-components/commit/fea8496d6f5f9b35e6db53fea1fb6b3a3b51afee))
+* **tooltip-arrow-fix:** fixed test ([7454274](https://github.com/PeculiarVentures/peculiar-react-components/commit/745427465d73d56d9698d7940f6ad0176091b667))
+
+
+
+
+
 ## [1.3.1](https://github.com/PeculiarVentures/peculiar-react-components/compare/lib-react-components@1.3.0...lib-react-components@1.3.1) (2020-11-12)
 
 **Note:** Version bump only for package lib-react-components
