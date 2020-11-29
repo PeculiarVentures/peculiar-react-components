@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/PeculiarVentures/peculiar-react-components/compare/lib-react-components@1.3.2...lib-react-components@1.4.0) (2020-11-29)
+
+
+### Features
+
+* **components:** add "getValue" method to TextField component ([c66589a](https://github.com/PeculiarVentures/peculiar-react-components/commit/c66589a3417f0c32b4ef120579e0ba3f93904cc5))
+* **components:** add "isChecked" method to checkbox and switch ([db42aa3](https://github.com/PeculiarVentures/peculiar-react-components/commit/db42aa34aac753d77bdbf967b43568ff345222ed))
+
+
+
+
+
 ## [1.3.2](https://github.com/PeculiarVentures/peculiar-react-components/compare/lib-react-components@1.3.1...lib-react-components@1.3.2) (2020-11-26)
 
 
