@@ -131,7 +131,6 @@ export default class Input extends PureComponent {
     valid: true,
     placeholder: undefined,
     placeholderColor: 'grey_4',
-    // label: undefined,
     children: null,
     name: undefined,
     bgType: 'fill',
@@ -207,7 +206,6 @@ export default class Input extends PureComponent {
       valid,
       placeholder,
       placeholderColor,
-      // label,
       children,
       name,
       bgType,
@@ -227,16 +225,6 @@ export default class Input extends PureComponent {
       ...otherInputProps
     } = inputProps;
     const Component = multiLine ? 'textarea' : 'input';
-
-    // {label && (
-    //   <div
-    //     onClick={this.setFocus}
-    //     className={s.label}
-    //     ref={(node) => { this.labelNode = node; }}
-    //   >
-    //     {label}
-    //   </div>
-    // )}
 
     let size = propsSize || Input.defaultProps.size;
 

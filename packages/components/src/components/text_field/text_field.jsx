@@ -381,6 +381,14 @@ export default class TextField extends Component {
   }
 
   /**
+   * Get input value
+   * @return {string}
+   */
+  getValue() {
+    return this.inputNode.getValue();
+  }
+
+  /**
    * renderPasswordIcon
    * @return {ReactElement} markup
    */

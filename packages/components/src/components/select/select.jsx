@@ -177,9 +177,9 @@ class Select extends Component {
    * Get select value
    * @return {string|number}
    */
-  getValue = () => (
-    this.inputNode.value
-  );
+  getValue() {
+    return this.inputNode.value;
+  }
 
   /**
    * Set select value
