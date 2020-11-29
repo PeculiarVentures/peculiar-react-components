@@ -274,6 +274,14 @@ export default class TextField extends Component {
     }
   }
 
+  /**
+   * Get input value
+   * @return {string}
+   */
+  getValue() {
+    return this.inputNode.getValue();
+  }
+
   inputNode = null;
   passwordButtonNode = null;
 
@@ -378,14 +386,6 @@ export default class TextField extends Component {
     }
 
     return TextField.validateValue(inputValue, validation);
-  }
-
-  /**
-   * Get input value
-   * @return {string}
-   */
-  getValue() {
-    return this.inputNode.getValue();
   }
 
   /**
