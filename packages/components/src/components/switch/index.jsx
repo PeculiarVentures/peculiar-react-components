@@ -31,7 +31,7 @@ class Switch extends SwitchHandler {
       iconColorOn,
       ...other
     } = this.props;
-    const { checkedState } = this.state;
+    const { checked: checkedState } = this.state;
 
     return (
       <div
