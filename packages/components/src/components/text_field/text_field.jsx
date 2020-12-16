@@ -157,9 +157,13 @@ export default class TextField extends Component {
      */
     textColor: PropTypes.string,
     /**
-     * Component focus color from theme
+     * Component focus color from the theme.
      */
     colorFocus: PropTypes.string,
+    /**
+     * Component error color from the theme.
+     */
+    colorError: PropTypes.string,
     /**
      * Component size.
      */
@@ -211,6 +215,7 @@ export default class TextField extends Component {
     color: 'light_grey',
     textColor: 'black',
     colorFocus: 'primary',
+    colorError: 'wrong',
     size: 'medium',
     mobileSize: undefined,
     inputProps: {},
@@ -449,6 +454,7 @@ export default class TextField extends Component {
       color,
       textColor,
       colorFocus,
+      colorError,
       size,
       mobileSize,
       inputProps,
@@ -492,6 +498,7 @@ export default class TextField extends Component {
           color={color}
           textColor={textColor}
           colorFocus={colorFocus}
+          colorError={colorError}
           placeholderColor={placeholderColor}
           size={size}
           mobileSize={mobileSize}

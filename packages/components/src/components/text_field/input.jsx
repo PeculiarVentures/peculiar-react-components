@@ -86,9 +86,13 @@ export default class Input extends PureComponent {
      */
     textColor: PropTypes.string,
     /**
-     * Component focus color from theme
+     * Component focus color from the theme.
      */
     colorFocus: PropTypes.string,
+    /**
+     * Component error color from the theme.
+     */
+    colorError: PropTypes.string,
     /**
      * Component size.
      */
@@ -137,6 +141,7 @@ export default class Input extends PureComponent {
     color: 'light_grey',
     textColor: 'black',
     colorFocus: 'primary',
+    colorError: 'wrong',
     size: 'medium',
     mobileSize: undefined,
     inputProps: {},
@@ -212,6 +217,7 @@ export default class Input extends PureComponent {
       color,
       textColor,
       colorFocus,
+      colorError,
       size: propsSize,
       mobileSize,
       inputProps,
@@ -253,13 +259,15 @@ export default class Input extends PureComponent {
             'input_field',
             'round_small',
             [`input_field_${size}`],
-            [`stroke_${color}`],
             {
+              [`stroke_${color}`]: valid,
+              [`stroke_${colorError}`]: !valid,
+              [`input_field_focus_${colorFocus}`]: valid,
+
               fill_white: bgType === 'stroke',
               [`fill_${color}`]: bgType === 'fill',
               [`text_${textColor}`]: textColor,
             },
-            [`input_field_focus_${colorFocus}`],
             [`input_placeholder_color_${placeholderColor}`],
             classNameInput,
           )}
