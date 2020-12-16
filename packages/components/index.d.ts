@@ -391,6 +391,7 @@ interface InputBasicProps {
   color?: Color;
   textColor?: Color;
   colorFocus?: Color;
+  colorError?: Color;
   size?: 'medium' | 'large';
   mobileSize?: 'medium' | 'large';
   inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
