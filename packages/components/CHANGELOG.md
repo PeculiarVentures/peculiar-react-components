@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/PeculiarVentures/peculiar-react-components/compare/lib-react-components@1.4.0...lib-react-components@1.5.0) (2020-12-16)
+
+
+### Bug Fixes
+
+* lint ([4ac3e29](https://github.com/PeculiarVentures/peculiar-react-components/commit/4ac3e29242e657c6f1729318777ae7e08571917b))
+
+
+### Features
+
+* **components:** add possibility change field error color from props ([c63b843](https://github.com/PeculiarVentures/peculiar-react-components/commit/c63b8435ec18cca35458cba3d403fe3f1156e91b))
+
+
+
+
+
 # [1.4.0](https://github.com/PeculiarVentures/peculiar-react-components/compare/lib-react-components@1.3.2...lib-react-components@1.4.0) (2020-11-29)
 
 
