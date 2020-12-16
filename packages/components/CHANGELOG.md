@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.1](https://github.com/PeculiarVentures/peculiar-react-components/compare/lib-react-components@1.5.0...lib-react-components@1.5.1) (2020-12-16)
+
+**Note:** Version bump only for package lib-react-components
+
+
+
+
+
 # [1.5.0](https://github.com/PeculiarVentures/peculiar-react-components/compare/lib-react-components@1.4.0...lib-react-components@1.5.0) (2020-12-16)
 
 
