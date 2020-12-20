@@ -3,6 +3,55 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.1](https://github.com/PeculiarVentures/peculiar-react-components/compare/lib-react-components@1.5.0...lib-react-components@1.5.1) (2020-12-16)
+
+**Note:** Version bump only for package lib-react-components
+
+
+
+
+
+# [1.5.0](https://github.com/PeculiarVentures/peculiar-react-components/compare/lib-react-components@1.4.0...lib-react-components@1.5.0) (2020-12-16)
+
+
+### Bug Fixes
+
+* lint ([4ac3e29](https://github.com/PeculiarVentures/peculiar-react-components/commit/4ac3e29242e657c6f1729318777ae7e08571917b))
+
+
+### Features
+
+* **components:** add possibility change field error color from props ([c63b843](https://github.com/PeculiarVentures/peculiar-react-components/commit/c63b8435ec18cca35458cba3d403fe3f1156e91b))
+
+
+
+
+
+# [1.4.0](https://github.com/PeculiarVentures/peculiar-react-components/compare/lib-react-components@1.3.2...lib-react-components@1.4.0) (2020-11-29)
+
+
+### Features
+
+* **components:** add "getValue" method to TextField component ([c66589a](https://github.com/PeculiarVentures/peculiar-react-components/commit/c66589a3417f0c32b4ef120579e0ba3f93904cc5))
+* **components:** add "isChecked" method to checkbox and switch ([db42aa3](https://github.com/PeculiarVentures/peculiar-react-components/commit/db42aa34aac753d77bdbf967b43568ff345222ed))
+
+
+
+
+
+## [1.3.2](https://github.com/PeculiarVentures/peculiar-react-components/compare/lib-react-components@1.3.1...lib-react-components@1.3.2) (2020-11-26)
+
+
+### Bug Fixes
+
+* **tooltip-arrow-fix:** add pointer events for arrow ([9088faf](https://github.com/PeculiarVentures/peculiar-react-components/commit/9088faf5d978592451957400709c3cde50b45bdd))
+* **tooltip-arrow-fix:** fixed bug with icon rotate ([fea8496](https://github.com/PeculiarVentures/peculiar-react-components/commit/fea8496d6f5f9b35e6db53fea1fb6b3a3b51afee))
+* **tooltip-arrow-fix:** fixed test ([7454274](https://github.com/PeculiarVentures/peculiar-react-components/commit/745427465d73d56d9698d7940f6ad0176091b667))
+
+
+
+
+
 ## [1.3.1](https://github.com/PeculiarVentures/peculiar-react-components/compare/lib-react-components@1.3.0...lib-react-components@1.3.1) (2020-11-12)
 
 **Note:** Version bump only for package lib-react-components

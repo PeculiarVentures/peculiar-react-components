@@ -45,7 +45,7 @@ class Checkbox extends SwitchHandler {
       iconType,
       ...other
     } = this.props;
-    const { checkedState } = this.state;
+    const { checked: checkedState } = this.state;
 
     return (
       <div

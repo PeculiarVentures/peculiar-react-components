@@ -101,7 +101,7 @@ export default class SwitchHandler extends PureComponent {
     super(props);
 
     this.state = {
-      checkedState: !!(props.checked || props.defaultChecked),
+      checked: !!(props.checked || props.defaultChecked),
     };
   }
 
@@ -110,7 +110,7 @@ export default class SwitchHandler extends PureComponent {
 
     if (checked !== nextProps.checked) {
       this.setState({
-        checkedState: nextProps.checked,
+        checked: nextProps.checked,
       });
     }
   }
@@ -121,16 +121,22 @@ export default class SwitchHandler extends PureComponent {
    */
   onChange = (e) => {
     const { onCheck } = this.props;
-    const { checkedState } = this.state;
+    const { checked } = this.state;
 
-    if (onCheck) onCheck(e, !checkedState);
+    if (onCheck) {
+      onCheck(e, !checked);
+    }
 
     if (!{}.hasOwnProperty.call(this.props, 'checked')) {
       this.setState({
-        checkedState: !checkedState,
+        checked: !checked,
       });
     }
   };
+
+  isChecked() {
+    return this.state.checked;
+  }
 
   /**
    * renderLabel

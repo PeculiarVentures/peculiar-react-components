@@ -62,11 +62,6 @@
           &:focus
             border-color: rgb(var(--$(key)))
 
-  &[data-valid="false"]
-    .input_field
-      color: rgb(var(--wrong)) !important
-      border-color: rgb(var(--wrong)) !important
-
 @each $key in $colors
   .input_placeholder_color_$(key)
     &::placeholder
