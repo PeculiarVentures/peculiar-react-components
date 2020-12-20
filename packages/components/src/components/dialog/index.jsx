@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+// eslint-disable-next-line import/no-named-as-default
 import Button from '../button';
-// import s from './styles/index.sss';
 
 const s = {};
 
