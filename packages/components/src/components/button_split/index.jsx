@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 import ButtonGroup from '../button_group';
+// eslint-disable-next-line import/no-named-as-default
 import Button from '../button';
 import TooltipPopper from '../tooltip/tooltip_popper';
 import Portal from '../../containers/portal';

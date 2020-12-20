@@ -13,14 +13,15 @@
   "main": "commonjs/index.js",
   "module": "esm/index.js",
   "scripts": {
-    "test": "BABEL_ENV=test NODE_ENV=test jest",
     "lint": "eslint --ext .js,.jsx ./",
     "build:css": "node scripts/build_theme.js",
     "build:commonjs": "BABEL_ENV=commonjs babel src --out-dir commonjs --ignore *.css,*.sss,*.spec.js,*.spec.jsx --source-maps",
     "build:esm": "BABEL_ENV=esm babel src --out-dir esm --ignore *.css,*.sss,*.spec.js,*.spec.jsx --source-maps",
     "build": "yarn run build:css && yarn run build:commonjs && yarn run build:esm",
     "prebuild": "yarn run clean",
-    "clean": "rimraf commonjs esm"
+    "clean": "rimraf commonjs esm",
+    "test": "karma start",
+    "test:debug": "karma start --single-run=false --reporters=mocha --debug"
   },
   "repository": {
     "type": "git",
@@ -44,29 +45,28 @@
     "react-popper": "^1.0.2"
   },
   "devDependencies": {
+    "@peculiar/karma-scripts": "^0.0.0",
+    "@types/chai": "^4.2.14",
+    "@types/faker": "^5.1.4",
+    "@types/sinon": "^9.0.8",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.2",
-    "babel-jest": "^23.6.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.26.0",
-    "enzyme": "^3.3.0",
-    "enzyme-adapter-react-16": "^1.1.1",
+    "chai": "^4.2.0",
     "eslint": "4.18.2",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.9.0",
-    "eslint-plugin-jest": "^21.27.1",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.9.1",
     "faker": "^4.1.0",
-    "ignore-styles": "^5.0.1",
-    "jest": "^23.6.0",
-    "jsdom": "^11.6.2",
-    "jsdom-global": "^3.0.2",
+    "karma": "^5.2.3",
     "rimraf": "^2.6.2",
-    "traverse": "^0.6.6"
+    "sinon": "^9.2.1",
+    "typescript": "^4.0.5"
   },
   "files": [
     "src/",
@@ -76,7 +76,7 @@
     "themes/",
     "index.d.ts"
   ],
-  "author": "PeculiarVentures Team",
+  "author": "PeculiarVentures",
   "license": "AGPL-3.0",
   "engines": {
     "node": ">=10.0.0"

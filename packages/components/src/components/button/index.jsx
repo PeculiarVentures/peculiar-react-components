@@ -6,7 +6,7 @@ import withAnalytics from '../../containers/analytics_hoc';
 /**
  * Button component
  */
-class Button extends React.Component {
+export class Button extends React.Component {
   /**
    * Construct class name for the root element using options from props
    * @param {{

@@ -48,7 +48,7 @@
   "files": [
     "src/"
   ],
-  "author": "PeculiarVentures Team",
+  "author": "PeculiarVentures",
   "license": "AGPL-3.0",
   "engines": {
     "node": ">=10.0.0"

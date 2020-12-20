@@ -7,12 +7,21 @@ import classNames from 'classnames';
  */
 export default function LinearProgress(props) {
   const {
-    value,
+    value: valueProp,
     color,
     colorProgress,
     className,
     ...other
   } = props;
+  let value = valueProp;
+
+  if (value < 0) {
+    value = 0;
+  }
+
+  if (value > 100) {
+    value = 100;
+  }
 
   /**
    * @return {ReactElement} markup
@@ -27,6 +36,7 @@ export default function LinearProgress(props) {
         className,
       )}
       {...other}
+      aria-valuenow={value}
     >
       <div
         className={classNames(

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-const SIZE = 50;
+const SVG_SIZE = 50;
 
 /**
  * CircularProgress component
@@ -34,13 +34,13 @@ export default function CircularProgress(props) {
     >
       <svg
         className="circle_progress_svg"
-        viewBox={`0 0 ${SIZE} ${SIZE}`}
+        viewBox={`0 0 ${SVG_SIZE} ${SVG_SIZE}`}
       >
         <circle
           className={[`circle_progress_stroke_${color}`]}
-          cx={SIZE / 2}
-          cy={SIZE / 2}
-          r={(SIZE / 2) - 5}
+          cx={SVG_SIZE / 2}
+          cy={SVG_SIZE / 2}
+          r={(SVG_SIZE / 2) - 5}
           fill="none"
           strokeWidth={thickness}
         />
@@ -49,9 +49,9 @@ export default function CircularProgress(props) {
             'circle_progress_circle',
             [`circle_progress_stroke_${colorProgress}`],
           )}
-          cx={SIZE / 2}
-          cy={SIZE / 2}
-          r={(SIZE / 2) - 5}
+          cx={SVG_SIZE / 2}
+          cy={SVG_SIZE / 2}
+          r={(SVG_SIZE / 2) - 5}
           fill="none"
           strokeWidth={thickness}
         />
@@ -66,7 +66,7 @@ CircularProgress.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * The color of the static circle element.
+   * The color SVG_SIZEof the static circle element.
    */
   color: PropTypes.string,
   /**

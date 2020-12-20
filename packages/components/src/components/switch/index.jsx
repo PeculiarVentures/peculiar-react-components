@@ -6,7 +6,7 @@ import withAnalytics from '../../containers/analytics_hoc';
 /**
  * Switch component
  */
-class Switch extends SwitchHandler {
+export class Switch extends SwitchHandler {
   /**
    * render
    * @return {ReactElement} markup
