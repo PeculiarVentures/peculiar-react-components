@@ -27,7 +27,7 @@ describe('<Button />', () => {
   it('renders the button children prop like a text', () => {
     const wrapper = button({
       children: 'test',
-    })
+    });
 
     expect(wrapper.text()).to.equal('test');
   });

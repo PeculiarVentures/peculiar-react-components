@@ -8,7 +8,7 @@ import CheckmarkIcon from '../icons/checkmark';
 /**
  * Checkbox component
  */
-class Checkbox extends SwitchHandler {
+export class Checkbox extends SwitchHandler {
   /**
    * render
    * @return {ReactElement} markup
