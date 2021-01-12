@@ -9,16 +9,20 @@
     height: 100%
     width: 30px
     pointer-events: none
+    text-align: center
+    &:before
+      content: ''
+      width: 0
+      height: 100%
+      display: inline-block
+      vertical-align: middle
 
   &_arrow_icon
     width: 8px
     height: 6px
     fill: rgb(var(--grey))
-    position: absolute
-    top: 50%
-    left: 50%
-    display: block
-    transform: translate(-50%, -50%)
+    display: inline-block
+    vertical-align: middle
 
   &_dropdown_container
     width: 100%
@@ -59,6 +63,9 @@
       line-height: calc($input-large-height - 2px)
 
   &[data-open="true"]
+    .select_open_button
+      transform: rotate(180deg)
+
     &[data-placement="top"]
       .select_field
         border-top: none
