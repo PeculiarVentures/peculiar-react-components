@@ -1,6 +1,6 @@
 {
   "name": "@peculiar/karma-scripts",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
   "description": "Karma scripts",
   "author": "PeculiarVentures",
@@ -14,7 +14,7 @@
     "url": "https://github.com/PeculiarVentures/peculiar-react-components/issues"
   },
   "dependencies": {
-    "@peculiar/webpack-scripts": "^0.0.0",
+    "@peculiar/webpack-scripts": "^0.1.0",
     "@types/enzyme": "^3.10.8",
     "@types/mocha": "^8.0.4",
     "enzyme": "^3.11.0",
@@ -26,6 +26,5 @@
     "karma-mocha-reporter": "^2.2.5",
     "karma-webpack": "^4.0.2",
     "mocha": "^8.2.1"
-  },
-  "devDependencies": {}
+  }
 }

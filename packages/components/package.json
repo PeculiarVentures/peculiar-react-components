@@ -1,6 +1,6 @@
 {
   "name": "lib-react-components",
-  "version": "1.5.1",
+  "version": "1.6.0",
   "private": false,
   "description": "React components",
   "keywords": [
@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
-    "lib-theme-contructor": "^0.4.0",
+    "lib-theme-contructor": "^0.4.1",
     "prismjs": "1.21.0",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
@@ -45,7 +45,7 @@
     "react-popper": "^1.0.2"
   },
   "devDependencies": {
-    "@peculiar/karma-scripts": "^0.0.0",
+    "@peculiar/karma-scripts": "^0.1.0",
     "@types/chai": "^4.2.14",
     "@types/faker": "^5.1.4",
     "@types/sinon": "^9.0.8",

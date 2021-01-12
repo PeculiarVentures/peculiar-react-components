@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://github.com/PeculiarVentures/peculiar-react-components/compare/lib-react-components@1.5.1...lib-react-components@1.6.0) (2021-01-12)
+
+
+### Bug Fixes
+
+* lint ([5030809](https://github.com/PeculiarVentures/peculiar-react-components/commit/50308099767b641bed676da2ce326b5a2a39c325))
+
+
+### Features
+
+* **components:** add `karma-scripts` package for run tests ([850a5dc](https://github.com/PeculiarVentures/peculiar-react-components/commit/850a5dca14dcbc653d309a97c13aa00e52754536))
+* **components:** add test for "box" ([29c176d](https://github.com/PeculiarVentures/peculiar-react-components/commit/29c176dd207a7c1727bed89508f7b00aa72dc015))
+* **components:** add test for "content_loader" ([fabe18a](https://github.com/PeculiarVentures/peculiar-react-components/commit/fabe18ac7f6fcec7afd51e142fc733c555462af6))
+* **components:** add test for "progress" ([c00b980](https://github.com/PeculiarVentures/peculiar-react-components/commit/c00b9804a04076c5e82bb1a630ab8170ee27d852))
+* **components:** add test for "uuid" ([d65f63a](https://github.com/PeculiarVentures/peculiar-react-components/commit/d65f63ae146bff994b0fd80e9ed8d9ffb37523fa))
+* **components:** add test for "validator" ([d4ac528](https://github.com/PeculiarVentures/peculiar-react-components/commit/d4ac528bf969c0ac7684b19f0b612b75711e517f))
+* **components:** add tests for "switch" and "checkbox" ([2e35a66](https://github.com/PeculiarVentures/peculiar-react-components/commit/2e35a66ddff18a5dbc230a10980788aa6b083f47))
+
+
+
+
+
 ## [1.5.1](https://github.com/PeculiarVentures/peculiar-react-components/compare/lib-react-components@1.5.0...lib-react-components@1.5.1) (2020-12-16)
 
 **Note:** Version bump only for package lib-react-components
