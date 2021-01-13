@@ -13,22 +13,17 @@
     font-size: $input-large-fontSize
     line-height: calc($input-large-height - 2px)
 
-  &[data-disabled="true"]
+  &[aria-disabled="true"]
     pointer-events: none
     cursor: default
     color: rgb(var(--grey))
     opacity: .4
 
-  &[data-has-focus="true"]
-    &.select_item_focus
-      @each $key in $colors
-        &_$(key)
-          background-color: rgba(var(--$(key)), .05)
+  &[data-focused="true"]
+    background: rgba(var(--light_grey), .4)
 
 @media (hover: hover)
   .select_item
-    &:not([data-disabled="true"])
+    &:not([aria-disabled="true"])
       &:hover
-        opacity: .5
-      &:active
-        opacity: 1
+        background: rgba(var(--light_grey), .4)

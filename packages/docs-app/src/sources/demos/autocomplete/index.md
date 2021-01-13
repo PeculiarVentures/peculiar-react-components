@@ -2,7 +2,7 @@
 
 ## Basic
 
-{{"demo": "/demos/autocomplete/basic.jsx"}}
+{{"demo": "/demos/autocomplete/basic.jsx", "showCode": "true"}}
 
 ## Props
 
