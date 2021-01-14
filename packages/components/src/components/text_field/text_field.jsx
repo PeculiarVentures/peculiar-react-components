@@ -13,7 +13,7 @@ import validator from '../../utils/validator';
  * @param {string} componentName
  * @returns {object}
  */
-function validationPropType(props, propName, componentName, ...rest) {
+export function validationPropType(props, propName, componentName, ...rest) {
   const value = props[propName];
 
   if (typeof value === 'string') {

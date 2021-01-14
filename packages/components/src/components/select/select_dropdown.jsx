@@ -94,8 +94,10 @@ export default class SelectDropdown extends React.PureComponent {
 
     const nextElement = this._refRootElement.current.querySelector(`[data-option-index="${nextIndex}"]`);
 
-    nextElement.setAttribute('data-focused', 'true');
-    this._scrollToElement(nextElement);
+    if (nextElement) {
+      nextElement.setAttribute('data-focused', 'true');
+      this._scrollToElement(nextElement);
+    }
   }
 
   render() {
