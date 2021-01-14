@@ -66,15 +66,20 @@ export default class Autocomplete extends React.Component {
     inputValue: '',
   };
 
-  getOptions() {
+  getFillteredOptions() {
     const {
       options,
       getOptionLabel,
     } = this.props;
     const {
+      showOptions,
       inputValue,
       activeOption,
     } = this.state;
+
+    if (!showOptions) {
+      return [];
+    }
 
     if (inputValue === activeOption) {
       return options;
@@ -86,6 +91,108 @@ export default class Autocomplete extends React.Component {
   }
 
   _refRootElement = React.createRef();
+  _refSelectDropdownElement = React.createRef();
+
+  handleClickOption(label) {
+    this.setState({
+      activeOption: label,
+      inputValue: label,
+      showOptions: false,
+    });
+  }
+
+  handleChangeField = (event) => {
+    const { activeOption } = this.state;
+    const { value } = event.currentTarget;
+
+    this.setState({
+      showOptions: true,
+      inputValue: value,
+      activeOption: value ? activeOption : '',
+    });
+  }
+
+  handleBlurField = () => {
+    const { freeSolo } = this.props;
+    const { activeOption } = this.state;
+
+    if (freeSolo) {
+      this.setState({
+        showOptions: false,
+      });
+    } else {
+      this.setState({
+        showOptions: false,
+        inputValue: activeOption,
+      });
+    }
+  }
+
+  handleClickField = () => {
+    const { inputValue, showOptions } = this.state;
+
+    if (inputValue) {
+      this.setState({
+        showOptions: true,
+      });
+    } else {
+      this.setState({
+        showOptions: !showOptions,
+      });
+    }
+  }
+
+  handleKeyDownField = (event) => {
+    // Wait until IME is settled.
+    if (event.which !== 229) {
+      switch (event.key) {
+        case 'ArrowUp': {
+          // Prevent scroll of the page
+          event.preventDefault();
+
+          if (this._refSelectDropdownElement && this._refSelectDropdownElement.current) {
+            this._refSelectDropdownElement.current.focusOption('prev');
+          }
+
+          break;
+        }
+
+        case 'ArrowDown': {
+          // Prevent scroll of the page
+          event.preventDefault();
+
+          if (this._refSelectDropdownElement && this._refSelectDropdownElement.current) {
+            this._refSelectDropdownElement.current.focusOption();
+          }
+
+          break;
+        }
+
+        case 'Enter': {
+          event.preventDefault();
+
+          if (this._refSelectDropdownElement && this._refSelectDropdownElement.current) {
+            this._refSelectDropdownElement.current.clickToFocusedElement();
+          }
+
+          break;
+        }
+
+        case 'Escape': {
+          // Avoid Opera to exit fullscreen mode.
+          event.preventDefault();
+          // Avoid the Modal to handle the event.
+          event.stopPropagation();
+
+          this.handleBlurField();
+
+          break;
+        }
+
+        default:
+      }
+    }
+  }
 
   renderDropDown = options => props => (
     <div
@@ -121,17 +228,12 @@ export default class Autocomplete extends React.Component {
       return (
         <SelectItem
           key={index}
+          data-option-index={index}
           value={label}
           selected={label === activeOption}
-          onClick={() => {
-            this.setState({
-              activeOption: label,
-              inputValue: label,
-              showOptions: false,
-            });
-          }}
+          onClick={this.handleClickOption.bind(this, label)}
         >
-          {renderOption ? renderOption(opt) : label}
+          {typeof renderOption === 'function' ? renderOption(opt) : label}
         </SelectItem>
       );
     });
@@ -139,7 +241,6 @@ export default class Autocomplete extends React.Component {
 
   renderField() {
     const {
-      freeSolo,
       disabled,
       placeholder,
       required,
@@ -150,47 +251,17 @@ export default class Autocomplete extends React.Component {
       size,
     } = this.props;
     const {
-      showOptions,
       inputValue,
-      activeOption,
     } = this.state;
 
     return (
       <TextField
-        value={inputValue}
-        onChange={(e) => {
-          const v = e.currentTarget.value;
-
-          this.setState({
-            showOptions: true,
-            inputValue: v,
-            activeOption: v ? activeOption : '',
-          });
-        }}
+        onChange={this.handleChangeField}
+        onBlur={this.handleBlurField}
+        onClick={this.handleClickField}
+        onKeyDown={this.handleKeyDownField}
         autoComplete="false"
-        onBlur={() => {
-          if (freeSolo) {
-            this.setState({
-              showOptions: false,
-            });
-          } else {
-            this.setState({
-              showOptions: false,
-              inputValue: activeOption,
-            });
-          }
-        }}
-        onClick={() => {
-          if (inputValue) {
-            this.setState({
-              showOptions: true,
-            });
-          } else {
-            this.setState({
-              showOptions: !showOptions,
-            });
-          }
-        }}
+        value={inputValue}
         disabled={disabled}
         placeholder={placeholder}
         required={required}
@@ -241,8 +312,8 @@ export default class Autocomplete extends React.Component {
     const {
       showOptions,
     } = this.state;
-    const options = this.getOptions();
-    const isOpen = showOptions && !!options.length;
+    const filteredOptions = this.getFillteredOptions();
+    const isOpen = showOptions && !!filteredOptions.length;
 
     return (
       <div
@@ -251,7 +322,7 @@ export default class Autocomplete extends React.Component {
         ref={this._refRootElement}
       >
         {this.renderField()}
-        {isOpen && this.renderPopup(options)}
+        {isOpen && this.renderPopup(filteredOptions)}
       </div>
     );
   }

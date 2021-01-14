@@ -28,7 +28,7 @@ export default class SelectDropdown extends React.PureComponent {
   };
 
   componentDidMount() {
-    this.scrollToSelectedElement();
+    this._scrollToSelectedElement();
   }
 
   getFocusedElement() {
@@ -41,22 +41,61 @@ export default class SelectDropdown extends React.PureComponent {
 
   _refRootElement = React.createRef();
 
-  scrollToFocusedElement() {
-    const el = this.getFocusedElement();
-
-    this.scrollToElement(el);
-  }
-
-  scrollToSelectedElement() {
+  _scrollToSelectedElement() {
     const el = this.getSelectedElement();
 
-    this.scrollToElement(el);
+    this._scrollToElement(el);
   }
 
-  scrollToElement(el) {
+  _scrollToElement(el) {
     if (el) {
       this._refRootElement.current.scrollTop = el.offsetTop;
     }
+  }
+
+  clickToFocusedElement() {
+    const el = this.getFocusedElement();
+
+    if (el) {
+      el.click();
+    }
+  }
+
+  focusOption(type) {
+    const { children } = this.props;
+    const focusedElement = this.getFocusedElement();
+    let currentIndex = -1;
+    let nextIndex;
+
+    if (!focusedElement) {
+      const selectedElement = this.getSelectedElement();
+
+      if (selectedElement) {
+        currentIndex = Number(selectedElement.getAttribute('data-option-index'));
+      }
+    } else {
+      currentIndex = Number(focusedElement.getAttribute('data-option-index'));
+      focusedElement.setAttribute('data-focused', 'false');
+    }
+
+    if (type === 'prev') {
+      nextIndex = currentIndex - 1;
+
+      if (nextIndex < 0) {
+        nextIndex = children.length - 1;
+      }
+    } else {
+      nextIndex = currentIndex + 1;
+
+      if (nextIndex > children.length - 1) {
+        nextIndex = 0;
+      }
+    }
+
+    const nextElement = this._refRootElement.current.querySelector(`[data-option-index="${nextIndex}"]`);
+
+    nextElement.setAttribute('data-focused', 'true');
+    this._scrollToElement(nextElement);
   }
 
   render() {
@@ -77,7 +116,7 @@ export default class SelectDropdown extends React.PureComponent {
           'shadow',
           className,
         )}
-        ref={this.refRootElement}
+        ref={this._refRootElement}
         role="listbox"
         {...other}
       >
