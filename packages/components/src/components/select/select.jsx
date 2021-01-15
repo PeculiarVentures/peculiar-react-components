@@ -1,92 +1,65 @@
-import React, { Component, Children, cloneElement, isValidElement } from 'react';
+/* eslint-disable react/require-default-props */
+import * as React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import { Popper } from 'react-popper';
 import SelectDropdown from './select_dropdown';
+import SelectItem from './select_item';
 import withAnalytics from '../../containers/analytics_hoc';
+import TextField from '../text_field';
 import SelectArrowIcon from '../icons/select_arrow';
 
-function prepareValue(value, defaultValue) {
-  if (value || typeof value === 'number') {
-    return value;
-  }
-
-  if (defaultValue || typeof defaultValue === 'number') {
-    return defaultValue;
-  }
-
-  return '';
-}
-
-/**
- * Select component
- */
-class Select extends Component {
+class Select extends React.Component {
   static propTypes = {
     /**
-     * The option elements to populate the select with.
-     */
-    children: PropTypes.node.isRequired,
-    /**
-     * If true, the component will be using a native select element.
-     */
-    native: PropTypes.bool,
-    /**
-     * The input/select name value.
-     */
-    name: PropTypes.string,
-    /**
-     * If true, the select will be disabled.
-     */
-    disabled: PropTypes.bool,
-    /**
-     * The input/select value.
-     */
-    value: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-    ]),
-    /**
-     * The input/select default value.
+     * The default input value, useful when not controlling the component.
      */
     defaultValue: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.number,
     ]),
     /**
-     * Callback function fired when a menu item is selected.
+     * The input value.
      */
-    onChange: PropTypes.func,
-    onFocus: PropTypes.func,
-    onBlur: PropTypes.func,
-    onKeyDown: PropTypes.func,
-    /**
-     * Element tabIndex.
-     */
-    tabIndex: PropTypes.number,
-    /**
-     * Classname for the root element.
-     */
-    className: PropTypes.string,
-    /**
-     * The short hint displayed in the input before
-     * the user enters a value (only for `native: false`)
-     */
-    placeholder: PropTypes.oneOfType([
+    value: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.number,
     ]),
     /**
-     * Color for placeholder
+     * Array of options.
      */
-    placeholderColor: PropTypes.string,
+    options: PropTypes.arrayOf(
+      PropTypes.shape({
+        label: PropTypes.oneOfType([
+          PropTypes.string,
+          PropTypes.number,
+        ]),
+        value: PropTypes.oneOfType([
+          PropTypes.string,
+          PropTypes.number,
+        ]),
+      }),
+    ).isRequired,
     /**
-     * Properties applied to the input/select element.
+     * Render the option.
      */
-    inputProps: PropTypes.oneOfType([
-      PropTypes.object,
-    ]),
-    arrowComponent: PropTypes.node,
+    renderOption: PropTypes.func,
+    /**
+     * If true, the input will be disabled.
+     */
+    disabled: PropTypes.bool,
+    /**
+     * The short hint displayed in the input before the user enters a value.
+     */
+    placeholder: PropTypes.string,
+    /**
+     * The CSS class name of the wrapper element.
+     */
+    className: PropTypes.string,
+    /**
+     * If true, the input will be required.
+     */
+    required: PropTypes.bool,
     /**
      * Component type one of `fill` or `stroke`.
      * If `fill` - component will be have background-color from `color` props.
@@ -102,6 +75,10 @@ class Select extends Component {
      */
     textColor: PropTypes.string,
     /**
+     * Color for the placeholder.
+     */
+    placeholderColor: PropTypes.string,
+    /**
      * Component focus color from theme.
      */
     colorFocus: PropTypes.string,
@@ -114,6 +91,24 @@ class Select extends Component {
      */
     mobileSize: PropTypes.oneOf(['medium', 'large']),
     /**
+     * Name attribute of the input element.
+     */
+    name: PropTypes.string,
+    /**
+     * Element tabIndex.
+     */
+    tabIndex: PropTypes.number,
+    /**
+     * If true, the input will be focused during the first mount.
+     */
+    autoFocus: PropTypes.bool,
+    /**
+     * Properties applied to the input element.
+     */
+    inputProps: PropTypes.oneOfType([
+      PropTypes.object,
+    ]),
+    /**
      * Component dropdown start opened direction.
      */
     placement: PropTypes.oneOf(['top', 'bottom']),
@@ -121,64 +116,56 @@ class Select extends Component {
      * If `true`, component will automatically calc possible dropdown opened direction.
      */
     flip: PropTypes.bool,
-  };
-
-  static contextTypes = {
-    device: PropTypes.object,
+    /**
+     * Callback fired when the value is changed.
+     */
+    onChange: PropTypes.func,
+    onBlur: PropTypes.func,
+    onKeyDown: PropTypes.func,
+    /**
+     * The icon that displays the arrow.
+     */
+    iconComponent: PropTypes.node,
   };
 
   static defaultProps = {
-    native: false,
-    name: undefined,
+    defaultValue: '',
     disabled: false,
-    value: undefined,
-    defaultValue: undefined,
-    onChange() {},
-    onFocus() {},
-    onBlur() {},
-    onKeyDown() {},
-    tabIndex: 0,
-    className: '',
-    placeholder: undefined,
-    placeholderColor: 'grey_4',
-    inputProps: {},
-    arrowComponent: null,
-    bgType: 'fill',
+    required: false,
+    bgType: 'stroke',
     color: 'light_grey',
     textColor: 'black',
+    placeholderColor: 'grey_4',
     colorFocus: 'primary',
     size: 'medium',
-    mobileSize: undefined,
+    tabIndex: 0,
+    autoFocus: false,
+    inputProps: {},
     placement: 'bottom',
     flip: true,
   };
 
   state = {
-    open: false,
-    value: prepareValue(this.props.value, this.props.defaultValue),
-    valueSelected: null,
+    showOptions: false,
+    activeOption: this.props.value || this.props.defaultValue,
   };
 
-  componentWillReceiveProps(nextProps) {
-    const { value } = this.props;
-
-    if (value !== nextProps.value) {
-      this.setState({
-        value: nextProps.value,
-      });
+  static getDerivedStateFromProps(props, state) {
+    if ('value' in props && props.value !== state.activeOption) {
+      return {
+        activeOption: props.value,
+      };
     }
-  }
 
-  componentWillUnmount() {
-    clearTimeout(this._blurTimeout);
+    return null;
   }
 
   /**
-   * Get select value
+   * Get components value.
    * @return {string|number}
    */
   getValue() {
-    return this.inputNode.value;
+    return this.state.activeOption;
   }
 
   /**
@@ -187,457 +174,335 @@ class Select extends Component {
    */
   setValue = value => (
     this.setState({
-      value,
+      activeOption: value,
     })
   )
 
-  _blurTimeout = null;
-  _childrenValues = [];
-  inputNode = null;
-  dropdownNode = null;
-  _rootNode = null;
+  _refRootElement = React.createRef();
+  _refSelectDropdownElement = React.createRef();
 
-  /**
-   * onClick select item handler
-   * @param {object} child
-   */
-  _handleItemClick = child => (e) => {
-    const { onChange, name, value } = this.props;
-    const valueChild = child.props.value;
+  handleBlurField = (event) => {
+    const { onBlur } = this.props;
 
-    if (value || value === valueChild) {
-      this.setState({
-        open: false,
-      });
+    this.setState({
+      showOptions: false,
+    });
 
-      if (value === valueChild) return;
-    } else {
-      this.setState({
-        value: valueChild,
-        open: false,
-      });
+    if (typeof onBlur === 'function') {
+      onBlur(event);
     }
-
-    onChange(e, valueChild, name);
-  };
-
-  /**
-   * onClick select handler
-   */
-  _handleClick = () => {
-    const { disabled } = this.props;
-    const { open } = this.state;
-
-    if (disabled) return;
-
-    if (open) {
-      this.setState({
-        open: false,
-      });
-    } else {
-      this.setState({
-        open: true,
-      }, this._handleItemHovered);
-    }
-  };
-
-  /**
-   * onFocus select handler
-   * @param {SytheticEvent} e
-   */
-  _handleFocus = (e) => {
-    const { onFocus, name } = this.props;
-
-    clearTimeout(this._blurTimeout);
-    onFocus(e, name);
-  };
-
-  /**
-   * onBlur select handler
-   * @param {SytheticEvent} e
-   */
-  _handleBlur = (e) => {
-    const { onBlur, name } = this.props;
-
-    clearTimeout(this._blurTimeout);
-    this._blurTimeout = setTimeout(this.setState.bind(this, { open: false }), 0);
-    onBlur(e, name);
-  };
-
-  /**
-   * onSpaceEnterPress select handler
-   * @param {SytheticEvent} e
-   */
-  _handleSpaceEnterPress(e) {
-    const { value, name, onChange } = this.props;
-    const {
-      valueSelected,
-      open,
-    } = this.state;
-
-    if (open && valueSelected && !value) {
-      this.setState({
-        value: valueSelected,
-      });
-    }
-
-    if (open && valueSelected) {
-      onChange(e, valueSelected, name);
-    }
-
-    this._handleClick();
   }
 
-  /**
-   * onKeyDown select handler
-   * @param {SytheticEvent} e
-   */
-  _handleKeyDown = (event) => {
-    const {
-      onKeyDown,
-      disabled,
-      name,
-    } = this.props;
+  handleKeyDownField = (event) => {
+    const { disabled, onKeyDown } = this.props;
+    const { showOptions } = this.state;
 
-    if (!disabled) {
-      const { keyCode } = event;
-
-      /**
-       * escape key press
-       * hide dropdown list
-       */
-      if (keyCode === 27) {
-        this.setState({
-          open: false,
-        });
-      }
-
-      /**
-       * space or enter key press
-       * open/hide dropdown or select element in dropdown list
-       */
-      if (keyCode === 32 || keyCode === 13) {
-        event.preventDefault();
-        this._handleSpaceEnterPress(event);
-      }
-
-      /**
-       * up key press
-       * select prev element in dropdown list
-       */
-      if (keyCode === 38) {
-        event.preventDefault();
-        this._handleItemHovered('up');
-      }
-
-      /**
-       * down key press
-       * select next element in dropdown list
-       */
-      if (keyCode === 40) {
-        event.preventDefault();
-        this._handleItemHovered('down');
-      }
+    if (disabled) {
+      return;
     }
 
-    onKeyDown(event, name);
-  };
+    if (typeof onKeyDown === 'function') {
+      onKeyDown(event);
+    }
 
-  /**
-   * onSelectItemFocus handler
-   * @param {string|undefined} type
-   */
-  _handleItemHovered(type) {
-    const { valueSelected, open, value } = this.state;
-    const { _childrenValues } = this;
+    // Wait until IME is settled.
+    if (event.which !== 229) {
+      switch (event.key) {
+        case 'ArrowUp': {
+          // Prevent scroll of the page
+          event.preventDefault();
 
-    if (!open) return;
+          if (this._refSelectDropdownElement && this._refSelectDropdownElement.current) {
+            this._refSelectDropdownElement.current.focusOption('prev');
+          }
 
-    if (!type) {
-      if (value) {
-        this.setState({
-          valueSelected: value,
-        }, this._handleScrollToElement);
-      } else {
-        this.setState({
-          valueSelected: _childrenValues[0],
-        }, this._handleScrollToElement);
+          break;
+        }
+
+        case 'ArrowDown': {
+          // Prevent scroll of the page
+          event.preventDefault();
+
+          if (this._refSelectDropdownElement && this._refSelectDropdownElement.current) {
+            this._refSelectDropdownElement.current.focusOption();
+          }
+
+          break;
+        }
+
+        case ' ': {
+          event.preventDefault();
+
+          if (!showOptions) {
+            this.setState({
+              showOptions: true,
+            });
+          }
+
+          break;
+        }
+
+        case 'Enter': {
+          event.preventDefault();
+
+          if (!showOptions) {
+            this.setState({
+              showOptions: true,
+            });
+          }
+
+          if (this._refSelectDropdownElement && this._refSelectDropdownElement.current) {
+            this._refSelectDropdownElement.current.clickToFocusedElement();
+          }
+
+          break;
+        }
+
+        case 'Escape': {
+          // Avoid Opera to exit fullscreen mode.
+          event.preventDefault();
+          // Avoid the Modal to handle the event.
+          event.stopPropagation();
+
+          this.handleBlurField();
+
+          break;
+        }
+
+        default:
       }
+    }
+  }
+
+  handleBlurField = (event) => {
+    const { onBlur } = this.props;
+
+    this.setState({
+      showOptions: false,
+    });
+
+    if (typeof onBlur === 'function') {
+      onBlur(event);
+    }
+  }
+
+  handleClickField = () => {
+    const { disabled } = this.props;
+    const { showOptions } = this.state;
+
+    if (disabled) {
+      return;
+    }
+
+    this.setState({
+      showOptions: !showOptions,
+    });
+  }
+
+  handleClickOption = option => (event) => {
+    const { onChange, name, required } = this.props;
+    const { activeOption } = this.state;
+
+    // Prevent choose the same value.
+    if (activeOption === option.value) {
+      this.setState({
+        showOptions: false,
+      });
 
       return;
     }
 
-    const valueIndex = _childrenValues.indexOf(valueSelected);
-    const prevValue = _childrenValues[valueIndex - 1];
-    const nextValue = _childrenValues[valueIndex + 1];
-
-    if (type === 'up' && prevValue) {
+    if ('value' in this.props) {
       this.setState({
-        valueSelected: prevValue,
-      }, this._handleScrollToElement);
+        showOptions: false,
+      });
+    } else {
+      this.setState({
+        showOptions: false,
+        activeOption: option.value,
+      });
     }
 
-    if (type === 'down' && nextValue) {
-      this.setState({
-        valueSelected: nextValue,
-      }, this._handleScrollToElement);
+    if (typeof onChange === 'function') {
+      event.persist();
+
+      Object.defineProperty(event, 'target', {
+        writable: true,
+        value: {
+          name,
+          value: option.value,
+          required,
+        },
+      });
+
+      onChange(event);
     }
   }
 
-  /**
-   * Scroll to focused element
-   */
-  _handleScrollToElement() {
-    if (this.dropdownNode) {
-      this.dropdownNode.scrollToFocusedElement();
-    }
-  }
-
-  /**
-   * Render open button
-   * @return {ReactElement} markup
-   */
-  _renderOpenButton() {
-    const { arrowComponent } = this.props;
+  renderOpenButton() {
+    const { iconComponent } = this.props;
+    const { showOptions } = this.state;
 
     return (
-      <div className="select_open_button">
-        {arrowComponent || <SelectArrowIcon className="select_arrow_icon" />}
+      <div
+        className={classnames(
+          'select_button',
+          {
+            select_button_open: showOptions,
+          },
+        )}
+        focusable="false"
+        aria-hidden
+      >
+        {iconComponent || <SelectArrowIcon className="select_arrow_icon" />}
       </div>
     );
   }
 
-  /**
-   * render
-   * @return {ReactElement} markup
-   */
-  render() {
+  renderOptions(options) {
+    const { size, renderOption } = this.props;
+    const { activeOption } = this.state;
+
+    return options.map((opt, index) => {
+      return (
+        <SelectItem
+          key={index}
+          data-option-index={index}
+          value={opt.value}
+          selected={activeOption === opt.value}
+          onClick={this.handleClickOption(opt)}
+          size={size}
+        >
+          {typeof renderOption === 'function' ? renderOption(opt) : opt.label}
+        </SelectItem>
+      );
+    });
+  }
+
+  renderDropDown = options => props => (
+    <div
+      ref={props.ref}
+      style={{
+        top: 0,
+        left: 0,
+        position: props.style.position,
+        transform: `translate3d(0px, ${props.style.top}px, 0px)`,
+        transformOrigin: 'top center',
+      }}
+      className="select_dropdown_container"
+    >
+      <SelectDropdown
+        ref={this._refSelectDropdownElement}
+        onMouseDown={(event) => {
+          // Prevent blur
+          event.preventDefault();
+        }}
+      >
+        {this.renderOptions(options)}
+      </SelectDropdown>
+    </div>
+  );
+
+  renderPopup(options) {
     const {
-      native,
-      children,
-      name,
+      placement,
+      flip,
+    } = this.props;
+
+    return (
+      <Popper
+        modifiers={{
+          computeStyle: {
+            gpuAcceleration: false,
+          },
+          preventOverflow: {
+            enabled: false,
+          },
+          hide: {
+            enabled: false,
+          },
+          flip: {
+            enabled: flip,
+          },
+        }}
+        positionFixed={false}
+        referenceElement={this._refRootElement ? this._refRootElement.current : null}
+        placement={placement}
+      >
+        {this.renderDropDown(options)}
+      </Popper>
+    );
+  }
+
+  renderField() {
+    const {
       disabled,
-      value,
-      defaultValue,
-      onChange,
-      onFocus,
-      onBlur,
-      onKeyDown,
-      multiple, // eslint-disable-line
-      tabIndex,
-      className,
       placeholder,
-      inputProps,
-      arrowComponent,
+      required,
       bgType,
       color,
       textColor,
       colorFocus,
-      size: propsSize,
-      mobileSize,
+      size,
       placeholderColor,
-      placement,
-      flip,
-      ...other
+      name,
+      mobileSize,
+      inputProps,
+      options,
+      tabIndex,
+      autoFocus,
     } = this.props;
     const {
-      open,
-      value: valueState,
-      valueSelected,
+      activeOption,
     } = this.state;
-    const { device } = this.context;
+    const option = options.find(opt => opt.value === activeOption);
 
-    let size = propsSize || Select.defaultProps.size;
+    return (
+      <TextField
+        autoComplete="false"
+        onBlur={this.handleBlurField}
+        onClick={this.handleClickField}
+        onKeyDown={this.handleKeyDownField}
+        value={option ? option.label : ''}
+        disabled={disabled}
+        placeholder={placeholder}
+        required={required}
+        bgType={bgType}
+        color={color}
+        textColor={textColor}
+        colorFocus={colorFocus}
+        size={size}
+        placeholderColor={placeholderColor}
+        name={name}
+        mobileSize={mobileSize}
+        inputProps={{
+          ...inputProps,
+          readOnly: true,
+        }}
+        tabIndex={tabIndex}
+        autoFocus={autoFocus}
+        className="select_field"
+      >
+        {this.renderOpenButton()}
+      </TextField>
+    );
+  }
 
-    if (device && mobileSize) {
-      if (device.type === 'mobile') {
-        size = mobileSize;
-      }
-    }
-
-    if (native) {
-      return (
-        <div
-          data-component="select"
-          data-type={bgType}
-          data-disabled={disabled}
-          className={classNames(
-            'select',
-            className,
-          )}
-          {...other}
-          ref={(node) => { this._rootNode = node; }}
-        >
-          <select
-            data-component="select_field"
-            {...inputProps}
-            tabIndex={tabIndex}
-            multiple={false}
-            className={classNames(
-              'select_field',
-              'round_small',
-              [`select_field_${size}`],
-              [`select_field_focus_${colorFocus}`],
-              [`stroke_${color}`],
-              {
-                [`fill_${color}`]: bgType === 'fill',
-                fill_white: bgType === 'stroke',
-              },
-            )}
-            name={name}
-            disabled={disabled}
-            ref={(node) => { this.inputNode = node; }}
-            value={value}
-            defaultValue={defaultValue}
-            onChange={(e) => { onChange(e, e.target.value, name); }}
-            onFocus={(e) => { onFocus(e, name); }}
-            onBlur={(e) => { onBlur(e, name); }}
-            onKeyDown={(e) => { onKeyDown(e, name); }}
-          >
-            {children}
-          </select>
-          {this._renderOpenButton()}
-        </div>
-      );
-    }
-
-    this._childrenValues = [];
-    let displayValue = placeholder;
-
-    const options = Children.map(children, (child) => {
-      if (!isValidElement(child)) {
-        return null;
-      }
-
-      const {
-        value: valueChild,
-        children: childrenChild,
-        disabled: disabledChild,
-      } = child.props;
-      const selected = valueState === valueChild;
-
-      if (selected) {
-        displayValue = childrenChild;
-      }
-
-      if (!disabledChild) {
-        this._childrenValues.push(valueChild);
-      }
-
-      return cloneElement(child, {
-        onClick: disabledChild ? null : this._handleItemClick(child),
-        selected,
-        hasFocus: valueSelected === valueChild,
-        size,
-        textColor,
-        colorFocus,
-      });
-    });
-    const mustOpen = open && options && options.length > 0;
-    const dropdownBody = (dropDownProps) => {
-      this._rootNode.setAttribute('data-placement', dropDownProps.placement);
-
-      return (
-        <div
-          ref={dropDownProps.ref}
-          style={{
-            top: 0,
-            left: 0,
-            position: dropDownProps.style.position,
-            transform: `translate3d(0px, ${dropDownProps.style.top}px, 0px)`,
-            transformOrigin: 'top center',
-          }}
-          className="select_dropdown_container"
-        >
-          <SelectDropdown
-            className="select_dropdown"
-            ref={(node) => { this.dropdownNode = node; }}
-            bgType={bgType}
-            color={color}
-            colorFocus={colorFocus}
-          >
-            {options}
-          </SelectDropdown>
-        </div>
-      );
-    };
+  render() {
+    const {
+      options,
+      className,
+    } = this.props;
+    const { showOptions } = this.state;
 
     return (
       <div
         data-component="select"
-        data-type={bgType}
-        data-disabled={disabled}
-        data-open={mustOpen}
-        className={classNames(
-          'select',
-          className,
-        )}
-        onFocus={this._handleFocus}
-        onBlur={this._handleBlur}
-        onKeyDown={this._handleKeyDown}
-        {...other}
-        {...Object.assign(disabled ? {} : {
-          tabIndex,
-        })}
-        ref={(node) => { this._rootNode = node; }}
+        className={classnames('select', className)}
+        ref={this._refRootElement}
       >
-        <div
-          data-component="select_field"
-          className={classNames(
-            'select_field',
-            'truncate_text',
-            'round_small',
-            [`select_field_${size}`],
-            [`select_field_focus_${colorFocus}`],
-            [`stroke_${color}`],
-            {
-              [`fill_${color}`]: bgType === 'fill',
-              fill_white: bgType === 'stroke',
-            },
-          )}
-          onClick={this._handleClick}
-        >
-          <span
-            className={classNames({
-              [`text_${textColor}`]: valueState,
-              [`text_${placeholderColor}`]: !valueState,
-            })}
-          >
-            {displayValue}
-          </span>
-        </div>
-        <input
-          {...inputProps}
-          type="hidden"
-          value={valueState}
-          name={name}
-          ref={(node) => { this.inputNode = node; }}
-          disabled={disabled}
-        />
-        {this._renderOpenButton()}
-        {mustOpen && (
-          <Popper
-            modifiers={{
-              computeStyle: {
-                gpuAcceleration: false,
-              },
-              preventOverflow: {
-                enabled: false,
-              },
-              hide: {
-                enabled: false,
-              },
-              flip: {
-                enabled: flip,
-              },
-            }}
-            positionFixed={false}
-            referenceElement={this._rootNode}
-            placement={placement}
-          >
-            {dropdownBody}
-          </Popper>
-        )}
+        {this.renderField()}
+        {showOptions && this.renderPopup(options)}
       </div>
     );
   }

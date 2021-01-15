@@ -94,6 +94,14 @@ export default class Autocomplete extends React.Component {
      */
     name: PropTypes.string,
     /**
+     * Element tabIndex.
+     */
+    tabIndex: PropTypes.number,
+    /**
+     * If true, the input will be focused during the first mount.
+     */
+    autoFocus: PropTypes.bool,
+    /**
      * Type of the input element.
      */
     type: PropTypes.oneOf([
@@ -140,6 +148,8 @@ export default class Autocomplete extends React.Component {
     colorFocus: 'primary',
     size: 'medium',
     type: 'text',
+    tabIndex: 0,
+    autoFocus: false,
     inputProps: {},
     placement: 'bottom',
     flip: true,
@@ -303,37 +313,32 @@ export default class Autocomplete extends React.Component {
     }
   }
 
-  renderDropDown = options => (props) => {
-    const { color } = props;
-
-    return (
-      <div
-        ref={props.ref}
-        style={{
-          top: 0,
-          left: 0,
-          position: props.style.position,
-          transform: `translate3d(0px, ${props.style.top}px, 0px)`,
-          transformOrigin: 'top center',
+  renderDropDown = options => props => (
+    <div
+      ref={props.ref}
+      style={{
+        top: 0,
+        left: 0,
+        position: props.style.position,
+        transform: `translate3d(0px, ${props.style.top}px, 0px)`,
+        transformOrigin: 'top center',
+      }}
+      className="select_dropdown_container"
+    >
+      <SelectDropdown
+        ref={this._refSelectDropdownElement}
+        onMouseDown={(event) => {
+          // Prevent blur
+          event.preventDefault();
         }}
-        className="autocomplete_dropdown_container"
       >
-        <SelectDropdown
-          ref={this._refSelectDropdownElement}
-          onMouseDown={(event) => {
-            // Prevent blur
-            event.preventDefault();
-          }}
-          color={color}
-        >
-          {this.renderOptions(options)}
-        </SelectDropdown>
-      </div>
-    );
-  };
+        {this.renderOptions(options)}
+      </SelectDropdown>
+    </div>
+  );
 
   renderOptions(options) {
-    const { renderOption, getOptionLabel } = this.props;
+    const { renderOption, getOptionLabel, size } = this.props;
     const { activeOption } = this.state;
 
     return options.map((opt, index) => {
@@ -346,6 +351,7 @@ export default class Autocomplete extends React.Component {
           value={label}
           selected={label === activeOption}
           onClick={this.handleClickOption.bind(this, label)}
+          size={size}
         >
           {typeof renderOption === 'function' ? renderOption(opt) : label}
         </SelectItem>
@@ -370,6 +376,8 @@ export default class Autocomplete extends React.Component {
       inputProps,
       validation,
       type,
+      tabIndex,
+      autoFocus,
     } = this.props;
     const {
       inputValue,
@@ -398,6 +406,8 @@ export default class Autocomplete extends React.Component {
         inputProps={inputProps}
         validation={validation}
         type={type}
+        tabIndex={tabIndex}
+        autoFocus={autoFocus}
       />
     );
   }
