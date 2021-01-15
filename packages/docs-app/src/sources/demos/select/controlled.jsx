@@ -1,45 +1,17 @@
-import React, { Component } from 'react';
-import { Select, SelectItem } from 'lib-react-components';
+import React from 'react';
+import { Select } from 'lib-react-components';
+import planets from './planets.json';
 
-const options = [
-  {
-    label: 'Mercury',
-    value: 'mercury',
-  },
-  {
-    label: 'Venus',
-    value: 'venus',
-  },
-  {
-    label: 'Earth',
-    value: 'earth',
-  },
-  {
-    label: 'Mars',
-    value: 'mars',
-  },
-  {
-    label: 'Jupiter',
-    value: 'jupiter',
-  },
-  {
-    label: 'Saturn',
-    value: 'saturn',
-  },
-  {
-    label: 'Uranus',
-    value: 'uranus',
-  },
-  {
-    label: 'Neptune',
-    value: 'neptune',
-  },
-];
-
-export default class Usage extends Component {
+export default class Usage extends React.Component {
   state = {
-    value: 'earth',
+    value: '',
   };
+
+  handleChange = (event) => {
+    this.setState({
+      value: event.target.value,
+    });
+  }
 
   render() {
     const { value } = this.state;
@@ -47,22 +19,10 @@ export default class Usage extends Component {
     return (
       <Select
         placeholder="Planet name"
-        style={{
-          maxWidth: 300,
-        }}
+        options={planets}
         value={value}
-        onChange={(e, val) => this.setState({ value: val })}
-        placement="top"
-      >
-        {options.map(opt => (
-          <SelectItem
-            key={opt.value}
-            value={opt.value}
-          >
-            {opt.label}
-          </SelectItem>
-        ))}
-      </Select>
+        onChange={this.handleChange}
+      />
     );
   }
 }

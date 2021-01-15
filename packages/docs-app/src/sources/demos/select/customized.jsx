@@ -1,81 +1,34 @@
 import React from 'react';
-import { Select, SelectItem } from 'lib-react-components';
-
-const options = [
-  {
-    label: 'Mercury',
-    value: 'mercury',
-  },
-  {
-    label: 'Venus',
-    value: 'venus',
-  },
-  {
-    label: 'Earth',
-    value: 'earth',
-  },
-  {
-    label: 'Mars',
-    value: 'mars',
-  },
-  {
-    label: 'Jupiter',
-    value: 'jupiter',
-  },
-  {
-    label: 'Saturn',
-    value: 'saturn',
-  },
-  {
-    label: 'Uranus',
-    value: 'uranus',
-  },
-  {
-    label: 'Neptune',
-    value: 'neptune',
-  },
-];
+import { Select } from 'lib-react-components';
+import planets from './planets.json';
 
 export default function Usage() {
   return (
-    <div>
+    <React.Fragment>
       <Select
-        placeholder="Planet name"
-        style={{
-          maxWidth: 300,
-          marginBottom: 10,
-        }}
-        bgType="stroke"
-        color="black"
-        textColor="black"
-      >
-        {options.map(opt => (
-          <SelectItem
-            key={opt.value}
-            value={opt.value}
-          >
-            {opt.label}
-          </SelectItem>
-        ))}
-      </Select>
+        placeholder="Size"
+        options={planets}
+        size="large"
+      />
+      <br/>
       <Select
-        placeholder="Planet name"
-        style={{
-          maxWidth: 300,
-        }}
-        colorFocus="success"
-        color="black"
+        placeholder="Colors"
+        options={planets}
+        bgType="fill"
+        color="success"
         textColor="white"
-      >
-        {options.map(opt => (
-          <SelectItem
-            key={opt.value}
-            value={opt.value}
-          >
-            {opt.label}
-          </SelectItem>
-        ))}
-      </Select>
-    </div>
+        colorFocus="secondary"
+      />
+      <br/>
+      <Select
+        placeholder="Option"
+        options={planets}
+        renderOption={(option) => (
+          <span>
+            🌍 {option.label}
+          </span>
+        )}
+      />
+    </React.Fragment>
   );
 }

@@ -14,11 +14,9 @@ const options = [
 
 export default function Usage() {
   return (
-    <React.Fragment>
-      <Autocomplete
-        placeholder="Planet"
-        options={options}
-      />
-    </React.Fragment>
+    <Autocomplete
+      placeholder="Planet"
+      options={options}
+    />
   );
 }
