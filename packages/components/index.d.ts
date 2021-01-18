@@ -231,53 +231,37 @@ interface RadioGroupProps {
   gaEventName?: string;
 }
 
-interface SelectProps {
-  children: React.ReactNode;
-  native?: boolean;
-  name?: string;
-  disabled?: boolean;
-  value?: string | number;
+interface ISelectOption {
+  label: string | number;
+  value: string | number;
+}
+
+interface SelectProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onBlur' | 'onChange' | 'onKeyDown'> {
   defaultValue?: string | number;
-  onChange?: (e: Event, value: string | number, name: string) => void;
-  onFocus?: (e: Event, name: string) => void;
-  onBlur?: (e: Event, name: string) => void;
-  onKeyDown?: (e: Event, name: string) => void;
-  tabIndex?: number;
+  value?: string | number;
+  options: ISelectOption[];
+  renderOption?: (option: ISelectOption) => React.ReactNode;
+  disabled?: boolean;
+  placeholder?: string;
   className?: string;
-  placeholder?: string | number;
-  placeholderColor?: Color;
-  inputProps?: object;
-  arrowComponent?: React.ReactNode;
+  required?: boolean;
   bgType?: Fill;
   color?: Color;
   textColor?: Color;
+  placeholderColor?: Color;
   colorFocus?: Color;
   size?: 'medium' | 'large';
   mobileSize?: 'medium' | 'large';
-  ref?: React.Ref<HTMLElement>;
-  gaEventName?: string;
+  name?: string;
+  tabIndex?: number;
+  autoFocus?: boolean;
+  inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
   placement?: 'bottom' | 'top';
   flip?: boolean;
-}
-
-interface SelectDropdownProps extends React.HTMLAttributes<HTMLDivElement> {
-  children?: React.ReactNode;
-  bgType?: Fill;
-  color?: Color;
-  colorFocus?: Color;
-  ref?: React.Ref<HTMLElement>;
-}
-
-interface SelectItemProps extends React.HTMLAttributes<HTMLDivElement> {
-  children: React.ReactNode;
-  value: string | number;
-  selected?: boolean;
-  disabled?: boolean;
-  hasFocus?: boolean;
-  textColor?: Color;
-  colorFocus?: Color;
-  size?: 'medium' | 'large';
-  ref?: React.Ref<HTMLElement>;
+  onChange?: (e: Event) => void;
+  onBlur?: (e: Event) => void;
+  onKeyDown?: (e: Event) => void;
+  iconComponent?: React.ReactNode;
 }
 
 interface SliderProps {
@@ -414,42 +398,37 @@ interface TextFieldProps extends InputBasicProps {
     | 'email'
     | 'tel'
     | 'date';
-  validation?: (ValidationType|((value: string | number) => boolean))[];
+  validation?: (ValidationType | ((value: string | number) => boolean))[];
 }
 
-interface AutocompleteProps {
-  tabIndex?: number;
-  className?: string;
+interface AutocompleteProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onBlur' | 'onChange' | 'onKeyDown'> {
   defaultValue?: string | number;
-  disabled?: boolean;
   value?: string | number;
+  options: (string | number)[];
+  renderOption?: (option: string | number) => React.ReactNode;
+  disabled?: boolean;
+  placeholder?: string;
+  className?: string;
   required?: boolean;
   valid?: boolean;
-  placeholder?: string;
-  placeholderColor?: Color;
-  children?: React.ReactNode;
-  name?: string;
   bgType?: Fill;
   color?: Color;
   textColor?: Color;
+  placeholderColor?: Color;
   colorFocus?: Color;
   size?: 'medium' | 'large';
   mobileSize?: 'medium' | 'large';
+  name?: string;
+  tabIndex?: number;
+  autoFocus?: boolean;
+  type?: 'text' | 'email' | 'tel';
   inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
-  autoComplete?: string;
-  ref?: React.Ref<HTMLElement>;
-  onChange?: (e: Event, value: string | number, name: string, action: 'select' | undefined) => void;
-  onFocus?: (e: Event, name: string) => void;
-  onBlur?: (e: Event, name: string) => void;
-  onKeyDown?: (e: Event, name: string) => void;
-  type?: 'text'
-    | 'password'
-    | 'email'
-    | 'tel'
-    | 'date';
-  validation?: (ValidationType|((value: string | number) => boolean))[];
+  validation?: (ValidationType | ((value: string | number) => boolean))[];
   placement?: 'bottom' | 'top';
   flip?: boolean;
+  onChange?: (e: Event) => void;
+  onBlur?: (e: Event) => void;
+  onKeyDown?: (e: Event) => void;
 }
 
 interface TooltipProps extends React.HTMLAttributes<HTMLDivElement>, Omit<TooltipPopperProps, 'referenceElement' | 'children' | 'open'> {
@@ -574,8 +553,6 @@ declare const ProgressiveImage: React.ComponentType<ProgressiveImageProps>;
 declare const Radio: React.ComponentType<RadioProps>;
 declare const RadioGroup: React.ComponentType<RadioGroupProps>;
 declare const Select: React.ComponentType<SelectProps>;
-declare const SelectDropdown: React.ComponentType<SelectDropdownProps>;
-declare const SelectItem: React.ComponentType<SelectItemProps>;
 declare const Slider: React.ComponentType<SliderProps>;
 declare const Snackbar: React.ComponentType<SnackbarProps>;
 declare const Switch: React.ComponentType<SwitchProps>;
