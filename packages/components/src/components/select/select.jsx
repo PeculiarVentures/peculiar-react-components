@@ -5,10 +5,13 @@ import classnames from 'classnames';
 import { Popper } from 'react-popper';
 import SelectDropdown from './select_dropdown';
 import SelectItem from './select_item';
-import withAnalytics from '../../containers/analytics_hoc';
 import TextField from '../text_field';
 import SelectArrowIcon from '../icons/select_arrow';
+import withAnalytics from '../../containers/analytics_hoc';
 
+/**
+ * Select component
+ */
 class Select extends React.Component {
   static propTypes = {
     /**
@@ -120,6 +123,9 @@ class Select extends React.Component {
      * Callback fired when the value is changed.
      */
     onChange: PropTypes.func,
+    /**
+     * Callback fired when the input left focus.
+     */
     onBlur: PropTypes.func,
     onKeyDown: PropTypes.func,
     /**
@@ -490,13 +496,38 @@ class Select extends React.Component {
 
   render() {
     const {
-      options,
+      autoFocus,
+      bgType,
       className,
+      color,
+      colorFocus,
+      defaultValue,
+      disabled,
+      flip,
+      iconComponent,
+      inputProps,
+      mobileSize,
+      name,
+      onBlur,
+      onChange,
+      onKeyDown,
+      options,
+      placeholder,
+      placeholderColor,
+      placement,
+      renderOption,
+      required,
+      size,
+      tabIndex,
+      textColor,
+      value,
+      ...other
     } = this.props;
     const { showOptions } = this.state;
 
     return (
       <div
+        {...other}
         data-component="select"
         className={classnames('select', className)}
         ref={this._refRootElement}
