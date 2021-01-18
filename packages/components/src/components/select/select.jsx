@@ -466,6 +466,7 @@ class Select extends React.Component {
     return (
       <TextField
         autoComplete="false"
+        className="select_field"
         onBlur={this.handleBlurField}
         onClick={this.handleClickField}
         onKeyDown={this.handleKeyDownField}
@@ -487,7 +488,6 @@ class Select extends React.Component {
         }}
         tabIndex={tabIndex}
         autoFocus={autoFocus}
-        className="select_field"
       >
         {this.renderOpenButton()}
       </TextField>

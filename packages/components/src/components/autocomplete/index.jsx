@@ -434,11 +434,11 @@ class Autocomplete extends React.Component {
 
     return (
       <TextField
+        autoComplete="false"
         onChange={this.handleChangeField}
         onBlur={this.handleBlurField}
         onClick={this.handleClickField}
         onKeyDown={this.handleKeyDownField}
-        autoComplete="false"
         value={activeOption}
         disabled={disabled}
         placeholder={placeholder}
