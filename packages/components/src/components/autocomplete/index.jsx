@@ -6,16 +6,24 @@ import { Popper } from 'react-popper';
 import TextField, { validationPropType } from '../text_field';
 import SelectDropdown from '../select/select_dropdown';
 import SelectItem from '../select/select_item';
+import withAnalytics from '../../containers/analytics_hoc';
 
 /**
  * Autocomplete component
  */
-export default class Autocomplete extends React.Component {
+class Autocomplete extends React.Component {
   static propTypes = {
     /**
      * The default input value, useful when not controlling the component.
      */
     defaultValue: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]),
+    /**
+     * The input value.
+     */
+    value: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.number,
     ]),
@@ -26,17 +34,10 @@ export default class Autocomplete extends React.Component {
       PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number,
-        PropTypes.object,
       ]),
     ).isRequired,
     /**
-     * Used to determine the string value for a given option.
-     * It's used to fill the input (and the list box options
-     * if `renderOption` is not provided).
-     */
-    getOptionLabel: PropTypes.func,
-    /**
-     * Render the option, use `getOptionLabel` by default.
+     * Render the option.
      */
     renderOption: PropTypes.func,
     /**
@@ -131,14 +132,15 @@ export default class Autocomplete extends React.Component {
      * Callback fired when the value is changed.
      */
     onChange: PropTypes.func,
-    onOptionChange: PropTypes.func,
+    /**
+     * Callback fired when the input left focus.
+     */
     onBlur: PropTypes.func,
     onKeyDown: PropTypes.func,
   };
 
   static defaultProps = {
     defaultValue: '',
-    getOptionLabel: x => x,
     disabled: false,
     required: false,
     bgType: 'stroke',
@@ -147,28 +149,53 @@ export default class Autocomplete extends React.Component {
     placeholderColor: 'grey_4',
     colorFocus: 'primary',
     size: 'medium',
-    type: 'text',
     tabIndex: 0,
     autoFocus: false,
     inputProps: {},
     placement: 'bottom',
     flip: true,
+    type: 'text',
   };
 
   state = {
     showOptions: false,
-    activeOption: this.props.defaultValue,
-    inputValue: this.props.defaultValue,
+    activeOption: this.props.value || this.props.defaultValue,
   };
+
+  static getDerivedStateFromProps(props, state) {
+    if ('value' in props && props.value !== state.activeOption) {
+      return {
+        activeOption: props.value,
+      };
+    }
+
+    return null;
+  }
+
+  /**
+   * Get components value.
+   * @return {string|number}
+   */
+  getValue() {
+    return this.state.activeOption;
+  }
+
+  /**
+   * Set select value
+   * @param {string|number} value
+   */
+  setValue = value => (
+    this.setState({
+      activeOption: value,
+    })
+  )
 
   getFillteredOptions() {
     const {
       options,
-      getOptionLabel,
     } = this.props;
     const {
       showOptions,
-      inputValue,
       activeOption,
     } = this.state;
 
@@ -176,44 +203,74 @@ export default class Autocomplete extends React.Component {
       return [];
     }
 
-    if (inputValue === activeOption) {
-      return options;
-    }
-
     return options.filter(opt => (
-      getOptionLabel(opt).toLowerCase().indexOf(inputValue.toLowerCase()) > -1
+      opt.toLowerCase().indexOf(activeOption.toLowerCase()) > -1
     ));
   }
 
   _refRootElement = React.createRef();
   _refSelectDropdownElement = React.createRef();
 
-  handleClickOption(label) {
-    const { onOptionChange } = this.props;
+  handleClickOption = label => (event) => {
+    const {
+      onChange,
+      name,
+      required,
+    } = this.props;
+    const {
+      activeOption,
+    } = this.state;
 
-    this.setState({
-      activeOption: label,
-      inputValue: label,
-      showOptions: false,
-    });
-
-    if (typeof onOptionChange === 'function') {
-      onOptionChange({
-        value: label,
+    // Prevent choose the same value.
+    if (activeOption === label) {
+      this.setState({
+        showOptions: false,
       });
+
+      return;
+    }
+
+    if ('value' in this.props) {
+      this.setState({
+        showOptions: false,
+      });
+    } else {
+      this.setState({
+        showOptions: false,
+        activeOption: label,
+      });
+    }
+
+    if (typeof onChange === 'function') {
+      event.persist();
+
+      Object.defineProperty(event, 'target', {
+        writable: true,
+        value: {
+          name,
+          value: label,
+          required,
+        },
+      });
+
+      onChange(event);
     }
   }
 
   handleChangeField = (event) => {
     const { onChange } = this.props;
-    const { activeOption } = this.state;
     const { value } = event.currentTarget;
 
-    this.setState({
-      showOptions: true,
-      inputValue: value,
-      activeOption: value ? activeOption : '',
-    });
+    if ('value' in this.props) {
+      this.setState({
+        showOptions: true,
+      });
+    } else {
+      this.setState({
+        showOptions: true,
+        activeOption: value,
+      });
+    }
 
     if (typeof onChange === 'function') {
       onChange(event);
@@ -234,21 +291,15 @@ export default class Autocomplete extends React.Component {
 
   handleClickField = () => {
     const { disabled } = this.props;
-    const { inputValue, showOptions } = this.state;
+    const { showOptions } = this.state;
 
     if (disabled) {
       return;
     }
 
-    if (inputValue) {
-      this.setState({
-        showOptions: true,
-      });
-    } else {
-      this.setState({
-        showOptions: !showOptions,
-      });
-    }
+    this.setState({
+      showOptions: !showOptions,
+    });
   }
 
   handleKeyDownField = (event) => {
@@ -338,22 +389,20 @@ export default class Autocomplete extends React.Component {
   );
 
   renderOptions(options) {
-    const { renderOption, getOptionLabel, size } = this.props;
+    const { renderOption, size } = this.props;
     const { activeOption } = this.state;
 
     return options.map((opt, index) => {
-      const label = getOptionLabel(opt);
-
       return (
         <SelectItem
           key={index}
           data-option-index={index}
-          value={label}
-          selected={label === activeOption}
-          onClick={this.handleClickOption.bind(this, label)}
+          value={opt}
+          selected={opt === activeOption}
+          onClick={this.handleClickOption(opt)}
           size={size}
         >
-          {typeof renderOption === 'function' ? renderOption(opt) : label}
+          {typeof renderOption === 'function' ? renderOption(opt) : opt}
         </SelectItem>
       );
     });
@@ -380,7 +429,7 @@ export default class Autocomplete extends React.Component {
       autoFocus,
     } = this.props;
     const {
-      inputValue,
+      activeOption,
     } = this.state;
 
     return (
@@ -390,7 +439,7 @@ export default class Autocomplete extends React.Component {
         onClick={this.handleClickField}
         onKeyDown={this.handleKeyDownField}
         autoComplete="false"
-        value={inputValue}
+        value={activeOption}
         disabled={disabled}
         placeholder={placeholder}
         required={required}
@@ -445,31 +494,33 @@ export default class Autocomplete extends React.Component {
 
   render() {
     const {
-      defaultValue,
-      getOptionLabel,
-      renderOption,
-      disabled,
-      placeholder,
-      className,
-      required,
-      valid,
+      autoFocus,
       bgType,
+      className,
       color,
-      textColor,
-      placeholderColor,
       colorFocus,
-      size,
+      defaultValue,
+      disabled,
+      flip,
+      inputProps,
       mobileSize,
       name,
-      type,
-      inputProps,
-      validation,
-      placement,
-      flip,
-      onChange,
-      onOptionChange,
       onBlur,
+      onChange,
       onKeyDown,
+      options,
+      placeholder,
+      placeholderColor,
+      placement,
+      renderOption,
+      required,
+      size,
+      tabIndex,
+      textColor,
+      type,
+      valid,
+      validation,
+      value,
       ...other
     } = this.props;
     const {
@@ -491,3 +542,5 @@ export default class Autocomplete extends React.Component {
     );
   }
 }
+
+export default withAnalytics(Autocomplete, 'onChange');
