@@ -392,20 +392,18 @@ class Autocomplete extends React.Component {
     const { renderOption, size } = this.props;
     const { activeOption } = this.state;
 
-    return options.map((opt, index) => {
-      return (
-        <SelectItem
-          key={index}
-          data-option-index={index}
-          value={opt}
-          selected={opt === activeOption}
-          onClick={this.handleClickOption(opt)}
-          size={size}
-        >
-          {typeof renderOption === 'function' ? renderOption(opt) : opt}
-        </SelectItem>
-      );
-    });
+    return options.map((opt, index) => (
+      <SelectItem
+        key={opt}
+        data-option-index={index}
+        value={opt}
+        selected={opt === activeOption}
+        onClick={this.handleClickOption(opt)}
+        size={size}
+      >
+        {typeof renderOption === 'function' ? renderOption(opt) : opt}
+      </SelectItem>
+    ));
   }
 
   renderField() {

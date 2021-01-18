@@ -369,20 +369,18 @@ class Select extends React.Component {
     const { size, renderOption } = this.props;
     const { activeOption } = this.state;
 
-    return options.map((opt, index) => {
-      return (
-        <SelectItem
-          key={index}
-          data-option-index={index}
-          value={opt.value}
-          selected={activeOption === opt.value}
-          onClick={this.handleClickOption(opt)}
-          size={size}
-        >
-          {typeof renderOption === 'function' ? renderOption(opt) : opt.label}
-        </SelectItem>
-      );
-    });
+    return options.map((opt, index) => (
+      <SelectItem
+        key={opt.value}
+        data-option-index={index}
+        value={opt.value}
+        selected={activeOption === opt.value}
+        onClick={this.handleClickOption(opt)}
+        size={size}
+      >
+        {typeof renderOption === 'function' ? renderOption(opt) : opt.label}
+      </SelectItem>
+    ));
   }
 
   renderDropDown = options => props => (
