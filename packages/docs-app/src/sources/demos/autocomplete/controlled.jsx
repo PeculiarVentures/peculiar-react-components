@@ -1,5 +1,5 @@
 import React from 'react';
-import { Select } from 'lib-react-components';
+import { Autocomplete } from 'lib-react-components';
 import planets from './planets.json';
 
 export default class Usage extends React.Component {
@@ -17,7 +17,7 @@ export default class Usage extends React.Component {
     const { value } = this.state;
 
     return (
-      <Select
+      <Autocomplete
         placeholder="Planet name"
         options={planets}
         value={value}
@@ -26,3 +26,4 @@ export default class Usage extends React.Component {
     );
   }
 }
+

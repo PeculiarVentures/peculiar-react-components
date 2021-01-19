@@ -1,0 +1,38 @@
+.select
+  position: relative
+
+  &_dropdown_container
+    width: 100%
+    z-index: 1
+    margin: 1px 0
+
+  &_button
+    position: absolute
+    right: 0
+    top: 0
+    height: 100%
+    width: 30px
+    pointer-events: none
+    text-align: center
+    &:before
+      content: ''
+      width: 0
+      height: 100%
+      display: inline-block
+      vertical-align: middle
+
+  &_button_open
+    transform: rotate(180deg)
+
+  &_arrow_icon
+    width: 8px
+    height: 6px
+    fill: rgb(var(--grey))
+    display: inline-block
+    vertical-align: middle
+
+  &_field
+    input
+      cursor: pointer
+      &::selection
+        background: transparent

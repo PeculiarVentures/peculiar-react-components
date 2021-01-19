@@ -3,15 +3,16 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { Popper } from 'react-popper';
-import TextField, { validationPropType } from '../text_field';
-import SelectDropdown from '../select/select_dropdown';
-import SelectItem from '../select/select_item';
+import SelectDropdown from './select_dropdown';
+import SelectItem from './select_item';
+import TextField from '../text_field';
+import SelectArrowIcon from '../icons/select_arrow';
 import withAnalytics from '../../containers/analytics_hoc';
 
 /**
- * Autocomplete component
+ * Select component
  */
-class Autocomplete extends React.Component {
+class Select extends React.Component {
   static propTypes = {
     /**
      * The default input value, useful when not controlling the component.
@@ -31,10 +32,16 @@ class Autocomplete extends React.Component {
      * Array of options.
      */
     options: PropTypes.arrayOf(
-      PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number,
-      ]),
+      PropTypes.shape({
+        label: PropTypes.oneOfType([
+          PropTypes.string,
+          PropTypes.number,
+        ]),
+        value: PropTypes.oneOfType([
+          PropTypes.string,
+          PropTypes.number,
+        ]),
+      }),
     ).isRequired,
     /**
      * Render the option.
@@ -56,10 +63,6 @@ class Autocomplete extends React.Component {
      * If true, the input will be required.
      */
     required: PropTypes.bool,
-    /**
-     * If false, the input will be unvalid styles.
-     */
-    valid: PropTypes.bool,
     /**
      * Component type one of `fill` or `stroke`.
      * If `fill` - component will be have background-color from `color` props.
@@ -103,23 +106,11 @@ class Autocomplete extends React.Component {
      */
     autoFocus: PropTypes.bool,
     /**
-     * Type of the input element.
-     */
-    type: PropTypes.oneOf([
-      'text',
-      'email',
-      'tel',
-    ]),
-    /**
      * Properties applied to the input element.
      */
     inputProps: PropTypes.oneOfType([
       PropTypes.object,
     ]),
-    /**
-     * Array with validation types.
-     */
-    validation: PropTypes.arrayOf(validationPropType),
     /**
      * Component dropdown start opened direction.
      */
@@ -137,6 +128,10 @@ class Autocomplete extends React.Component {
      */
     onBlur: PropTypes.func,
     onKeyDown: PropTypes.func,
+    /**
+     * The icon that displays the arrow.
+     */
+    iconComponent: PropTypes.node,
   };
 
   static defaultProps = {
@@ -154,7 +149,6 @@ class Autocomplete extends React.Component {
     inputProps: {},
     placement: 'bottom',
     flip: true,
-    type: 'text',
   };
 
   state = {
@@ -190,92 +184,8 @@ class Autocomplete extends React.Component {
     })
   )
 
-  getFillteredOptions() {
-    const {
-      options,
-    } = this.props;
-    const {
-      showOptions,
-      activeOption,
-    } = this.state;
-
-    if (!showOptions) {
-      return [];
-    }
-
-    return options.filter(opt => (
-      opt.toLowerCase().indexOf(activeOption.toLowerCase()) > -1
-    ));
-  }
-
   _refRootElement = React.createRef();
   _refSelectDropdownElement = React.createRef();
-
-  handleClickOption = label => (event) => {
-    const {
-      onChange,
-      name,
-      required,
-    } = this.props;
-    const {
-      activeOption,
-    } = this.state;
-
-    // Prevent choose the same value.
-    if (activeOption === label) {
-      this.setState({
-        showOptions: false,
-      });
-
-      return;
-    }
-
-    if ('value' in this.props) {
-      this.setState({
-        showOptions: false,
-      });
-    } else {
-      this.setState({
-        showOptions: false,
-        activeOption: label,
-      });
-    }
-
-    if (typeof onChange === 'function') {
-      event.persist();
-
-      Object.defineProperty(event, 'target', {
-        writable: true,
-        value: {
-          name,
-          value: label,
-          required,
-        },
-      });
-
-      onChange(event);
-    }
-  }
-
-  handleChangeField = (event) => {
-    const { onChange } = this.props;
-    const { value } = event.currentTarget;
-
-    if ('value' in this.props) {
-      this.setState({
-        showOptions: true,
-      });
-    } else {
-      this.setState({
-        showOptions: true,
-        activeOption: value,
-      });
-    }
-
-    if (typeof onChange === 'function') {
-      onChange(event);
-    }
-  }
 
   handleBlurField = (event) => {
     const { onBlur } = this.props;
@@ -289,21 +199,9 @@ class Autocomplete extends React.Component {
     }
   }
 
-  handleClickField = () => {
-    const { disabled } = this.props;
-    const { showOptions } = this.state;
-
-    if (disabled) {
-      return;
-    }
-
-    this.setState({
-      showOptions: !showOptions,
-    });
-  }
-
   handleKeyDownField = (event) => {
     const { disabled, onKeyDown } = this.props;
+    const { showOptions } = this.state;
 
     if (disabled) {
       return;
@@ -338,8 +236,26 @@ class Autocomplete extends React.Component {
           break;
         }
 
+        case ' ': {
+          event.preventDefault();
+
+          if (!showOptions) {
+            this.setState({
+              showOptions: true,
+            });
+          }
+
+          break;
+        }
+
         case 'Enter': {
           event.preventDefault();
+
+          if (!showOptions) {
+            this.setState({
+              showOptions: true,
+            });
+          }
 
           if (this._refSelectDropdownElement && this._refSelectDropdownElement.current) {
             this._refSelectDropdownElement.current.clickToFocusedElement();
@@ -362,6 +278,109 @@ class Autocomplete extends React.Component {
         default:
       }
     }
+  }
+
+  handleBlurField = (event) => {
+    const { onBlur } = this.props;
+
+    this.setState({
+      showOptions: false,
+    });
+
+    if (typeof onBlur === 'function') {
+      onBlur(event);
+    }
+  }
+
+  handleClickField = () => {
+    const { disabled } = this.props;
+    const { showOptions } = this.state;
+
+    if (disabled) {
+      return;
+    }
+
+    this.setState({
+      showOptions: !showOptions,
+    });
+  }
+
+  handleClickOption = option => (event) => {
+    const { onChange, name, required } = this.props;
+    const { activeOption } = this.state;
+
+    // Prevent choose the same value.
+    if (activeOption === option.value) {
+      this.setState({
+        showOptions: false,
+      });
+
+      return;
+    }
+
+    if ('value' in this.props) {
+      this.setState({
+        showOptions: false,
+      });
+    } else {
+      this.setState({
+        showOptions: false,
+        activeOption: option.value,
+      });
+    }
+
+    if (typeof onChange === 'function') {
+      event.persist();
+
+      Object.defineProperty(event, 'target', {
+        writable: true,
+        value: {
+          name,
+          value: option.value,
+          required,
+        },
+      });
+
+      onChange(event);
+    }
+  }
+
+  renderOpenButton() {
+    const { iconComponent } = this.props;
+    const { showOptions } = this.state;
+
+    return (
+      <div
+        className={classnames(
+          'select_button',
+          {
+            select_button_open: showOptions,
+          },
+        )}
+        focusable="false"
+        aria-hidden
+      >
+        {iconComponent || <SelectArrowIcon className="select_arrow_icon" />}
+      </div>
+    );
+  }
+
+  renderOptions(options) {
+    const { size, renderOption } = this.props;
+    const { activeOption } = this.state;
+
+    return options.map((opt, index) => (
+      <SelectItem
+        key={opt.value}
+        data-option-index={index}
+        value={opt.value}
+        selected={activeOption === opt.value}
+        onClick={this.handleClickOption(opt)}
+        size={size}
+      >
+        {typeof renderOption === 'function' ? renderOption(opt) : opt.label}
+      </SelectItem>
+    ));
   }
 
   renderDropDown = options => props => (
@@ -387,77 +406,6 @@ class Autocomplete extends React.Component {
       </SelectDropdown>
     </div>
   );
-
-  renderOptions(options) {
-    const { renderOption, size } = this.props;
-    const { activeOption } = this.state;
-
-    return options.map((opt, index) => (
-      <SelectItem
-        key={opt}
-        data-option-index={index}
-        value={opt}
-        selected={opt === activeOption}
-        onClick={this.handleClickOption(opt)}
-        size={size}
-      >
-        {typeof renderOption === 'function' ? renderOption(opt) : opt}
-      </SelectItem>
-    ));
-  }
-
-  renderField() {
-    const {
-      disabled,
-      placeholder,
-      required,
-      bgType,
-      color,
-      textColor,
-      colorFocus,
-      size,
-      valid,
-      placeholderColor,
-      name,
-      mobileSize,
-      inputProps,
-      validation,
-      type,
-      tabIndex,
-      autoFocus,
-    } = this.props;
-    const {
-      activeOption,
-    } = this.state;
-
-    return (
-      <TextField
-        autoComplete="false"
-        onChange={this.handleChangeField}
-        onBlur={this.handleBlurField}
-        onClick={this.handleClickField}
-        onKeyDown={this.handleKeyDownField}
-        value={activeOption}
-        disabled={disabled}
-        placeholder={placeholder}
-        required={required}
-        bgType={bgType}
-        color={color}
-        textColor={textColor}
-        colorFocus={colorFocus}
-        size={size}
-        valid={valid}
-        placeholderColor={placeholderColor}
-        name={name}
-        mobileSize={mobileSize}
-        inputProps={inputProps}
-        validation={validation}
-        type={type}
-        tabIndex={tabIndex}
-        autoFocus={autoFocus}
-      />
-    );
-  }
 
   renderPopup(options) {
     const {
@@ -490,6 +438,60 @@ class Autocomplete extends React.Component {
     );
   }
 
+  renderField() {
+    const {
+      disabled,
+      placeholder,
+      required,
+      bgType,
+      color,
+      textColor,
+      colorFocus,
+      size,
+      placeholderColor,
+      name,
+      mobileSize,
+      inputProps,
+      options,
+      tabIndex,
+      autoFocus,
+    } = this.props;
+    const {
+      activeOption,
+    } = this.state;
+    const option = options.find(opt => opt.value === activeOption);
+
+    return (
+      <TextField
+        autoComplete="false"
+        className="select_field"
+        onBlur={this.handleBlurField}
+        onClick={this.handleClickField}
+        onKeyDown={this.handleKeyDownField}
+        value={option ? option.label : ''}
+        disabled={disabled}
+        placeholder={placeholder}
+        required={required}
+        bgType={bgType}
+        color={color}
+        textColor={textColor}
+        colorFocus={colorFocus}
+        size={size}
+        placeholderColor={placeholderColor}
+        name={name}
+        mobileSize={mobileSize}
+        inputProps={{
+          ...inputProps,
+          readOnly: true,
+        }}
+        tabIndex={tabIndex}
+        autoFocus={autoFocus}
+      >
+        {this.renderOpenButton()}
+      </TextField>
+    );
+  }
+
   render() {
     const {
       autoFocus,
@@ -500,6 +502,7 @@ class Autocomplete extends React.Component {
       defaultValue,
       disabled,
       flip,
+      iconComponent,
       inputProps,
       mobileSize,
       name,
@@ -515,30 +518,23 @@ class Autocomplete extends React.Component {
       size,
       tabIndex,
       textColor,
-      type,
-      valid,
-      validation,
       value,
       ...other
     } = this.props;
-    const {
-      showOptions,
-    } = this.state;
-    const filteredOptions = this.getFillteredOptions();
-    const isOpen = showOptions && !!filteredOptions.length;
+    const { showOptions } = this.state;
 
     return (
       <div
         {...other}
-        data-component="autocomplete"
-        className={classnames('autocomplete', className)}
+        data-component="select"
+        className={classnames('select', className)}
         ref={this._refRootElement}
       >
         {this.renderField()}
-        {isOpen && this.renderPopup(filteredOptions)}
+        {showOptions && this.renderPopup(options)}
       </div>
     );
   }
 }
 
-export default withAnalytics(Autocomplete, 'onChange');
+export default withAnalytics(Select, 'onChange');

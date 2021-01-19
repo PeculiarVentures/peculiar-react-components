@@ -81,7 +81,7 @@ function generateProps(reactAPI) {
 | Name | Type | Default | Description |
 |:-----|:-----|:--------|:------------|\n`;
 
-  text = Object.keys(reactAPI.props).reduce((textProps, propRaw) => {
+  text = Object.keys(reactAPI.props).sort().reduce((textProps, propRaw) => {
     const prop = getProp(reactAPI.props, propRaw);
 
     if (typeof prop.description === 'undefined') {

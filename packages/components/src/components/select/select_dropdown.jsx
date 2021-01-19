@@ -1,97 +1,129 @@
-import React, { PureComponent } from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 /**
  * SelectDropdown component
  */
-export default class SelectDropdown extends PureComponent {
+export default class SelectDropdown extends React.PureComponent {
   static propTypes = {
     /**
-     * This is what will be displayed inside the dropdown list
+     * This is what will be displayed inside the dropdown list.
      */
     children: PropTypes.node,
     /**
-     * The CSS class name of the root element
+     * The CSS class name of the root element.
      */
     className: PropTypes.string,
     /**
-     * Component type one of `fill` or `stroke`.
-     * If `fill` - component will be have background-color from `color` props.
-     * If `stroke` - component will be have border-color from `color` props.
-     */
-    bgType: PropTypes.oneOf(['fill', 'stroke']),
-    /**
-     * Component color from theme
+     * Component color from theme.
      */
     color: PropTypes.string,
-    /**
-     * Component focus color from theme
-     */
-    colorFocus: PropTypes.string,
   };
 
   static defaultProps = {
     children: null,
     className: '',
-    bgType: 'fill',
-    color: 'light_grey',
-    colorFocus: 'primary',
+    color: 'white',
   };
 
-  /**
-   * Get focused element from root element
-   * @returns {object|null}
-   */
-  getFocusedElement() {
-    return this.dropdownNode.querySelector('[data-has-focus="true"]');
+  componentDidMount() {
+    this._scrollToSelectedElement();
   }
 
-  dropdownNode = null;
+  getFocusedElement() {
+    return this._refRootElement.current.querySelector('[data-focused="true"]');
+  }
 
-  /**
-   * Scroll root element to focused element
-   */
-  scrollToFocusedElement() {
-    const focusedElement = this.getFocusedElement();
+  getSelectedElement() {
+    return this._refRootElement.current.querySelector('[aria-selected="true"]');
+  }
 
-    if (focusedElement) {
-      this.dropdownNode.scrollTop = focusedElement.offsetTop;
+  _refRootElement = React.createRef();
+
+  _scrollToSelectedElement() {
+    const el = this.getSelectedElement();
+
+    this._scrollToElement(el);
+  }
+
+  _scrollToElement(el) {
+    if (el) {
+      this._refRootElement.current.scrollTop = el.offsetTop;
     }
   }
 
-  /**
-   * render
-   * @return {ReactElement} markup
-   */
+  clickToFocusedElement() {
+    const el = this.getFocusedElement();
+
+    if (el) {
+      el.click();
+    }
+  }
+
+  focusOption(type) {
+    const { children } = this.props;
+    const focusedElement = this.getFocusedElement();
+    let currentIndex = -1;
+    let nextIndex;
+
+    if (!focusedElement) {
+      const selectedElement = this.getSelectedElement();
+
+      if (selectedElement) {
+        currentIndex = Number(selectedElement.getAttribute('data-option-index'));
+      }
+    } else {
+      currentIndex = Number(focusedElement.getAttribute('data-option-index'));
+      focusedElement.setAttribute('data-focused', 'false');
+    }
+
+    if (type === 'prev') {
+      nextIndex = currentIndex - 1;
+
+      if (nextIndex < 0) {
+        nextIndex = children.length - 1;
+      }
+    } else {
+      nextIndex = currentIndex + 1;
+
+      if (nextIndex > children.length - 1) {
+        nextIndex = 0;
+      }
+    }
+
+    const nextElement = this._refRootElement.current.querySelector(`[data-option-index="${nextIndex}"]`);
+
+    if (nextElement) {
+      nextElement.setAttribute('data-focused', 'true');
+      this._scrollToElement(nextElement);
+    }
+  }
+
   render() {
     const {
       children,
       className,
-      bgType,
       color,
-      colorFocus,
       ...other
     } = this.props;
 
     return (
-      <div
+      <ul
         data-component="select_dropdown"
         className={classNames(
           'select_dropdown',
-          [`stroke_${colorFocus}`],
-          {
-            [`fill_${color}`]: bgType === 'fill',
-            fill_white: bgType === 'stroke',
-          },
+          [`fill_${color}`],
           'round_small',
+          'shadow',
           className,
         )}
-        ref={(node) => { this.dropdownNode = node; }}
+        ref={this._refRootElement}
+        role="listbox"
         {...other}
       >
         {children}
-      </div>
+      </ul>
     );
   }
 }

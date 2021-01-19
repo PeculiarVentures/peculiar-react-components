@@ -1,17 +1,17 @@
 import React from 'react';
-import { Select } from 'lib-react-components';
+import { Autocomplete } from 'lib-react-components';
 import planets from './planets.json';
 
 export default function Usage() {
   return (
     <React.Fragment>
-      <Select
+      <Autocomplete
         placeholder="Size"
         options={planets}
         size="large"
       />
       <br/>
-      <Select
+      <Autocomplete
         placeholder="Colors"
         options={planets}
         bgType="fill"
@@ -20,12 +20,12 @@ export default function Usage() {
         colorFocus="secondary"
       />
       <br/>
-      <Select
+      <Autocomplete
         placeholder="Option"
         options={planets}
         renderOption={(option) => (
           <span>
-            🌍 {option.label}
+            🌍 {option}
           </span>
         )}
       />

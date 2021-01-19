@@ -11,38 +11,33 @@ export default function SelectItem(props) {
     value,
     selected,
     disabled,
-    hasFocus,
     className,
     textColor,
-    colorFocus,
     size,
     ...other
   } = props;
 
   return (
-    <div
+    <li
       data-component="select_item"
-      data-disabled={disabled}
-      data-selected={selected}
-      data-has-focus={hasFocus}
-      data-value={value}
+      aria-disabled={disabled}
+      aria-selected={selected}
       className={classNames(
         'select_item',
         'truncate_text',
         [`select_item_${size}`],
+        [`text_${textColor}`],
         {
-          [`select_item_focus_${colorFocus}`]: hasFocus,
-          [`text_${textColor}`]: !selected,
-        },
-        {
-          [`text_${colorFocus}`]: selected,
+          fill_light_grey: selected,
         },
         className,
       )}
+      role="option"
+      tabIndex={-1}
       {...other}
     >
       {children}
-    </div>
+    </li>
   );
 }
 
@@ -58,16 +53,11 @@ SelectItem.propTypes = {
   ]).isRequired,
   selected: PropTypes.bool,
   disabled: PropTypes.bool,
-  hasFocus: PropTypes.bool,
   className: PropTypes.string,
   /**
    * Component text color from theme
    */
   textColor: PropTypes.string,
-  /**
-   * Component focus color from theme
-   */
-  colorFocus: PropTypes.string,
   /**
    * Component size
    */
@@ -77,9 +67,7 @@ SelectItem.propTypes = {
 SelectItem.defaultProps = {
   selected: false,
   disabled: false,
-  hasFocus: false,
   className: '',
   textColor: 'black',
-  colorFocus: 'primary',
   size: 'medium',
 };

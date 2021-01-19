@@ -1,0 +1,10 @@
+[
+  {"label":"Mercury","value":"mercury"},
+  {"label":"Venus","value":"venus"},
+  {"label":"Earth","value":"earth"},
+  {"label":"Mars","value":"mars"},
+  {"label":"Jupiter","value":"jupiter"},
+  {"label":"Saturn","value":"saturn"},
+  {"label":"Uranus","value":"uranus"},
+  {"label":"Neptune","value":"neptune"}
+]

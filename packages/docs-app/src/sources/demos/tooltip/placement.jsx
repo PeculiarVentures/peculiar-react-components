@@ -34,22 +34,17 @@ export default class Usage extends Component {
             maxWidth: 300,
             marginBottom: 40,
           }}
-          native
-          onChange={(e, value) => {
+          onChange={(e) => {
             this.setState({
-              placement: value,
+              placement: e.target.value,
             });
           }}
-        >
-          {options.map(opt => (
-            <option
-              key={opt}
-              value={opt}
-            >
-              {opt}
-            </option>
-          ))}
-        </Select>
+          options={options.map((opt) => ({
+            label: opt,
+            value: opt,
+          }))}
+          defaultValue={placement}
+        />
         <Tooltip
           placement={placement}
           content={
