@@ -241,6 +241,7 @@ interface SelectProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onBlur
   value?: string | number;
   options: ISelectOption[];
   renderOption?: (option: ISelectOption) => React.ReactNode;
+  getOptionDisabled?: (option: ISelectOption) => boolean;
   disabled?: boolean;
   placeholder?: string;
   className?: string;
@@ -258,7 +259,7 @@ interface SelectProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onBlur
   inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
   placement?: 'bottom' | 'top';
   flip?: boolean;
-  onChange?: (e: Event) => void;
+  onChange?: (e: React.SyntheticEvent) => void;
   onBlur?: (e: Event) => void;
   onKeyDown?: (e: Event) => void;
   iconComponent?: React.ReactNode;
@@ -408,6 +409,7 @@ interface AutocompleteProps extends Omit<React.HTMLAttributes<HTMLDivElement>, '
   value?: string | number;
   options: (string | number)[];
   renderOption?: (option: string | number) => React.ReactNode;
+  getOptionDisabled?: (option: string | number) => boolean;
   disabled?: boolean;
   placeholder?: string;
   className?: string;
@@ -428,7 +430,7 @@ interface AutocompleteProps extends Omit<React.HTMLAttributes<HTMLDivElement>, '
   validation?: (ValidationType | ((value: string | number) => boolean))[];
   placement?: 'bottom' | 'top';
   flip?: boolean;
-  onChange?: (e: Event) => void;
+  onChange?: (e: React.SyntheticEvent) => void;
   onBlur?: (e: Event) => void;
   onKeyDown?: (e: Event) => void;
   ref?: React.Ref<HTMLElement>;
