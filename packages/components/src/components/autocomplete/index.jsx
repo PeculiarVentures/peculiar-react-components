@@ -41,6 +41,10 @@ class Autocomplete extends React.Component {
      */
     renderOption: PropTypes.func,
     /**
+     * Used to determine the disabled state for a given option.
+     */
+    getOptionDisabled: PropTypes.func,
+    /**
      * If true, the input will be disabled.
      */
     disabled: PropTypes.bool,
@@ -389,19 +393,20 @@ class Autocomplete extends React.Component {
   );
 
   renderOptions(options) {
-    const { renderOption, size } = this.props;
+    const { renderOption, size, getOptionDisabled } = this.props;
     const { activeOption } = this.state;
 
-    return options.map((opt, index) => (
+    return options.map((option, index) => (
       <SelectItem
-        key={opt}
+        key={option}
         data-option-index={index}
-        value={opt}
-        selected={opt === activeOption}
-        onClick={this.handleClickOption(opt)}
+        value={option}
+        selected={option === activeOption}
+        onClick={this.handleClickOption(option)}
         size={size}
+        disabled={typeof getOptionDisabled === 'function' ? getOptionDisabled(option) : false}
       >
-        {typeof renderOption === 'function' ? renderOption(opt) : opt}
+        {typeof renderOption === 'function' ? renderOption(option) : option}
       </SelectItem>
     ));
   }
@@ -511,6 +516,7 @@ class Autocomplete extends React.Component {
       placeholderColor,
       placement,
       renderOption,
+      getOptionDisabled,
       required,
       size,
       tabIndex,

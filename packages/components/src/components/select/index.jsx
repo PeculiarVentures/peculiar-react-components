@@ -48,6 +48,10 @@ class Select extends React.Component {
      */
     renderOption: PropTypes.func,
     /**
+     * Used to determine the disabled state for a given option.
+     */
+    getOptionDisabled: PropTypes.func,
+    /**
      * If true, the input will be disabled.
      */
     disabled: PropTypes.bool,
@@ -366,19 +370,21 @@ class Select extends React.Component {
   }
 
   renderOptions(options) {
-    const { size, renderOption } = this.props;
+    const { size, renderOption, getOptionDisabled } = this.props;
     const { activeOption } = this.state;
 
-    return options.map((opt, index) => (
+    return options.map((option, index) => (
       <SelectItem
-        key={opt.value}
+        key={option.value}
         data-option-index={index}
-        value={opt.value}
-        selected={activeOption === opt.value}
-        onClick={this.handleClickOption(opt)}
+        value={option.value}
+        selected={activeOption === option.value}
+        focused={activeOption === option.value}
+        onClick={this.handleClickOption(option)}
         size={size}
+        disabled={typeof getOptionDisabled === 'function' ? getOptionDisabled(option) : false}
       >
-        {typeof renderOption === 'function' ? renderOption(opt) : opt.label}
+        {typeof renderOption === 'function' ? renderOption(option) : option.label}
       </SelectItem>
     ));
   }
@@ -514,6 +520,7 @@ class Select extends React.Component {
       placeholderColor,
       placement,
       renderOption,
+      getOptionDisabled,
       required,
       size,
       tabIndex,
