@@ -262,6 +262,8 @@ interface SelectProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onBlur
   onBlur?: (e: Event) => void;
   onKeyDown?: (e: Event) => void;
   iconComponent?: React.ReactNode;
+  ref?: React.Ref<HTMLElement>;
+  gaEventName?: string;
 }
 
 interface SliderProps {
@@ -429,6 +431,8 @@ interface AutocompleteProps extends Omit<React.HTMLAttributes<HTMLDivElement>, '
   onChange?: (e: Event) => void;
   onBlur?: (e: Event) => void;
   onKeyDown?: (e: Event) => void;
+  ref?: React.Ref<HTMLElement>;
+  gaEventName?: string;
 }
 
 interface TooltipProps extends React.HTMLAttributes<HTMLDivElement>, Omit<TooltipPopperProps, 'referenceElement' | 'children' | 'open'> {
