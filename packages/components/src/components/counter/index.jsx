@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import withAnalytics from '../../containers/analytics_hoc';
 import Input from '../text_field/input';
-import CounterTriangleIcon from '../icons/counter_arrow';
+import { CounterArrowIcon } from '../icons';
 
 function prepareValue(value, defaultValue) {
   if (value || typeof value === 'number') {
@@ -205,7 +205,7 @@ class Counter extends React.Component {
           onClick={() => this.onChange(1)}
         >
           <span>
-            <CounterTriangleIcon className="counter_triangle" />
+            <CounterArrowIcon className="counter_triangle" />
           </span>
         </button>
         <button
@@ -218,7 +218,7 @@ class Counter extends React.Component {
           }}
         >
           <span>
-            <CounterTriangleIcon className="counter_triangle" />
+            <CounterArrowIcon className="counter_triangle" />
           </span>
         </button>
       </Input>

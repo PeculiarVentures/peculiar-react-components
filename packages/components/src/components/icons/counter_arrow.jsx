@@ -1,7 +1,7 @@
 import React from 'react';
 
 /**
- * SelectArrowIcon - SelectArrowIcon svg component
+ * CounterArrowIcon - CounterArrowIcon svg component
  * @param props
  * @return {ReactElement} markup
  */

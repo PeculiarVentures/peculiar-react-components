@@ -8,12 +8,14 @@ import React from 'react';
 export default function SelectArrowIcon(props) {
   return (
     <svg
-      viewBox="0 0 8 6"
+      width="10"
+      height="10"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
       <path
-        fillRule="evenodd"
-        d="M6.55.945c.556 0 .718.345.363.767L4.352 4.757c-.356.423-.935.421-1.29-.001L.493 1.706C.137 1.28.296.937.856.938l5.693.006z"
+        d="M5.39 7.512a.5.5 0 01-.78 0l-2.96-3.7A.5.5 0 012.04 3h5.92a.5.5 0 01.39.812l-2.96 3.7z"
       />
     </svg>
   );

@@ -19,11 +19,5 @@ export { default as HighlightCode } from './highlight_code';
 export { default as Counter } from './counter';
 export { default as Autocomplete } from './autocomplete';
 
-export {
-  RequiredIcon,
-  EyeVisibleIcon,
-  EyeInvisibleIcon,
-  SelectArrowIcon,
-  CheckmarkIcon,
-} from './icons';
+export * from './icons';
 export { default as Tooltip, TooltipPopper } from './tooltip';

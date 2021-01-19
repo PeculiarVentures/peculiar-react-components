@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { Popper } from 'react-popper';
-import RightTriangleIcon from '../icons/right_triangle';
+import { RightTriangleIcon } from '../icons';
 import Portal from '../../containers/portal';
 
 /**
