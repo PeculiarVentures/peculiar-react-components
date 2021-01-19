@@ -11,6 +11,7 @@ export default function SelectItem(props) {
     value,
     selected,
     disabled,
+    focused,
     className,
     textColor,
     size,
@@ -22,6 +23,7 @@ export default function SelectItem(props) {
       data-component="select_item"
       aria-disabled={disabled}
       aria-selected={selected}
+      data-focused={focused}
       className={classNames(
         'select_item',
         'truncate_text',
@@ -53,6 +55,7 @@ SelectItem.propTypes = {
   ]).isRequired,
   selected: PropTypes.bool,
   disabled: PropTypes.bool,
+  focused: PropTypes.bool,
   className: PropTypes.string,
   /**
    * Component text color from theme
@@ -67,6 +70,7 @@ SelectItem.propTypes = {
 SelectItem.defaultProps = {
   selected: false,
   disabled: false,
+  focused: false,
   className: '',
   textColor: 'black',
   size: 'medium',

@@ -61,42 +61,122 @@ export default class SelectDropdown extends React.PureComponent {
     }
   }
 
-  focusOption(type) {
+  _isChildDisabled(childIndex) {
     const { children } = this.props;
-    const focusedElement = this.getFocusedElement();
-    let currentIndex = -1;
-    let nextIndex;
+    const child = children[childIndex];
 
-    if (!focusedElement) {
-      const selectedElement = this.getSelectedElement();
-
-      if (selectedElement) {
-        currentIndex = Number(selectedElement.getAttribute('data-option-index'));
-      }
-    } else {
-      currentIndex = Number(focusedElement.getAttribute('data-option-index'));
-      focusedElement.setAttribute('data-focused', 'false');
+    if (child && child.props) {
+      return child.props.disabled;
     }
+
+    return false;
+  }
+
+  /**
+   * Returns next not disabled element focus index using decrease strategy.
+   * @param {number} focusedIndex - current focused element index.
+   * @returns {number}
+   */
+  _getPrevFocusIndex(focusedIndex) {
+    const { children } = this.props;
+
+    const getIndex = (index) => {
+      let nextFocusedIndex;
+
+      if (index - 1 < 0) {
+        nextFocusedIndex = children.length - 1;
+      } else {
+        nextFocusedIndex = index - 1;
+      }
+
+      // Prevent `Maximum call stack size`.
+      if (index === nextFocusedIndex) {
+        return focusedIndex;
+      }
+
+      const isNextFocusedChildDisabled = this._isChildDisabled(nextFocusedIndex);
+
+      if (isNextFocusedChildDisabled) {
+        return getIndex(nextFocusedIndex);
+      }
+
+      return nextFocusedIndex;
+    };
+
+    return getIndex(focusedIndex);
+  }
+
+  /**
+   * Returns next not disabled element focus index using increase strategy.
+   * @param {number} focusedIndex - current focused element index.
+   * @returns {number}
+   */
+  _getNextFocusIndex(focusedIndex) {
+    const { children } = this.props;
+
+    const getIndex = (index) => {
+      let nextFocusedIndex;
+
+      if (index + 1 > children.length - 1) {
+        nextFocusedIndex = 0;
+      } else {
+        nextFocusedIndex = index + 1;
+      }
+
+      // Prevent `Maximum call stack size`.
+      if (index === nextFocusedIndex) {
+        return focusedIndex;
+      }
+
+      const isNextFocusedChildDisabled = this._isChildDisabled(nextFocusedIndex);
+
+      if (isNextFocusedChildDisabled) {
+        return getIndex(nextFocusedIndex);
+      }
+
+      return nextFocusedIndex;
+    };
+
+    return getIndex(focusedIndex);
+  }
+
+  focusOption(type) {
+    const selectedElement = this.getSelectedElement();
+    const focusedElement = this.getFocusedElement();
+    let selectedIndex;
+    let focusedIndex;
+
+    if (selectedElement) {
+      selectedIndex = Number(selectedElement.getAttribute('data-option-index'));
+    }
+
+    if (focusedElement) {
+      focusedIndex = Number(focusedElement.getAttribute('data-option-index'));
+    }
+
+    // Use `selectedIndex` if `focusedIndex` not defined.
+    if (typeof focusedIndex !== 'number') {
+      focusedIndex = selectedIndex || -1;
+    }
+
+    let nextFocusedIndex;
 
     if (type === 'prev') {
-      nextIndex = currentIndex - 1;
-
-      if (nextIndex < 0) {
-        nextIndex = children.length - 1;
-      }
+      nextFocusedIndex = this._getPrevFocusIndex(focusedIndex);
     } else {
-      nextIndex = currentIndex + 1;
-
-      if (nextIndex > children.length - 1) {
-        nextIndex = 0;
-      }
+      nextFocusedIndex = this._getNextFocusIndex(focusedIndex);
     }
 
-    const nextElement = this._refRootElement.current.querySelector(`[data-option-index="${nextIndex}"]`);
+    const nextFocusedElement = this._refRootElement.current.querySelector(`[data-option-index="${nextFocusedIndex}"]`);
 
-    if (nextElement) {
-      nextElement.setAttribute('data-focused', 'true');
-      this._scrollToElement(nextElement);
+    if (nextFocusedElement) {
+      // Remove focus from prev focused element.
+      if (focusedElement) {
+        focusedElement.removeAttribute('data-focused');
+      }
+
+      nextFocusedElement.setAttribute('data-focused', 'true');
+      this._scrollToElement(nextFocusedElement);
     }
   }
 
