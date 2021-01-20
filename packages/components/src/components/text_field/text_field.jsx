@@ -280,11 +280,18 @@ export default class TextField extends Component {
   }
 
   /**
-   * Get input value
+   * Get input value.
    * @return {string}
    */
   getValue() {
     return this.inputNode.getValue();
+  }
+
+  /**
+   * Focus input element.
+   */
+  focus() {
+    return this.inputNode.focus();
   }
 
   inputNode = null;

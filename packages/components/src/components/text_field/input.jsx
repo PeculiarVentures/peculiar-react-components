@@ -150,7 +150,7 @@ export default class Input extends PureComponent {
   };
 
   /**
-   * Return input value
+   * Return input value.
    * @return {string}
    */
   getValue = () => {
@@ -160,9 +160,9 @@ export default class Input extends PureComponent {
   };
 
   /**
-   * Set focus to input
+   * Focus input element.
    */
-  setFocus = () => {
+  focus = () => {
     const { inputNode } = this;
 
     inputNode.focus();
