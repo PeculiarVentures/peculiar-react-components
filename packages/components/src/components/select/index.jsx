@@ -469,7 +469,7 @@ class Select extends React.Component {
 
     return (
       <TextField
-        autoComplete="false"
+        autoComplete="off"
         className="select_field"
         onBlur={this.handleBlurField}
         onClick={this.handleClickField}
