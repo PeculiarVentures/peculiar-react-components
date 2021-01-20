@@ -140,6 +140,10 @@ class Autocomplete extends React.Component {
      * Callback fired when the input left focus.
      */
     onBlur: PropTypes.func,
+    /**
+     * Callback fired when the input receives focus.
+     */
+    onFocus: PropTypes.func,
     onKeyDown: PropTypes.func,
   };
 
@@ -430,6 +434,7 @@ class Autocomplete extends React.Component {
       type,
       tabIndex,
       autoFocus,
+      onFocus,
     } = this.props;
     const {
       activeOption,
@@ -440,6 +445,7 @@ class Autocomplete extends React.Component {
         autoComplete="off"
         onChange={this.handleChangeField}
         onBlur={this.handleBlurField}
+        onFocus={onFocus}
         onClick={this.handleClickField}
         onKeyDown={this.handleKeyDownField}
         value={activeOption}
@@ -509,6 +515,7 @@ class Autocomplete extends React.Component {
       mobileSize,
       name,
       onBlur,
+      onFocus,
       onChange,
       onKeyDown,
       options,

@@ -131,6 +131,10 @@ class Select extends React.Component {
      * Callback fired when the input left focus.
      */
     onBlur: PropTypes.func,
+    /**
+     * Callback fired when the input receives focus.
+     */
+    onFocus: PropTypes.func,
     onKeyDown: PropTypes.func,
     /**
      * The icon that displays the arrow.
@@ -461,6 +465,7 @@ class Select extends React.Component {
       options,
       tabIndex,
       autoFocus,
+      onFocus,
     } = this.props;
     const {
       activeOption,
@@ -472,6 +477,7 @@ class Select extends React.Component {
         autoComplete="off"
         className="select_field"
         onBlur={this.handleBlurField}
+        onFocus={onFocus}
         onClick={this.handleClickField}
         onKeyDown={this.handleKeyDownField}
         value={option ? option.label : ''}
@@ -513,6 +519,7 @@ class Select extends React.Component {
       mobileSize,
       name,
       onBlur,
+      onFocus,
       onChange,
       onKeyDown,
       options,

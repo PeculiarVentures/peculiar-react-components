@@ -264,6 +264,7 @@ interface SelectProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onBlur
     name: string;
     required: boolean;
   }>;
+  onFocus?: React.FocusEventHandler;
   onBlur?: React.FocusEventHandler;
   onKeyDown?: React.KeyboardEventHandler;
   iconComponent?: React.ReactNode;
@@ -443,6 +444,7 @@ interface AutocompleteProps extends Omit<React.HTMLAttributes<HTMLDivElement>, '
     reason?: 'select-option',
   ) => void;
   onBlur?: React.FocusEventHandler;
+  onFocus?: React.FocusEventHandler;
   onKeyDown?: React.KeyboardEventHandler;
   ref?: React.Ref<HTMLElement>;
   gaEventName?: string;
