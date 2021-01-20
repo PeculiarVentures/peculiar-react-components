@@ -24,6 +24,7 @@ export default function SelectItem(props) {
       aria-disabled={disabled}
       aria-selected={selected}
       data-focused={focused}
+      data-value={value}
       className={classNames(
         'select_item',
         'truncate_text',
