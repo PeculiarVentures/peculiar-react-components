@@ -192,8 +192,16 @@ class Select extends React.Component {
     })
   )
 
+  /**
+   * Focus input element.
+   */
+  focus() {
+    this.refTextField.current.focus();
+  }
+
   _refRootElement = React.createRef();
-  _refSelectDropdownElement = React.createRef();
+  _refSelectDropdown = React.createRef();
+  refTextField = React.createRef();
 
   handleBlurField = (event) => {
     const { onBlur } = this.props;
@@ -226,8 +234,8 @@ class Select extends React.Component {
           // Prevent scroll of the page
           event.preventDefault();
 
-          if (this._refSelectDropdownElement && this._refSelectDropdownElement.current) {
-            this._refSelectDropdownElement.current.focusOption('prev');
+          if (this._refSelectDropdown && this._refSelectDropdown.current) {
+            this._refSelectDropdown.current.focusOption('prev');
           }
 
           break;
@@ -237,8 +245,8 @@ class Select extends React.Component {
           // Prevent scroll of the page
           event.preventDefault();
 
-          if (this._refSelectDropdownElement && this._refSelectDropdownElement.current) {
-            this._refSelectDropdownElement.current.focusOption();
+          if (this._refSelectDropdown && this._refSelectDropdown.current) {
+            this._refSelectDropdown.current.focusOption();
           }
 
           break;
@@ -265,8 +273,8 @@ class Select extends React.Component {
             });
           }
 
-          if (this._refSelectDropdownElement && this._refSelectDropdownElement.current) {
-            this._refSelectDropdownElement.current.clickToFocusedElement();
+          if (this._refSelectDropdown && this._refSelectDropdown.current) {
+            this._refSelectDropdown.current.clickToFocusedElement();
           }
 
           break;
@@ -406,7 +414,7 @@ class Select extends React.Component {
       className="select_dropdown_container"
     >
       <SelectDropdown
-        ref={this._refSelectDropdownElement}
+        ref={this._refSelectDropdown}
         onMouseDown={(event) => {
           // Prevent blur
           event.preventDefault();
@@ -498,6 +506,7 @@ class Select extends React.Component {
         }}
         tabIndex={tabIndex}
         autoFocus={autoFocus}
+        ref={this.refTextField}
       >
         {this.renderOpenButton()}
       </TextField>

@@ -216,8 +216,16 @@ class Autocomplete extends React.Component {
     ));
   }
 
+  /**
+   * Focus input element.
+   */
+  focus() {
+    this.refTextField.current.focus();
+  }
+
   _refRootElement = React.createRef();
-  _refSelectDropdownElement = React.createRef();
+  _refSelectDropdown = React.createRef();
+  refTextField = React.createRef();
 
   handleClickOption = label => (event) => {
     const {
@@ -328,8 +336,8 @@ class Autocomplete extends React.Component {
           // Prevent scroll of the page
           event.preventDefault();
 
-          if (this._refSelectDropdownElement && this._refSelectDropdownElement.current) {
-            this._refSelectDropdownElement.current.focusOption('prev');
+          if (this._refSelectDropdown && this._refSelectDropdown.current) {
+            this._refSelectDropdown.current.focusOption('prev');
           }
 
           break;
@@ -339,8 +347,8 @@ class Autocomplete extends React.Component {
           // Prevent scroll of the page
           event.preventDefault();
 
-          if (this._refSelectDropdownElement && this._refSelectDropdownElement.current) {
-            this._refSelectDropdownElement.current.focusOption();
+          if (this._refSelectDropdown && this._refSelectDropdown.current) {
+            this._refSelectDropdown.current.focusOption();
           }
 
           break;
@@ -349,8 +357,8 @@ class Autocomplete extends React.Component {
         case 'Enter': {
           event.preventDefault();
 
-          if (this._refSelectDropdownElement && this._refSelectDropdownElement.current) {
-            this._refSelectDropdownElement.current.clickToFocusedElement();
+          if (this._refSelectDropdown && this._refSelectDropdown.current) {
+            this._refSelectDropdown.current.clickToFocusedElement();
           }
 
           break;
@@ -385,7 +393,7 @@ class Autocomplete extends React.Component {
       className="select_dropdown_container"
     >
       <SelectDropdown
-        ref={this._refSelectDropdownElement}
+        ref={this._refSelectDropdown}
         onMouseDown={(event) => {
           // Prevent blur
           event.preventDefault();
@@ -466,6 +474,7 @@ class Autocomplete extends React.Component {
         type={type}
         tabIndex={tabIndex}
         autoFocus={autoFocus}
+        ref={this.refTextField}
       />
     );
   }
