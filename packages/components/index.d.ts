@@ -259,9 +259,13 @@ interface SelectProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onBlur
   inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
   placement?: 'bottom' | 'top';
   flip?: boolean;
-  onChange?: (e: React.SyntheticEvent) => void;
-  onBlur?: (e: Event) => void;
-  onKeyDown?: (e: Event) => void;
+  onChange?: React.ChangeEventHandler<{
+    value: string | number;
+    name: string;
+    required: boolean;
+  }>;
+  onBlur?: React.FocusEventHandler;
+  onKeyDown?: React.KeyboardEventHandler;
   iconComponent?: React.ReactNode;
   ref?: React.Ref<HTMLElement>;
   gaEventName?: string;
@@ -430,9 +434,13 @@ interface AutocompleteProps extends Omit<React.HTMLAttributes<HTMLDivElement>, '
   validation?: (ValidationType | ((value: string | number) => boolean))[];
   placement?: 'bottom' | 'top';
   flip?: boolean;
-  onChange?: (e: React.SyntheticEvent) => void;
-  onBlur?: (e: Event) => void;
-  onKeyDown?: (e: Event) => void;
+  onChange?: React.ChangeEventHandler<{
+    value: string | number;
+    name: string;
+    required: boolean;
+  }>;
+  onBlur?: React.FocusEventHandler;
+  onKeyDown?: React.KeyboardEventHandler;
   ref?: React.Ref<HTMLElement>;
   gaEventName?: string;
 }
