@@ -257,7 +257,7 @@ class Autocomplete extends React.Component {
         },
       });
 
-      onChange(event);
+      onChange(event, 'select-option');
     }
   }
 

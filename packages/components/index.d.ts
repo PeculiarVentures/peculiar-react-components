@@ -434,11 +434,14 @@ interface AutocompleteProps extends Omit<React.HTMLAttributes<HTMLDivElement>, '
   validation?: (ValidationType | ((value: string | number) => boolean))[];
   placement?: 'bottom' | 'top';
   flip?: boolean;
-  onChange?: React.ChangeEventHandler<{
-    value: string | number;
-    name: string;
-    required: boolean;
-  }>;
+  onChange?: (
+    event: React.ChangeEvent<{
+      value: string | number;
+      name: string;
+      required: boolean;
+    }>,
+    reason?: 'select-option',
+  ) => void;
   onBlur?: React.FocusEventHandler;
   onKeyDown?: React.KeyboardEventHandler;
   ref?: React.Ref<HTMLElement>;
