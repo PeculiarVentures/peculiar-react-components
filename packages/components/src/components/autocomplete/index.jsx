@@ -145,6 +145,10 @@ class Autocomplete extends React.Component {
      */
     onFocus: PropTypes.func,
     onKeyDown: PropTypes.func,
+    /**
+     * If `true`, the options can't be filtered.
+     */
+    disableFiltering: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -163,6 +167,7 @@ class Autocomplete extends React.Component {
     placement: 'bottom',
     flip: true,
     type: 'text',
+    disableFiltering: false,
   };
 
   state = {
@@ -201,6 +206,7 @@ class Autocomplete extends React.Component {
   getFillteredOptions() {
     const {
       options,
+      disableFiltering,
     } = this.props;
     const {
       showOptions,
@@ -209,6 +215,10 @@ class Autocomplete extends React.Component {
 
     if (!showOptions) {
       return [];
+    }
+
+    if (disableFiltering) {
+      return options;
     }
 
     return options.filter(opt => (
@@ -541,6 +551,7 @@ class Autocomplete extends React.Component {
       valid,
       validation,
       value,
+      disableFiltering,
       ...other
     } = this.props;
     const {

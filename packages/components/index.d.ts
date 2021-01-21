@@ -448,6 +448,7 @@ interface AutocompleteProps extends Omit<React.HTMLAttributes<HTMLDivElement>, '
   onKeyDown?: React.KeyboardEventHandler;
   ref?: React.Ref<HTMLElement>;
   gaEventName?: string;
+  disableFiltering?: boolean;
 }
 
 interface TooltipProps extends React.HTMLAttributes<HTMLDivElement>, Omit<TooltipPopperProps, 'referenceElement' | 'children' | 'open'> {

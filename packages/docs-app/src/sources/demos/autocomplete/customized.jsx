@@ -29,6 +29,12 @@ export default function Usage() {
           </span>
         )}
       />
+      <br/>
+      <Autocomplete
+        placeholder="Disable filtering"
+        options={planets}
+        disableFiltering
+      />
     </React.Fragment>
   );
 }
