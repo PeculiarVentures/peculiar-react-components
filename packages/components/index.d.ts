@@ -409,12 +409,13 @@ interface TextFieldProps extends InputBasicProps {
   validation?: (ValidationType | ((value: string | number) => boolean))[];
 }
 
-interface AutocompleteProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onBlur' | 'onChange' | 'onKeyDown'> {
-  defaultValue?: string | number;
-  value?: string | number;
-  options: (string | number)[];
-  renderOption?: (option: string | number) => React.ReactNode;
-  getOptionDisabled?: (option: string | number) => boolean;
+interface AutocompleteProps<T> extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onBlur' | 'onChange' | 'onKeyDown'> {
+  defaultValue?: string;
+  value?: string;
+  options: T[];
+  renderOption?: (option: T) => React.ReactNode;
+  getOptionLabel?: (option: T) => string;
+  getOptionDisabled?: (option: T) => boolean;
   disabled?: boolean;
   placeholder?: string;
   className?: string;
@@ -432,17 +433,19 @@ interface AutocompleteProps extends Omit<React.HTMLAttributes<HTMLDivElement>, '
   autoFocus?: boolean;
   type?: 'text' | 'email' | 'tel';
   inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
-  validation?: (ValidationType | ((value: string | number) => boolean))[];
+  validation?: (ValidationType | ((value: string) => boolean))[];
   placement?: 'bottom' | 'top';
   flip?: boolean;
   onChange?: (
     event: React.ChangeEvent<{
-      value: string | number;
+      value: string;
       name: string;
       required: boolean;
     }>,
+    value: T,
     reason?: 'select-option',
   ) => void;
+  onInputChange?: React.ChangeEventHandler<HTMLInputElement>;
   onBlur?: React.FocusEventHandler;
   onFocus?: React.FocusEventHandler;
   onKeyDown?: React.KeyboardEventHandler;
@@ -558,7 +561,7 @@ interface RegExps {
 }
 
 declare const Avatar: React.ComponentType<AvatarProps>;
-declare const Autocomplete: React.ComponentType<AutocompleteProps>;
+declare class Autocomplete<T> extends React.Component<AutocompleteProps<T>> {}
 declare const Box: React.ComponentType<BoxProps>;
 declare const Button: React.ComponentType<ButtonProps>;
 declare const ButtonGroup: React.ComponentType<ButtonGroupProps>;
