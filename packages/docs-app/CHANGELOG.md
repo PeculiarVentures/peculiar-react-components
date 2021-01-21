@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](https://github.com/PeculiarVentures/peculiar-react-components/compare/docs-app@1.0.15...docs-app@2.0.0) (2021-01-21)
+
+
+### Features
+
+* **components:** add "disableFiltering" prop to autocomplete ([91c1243](https://github.com/PeculiarVentures/peculiar-react-components/commit/91c12432f9e87e46cd5dbba941f6cf9f59807aeb))
+
+
+
+
+
 ## [1.0.15](https://github.com/PeculiarVentures/peculiar-react-components/compare/docs-app@1.0.14...docs-app@1.0.15) (2021-01-12)
 
 **Note:** Version bump only for package docs-app

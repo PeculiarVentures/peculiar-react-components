@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](https://github.com/PeculiarVentures/peculiar-react-components/compare/lib-react-components@1.6.0...lib-react-components@2.0.0) (2021-01-21)
+
+
+### Bug Fixes
+
+* **components:** fix select dropdown focus for disabled options ([0fc4db7](https://github.com/PeculiarVentures/peculiar-react-components/commit/0fc4db730e290a3665f819718599f64312b2ae6c))
+* **components:** lint errors ([b00acdd](https://github.com/PeculiarVentures/peculiar-react-components/commit/b00acdd5b49be1c4b81accce3ed945d915cf6f9f))
+
+
+### Features
+
+* **components:** add "disableFiltering" prop to autocomplete ([91c1243](https://github.com/PeculiarVentures/peculiar-react-components/commit/91c12432f9e87e46cd5dbba941f6cf9f59807aeb))
+* **components:** add "focus" method to autocomplete/select ([d6147b5](https://github.com/PeculiarVentures/peculiar-react-components/commit/d6147b5eb7152e5519a858e6d4c9a6677630e5dd))
+* **components:** add "reason" argument to onChange autocomplete event ([72a2a7b](https://github.com/PeculiarVentures/peculiar-react-components/commit/72a2a7bbb0a81615f3eca0e9edaf598103e142f8))
+* **components:** add "value" prop to autocomplete ([8098403](https://github.com/PeculiarVentures/peculiar-react-components/commit/8098403e753c5fe551ebe098b4823a783a2df57a))
+* **components:** add prop "getOptionDisabled" to autocomplete/select ([1c0916e](https://github.com/PeculiarVentures/peculiar-react-components/commit/1c0916e9c626f0cb376408e9bb299692a421aa4d))
+* **components:** add prop "getOptionLabel" and change option type for autocomplete ([1abff67](https://github.com/PeculiarVentures/peculiar-react-components/commit/1abff67c82fccf09bf0fc13eb856e96139c511fb))
+* **components:** add prop "onFocus" to autocomplete/select ([43a779f](https://github.com/PeculiarVentures/peculiar-react-components/commit/43a779f305de9c92ecff8d580f3384ece6f5af19))
+* **components:** add support extra props for select ([db1f306](https://github.com/PeculiarVentures/peculiar-react-components/commit/db1f3065c43d58126f6242f8d21fb65015a3adbe))
+
+
+
+
+
 # [1.6.0](https://github.com/PeculiarVentures/peculiar-react-components/compare/lib-react-components@1.5.1...lib-react-components@1.6.0) (2021-01-12)
 
 
