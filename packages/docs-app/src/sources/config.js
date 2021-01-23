@@ -79,6 +79,10 @@ export default [
         title: 'Highlight code',
       },
       {
+        pathname: '/demos/phone-field',
+        title: 'PhoneField',
+      },
+      {
         pathname: '/demos/linear-progress',
         title: 'Linear progress',
       },
