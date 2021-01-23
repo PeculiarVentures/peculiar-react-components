@@ -195,7 +195,7 @@ export default class SelectDropdown extends React.PureComponent {
           'select_dropdown',
           [`fill_${color}`],
           'round_small',
-          'shadow',
+          'shadow_medium',
           className,
         )}
         ref={this._refRootElement}
