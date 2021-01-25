@@ -1,12 +1,15 @@
 @each $key in $colors
-	.fill_$(key)
-		&:not(svg)
-			background-color: rgb(var(--$(key)))
-		svg& [data-fill]
-			fill: rgb(var(--$(key)))
+  .fill_$(key)
+    &:not(svg)
+      background-color: rgb(var(--$(key)))
+    svg& [data-fill]
+      fill: rgb(var(--$(key)))
 
 .shadow
-	border-width: 1px
-	border-style: solid
-	border-color: rgba(var(--grey), 0.15)
-	box-shadow: 0 4px 10px 0 rgba(var(--black), 0.05)
+  border-width: 1px
+  border-style: solid
+  border-color: rgba(var(--grey), 0.15)
+  box-shadow: 0 4px 10px 0 rgba(var(--black), 0.05)
+
+.shadow_medium
+  box-shadow: 0px 1px 4px rgba(var(--dark_grey), 0.18), 0px 3px 5px rgba(var(--dark_grey), 0.14), 0px 1px 10px rgba(var(--dark_grey), 0.12)
