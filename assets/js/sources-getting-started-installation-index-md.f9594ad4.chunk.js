@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[105],{157:function(n,a){n.exports=["# Installation\n\n## npm\n\nTo install and save in your `package.json` dependencies, run:\n\n```bash\nnpm install --save lib-react-components\n```\n"]}}]);
+//# sourceMappingURL=sources-getting-started-installation-index-md.f9594ad4.chunk.js.map
