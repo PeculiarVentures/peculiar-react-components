@@ -1,4 +1,5 @@
 import * as React from 'react';
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { Popper } from 'react-popper';
 import * as Flags from 'country-flag-icons/react/3x2';
@@ -9,6 +10,15 @@ import SelectArrowIcon from '../icons/select_arrow';
 import { countries, formatNumber } from './utils';
 
 export default class PhoneField extends React.Component {
+  static propTypes = {
+    /**
+     * The short hint displayed in the input before the user enters a value.
+     */
+    placeholder: PropTypes.string,
+  };
+
+  static defaultProps = {};
+
   constructor(props) {
     super(props);
 
@@ -30,6 +40,24 @@ export default class PhoneField extends React.Component {
    */
   focus() {
     this.refTextField.current.focus();
+  }
+
+  focusPrevOptionInDropdown() {
+    if (this._refSelectDropdown && this._refSelectDropdown.current) {
+      this._refSelectDropdown.current.focusOption('prev');
+    }
+  }
+
+  focusNextOptionInDropdown() {
+    if (this._refSelectDropdown && this._refSelectDropdown.current) {
+      this._refSelectDropdown.current.focusOption();
+    }
+  }
+
+  clickOnFocusedOptionInDropdown() {
+    if (this._refSelectDropdown && this._refSelectDropdown.current) {
+      this._refSelectDropdown.current.clickToFocusedElement();
+    }
   }
 
   handleChangeField = (event) => {
@@ -100,9 +128,7 @@ export default class PhoneField extends React.Component {
             });
           }
 
-          if (this._refSelectDropdown && this._refSelectDropdown.current) {
-            this._refSelectDropdown.current.focusOption('prev');
-          }
+          this.focusPrevOptionInDropdown();
 
           break;
         }
@@ -117,18 +143,28 @@ export default class PhoneField extends React.Component {
             });
           }
 
-          if (this._refSelectDropdown && this._refSelectDropdown.current) {
-            this._refSelectDropdown.current.focusOption();
+          this.focusNextOptionInDropdown();
+
+          break;
+        }
+
+        case ' ': {
+          event.preventDefault();
+
+          if (!showOptions) {
+            this.setState({
+              showOptions: true,
+            });
           }
 
           break;
         }
 
         case 'Enter': {
-          if (this._refSelectDropdown && this._refSelectDropdown.current) {
+          if (showOptions) {
             event.preventDefault();
 
-            this._refSelectDropdown.current.clickToFocusedElement();
+            this.clickOnFocusedOptionInDropdown();
           }
 
           break;
@@ -140,7 +176,9 @@ export default class PhoneField extends React.Component {
           // Avoid the Modal to handle the event.
           event.stopPropagation();
 
-          this.handleBlurField();
+          this.setState({
+            showOptions: false,
+          });
 
           break;
         }
@@ -158,7 +196,7 @@ export default class PhoneField extends React.Component {
     });
   }
 
-  handleClickSelect = () => {
+  handleClickSelectButton = () => {
     const { showOptions } = this.state;
 
     this.setState({
@@ -166,6 +204,11 @@ export default class PhoneField extends React.Component {
     });
 
     this.refTextField.current.focus();
+  }
+
+  handleMouseDownForPreventBlur = (event) => {
+    // Prevent blur
+    event.preventDefault();
   }
 
   renderOpenButton() {
@@ -177,7 +220,8 @@ export default class PhoneField extends React.Component {
 
     return (
       <button
-        onClick={this.handleClickSelect}
+        onClick={this.handleClickSelectButton}
+        onMouseDown={this.handleMouseDownForPreventBlur}
         tabIndex={-1}
         type="button"
         className={classnames(
@@ -186,10 +230,6 @@ export default class PhoneField extends React.Component {
             phone_field_button_country_open: showOptions,
           },
         )}
-        onMouseDown={(event) => {
-          // Prevent blur
-          event.preventDefault();
-        }}
         aria-hidden
       >
         <Icon
@@ -243,10 +283,7 @@ export default class PhoneField extends React.Component {
     >
       <SelectDropdown
         ref={this._refSelectDropdown}
-        onMouseDown={(event) => {
-          // Prevent blur
-          event.preventDefault();
-        }}
+        onMouseDown={this.handleMouseDownForPreventBlur}
       >
         {this.renderOptions()}
       </SelectDropdown>

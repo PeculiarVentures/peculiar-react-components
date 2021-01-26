@@ -192,6 +192,10 @@ class Select extends React.Component {
     })
   )
 
+  _refRootElement = React.createRef();
+  _refSelectDropdown = React.createRef();
+  refTextField = React.createRef();
+
   /**
    * Focus input element.
    */
@@ -199,9 +203,23 @@ class Select extends React.Component {
     this.refTextField.current.focus();
   }
 
-  _refRootElement = React.createRef();
-  _refSelectDropdown = React.createRef();
-  refTextField = React.createRef();
+  focusPrevOptionInDropdown() {
+    if (this._refSelectDropdown && this._refSelectDropdown.current) {
+      this._refSelectDropdown.current.focusOption('prev');
+    }
+  }
+
+  focusNextOptionInDropdown() {
+    if (this._refSelectDropdown && this._refSelectDropdown.current) {
+      this._refSelectDropdown.current.focusOption();
+    }
+  }
+
+  clickOnFocusedOptionInDropdown() {
+    if (this._refSelectDropdown && this._refSelectDropdown.current) {
+      this._refSelectDropdown.current.clickToFocusedElement();
+    }
+  }
 
   handleBlurField = (event) => {
     const { onBlur } = this.props;
@@ -240,9 +258,7 @@ class Select extends React.Component {
             });
           }
 
-          if (this._refSelectDropdown && this._refSelectDropdown.current) {
-            this._refSelectDropdown.current.focusOption('prev');
-          }
+          this.focusPrevOptionInDropdown();
 
           break;
         }
@@ -257,9 +273,7 @@ class Select extends React.Component {
             });
           }
 
-          if (this._refSelectDropdown && this._refSelectDropdown.current) {
-            this._refSelectDropdown.current.focusOption();
-          }
+          this.focusNextOptionInDropdown();
 
           break;
         }
@@ -285,9 +299,7 @@ class Select extends React.Component {
             });
           }
 
-          if (this._refSelectDropdown && this._refSelectDropdown.current) {
-            this._refSelectDropdown.current.clickToFocusedElement();
-          }
+          this.clickOnFocusedOptionInDropdown();
 
           break;
         }
@@ -298,7 +310,9 @@ class Select extends React.Component {
           // Avoid the Modal to handle the event.
           event.stopPropagation();
 
-          this.handleBlurField();
+          this.setState({
+            showOptions: false,
+          });
 
           break;
         }
@@ -373,6 +387,11 @@ class Select extends React.Component {
     }
   }
 
+  handleMouseDownForPreventBlur = (event) => {
+    // Prevent blur
+    event.preventDefault();
+  }
+
   renderOpenButton() {
     const { iconComponent } = this.props;
     const { showOptions } = this.state;
@@ -427,10 +446,7 @@ class Select extends React.Component {
     >
       <SelectDropdown
         ref={this._refSelectDropdown}
-        onMouseDown={(event) => {
-          // Prevent blur
-          event.preventDefault();
-        }}
+        onMouseDown={this.handleMouseDownForPreventBlur}
       >
         {this.renderOptions(options)}
       </SelectDropdown>
