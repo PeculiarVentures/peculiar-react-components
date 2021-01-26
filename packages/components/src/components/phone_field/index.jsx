@@ -1,52 +1,151 @@
 import * as React from 'react';
-// import PropTypes from 'prop-types';
-// import classnames from 'classnames';
+import classnames from 'classnames';
 import { Popper } from 'react-popper';
 import * as Flags from 'country-flag-icons/react/3x2';
-import {
-  getCountries,
-  getCountryCallingCode,
-  AsYouType,
-} from 'libphonenumber-js';
-import countries from './en.js';
 import SelectDropdown from '../select/select_dropdown';
 import SelectItem from '../select/select_item';
 import TextField from '../text_field';
 import SelectArrowIcon from '../icons/select_arrow';
+import { countries, formatNumber } from './utils';
 
 export default class PhoneField extends React.Component {
-  state = {
-    showOptions: false,
-    activeOption: 'UA',
-    inputValue: `+${getCountryCallingCode('UA')}`,
-  };
+  constructor(props) {
+    super(props);
 
-  supportedCountries = getCountries();
+    const defaultCountry = countries.find(c => c.iso2 === 'UA');
+
+    this.state = {
+      showOptions: false,
+      activeOption: defaultCountry,
+      inputValue: defaultCountry.dialCode,
+    };
+  }
+
   _refRootElement = React.createRef();
+  _refSelectDropdown = React.createRef();
+  refTextField = React.createRef();
+
+  /**
+   * Focus input element.
+   */
+  focus() {
+    this.refTextField.current.focus();
+  }
 
   handleChangeField = (event) => {
-    const { activeOption } = this.state;
-    const callingCode = getCountryCallingCode(activeOption);
+    const { activeOption, inputValue } = this.state;
+    const { dialCode } = activeOption;
     const { value } = event.currentTarget;
-    const replaced = value.replace(/\D/g, '');
-    const callingCodeFromValue = replaced.slice(0, callingCode.length);
 
-    if (callingCode === callingCodeFromValue) {
-      const formatter = new AsYouType(activeOption);
+    if (!value.length) {
+      this.setState({
+        inputValue: dialCode,
+      });
 
-      formatter.input(`+${replaced}`);
+      return;
+    }
 
-      const phoneNumber = formatter.getNumber();
+    if (value.slice(0, dialCode.length) !== dialCode) {
+      return;
+    }
 
-      if (phoneNumber) {
-        console.log(phoneNumber.formatInternational());
-        this.setState({
-          inputValue: phoneNumber.formatInternational(),
-        });
-      } else {
-        this.setState({
-          inputValue: `+${replaced}`,
-        });
+    const inputNumber = value.replace(/\D/g, '');
+    const formattedNumber = formatNumber(inputNumber, activeOption);
+    let caretPosition = event.target.selectionStart;
+    const diff = formattedNumber.length - inputValue.length;
+
+    this.setState({
+      inputValue: formattedNumber,
+    }, () => {
+      if (diff > 0) {
+        caretPosition -= diff;
+      }
+
+      const numberInputRef = this.refTextField.current.inputNode.inputNode;
+
+      if (caretPosition > 0 && inputValue.length >= formattedNumber.length) {
+        numberInputRef.setSelectionRange(caretPosition, caretPosition);
+      }
+    });
+  }
+
+  handleBlurField = () => {
+    this.setState({
+      showOptions: false,
+    });
+  }
+
+  handleKeyDownField = (event) => {
+    const { disabled, onKeyDown } = this.props;
+    const { showOptions } = this.state;
+
+    if (disabled) {
+      return;
+    }
+
+    if (typeof onKeyDown === 'function') {
+      onKeyDown(event);
+    }
+
+    // Wait until IME is settled.
+    if (event.which !== 229) {
+      switch (event.key) {
+        case 'ArrowUp': {
+          // Prevent scroll of the page
+          event.preventDefault();
+
+          if (!showOptions) {
+            this.setState({
+              showOptions: true,
+            });
+          }
+
+          if (this._refSelectDropdown && this._refSelectDropdown.current) {
+            this._refSelectDropdown.current.focusOption('prev');
+          }
+
+          break;
+        }
+
+        case 'ArrowDown': {
+          // Prevent scroll of the page
+          event.preventDefault();
+
+          if (!showOptions) {
+            this.setState({
+              showOptions: true,
+            });
+          }
+
+          if (this._refSelectDropdown && this._refSelectDropdown.current) {
+            this._refSelectDropdown.current.focusOption();
+          }
+
+          break;
+        }
+
+        case 'Enter': {
+          if (this._refSelectDropdown && this._refSelectDropdown.current) {
+            event.preventDefault();
+
+            this._refSelectDropdown.current.clickToFocusedElement();
+          }
+
+          break;
+        }
+
+        case 'Escape': {
+          // Avoid Opera to exit fullscreen mode.
+          event.preventDefault();
+          // Avoid the Modal to handle the event.
+          event.stopPropagation();
+
+          this.handleBlurField();
+
+          break;
+        }
+
+        default:
       }
     }
   }
@@ -55,37 +154,49 @@ export default class PhoneField extends React.Component {
     this.setState({
       activeOption: option,
       showOptions: false,
-      inputValue: `+${getCountryCallingCode(option)}`,
+      inputValue: option.dialCode,
     });
+  }
+
+  handleClickSelect = () => {
+    const { showOptions } = this.state;
+
+    this.setState({
+      showOptions: !showOptions,
+    });
+
+    this.refTextField.current.focus();
   }
 
   renderOpenButton() {
     const {
-      showOptions,
       activeOption,
+      showOptions,
     } = this.state;
-    const Icon = Flags[activeOption];
+    const Icon = Flags[activeOption.iso2];
 
     return (
       <button
-        onClick={() => {
-          this.setState({
-            showOptions: !showOptions,
-          });
-        }}
+        onClick={this.handleClickSelect}
         tabIndex={-1}
         type="button"
-        className="phone_field_button_country"
-        // onMouseDown={(event) => {
-        //   // Prevent blur
-        //   event.preventDefault();
-        // }}
+        className={classnames(
+          'phone_field_button_country',
+          {
+            phone_field_button_country_open: showOptions,
+          },
+        )}
+        onMouseDown={(event) => {
+          // Prevent blur
+          event.preventDefault();
+        }}
+        aria-hidden
       >
         <Icon
           className="phone_field_icon_country"
         />
         <SelectArrowIcon
-          className="select_arrow_icon"
+          className="phone_field_icon_arrow"
         />
       </button>
     );
@@ -94,8 +205,8 @@ export default class PhoneField extends React.Component {
   renderOptions() {
     const { activeOption } = this.state;
 
-    return this.supportedCountries.map((option, index) => {
-      const Icon = Flags[option];
+    return countries.map((option, index) => {
+      const Icon = Flags[option.iso2];
 
       if (!Icon) {
         return null;
@@ -103,16 +214,16 @@ export default class PhoneField extends React.Component {
 
       return (
         <SelectItem
-          key={option}
+          key={option.iso2}
+          value={option.iso2}
           data-option-index={index}
-          value={option}
           onClick={this.handleClickOption(option)}
-          selected={activeOption === option}
+          selected={activeOption.iso2 === option.iso2}
         >
           <Icon
             className="phone_field_icon_country"
           />
-          {countries[option]} +{getCountryCallingCode(option)}
+          {option.name} <span className="phone_field_text_dial_code">{option.dialCode}</span>
         </SelectItem>
       );
     });
@@ -131,6 +242,7 @@ export default class PhoneField extends React.Component {
       className="select_dropdown_container"
     >
       <SelectDropdown
+        ref={this._refSelectDropdown}
         onMouseDown={(event) => {
           // Prevent blur
           event.preventDefault();
@@ -172,6 +284,7 @@ export default class PhoneField extends React.Component {
 
     return (
       <TextField
+        type="tel"
         autoComplete="off"
         bgType="stroke"
         color="light_grey"
@@ -181,6 +294,9 @@ export default class PhoneField extends React.Component {
         className="phone_field_field"
         value={inputValue}
         onChange={this.handleChangeField}
+        onBlur={this.handleBlurField}
+        onKeyDown={this.handleKeyDownField}
+        ref={this.refTextField}
       >
         {this.renderOpenButton()}
       </TextField>

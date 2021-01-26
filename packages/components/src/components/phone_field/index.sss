@@ -1,6 +1,12 @@
 .phone_field
   position: relative
 
+  &_icon_arrow
+    fill: rgb(var(--grey))
+    display: inline-block
+    vertical-align: middle
+    position: relative
+
   &_button_country
     position: absolute
     top: 0
@@ -15,17 +21,25 @@
     border: 0
     display: block
     color: transparent
+    font-size: 0
 
     .phone_field_icon_country
       margin-right: 6px
 
+    &_open
+      .phone_field_icon_arrow
+        transform: rotate(180deg)
+
   &_icon_country
-    width: 25px
     margin-right: 10px
     border: 1px solid rgba(0, 0, 0, .2)
     display: inline-block
     vertical-align: middle
+    height: 17px
 
   &_field
     input
       padding-left: 60px
+
+  &_text_dial_code
+    color: rgba(var(--black), 0.5)
