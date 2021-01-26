@@ -338,6 +338,7 @@ class Autocomplete extends React.Component {
       disabled,
       onKeyDown,
     } = this.props;
+    const { showOptions } = this.state;
 
     if (disabled) {
       return;
@@ -354,6 +355,12 @@ class Autocomplete extends React.Component {
           // Prevent scroll of the page
           event.preventDefault();
 
+          if (!showOptions) {
+            this.setState({
+              showOptions: true,
+            });
+          }
+
           if (this._refSelectDropdown && this._refSelectDropdown.current) {
             this._refSelectDropdown.current.focusOption('prev');
           }
@@ -365,6 +372,12 @@ class Autocomplete extends React.Component {
           // Prevent scroll of the page
           event.preventDefault();
 
+          if (!showOptions) {
+            this.setState({
+              showOptions: true,
+            });
+          }
+
           if (this._refSelectDropdown && this._refSelectDropdown.current) {
             this._refSelectDropdown.current.focusOption();
           }
@@ -373,9 +386,9 @@ class Autocomplete extends React.Component {
         }
 
         case 'Enter': {
-          event.preventDefault();
-
           if (this._refSelectDropdown && this._refSelectDropdown.current) {
+            event.preventDefault();
+
             this._refSelectDropdown.current.clickToFocusedElement();
           }
 
