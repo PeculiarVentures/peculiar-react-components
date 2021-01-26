@@ -234,6 +234,12 @@ class Select extends React.Component {
           // Prevent scroll of the page
           event.preventDefault();
 
+          if (!showOptions) {
+            this.setState({
+              showOptions: true,
+            });
+          }
+
           if (this._refSelectDropdown && this._refSelectDropdown.current) {
             this._refSelectDropdown.current.focusOption('prev');
           }
@@ -244,6 +250,12 @@ class Select extends React.Component {
         case 'ArrowDown': {
           // Prevent scroll of the page
           event.preventDefault();
+
+          if (!showOptions) {
+            this.setState({
+              showOptions: true,
+            });
+          }
 
           if (this._refSelectDropdown && this._refSelectDropdown.current) {
             this._refSelectDropdown.current.focusOption();
