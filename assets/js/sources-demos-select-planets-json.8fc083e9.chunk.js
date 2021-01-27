@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[94],{271:function(e){e.exports=JSON.parse('[{"label":"Mercury","value":"mercury"},{"label":"Venus","value":"venus"},{"label":"Earth","value":"earth"},{"label":"Mars","value":"mars"},{"label":"Jupiter","value":"jupiter"},{"label":"Saturn","value":"saturn"},{"label":"Uranus","value":"uranus"},{"label":"Neptune","value":"neptune"}]')}}]);
-//# sourceMappingURL=sources-demos-select-planets-json.8fc083e9.chunk.js.map
