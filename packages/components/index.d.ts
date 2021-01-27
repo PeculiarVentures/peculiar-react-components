@@ -409,6 +409,40 @@ interface TextFieldProps extends InputBasicProps {
   validation?: (ValidationType | ((value: string | number) => boolean))[];
 }
 
+interface PhoneFieldProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onBlur' | 'onChange' | 'onKeyDown'> {
+  defaultCountry?: string;
+  defaultValue?: string;
+  disabled?: boolean;
+  placeholder?: string;
+  className?: string;
+  required?: boolean;
+  valid?: boolean;
+  bgType?: Fill;
+  color?: Color;
+  textColor?: Color;
+  placeholderColor?: Color;
+  colorFocus?: Color;
+  size?: 'medium' | 'large';
+  mobileSize?: 'medium' | 'large';
+  name?: string;
+  tabIndex?: number;
+  autoFocus?: boolean;
+  inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
+  placement?: 'bottom' | 'top';
+  flip?: boolean;
+  onChange?: (
+    event: React.ChangeEvent<{
+      value: string;
+      name: string;
+      required: boolean;
+    }>,
+    reason?: 'select-option',
+  ) => void;
+  onBlur?: React.FocusEventHandler;
+  onFocus?: React.FocusEventHandler;
+  onKeyDown?: React.KeyboardEventHandler;
+}
+
 interface AutocompleteProps<T> extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onBlur' | 'onChange' | 'onKeyDown'> {
   defaultValue?: string;
   value?: string;
@@ -583,6 +617,7 @@ declare const Tab: React.ComponentType<TabProps>;
 declare const Tabs: React.ComponentType<TabsProps>;
 declare const Input: React.ComponentType<InputProps>;
 declare const TextField: React.ComponentType<TextFieldProps>;
+declare const PhoneField: React.ComponentType<PhoneFieldProps>;
 declare const Tooltip: React.ComponentType<TooltipProps>;
 declare const TooltipPopper: React.ComponentType<TooltipPopperProps>;
 declare const Typography: React.ComponentType<TypographyProps>;
