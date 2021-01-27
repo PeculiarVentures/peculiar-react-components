@@ -52,11 +52,11 @@ export default [
       },
       {
         pathname: '/demos/button_group',
-        title: 'Button Group',
+        title: 'Button group',
       },
       {
         pathname: '/demos/button_split',
-        title: 'Button Split',
+        title: 'Button split',
       },
       {
         pathname: '/demos/checkbox',
@@ -79,24 +79,24 @@ export default [
         title: 'Highlight code',
       },
       {
-        pathname: '/demos/phone-field',
-        title: 'PhoneField',
-      },
-      {
         pathname: '/demos/linear-progress',
         title: 'Linear progress',
+      },
+      {
+        pathname: '/demos/phone-field',
+        title: 'Phone field',
       },
       {
         pathname: '/demos/progressive-image',
         title: 'Progressive image',
       },
       {
-        pathname: '/demos/radio',
-        title: 'Radio',
-      },
-      {
         pathname: '/demos/portal',
         title: 'Portal',
+      },
+      {
+        pathname: '/demos/radio',
+        title: 'Radio',
       },
       {
         pathname: '/demos/select',
@@ -120,7 +120,7 @@ export default [
       },
       {
         pathname: '/demos/text-field',
-        title: 'TextField',
+        title: 'Text field',
       },
       {
         pathname: '/demos/typography',
