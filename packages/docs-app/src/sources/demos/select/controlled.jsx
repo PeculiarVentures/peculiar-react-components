@@ -17,12 +17,18 @@ export default class Usage extends React.Component {
     const { value } = this.state;
 
     return (
-      <Select
-        placeholder="Planet name"
-        options={planets}
-        value={value}
-        onChange={this.handleChange}
-      />
+      <>
+        <Select
+          placeholder="Planet name"
+          options={planets}
+          value={value}
+          onChange={this.handleChange}
+        />
+        <br />
+        <p>
+          Value: {value}
+        </p>
+      </>
     );
   }
 }

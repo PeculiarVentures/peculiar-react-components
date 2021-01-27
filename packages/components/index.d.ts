@@ -409,6 +409,40 @@ interface TextFieldProps extends InputBasicProps {
   validation?: (ValidationType | ((value: string | number) => boolean))[];
 }
 
+interface PhoneFieldProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onBlur' | 'onChange' | 'onKeyDown'> {
+  defaultCountry?: string;
+  defaultValue?: string;
+  disabled?: boolean;
+  placeholder?: string;
+  className?: string;
+  required?: boolean;
+  valid?: boolean;
+  bgType?: Fill;
+  color?: Color;
+  textColor?: Color;
+  placeholderColor?: Color;
+  colorFocus?: Color;
+  size?: 'medium' | 'large';
+  mobileSize?: 'medium' | 'large';
+  name?: string;
+  tabIndex?: number;
+  autoFocus?: boolean;
+  inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
+  placement?: 'bottom' | 'top';
+  flip?: boolean;
+  onChange?: (
+    event: React.ChangeEvent<{
+      value: string;
+      name: string;
+      required: boolean;
+    }>,
+    reason?: 'select-option',
+  ) => void;
+  onBlur?: React.FocusEventHandler;
+  onFocus?: React.FocusEventHandler;
+  onKeyDown?: React.KeyboardEventHandler;
+}
+
 interface AutocompleteProps<T> extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onBlur' | 'onChange' | 'onKeyDown'> {
   defaultValue?: string;
   value?: string;
@@ -560,6 +594,16 @@ interface RegExps {
   objectID: RegExp;
 }
 
+interface ICountry {
+  name: string;
+  regions: string[];
+  iso2: string;
+  countryCode: string;
+  dialCode: string;
+  format: string;
+  ariaCodes?: string[];
+}
+
 declare const Avatar: React.ComponentType<AvatarProps>;
 declare class Autocomplete<T> extends React.Component<AutocompleteProps<T>> {}
 declare const Box: React.ComponentType<BoxProps>;
@@ -583,6 +627,7 @@ declare const Tab: React.ComponentType<TabProps>;
 declare const Tabs: React.ComponentType<TabsProps>;
 declare const Input: React.ComponentType<InputProps>;
 declare const TextField: React.ComponentType<TextFieldProps>;
+declare const PhoneField: React.ComponentType<PhoneFieldProps>;
 declare const Tooltip: React.ComponentType<TooltipProps>;
 declare const TooltipPopper: React.ComponentType<TooltipPopperProps>;
 declare const Typography: React.ComponentType<TypographyProps>;
@@ -609,3 +654,4 @@ declare function validator(
   types: (ValidationType|((value: string | number) => boolean))[],
   ignoreStartAndEndSpaces?: boolean,
 ): boolean;
+declare const countries: ICountry[];

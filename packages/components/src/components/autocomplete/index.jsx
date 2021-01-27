@@ -231,6 +231,10 @@ class Autocomplete extends React.Component {
     ));
   }
 
+  _refRootElement = React.createRef();
+  _refSelectDropdown = React.createRef();
+  refTextField = React.createRef();
+
   /**
    * Focus input element.
    */
@@ -238,9 +242,23 @@ class Autocomplete extends React.Component {
     this.refTextField.current.focus();
   }
 
-  _refRootElement = React.createRef();
-  _refSelectDropdown = React.createRef();
-  refTextField = React.createRef();
+  focusPrevOptionInDropdown() {
+    if (this._refSelectDropdown && this._refSelectDropdown.current) {
+      this._refSelectDropdown.current.focusOption('prev');
+    }
+  }
+
+  focusNextOptionInDropdown() {
+    if (this._refSelectDropdown && this._refSelectDropdown.current) {
+      this._refSelectDropdown.current.focusOption();
+    }
+  }
+
+  clickOnFocusedOptionInDropdown() {
+    if (this._refSelectDropdown && this._refSelectDropdown.current) {
+      this._refSelectDropdown.current.clickToFocusedElement();
+    }
+  }
 
   handleClickOption = (option, label) => (event) => {
     const {
@@ -338,6 +356,7 @@ class Autocomplete extends React.Component {
       disabled,
       onKeyDown,
     } = this.props;
+    const { showOptions } = this.state;
 
     if (disabled) {
       return;
@@ -354,9 +373,13 @@ class Autocomplete extends React.Component {
           // Prevent scroll of the page
           event.preventDefault();
 
-          if (this._refSelectDropdown && this._refSelectDropdown.current) {
-            this._refSelectDropdown.current.focusOption('prev');
+          if (!showOptions) {
+            this.setState({
+              showOptions: true,
+            });
           }
+
+          this.focusPrevOptionInDropdown();
 
           break;
         }
@@ -365,18 +388,22 @@ class Autocomplete extends React.Component {
           // Prevent scroll of the page
           event.preventDefault();
 
-          if (this._refSelectDropdown && this._refSelectDropdown.current) {
-            this._refSelectDropdown.current.focusOption();
+          if (!showOptions) {
+            this.setState({
+              showOptions: true,
+            });
           }
+
+          this.focusNextOptionInDropdown();
 
           break;
         }
 
         case 'Enter': {
-          event.preventDefault();
+          if (showOptions) {
+            event.preventDefault();
 
-          if (this._refSelectDropdown && this._refSelectDropdown.current) {
-            this._refSelectDropdown.current.clickToFocusedElement();
+            this.clickOnFocusedOptionInDropdown();
           }
 
           break;
@@ -388,7 +415,9 @@ class Autocomplete extends React.Component {
           // Avoid the Modal to handle the event.
           event.stopPropagation();
 
-          this.handleBlurField();
+          this.setState({
+            showOptions: false,
+          });
 
           break;
         }
@@ -396,6 +425,11 @@ class Autocomplete extends React.Component {
         default:
       }
     }
+  }
+
+  handleMouseDownForPreventBlur = (event) => {
+    // Prevent blur
+    event.preventDefault();
   }
 
   renderDropDown = options => props => (
@@ -412,10 +446,7 @@ class Autocomplete extends React.Component {
     >
       <SelectDropdown
         ref={this._refSelectDropdown}
-        onMouseDown={(event) => {
-          // Prevent blur
-          event.preventDefault();
-        }}
+        onMouseDown={this.handleMouseDownForPreventBlur}
       >
         {this.renderOptions(options)}
       </SelectDropdown>

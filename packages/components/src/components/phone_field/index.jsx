@@ -1,56 +1,27 @@
+/* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/require-default-props */
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { Popper } from 'react-popper';
-import SelectDropdown from './select_dropdown';
-import SelectItem from './select_item';
+import * as Flags from 'country-flag-icons/react/3x2';
+import withAnalytics from '../../containers/analytics_hoc';
+import SelectDropdown from '../select/select_dropdown';
+import SelectItem from '../select/select_item';
 import TextField from '../text_field';
 import SelectArrowIcon from '../icons/select_arrow';
-import withAnalytics from '../../containers/analytics_hoc';
+import { countries, formatNumber, getCountryByNumber } from './utils';
 
-/**
- * Select component
- */
-class Select extends React.Component {
+export class PhoneField extends React.Component {
   static propTypes = {
+    /**
+     * The default selected country.
+     */
+    defaultCountry: PropTypes.string,
     /**
      * The default input value, useful when not controlling the component.
      */
-    defaultValue: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-    ]),
-    /**
-     * The input value.
-     */
-    value: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-    ]),
-    /**
-     * Array of options.
-     */
-    options: PropTypes.arrayOf(
-      PropTypes.shape({
-        label: PropTypes.oneOfType([
-          PropTypes.string,
-          PropTypes.number,
-        ]),
-        value: PropTypes.oneOfType([
-          PropTypes.string,
-          PropTypes.number,
-        ]),
-      }),
-    ).isRequired,
-    /**
-     * Render the option.
-     */
-    renderOption: PropTypes.func,
-    /**
-     * Used to determine the disabled state for a given option.
-     */
-    getOptionDisabled: PropTypes.func,
+    defaultValue: PropTypes.string,
     /**
      * If true, the input will be disabled.
      */
@@ -67,6 +38,10 @@ class Select extends React.Component {
      * If true, the input will be required.
      */
     required: PropTypes.bool,
+    /**
+     * If false, the input will be unvalid styles.
+     */
+    valid: PropTypes.bool,
     /**
      * Component type one of `fill` or `stroke`.
      * If `fill` - component will be have background-color from `color` props.
@@ -112,9 +87,7 @@ class Select extends React.Component {
     /**
      * Properties applied to the input element.
      */
-    inputProps: PropTypes.oneOfType([
-      PropTypes.object,
-    ]),
+    inputProps: PropTypes.object,
     /**
      * Component dropdown start opened direction.
      */
@@ -136,13 +109,10 @@ class Select extends React.Component {
      */
     onFocus: PropTypes.func,
     onKeyDown: PropTypes.func,
-    /**
-     * The icon that displays the arrow.
-     */
-    iconComponent: PropTypes.node,
   };
 
   static defaultProps = {
+    defaultCountry: 'US',
     defaultValue: '',
     disabled: false,
     required: false,
@@ -159,38 +129,38 @@ class Select extends React.Component {
     flip: true,
   };
 
-  state = {
-    showOptions: false,
-    activeOption: this.props.value || this.props.defaultValue,
-  };
+  constructor(props) {
+    super(props);
 
-  static getDerivedStateFromProps(props, state) {
-    if ('value' in props && props.value !== state.activeOption) {
-      return {
-        activeOption: props.value,
-      };
+    let country;
+    let value;
+
+    if (props.defaultValue) {
+      country = getCountryByNumber(props.defaultValue);
     }
 
-    return null;
-  }
+    if (props.defaultValue && country) {
+      value = formatNumber(props.defaultValue, country);
+    }
 
-  /**
-   * Get components value.
-   * @return {string|number}
-   */
-  getValue() {
-    return this.state.activeOption;
-  }
+    if (props.defaultCountry && !country) {
+      country = countries.find(c => c.iso2 === props.defaultCountry);
+    }
 
-  /**
-   * Set select value
-   * @param {string|number} value
-   */
-  setValue = value => (
-    this.setState({
-      activeOption: value,
-    })
-  )
+    if (!country) {
+      country = countries.find(c => c.iso2 === 'US');
+    }
+
+    if (!value) {
+      value = country.dialCode;
+    }
+
+    this.state = {
+      showOptions: false,
+      activeOption: country,
+      inputValue: value,
+    };
+  }
 
   _refRootElement = React.createRef();
   _refSelectDropdown = React.createRef();
@@ -225,6 +195,75 @@ class Select extends React.Component {
     if (this._refSelectDropdown && this._refSelectDropdown.current) {
       this._refSelectDropdown.current.clickToFocusedElement();
     }
+  }
+
+  handleOnChangeCallback(event, newValue, reason) {
+    const {
+      name,
+      required,
+      onChange,
+    } = this.props;
+    const { inputValue } = this.state;
+
+    if (typeof onChange !== 'function') {
+      return;
+    }
+
+    if (newValue === inputValue) {
+      return;
+    }
+
+    event.persist();
+
+    Object.defineProperty(event, 'target', {
+      writable: true,
+      value: {
+        name,
+        value: newValue,
+        required,
+      },
+    });
+
+    onChange(event, reason);
+  }
+
+  handleChangeField = (event) => {
+    const { activeOption, inputValue } = this.state;
+    const { value } = event.target;
+
+    if (!value.length) {
+      this.setState({
+        inputValue: activeOption.dialCode,
+      });
+
+      this.handleOnChangeCallback(event, activeOption.dialCode);
+
+      return;
+    }
+
+    if (value.slice(0, activeOption.dialCode.length) !== activeOption.dialCode) {
+      return;
+    }
+
+    const formattedNumber = formatNumber(value, activeOption);
+    let caretPosition = event.target.selectionStart;
+    const diff = formattedNumber.length - inputValue.length;
+
+    this.setState({
+      inputValue: formattedNumber,
+    }, () => {
+      if (diff > 0) {
+        caretPosition -= diff;
+      }
+
+      const numberInputRef = this.refTextField.current.inputNode.inputNode;
+
+      if (caretPosition > 0 && inputValue.length >= formattedNumber.length) {
+        numberInputRef.setSelectionRange(caretPosition, caretPosition);
+      }
+    });
+
+    this.handleOnChangeCallback(event, formattedNumber);
   }
 
   handleBlurField = (event) => {
@@ -297,15 +336,11 @@ class Select extends React.Component {
         }
 
         case 'Enter': {
-          event.preventDefault();
+          if (showOptions) {
+            event.preventDefault();
 
-          if (!showOptions) {
-            this.setState({
-              showOptions: true,
-            });
+            this.clickOnFocusedOptionInDropdown();
           }
-
-          this.clickOnFocusedOptionInDropdown();
 
           break;
         }
@@ -331,69 +366,35 @@ class Select extends React.Component {
     }
   }
 
-  handleBlurField = (event) => {
-    const { onBlur } = this.props;
+  handleClickOption = option => (event) => {
+    const { activeOption } = this.state;
 
-    this.setState({
-      showOptions: false,
-    });
+    // Prevent choose the same value.
+    if (activeOption.iso2 === option.iso2) {
+      this.setState({
+        showOptions: false,
+      });
 
-    if (typeof onBlur === 'function') {
-      onBlur(event);
-    }
-  }
-
-  handleClickField = () => {
-    const { disabled } = this.props;
-    const { showOptions } = this.state;
-
-    if (disabled) {
       return;
     }
+
+    this.setState({
+      activeOption: option,
+      showOptions: false,
+      inputValue: option.dialCode,
+    });
+
+    this.handleOnChangeCallback(event, option.dialCode, 'select-option');
+  }
+
+  handleClickSelectButton = () => {
+    const { showOptions } = this.state;
 
     this.setState({
       showOptions: !showOptions,
     });
-  }
 
-  handleClickOption = option => (event) => {
-    const { onChange, name, required } = this.props;
-    const { activeOption } = this.state;
-
-    // Prevent choose the same value.
-    if (activeOption === option.value) {
-      this.setState({
-        showOptions: false,
-      });
-
-      return;
-    }
-
-    if ('value' in this.props) {
-      this.setState({
-        showOptions: false,
-      });
-    } else {
-      this.setState({
-        showOptions: false,
-        activeOption: option.value,
-      });
-    }
-
-    if (typeof onChange === 'function') {
-      event.persist();
-
-      Object.defineProperty(event, 'target', {
-        writable: true,
-        value: {
-          name,
-          value: option.value,
-          required,
-        },
-      });
-
-      onChange(event);
-    }
+    this.refTextField.current.focus();
   }
 
   handleMouseDownForPreventBlur = (event) => {
@@ -402,46 +403,68 @@ class Select extends React.Component {
   }
 
   renderOpenButton() {
-    const { iconComponent } = this.props;
-    const { showOptions } = this.state;
+    const { disabled } = this.props;
+    const {
+      activeOption,
+      showOptions,
+    } = this.state;
+    const Icon = Flags[activeOption.iso2];
 
     return (
-      <div
+      <button
+        onClick={this.handleClickSelectButton}
+        onMouseDown={this.handleMouseDownForPreventBlur}
+        tabIndex={-1}
+        type="button"
         className={classnames(
-          'select_button',
+          'phone_field_button_country',
           {
-            select_button_open: showOptions,
+            phone_field_button_country_open: showOptions,
           },
         )}
-        focusable="false"
         aria-hidden
+        disabled={disabled}
       >
-        {iconComponent || <SelectArrowIcon className="select_arrow_icon" />}
-      </div>
+        <Icon
+          className="phone_field_icon_country"
+        />
+        <SelectArrowIcon
+          className="phone_field_icon_arrow"
+        />
+      </button>
     );
   }
 
-  renderOptions(options) {
-    const { size, renderOption, getOptionDisabled } = this.props;
+  renderOptions() {
+    const { size } = this.props;
     const { activeOption } = this.state;
 
-    return options.map((option, index) => (
-      <SelectItem
-        key={option.value}
-        data-option-index={index}
-        value={option.value}
-        selected={activeOption === option.value}
-        focused={activeOption === option.value}
-        onClick={this.handleClickOption(option)}
-        size={size}
-        disabled={typeof getOptionDisabled === 'function' ? getOptionDisabled(option) : false}
-      >
-        {typeof renderOption === 'function' ? renderOption(option) : option.label}
-      </SelectItem>
-    ));
+    return countries.map((option, index) => {
+      const Icon = Flags[option.iso2];
+
+      if (!Icon) {
+        return null;
+      }
+
+      return (
+        <SelectItem
+          key={option.iso2}
+          value={option.iso2}
+          data-option-index={index}
+          onClick={this.handleClickOption(option)}
+          selected={activeOption.iso2 === option.iso2}
+          size={size}
+        >
+          <Icon
+            className="phone_field_icon_country"
+          />
+          {option.name} <span className="phone_field_text_dial_code">{option.dialCode}</span>
+        </SelectItem>
+      );
+    });
   }
 
-  renderDropDown = options => props => (
+  renderDropDown = () => props => (
     <div
       ref={props.ref}
       style={{
@@ -457,12 +480,12 @@ class Select extends React.Component {
         ref={this._refSelectDropdown}
         onMouseDown={this.handleMouseDownForPreventBlur}
       >
-        {this.renderOptions(options)}
+        {this.renderOptions()}
       </SelectDropdown>
     </div>
   );
 
-  renderPopup(options) {
+  renderPopup() {
     const {
       placement,
       flip,
@@ -488,7 +511,7 @@ class Select extends React.Component {
         referenceElement={this._refRootElement ? this._refRootElement.current : null}
         placement={placement}
       >
-        {this.renderDropDown(options)}
+        {this.renderDropDown()}
       </Popper>
     );
   }
@@ -503,29 +526,27 @@ class Select extends React.Component {
       textColor,
       colorFocus,
       size,
+      valid,
       placeholderColor,
       name,
       mobileSize,
       inputProps,
-      options,
       tabIndex,
       autoFocus,
       onFocus,
     } = this.props;
-    const {
-      activeOption,
-    } = this.state;
-    const option = options.find(opt => opt.value === activeOption);
+    const { inputValue } = this.state;
 
     return (
       <TextField
-        autoComplete="off"
-        className="select_field"
+        type="tel"
+        className="phone_field_field"
+        value={inputValue}
+        onChange={this.handleChangeField}
         onBlur={this.handleBlurField}
         onFocus={onFocus}
         onClick={this.handleClickField}
         onKeyDown={this.handleKeyDownField}
-        value={option ? option.label : ''}
         disabled={disabled}
         placeholder={placeholder}
         required={required}
@@ -534,13 +555,11 @@ class Select extends React.Component {
         textColor={textColor}
         colorFocus={colorFocus}
         size={size}
+        valid={valid}
         placeholderColor={placeholderColor}
         name={name}
         mobileSize={mobileSize}
-        inputProps={{
-          ...inputProps,
-          readOnly: true,
-        }}
+        inputProps={inputProps}
         tabIndex={tabIndex}
         autoFocus={autoFocus}
         ref={this.refTextField}
@@ -557,10 +576,8 @@ class Select extends React.Component {
       className,
       color,
       colorFocus,
-      defaultValue,
       disabled,
       flip,
-      iconComponent,
       inputProps,
       mobileSize,
       name,
@@ -568,17 +585,15 @@ class Select extends React.Component {
       onFocus,
       onChange,
       onKeyDown,
-      options,
       placeholder,
       placeholderColor,
       placement,
-      renderOption,
-      getOptionDisabled,
       required,
       size,
       tabIndex,
       textColor,
-      value,
+      valid,
+      defaultCountry,
       ...other
     } = this.props;
     const { showOptions } = this.state;
@@ -586,15 +601,15 @@ class Select extends React.Component {
     return (
       <div
         {...other}
-        data-component="select"
-        className={classnames('select', className)}
+        data-component="phone_field"
+        className={classnames('phone_field', className)}
         ref={this._refRootElement}
       >
         {this.renderField()}
-        {showOptions && this.renderPopup(options)}
+        {showOptions && this.renderPopup()}
       </div>
     );
   }
 }
 
-export default withAnalytics(Select, 'onChange');
+export default withAnalytics(PhoneField, 'onChange');

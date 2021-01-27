@@ -18,6 +18,8 @@ export { default as ContentLoader } from './content_loader';
 export { default as HighlightCode } from './highlight_code';
 export { default as Counter } from './counter';
 export { default as Autocomplete } from './autocomplete';
+export { default as PhoneField } from './phone_field';
+export { countries } from './phone_field/utils';
 
 export * from './icons';
 export { default as Tooltip, TooltipPopper } from './tooltip';

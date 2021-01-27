@@ -17,12 +17,19 @@ export default class Usage extends React.Component {
     const { value } = this.state;
 
     return (
-      <Autocomplete
-        placeholder="Planet name"
-        options={planets}
-        value={value}
-        onChange={this.handleChange}
-      />
+      <>
+        <Autocomplete
+          placeholder="Planet name"
+          options={planets}
+          value={value}
+          onChange={this.handleChange}
+          onInputChange={this.handleChange}
+        />
+        <br />
+        <p>
+          Value: {value}
+        </p>
+      </>
     );
   }
 }
