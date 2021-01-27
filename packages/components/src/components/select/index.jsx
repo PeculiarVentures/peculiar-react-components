@@ -215,6 +215,12 @@ class Select extends React.Component {
     }
   }
 
+  focusValueMatchedOptionInDropdown(value) {
+    if (this._refSelectDropdown && this._refSelectDropdown.current) {
+      this._refSelectDropdown.current.focusOptionByValue(value);
+    }
+  }
+
   clickOnFocusedOptionInDropdown() {
     if (this._refSelectDropdown && this._refSelectDropdown.current) {
       this._refSelectDropdown.current.clickToFocusedElement();
@@ -318,6 +324,9 @@ class Select extends React.Component {
         }
 
         default:
+          if (showOptions) {
+            this.focusValueMatchedOptionInDropdown(event.key);
+          }
       }
     }
   }

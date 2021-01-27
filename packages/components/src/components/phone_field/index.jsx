@@ -54,6 +54,12 @@ export default class PhoneField extends React.Component {
     }
   }
 
+  focusValueMatchedOptionInDropdown(value) {
+    if (this._refSelectDropdown && this._refSelectDropdown.current) {
+      this._refSelectDropdown.current.focusOptionByValue(value);
+    }
+  }
+
   clickOnFocusedOptionInDropdown() {
     if (this._refSelectDropdown && this._refSelectDropdown.current) {
       this._refSelectDropdown.current.clickToFocusedElement();
@@ -184,6 +190,9 @@ export default class PhoneField extends React.Component {
         }
 
         default:
+          if (showOptions) {
+            this.focusValueMatchedOptionInDropdown(event.key);
+          }
       }
     }
   }

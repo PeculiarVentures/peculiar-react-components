@@ -39,6 +39,10 @@ export default class SelectDropdown extends React.PureComponent {
     return this._refRootElement.current.querySelector('[aria-selected="true"]');
   }
 
+  getValueMatchedElement(value) {
+    return this._refRootElement.current.querySelector(`[data-value^="${value}" i]`);
+  }
+
   _refRootElement = React.createRef();
 
   _scrollToSelectedElement() {
@@ -138,6 +142,25 @@ export default class SelectDropdown extends React.PureComponent {
     };
 
     return getIndex(focusedIndex);
+  }
+
+  focusOptionByValue(value) {
+    // Support match only by one letter.
+    if (value.length !== 1) {
+      return;
+    }
+
+    const focusedElement = this.getFocusedElement();
+    const matchedElement = this.getValueMatchedElement(value);
+
+    if (matchedElement) {
+      if (focusedElement) {
+        focusedElement.removeAttribute('data-focused');
+      }
+
+      matchedElement.setAttribute('data-focused', 'true');
+      this._scrollToElement(matchedElement);
+    }
   }
 
   focusOption(type) {
