@@ -1,33 +1,164 @@
+/* eslint-disable react/forbid-prop-types */
+/* eslint-disable react/require-default-props */
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { Popper } from 'react-popper';
 import * as Flags from 'country-flag-icons/react/3x2';
+import withAnalytics from '../../containers/analytics_hoc';
 import SelectDropdown from '../select/select_dropdown';
 import SelectItem from '../select/select_item';
 import TextField from '../text_field';
 import SelectArrowIcon from '../icons/select_arrow';
-import { countries, formatNumber } from './utils';
+import { countries, formatNumber, getCountryByNumber } from './utils';
 
-export default class PhoneField extends React.Component {
+export class PhoneField extends React.Component {
   static propTypes = {
+    /**
+     * The default selected country.
+     */
+    defaultCountry: PropTypes.string,
+    /**
+     * The default input value, useful when not controlling the component.
+     */
+    defaultValue: PropTypes.string,
+    /**
+     * If true, the input will be disabled.
+     */
+    disabled: PropTypes.bool,
     /**
      * The short hint displayed in the input before the user enters a value.
      */
     placeholder: PropTypes.string,
+    /**
+     * The CSS class name of the wrapper element.
+     */
+    className: PropTypes.string,
+    /**
+     * If true, the input will be required.
+     */
+    required: PropTypes.bool,
+    /**
+     * If false, the input will be unvalid styles.
+     */
+    valid: PropTypes.bool,
+    /**
+     * Component type one of `fill` or `stroke`.
+     * If `fill` - component will be have background-color from `color` props.
+     * If `stroke` - component will be have border-color from `color` props.
+     */
+    bgType: PropTypes.oneOf(['fill', 'stroke']),
+    /**
+     * Component color from theme.
+     */
+    color: PropTypes.string,
+    /**
+     * Component text color from theme.
+     */
+    textColor: PropTypes.string,
+    /**
+     * Color for the placeholder.
+     */
+    placeholderColor: PropTypes.string,
+    /**
+     * Component focus color from theme.
+     */
+    colorFocus: PropTypes.string,
+    /**
+     * Component size.
+     */
+    size: PropTypes.oneOf(['medium', 'large']),
+    /**
+     * Component size for mobile.
+     */
+    mobileSize: PropTypes.oneOf(['medium', 'large']),
+    /**
+     * Name attribute of the input element.
+     */
+    name: PropTypes.string,
+    /**
+     * Element tabIndex.
+     */
+    tabIndex: PropTypes.number,
+    /**
+     * If true, the input will be focused during the first mount.
+     */
+    autoFocus: PropTypes.bool,
+    /**
+     * Properties applied to the input element.
+     */
+    inputProps: PropTypes.object,
+    /**
+     * Component dropdown start opened direction.
+     */
+    placement: PropTypes.oneOf(['top', 'bottom']),
+    /**
+     * If `true`, component will automatically calc possible dropdown opened direction.
+     */
+    flip: PropTypes.bool,
+    /**
+     * Callback fired when the value is changed.
+     */
+    onChange: PropTypes.func,
+    /**
+     * Callback fired when the input left focus.
+     */
+    onBlur: PropTypes.func,
+    /**
+     * Callback fired when the input receives focus.
+     */
+    onFocus: PropTypes.func,
+    onKeyDown: PropTypes.func,
   };
 
-  static defaultProps = {};
+  static defaultProps = {
+    defaultCountry: 'US',
+    defaultValue: '',
+    disabled: false,
+    required: false,
+    bgType: 'stroke',
+    color: 'light_grey',
+    textColor: 'black',
+    placeholderColor: 'grey_4',
+    colorFocus: 'primary',
+    size: 'medium',
+    tabIndex: 0,
+    autoFocus: false,
+    inputProps: {},
+    placement: 'bottom',
+    flip: true,
+  };
 
   constructor(props) {
     super(props);
 
-    const defaultCountry = countries.find(c => c.iso2 === 'UA');
+    let country;
+    let value;
+
+    if (props.defaultValue) {
+      country = getCountryByNumber(props.defaultValue);
+    }
+
+    if (props.defaultValue && country) {
+      value = formatNumber(props.defaultValue, country);
+    }
+
+    if (props.defaultCountry && !country) {
+      country = countries.find(c => c.iso2 === props.defaultCountry);
+    }
+
+    if (!country) {
+      country = countries.find(c => c.iso2 === 'US');
+    }
+
+    if (!value) {
+      value = country.dialCode;
+    }
 
     this.state = {
       showOptions: false,
-      activeOption: defaultCountry,
-      inputValue: defaultCountry.dialCode,
+      activeOption: country,
+      inputValue: value,
     };
   }
 
@@ -66,25 +197,55 @@ export default class PhoneField extends React.Component {
     }
   }
 
+  handleOnChangeCallback(event, newValue, reason) {
+    const {
+      name,
+      required,
+      onChange,
+    } = this.props;
+    const { inputValue } = this.state;
+
+    if (typeof onChange !== 'function') {
+      return;
+    }
+
+    if (newValue === inputValue) {
+      return;
+    }
+
+    event.persist();
+
+    Object.defineProperty(event, 'target', {
+      writable: true,
+      value: {
+        name,
+        value: newValue,
+        required,
+      },
+    });
+
+    onChange(event, reason);
+  }
+
   handleChangeField = (event) => {
     const { activeOption, inputValue } = this.state;
-    const { dialCode } = activeOption;
-    const { value } = event.currentTarget;
+    const { value } = event.target;
 
     if (!value.length) {
       this.setState({
-        inputValue: dialCode,
+        inputValue: activeOption.dialCode,
       });
 
+      this.handleOnChangeCallback(event, activeOption.dialCode);
+
       return;
     }
 
-    if (value.slice(0, dialCode.length) !== dialCode) {
+    if (value.slice(0, activeOption.dialCode.length) !== activeOption.dialCode) {
       return;
     }
 
-    const inputNumber = value.replace(/\D/g, '');
-    const formattedNumber = formatNumber(inputNumber, activeOption);
+    const formattedNumber = formatNumber(value, activeOption);
     let caretPosition = event.target.selectionStart;
     const diff = formattedNumber.length - inputValue.length;
 
@@ -101,12 +262,20 @@ export default class PhoneField extends React.Component {
         numberInputRef.setSelectionRange(caretPosition, caretPosition);
       }
     });
+
+    this.handleOnChangeCallback(event, formattedNumber);
   }
 
-  handleBlurField = () => {
+  handleBlurField = (event) => {
+    const { onBlur } = this.props;
+
     this.setState({
       showOptions: false,
     });
+
+    if (typeof onBlur === 'function') {
+      onBlur(event);
+    }
   }
 
   handleKeyDownField = (event) => {
@@ -197,12 +366,25 @@ export default class PhoneField extends React.Component {
     }
   }
 
-  handleClickOption = option => () => {
+  handleClickOption = option => (event) => {
+    const { activeOption } = this.state;
+
+    // Prevent choose the same value.
+    if (activeOption.iso2 === option.iso2) {
+      this.setState({
+        showOptions: false,
+      });
+
+      return;
+    }
+
     this.setState({
       activeOption: option,
       showOptions: false,
       inputValue: option.dialCode,
     });
+
+    this.handleOnChangeCallback(event, option.dialCode, 'select-option');
   }
 
   handleClickSelectButton = () => {
@@ -221,6 +403,7 @@ export default class PhoneField extends React.Component {
   }
 
   renderOpenButton() {
+    const { disabled } = this.props;
     const {
       activeOption,
       showOptions,
@@ -240,6 +423,7 @@ export default class PhoneField extends React.Component {
           },
         )}
         aria-hidden
+        disabled={disabled}
       >
         <Icon
           className="phone_field_icon_country"
@@ -252,6 +436,7 @@ export default class PhoneField extends React.Component {
   }
 
   renderOptions() {
+    const { size } = this.props;
     const { activeOption } = this.state;
 
     return countries.map((option, index) => {
@@ -268,6 +453,7 @@ export default class PhoneField extends React.Component {
           data-option-index={index}
           onClick={this.handleClickOption(option)}
           selected={activeOption.iso2 === option.iso2}
+          size={size}
         >
           <Icon
             className="phone_field_icon_country"
@@ -300,6 +486,11 @@ export default class PhoneField extends React.Component {
   );
 
   renderPopup() {
+    const {
+      placement,
+      flip,
+    } = this.props;
+
     return (
       <Popper
         modifiers={{
@@ -313,12 +504,12 @@ export default class PhoneField extends React.Component {
             enabled: false,
           },
           flip: {
-            enabled: true,
+            enabled: flip,
           },
         }}
         positionFixed={false}
         referenceElement={this._refRootElement ? this._refRootElement.current : null}
-        placement="bottom"
+        placement={placement}
       >
         {this.renderDropDown()}
       </Popper>
@@ -326,22 +517,51 @@ export default class PhoneField extends React.Component {
   }
 
   renderField() {
+    const {
+      disabled,
+      placeholder,
+      required,
+      bgType,
+      color,
+      textColor,
+      colorFocus,
+      size,
+      valid,
+      placeholderColor,
+      name,
+      mobileSize,
+      inputProps,
+      tabIndex,
+      autoFocus,
+      onFocus,
+    } = this.props;
     const { inputValue } = this.state;
 
     return (
       <TextField
         type="tel"
-        autoComplete="off"
-        bgType="stroke"
-        color="light_grey"
-        textColor="black"
-        placeholderColor="grey_4"
-        colorFocus="primary"
         className="phone_field_field"
         value={inputValue}
         onChange={this.handleChangeField}
         onBlur={this.handleBlurField}
+        onFocus={onFocus}
+        onClick={this.handleClickField}
         onKeyDown={this.handleKeyDownField}
+        disabled={disabled}
+        placeholder={placeholder}
+        required={required}
+        bgType={bgType}
+        color={color}
+        textColor={textColor}
+        colorFocus={colorFocus}
+        size={size}
+        valid={valid}
+        placeholderColor={placeholderColor}
+        name={name}
+        mobileSize={mobileSize}
+        inputProps={inputProps}
+        tabIndex={tabIndex}
+        autoFocus={autoFocus}
         ref={this.refTextField}
       >
         {this.renderOpenButton()}
@@ -350,12 +570,40 @@ export default class PhoneField extends React.Component {
   }
 
   render() {
+    const {
+      autoFocus,
+      bgType,
+      className,
+      color,
+      colorFocus,
+      disabled,
+      flip,
+      inputProps,
+      mobileSize,
+      name,
+      onBlur,
+      onFocus,
+      onChange,
+      onKeyDown,
+      placeholder,
+      placeholderColor,
+      placement,
+      required,
+      size,
+      tabIndex,
+      textColor,
+      valid,
+      defaultCountry,
+      ...other
+    } = this.props;
     const { showOptions } = this.state;
 
     return (
       <div
+        {...other}
+        data-component="phone_field"
+        className={classnames('phone_field', className)}
         ref={this._refRootElement}
-        className="phone_field"
       >
         {this.renderField()}
         {showOptions && this.renderPopup()}
@@ -363,3 +611,5 @@ export default class PhoneField extends React.Component {
     );
   }
 }
+
+export default withAnalytics(PhoneField, 'onChange');
