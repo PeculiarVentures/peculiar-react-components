@@ -594,6 +594,16 @@ interface RegExps {
   objectID: RegExp;
 }
 
+interface ICountry {
+  name: string;
+  regions: string[];
+  iso2: string;
+  countryCode: string;
+  dialCode: string;
+  format: string;
+  ariaCodes?: string[];
+}
+
 declare const Avatar: React.ComponentType<AvatarProps>;
 declare class Autocomplete<T> extends React.Component<AutocompleteProps<T>> {}
 declare const Box: React.ComponentType<BoxProps>;
@@ -644,3 +654,4 @@ declare function validator(
   types: (ValidationType|((value: string | number) => boolean))[],
   ignoreStartAndEndSpaces?: boolean,
 ): boolean;
+declare const countries: ICountry[];
