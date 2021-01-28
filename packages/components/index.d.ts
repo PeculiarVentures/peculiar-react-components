@@ -435,6 +435,11 @@ interface PhoneFieldProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'on
       value: string;
       name: string;
       required: boolean;
+      country: {
+        name: string;
+        code: string;
+        dialCode: string;
+      };
     }>,
     reason?: 'select-option',
   ) => void;
@@ -597,7 +602,7 @@ interface RegExps {
 interface ICountry {
   name: string;
   regions: string[];
-  iso2: string;
+  code: string;
   countryCode: string;
   dialCode: string;
   format: string;

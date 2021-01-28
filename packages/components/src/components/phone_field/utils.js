@@ -14,7 +14,7 @@ export const countries = rawCountries.map((country) => {
   const countryItem = {
     name: country[0],
     regions: country[1],
-    iso2: country[2].toUpperCase(),
+    code: country[2].toUpperCase(),
     countryCode: country[3],
     dialCode: `${prefix}${country[3]}`,
     format: getMask(prefix, country[3], country[4], '... ... ... ... ..'),

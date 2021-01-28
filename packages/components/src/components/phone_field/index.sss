@@ -19,9 +19,9 @@
     background-color: transparent
     outline: 0
     border: 0
-    display: block
     color: transparent
     font-size: 0
+    display: none
 
     .phone_field_icon_country
       margin-right: 6px
@@ -37,9 +37,12 @@
     vertical-align: middle
     height: 17px
 
-  &_field
-    input
-      padding-left: 60px
-
   &_text_dial_code
     color: rgba(var(--black), 0.5)
+
+input.phone_field_input
+  &:focus
+    padding-left: 60px
+
+    ~ .phone_field_button_country
+      display: block
