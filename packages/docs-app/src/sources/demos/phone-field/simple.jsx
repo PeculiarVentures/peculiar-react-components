@@ -4,18 +4,23 @@ import { PhoneField } from 'lib-react-components';
 export default function Usage() {
   return (
     <>
-      <PhoneField />
-      <br/>
       <PhoneField
-        defaultValue="+7 800 555 35 35"
+        placeholder="Phone"
       />
       <br/>
       <PhoneField
+        placeholder="Phone default value"
+        defaultValue="+78005553535"
+      />
+      <br/>
+      <PhoneField
+        placeholder="Phone default country"
         required
         defaultCountry="UA"
       />
       <br/>
       <PhoneField
+        placeholder="Phone disabled"
         disabled
       />
     </>
