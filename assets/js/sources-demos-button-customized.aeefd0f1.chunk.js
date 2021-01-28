@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[9],{97:function(e,n,t){"use strict";t.r(n),t.d(n,"default",(function(){return c}));var o=t(0),r=t.n(o),a=t(6);function c(){return r.a.createElement("div",null,r.a.createElement(a.Button,{style:{marginRight:10},color:"secondary"},"Fill secondary"),r.a.createElement(a.Button,{bgType:"stroke",color:"wrong",textColor:"wrong"},"Stroke wrong"))}}}]);
-//# sourceMappingURL=sources-demos-button-customized.aeefd0f1.chunk.js.map

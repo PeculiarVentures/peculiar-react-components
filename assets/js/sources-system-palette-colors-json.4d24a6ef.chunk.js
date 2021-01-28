@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[105],{330:function(e){e.exports=JSON.parse('["primary","secondary","black","dark_grey","grey","light_grey","success","wrong","white"]')}}]);
-//# sourceMappingURL=sources-system-palette-colors-json.4d24a6ef.chunk.js.map

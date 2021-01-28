@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[23],{117:function(n,e,t){"use strict";t.r(e),t.d(e,"default",(function(){return o}));var u=t(0),a=t.n(u),r=t(6);function o(){return a.a.createElement(r.Counter,{minValue:0,maxValue:5})}}}]);
-//# sourceMappingURL=sources-demos-counter-basic.06c2227a.chunk.js.map

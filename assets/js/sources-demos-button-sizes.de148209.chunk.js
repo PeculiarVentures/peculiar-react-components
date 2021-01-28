@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[8],{76:function(e,t,l){"use strict";l.r(t),l.d(t,"default",(function(){return i}));var n=l(1),a=l.n(n),r=l(6);function i(){return a.a.createElement("div",null,a.a.createElement(r.e,{size:"small",style:{marginRight:10}},"Small"),a.a.createElement(r.e,{style:{marginRight:10}},"Medium"),a.a.createElement(r.e,{size:"large"},"Large"),a.a.createElement("br",null),a.a.createElement("br",null),a.a.createElement(r.e,{full:!0},"Full"))}}}]);
-//# sourceMappingURL=sources-demos-button-sizes.de148209.chunk.js.map
