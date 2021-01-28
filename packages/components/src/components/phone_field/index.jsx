@@ -10,8 +10,12 @@ import SelectDropdown from '../select/select_dropdown';
 import SelectItem from '../select/select_item';
 import TextField from '../text_field';
 import SelectArrowIcon from '../icons/select_arrow';
-import { countries, formatNumber, getCountryByNumber } from './utils';
+import formatNumber from './format_number';
+import countries from './countries';
 
+/**
+ * PhoneField component.
+ */
 export class PhoneField extends React.Component {
   static propTypes = {
     /**
@@ -132,27 +136,15 @@ export class PhoneField extends React.Component {
   constructor(props) {
     super(props);
 
-    let country;
-    let value;
+    const country = countries[props.defaultCountry] || countries.US;
+    let value = '';
 
     if (props.defaultValue) {
-      country = getCountryByNumber(props.defaultValue);
-    }
-
-    if (props.defaultValue && country) {
-      value = formatNumber(props.defaultValue, country);
-    }
-
-    if (props.defaultCountry && !country) {
-      country = countries.find(c => c.code === props.defaultCountry);
-    }
-
-    if (!country) {
-      country = countries.find(c => c.code === 'US');
-    }
-
-    if (!value) {
-      value = '';
+      if (props.defaultValue.startsWith(country.dialCode)) {
+        value = formatNumber(props.defaultValue, country);
+      } else {
+        console.warn('Warning:', 'PhoneField component `defaultValue` prop doesn\'t match country dial code. Please change `defaultCountry` or `defaultValue` prop.');
+      }
     }
 
     this.state = {
@@ -488,8 +480,9 @@ export class PhoneField extends React.Component {
     const { size } = this.props;
     const { activeOption } = this.state;
 
-    return countries.map((option, index) => {
-      const Icon = Flags[option.code];
+    return Object.keys(countries).map((code, index) => {
+      const option = countries[code];
+      const Icon = Flags[code];
 
       if (!Icon) {
         return null;

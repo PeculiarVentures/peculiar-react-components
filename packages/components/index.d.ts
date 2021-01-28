@@ -601,12 +601,9 @@ interface RegExps {
 
 interface ICountry {
   name: string;
-  regions: string[];
-  code: string;
-  countryCode: string;
   dialCode: string;
   format: string;
-  ariaCodes?: string[];
+  code: string;
 }
 
 declare const Avatar: React.ComponentType<AvatarProps>;
@@ -659,4 +656,4 @@ declare function validator(
   types: (ValidationType|((value: string | number) => boolean))[],
   ignoreStartAndEndSpaces?: boolean,
 ): boolean;
-declare const countries: ICountry[];
+declare const countries: Record<string, ICountry>;
