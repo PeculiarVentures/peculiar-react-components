@@ -144,15 +144,15 @@ export class PhoneField extends React.Component {
     }
 
     if (props.defaultCountry && !country) {
-      country = countries.find(c => c.iso2 === props.defaultCountry);
+      country = countries.find(c => c.code === props.defaultCountry);
     }
 
     if (!country) {
-      country = countries.find(c => c.iso2 === 'US');
+      country = countries.find(c => c.code === 'US');
     }
 
     if (!value) {
-      value = country.dialCode;
+      value = '';
     }
 
     this.state = {
@@ -203,14 +203,24 @@ export class PhoneField extends React.Component {
       required,
       onChange,
     } = this.props;
-    const { inputValue } = this.state;
+    const {
+      inputValue,
+      activeOption,
+    } = this.state;
 
+    // Prevent create event if prop `onChange` is empty.
     if (typeof onChange !== 'function') {
       return;
     }
 
+    // Prevent choose the same value.
     if (newValue === inputValue) {
       return;
+    }
+
+    // Simulate empty value if value is equal `dialCode`.
+    if (newValue === activeOption.dialCode) {
+      newValue = '';
     }
 
     event.persist();
@@ -219,8 +229,13 @@ export class PhoneField extends React.Component {
       writable: true,
       value: {
         name,
-        value: newValue,
+        value: newValue.replace(/\s/g, ''),
         required,
+        country: {
+          name: activeOption.name,
+          code: activeOption.code,
+          dialCode: activeOption.dialCode,
+        },
       },
     });
 
@@ -228,7 +243,10 @@ export class PhoneField extends React.Component {
   }
 
   handleChangeField = (event) => {
-    const { activeOption, inputValue } = this.state;
+    const {
+      activeOption,
+      inputValue,
+    } = this.state;
     const { value } = event.target;
 
     if (!value.length) {
@@ -268,13 +286,44 @@ export class PhoneField extends React.Component {
 
   handleBlurField = (event) => {
     const { onBlur } = this.props;
+    const {
+      inputValue,
+      activeOption,
+    } = this.state;
 
-    this.setState({
-      showOptions: false,
-    });
+    // Clear the field value if value is equal to `dialCode`.
+    if (inputValue === activeOption.dialCode) {
+      this.setState({
+        showOptions: false,
+        inputValue: '',
+      });
+    } else {
+      this.setState({
+        showOptions: false,
+      });
+    }
 
     if (typeof onBlur === 'function') {
       onBlur(event);
+    }
+  }
+
+  handleFocusField = (event) => {
+    const { onFocus } = this.props;
+    const {
+      inputValue,
+      activeOption,
+    } = this.state;
+
+    // Show `dialCode` when the field is empty.
+    if (!inputValue) {
+      this.setState({
+        inputValue: activeOption.dialCode,
+      });
+    }
+
+    if (typeof onFocus === 'function') {
+      onFocus(event);
     }
   }
 
@@ -370,7 +419,7 @@ export class PhoneField extends React.Component {
     const { activeOption } = this.state;
 
     // Prevent choose the same value.
-    if (activeOption.iso2 === option.iso2) {
+    if (activeOption.code === option.code) {
       this.setState({
         showOptions: false,
       });
@@ -382,9 +431,9 @@ export class PhoneField extends React.Component {
       activeOption: option,
       showOptions: false,
       inputValue: option.dialCode,
+    }, () => {
+      this.handleOnChangeCallback(event, '', 'select-option');
     });
-
-    this.handleOnChangeCallback(event, option.dialCode, 'select-option');
   }
 
   handleClickSelectButton = () => {
@@ -408,7 +457,7 @@ export class PhoneField extends React.Component {
       activeOption,
       showOptions,
     } = this.state;
-    const Icon = Flags[activeOption.iso2];
+    const Icon = Flags[activeOption.code];
 
     return (
       <button
@@ -440,7 +489,7 @@ export class PhoneField extends React.Component {
     const { activeOption } = this.state;
 
     return countries.map((option, index) => {
-      const Icon = Flags[option.iso2];
+      const Icon = Flags[option.code];
 
       if (!Icon) {
         return null;
@@ -448,11 +497,11 @@ export class PhoneField extends React.Component {
 
       return (
         <SelectItem
-          key={option.iso2}
-          value={option.iso2}
+          key={option.code}
+          value={option.code}
           data-option-index={index}
           onClick={this.handleClickOption(option)}
-          selected={activeOption.iso2 === option.iso2}
+          selected={activeOption.code === option.code}
           size={size}
         >
           <Icon
@@ -533,18 +582,16 @@ export class PhoneField extends React.Component {
       inputProps,
       tabIndex,
       autoFocus,
-      onFocus,
     } = this.props;
     const { inputValue } = this.state;
 
     return (
       <TextField
         type="tel"
-        className="phone_field_field"
         value={inputValue}
         onChange={this.handleChangeField}
         onBlur={this.handleBlurField}
-        onFocus={onFocus}
+        onFocus={this.handleFocusField}
         onClick={this.handleClickField}
         onKeyDown={this.handleKeyDownField}
         disabled={disabled}
@@ -559,7 +606,10 @@ export class PhoneField extends React.Component {
         placeholderColor={placeholderColor}
         name={name}
         mobileSize={mobileSize}
-        inputProps={inputProps}
+        inputProps={{
+          ...inputProps,
+          className: 'phone_field_input',
+        }}
         tabIndex={tabIndex}
         autoFocus={autoFocus}
         ref={this.refTextField}

@@ -540,6 +540,7 @@ class Select extends React.Component {
         inputProps={{
           ...inputProps,
           readOnly: true,
+          className: 'select_input',
         }}
         tabIndex={tabIndex}
         autoFocus={autoFocus}
