@@ -11,6 +11,7 @@ export default function Usage() {
       <PhoneField
         placeholder="Phone default value"
         defaultValue="+78005553535"
+        defaultCountry="RU"
       />
       <br/>
       <PhoneField
