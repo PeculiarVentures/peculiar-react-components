@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[25],{103:function(n,e,t){"use strict";t.r(e),t.d(e,"default",(function(){return a}));var o=t(0),r=t.n(o),u=t(7);function a(){return r.a.createElement(u.m,{lang:"jsx"},"<h1>Hello world!</h1>")}}}]);
+//# sourceMappingURL=sources-demos-highlight-code-basic.9c5dd2f2.chunk.js.map

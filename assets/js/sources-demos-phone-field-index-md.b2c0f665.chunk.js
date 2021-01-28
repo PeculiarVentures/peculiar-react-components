@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[92],{125:function(n,e){n.exports=["# PhoneField\n\n## Simple\n\n",{type:"demo",data:"import React from 'react';\nimport { PhoneField } from 'lib-react-components';\n\nexport default function Usage() {\n  return (\n    <React.Fragment>\n      <PhoneField />\n    </React.Fragment>\n  );\n}\n",options:{demo:"/demos/phone-field/simple.jsx",showCode:"true"}}]}}]);
+//# sourceMappingURL=sources-demos-phone-field-index-md.b2c0f665.chunk.js.map

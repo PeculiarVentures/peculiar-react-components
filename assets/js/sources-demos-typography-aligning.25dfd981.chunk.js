@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[62],{148:function(e,n,t){"use strict";t.r(n),t.d(n,"default",(function(){return i}));var a=t(1),r=t.n(a),c=t(6);function i(){return r.a.createElement("div",null,r.a.createElement(c.A,null,"Left"),r.a.createElement(c.A,{align:"center"},"Center"),r.a.createElement(c.A,{align:"right"},"Right"))}}}]);
+//# sourceMappingURL=sources-demos-typography-aligning.25dfd981.chunk.js.map
