@@ -10,8 +10,8 @@ import SelectDropdown from '../select/select_dropdown';
 import SelectItem from '../select/select_item';
 import TextField from '../text_field';
 import SelectArrowIcon from '../icons/select_arrow';
-import formatNumber from './format_number';
-import countries from './countries';
+import { formatNumber } from './format_number';
+import { countries } from './countries';
 
 /**
  * PhoneField component.

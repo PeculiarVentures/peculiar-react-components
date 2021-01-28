@@ -1,4 +1,4 @@
-export default {
+export const countries = {
   AF: {
     name: 'Afghanistan',
     dialCode: '+93',
@@ -1266,3 +1266,5 @@ export default {
     code: 'ZW',
   },
 };
+
+export default countries;

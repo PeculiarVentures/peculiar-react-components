@@ -1,4 +1,4 @@
-const formatNumber = (text, country) => {
+export const formatNumber = (text, country) => {
   if (!country) {
     return text;
   }
