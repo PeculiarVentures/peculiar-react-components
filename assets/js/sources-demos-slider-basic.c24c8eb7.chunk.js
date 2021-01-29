@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[39],{119:function(e,t,a){"use strict";a.r(t),a.d(t,"default",(function(){return u}));var n=a(1),l=a.n(n),r=a(6);function u(){return l.a.createElement("div",null,l.a.createElement(r.t,{style:{marginBottom:20}}),l.a.createElement(r.t,{style:{marginBottom:20},defaultValue:.3}),l.a.createElement(r.t,{step:.2,style:{marginBottom:20},defaultValue:.6}),l.a.createElement(r.t,{disabled:!0,defaultValue:.8}))}}}]);
+//# sourceMappingURL=sources-demos-slider-basic.c24c8eb7.chunk.js.map
