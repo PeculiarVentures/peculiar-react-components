@@ -236,6 +236,12 @@ interface ISelectOption {
   value: string | number;
 }
 
+type SelectChangeEvent = React.ChangeEvent<{
+  value: string | number;
+  name: string;
+  required: boolean;
+}>;
+
 interface SelectProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onBlur' | 'onChange' | 'onKeyDown'> {
   defaultValue?: string | number;
   value?: string | number;
@@ -259,11 +265,9 @@ interface SelectProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onBlur
   inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
   placement?: 'bottom' | 'top';
   flip?: boolean;
-  onChange?: React.ChangeEventHandler<{
-    value: string | number;
-    name: string;
-    required: boolean;
-  }>;
+  onChange?: (
+    event: SelectChangeEvent,
+  ) => void;
   onFocus?: React.FocusEventHandler;
   onBlur?: React.FocusEventHandler;
   onKeyDown?: React.KeyboardEventHandler;
@@ -409,6 +413,17 @@ interface TextFieldProps extends InputBasicProps {
   validation?: (ValidationType | ((value: string | number) => boolean))[];
 }
 
+type PhoneFieldChangeEvent = React.ChangeEvent<{
+  value: string;
+  name: string;
+  required: boolean;
+  country: {
+    name: string;
+    code: string;
+    dialCode: string;
+  };
+}>;
+
 interface PhoneFieldProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onBlur' | 'onChange' | 'onKeyDown'> {
   defaultCountry?: string;
   defaultValue?: string;
@@ -431,22 +446,19 @@ interface PhoneFieldProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'on
   placement?: 'bottom' | 'top';
   flip?: boolean;
   onChange?: (
-    event: React.ChangeEvent<{
-      value: string;
-      name: string;
-      required: boolean;
-      country: {
-        name: string;
-        code: string;
-        dialCode: string;
-      };
-    }>,
+    event: PhoneFieldChangeEvent,
     reason?: 'select-option',
   ) => void;
   onBlur?: React.FocusEventHandler;
   onFocus?: React.FocusEventHandler;
   onKeyDown?: React.KeyboardEventHandler;
 }
+
+type AutocompleteChangeEvent = React.ChangeEvent<{
+  value: string;
+  name: string;
+  required: boolean;
+}>;
 
 interface AutocompleteProps<T> extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onBlur' | 'onChange' | 'onKeyDown'> {
   defaultValue?: string;
@@ -476,11 +488,7 @@ interface AutocompleteProps<T> extends Omit<React.HTMLAttributes<HTMLDivElement>
   placement?: 'bottom' | 'top';
   flip?: boolean;
   onChange?: (
-    event: React.ChangeEvent<{
-      value: string;
-      name: string;
-      required: boolean;
-    }>,
+    event: AutocompleteChangeEvent,
     value: T,
     reason?: 'select-option',
   ) => void;
