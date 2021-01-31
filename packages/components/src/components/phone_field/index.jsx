@@ -576,7 +576,10 @@ export class PhoneField extends React.Component {
       tabIndex,
       autoFocus,
     } = this.props;
-    const { inputValue } = this.state;
+    const {
+      inputValue,
+      showOptions,
+    } = this.state;
 
     return (
       <TextField
@@ -606,6 +609,7 @@ export class PhoneField extends React.Component {
         tabIndex={tabIndex}
         autoFocus={autoFocus}
         ref={this.refTextField}
+        autoComplete={showOptions ? 'off' : 'on'}
       >
         {this.renderOpenButton()}
       </TextField>
