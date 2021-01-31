@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[26],{105:function(n,e,t){"use strict";t.r(e),t.d(e,"default",(function(){return u}));var o=t(0),a=t.n(o),r=t(7);function u(){return a.a.createElement(r.m,{lang:"none"},"Some plain text")}}}]);
-//# sourceMappingURL=sources-demos-highlight-code-without_lang.f04ca71e.chunk.js.map
