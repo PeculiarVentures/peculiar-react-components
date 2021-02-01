@@ -154,6 +154,14 @@ export class PhoneField extends React.Component {
     };
   }
 
+  componentDidMount() {
+    window.addEventListener('click', this.handleClickOutside);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('click', this.handleClickOutside);
+  }
+
   _refRootElement = React.createRef();
   _refSelectDropdown = React.createRef();
   refTextField = React.createRef();
@@ -239,8 +247,11 @@ export class PhoneField extends React.Component {
       activeOption,
       inputValue,
     } = this.state;
-    const { value } = event.target;
+    let { value } = event.target;
 
+    /**
+     * If value is empty, show country dial code.
+     */
     if (!value.length) {
       this.setState({
         inputValue: activeOption.dialCode,
@@ -251,13 +262,20 @@ export class PhoneField extends React.Component {
       return;
     }
 
+    /**
+     * Safari paste phone number without country code.
+     */
+    if (value[0] !== '+') {
+      value = `${activeOption.dialCode}${value}`;
+    }
+
     if (value.slice(0, activeOption.dialCode.length) !== activeOption.dialCode) {
       return;
     }
 
     const formattedNumber = formatNumber(value, activeOption);
-    let caretPosition = event.target.selectionStart;
     const diff = formattedNumber.length - inputValue.length;
+    let caretPosition = event.target.selectionStart;
 
     this.setState({
       inputValue: formattedNumber,
@@ -282,18 +300,13 @@ export class PhoneField extends React.Component {
       inputValue,
       activeOption,
     } = this.state;
+    const isInputValueTheSameAsCountryDialCode = inputValue === activeOption.dialCode;
 
-    // Clear the field value if value is equal to `dialCode`.
-    if (inputValue === activeOption.dialCode) {
-      this.setState({
-        showOptions: false,
-        inputValue: '',
-      });
-    } else {
-      this.setState({
-        showOptions: false,
-      });
-    }
+    this.setState({
+      showOptions: false,
+      // Clear the field value if value is equal to `dialCode`.
+      inputValue: isInputValueTheSameAsCountryDialCode ? '' : inputValue,
+    });
 
     if (typeof onBlur === 'function') {
       onBlur(event);
@@ -302,34 +315,61 @@ export class PhoneField extends React.Component {
 
   handleFocusField = (event) => {
     const { onFocus } = this.props;
-    const {
-      inputValue,
-      activeOption,
-    } = this.state;
 
-    // Show `dialCode` when the field is empty.
-    if (!inputValue) {
-      this.setState({
-        inputValue: activeOption.dialCode,
-      });
-    }
+    this.setState(prevState => ({
+      showOptions: false,
+      // Show `dialCode` when the field is empty.
+      inputValue: prevState.inputValue || prevState.activeOption.dialCode,
+    }));
 
     if (typeof onFocus === 'function') {
       onFocus(event);
     }
   }
 
-  handleKeyDownField = (event) => {
-    const { disabled, onKeyDown } = this.props;
+  handleClickOption = option => (event) => {
+    const { activeOption, inputValue } = this.state;
+    const isNextOptionTheSame = activeOption.code === option.code;
+
+    this.setState({
+      showOptions: false,
+      activeOption: option,
+      inputValue: isNextOptionTheSame ? inputValue : option.dialCode,
+    }, () => {
+      // Prevent call change event for the same option.
+      if (!isNextOptionTheSame) {
+        this.handleOnChangeCallback(event, '', 'select-option');
+      }
+    });
+
+    this.refTextField.current.focus();
+  }
+
+  handleClickSelectButton = () => {
     const { showOptions } = this.state;
 
-    if (disabled) {
-      return;
-    }
+    this.setState({
+      showOptions: !showOptions,
+    });
+  }
 
-    if (typeof onKeyDown === 'function') {
-      onKeyDown(event);
+  handleMouseDownForPreventBlur = (event) => {
+    // Prevent blur
+    event.preventDefault();
+  }
+
+  handleClickOutside = (event) => {
+    const { showOptions } = this.state;
+
+    if (showOptions && !this._refRootElement.current.contains(event.target)) {
+      this.setState({
+        showOptions: false,
+      });
     }
+  }
+
+  handleKeyDownSelectButton = (event) => {
+    const { showOptions } = this.state;
 
     // Wait until IME is settled.
     if (event.which !== 229) {
@@ -407,42 +447,6 @@ export class PhoneField extends React.Component {
     }
   }
 
-  handleClickOption = option => (event) => {
-    const { activeOption } = this.state;
-
-    // Prevent choose the same value.
-    if (activeOption.code === option.code) {
-      this.setState({
-        showOptions: false,
-      });
-
-      return;
-    }
-
-    this.setState({
-      activeOption: option,
-      showOptions: false,
-      inputValue: option.dialCode,
-    }, () => {
-      this.handleOnChangeCallback(event, '', 'select-option');
-    });
-  }
-
-  handleClickSelectButton = () => {
-    const { showOptions } = this.state;
-
-    this.setState({
-      showOptions: !showOptions,
-    });
-
-    this.refTextField.current.focus();
-  }
-
-  handleMouseDownForPreventBlur = (event) => {
-    // Prevent blur
-    event.preventDefault();
-  }
-
   renderOpenButton() {
     const { disabled } = this.props;
     const {
@@ -454,8 +458,7 @@ export class PhoneField extends React.Component {
     return (
       <button
         onClick={this.handleClickSelectButton}
-        onMouseDown={this.handleMouseDownForPreventBlur}
-        tabIndex={-1}
+        onKeyDown={this.handleKeyDownSelectButton}
         type="button"
         className={classnames(
           'phone_field_button_country',
@@ -463,8 +466,9 @@ export class PhoneField extends React.Component {
             phone_field_button_country_open: showOptions,
           },
         )}
-        aria-hidden
         disabled={disabled}
+        aria-label={showOptions ? 'Close' : 'Open'}
+        title={showOptions ? 'Close' : 'Open'}
       >
         <Icon
           className="phone_field_icon_country"
@@ -575,10 +579,10 @@ export class PhoneField extends React.Component {
       inputProps,
       tabIndex,
       autoFocus,
+      onKeyDown,
     } = this.props;
     const {
       inputValue,
-      showOptions,
     } = this.state;
 
     return (
@@ -589,7 +593,7 @@ export class PhoneField extends React.Component {
         onBlur={this.handleBlurField}
         onFocus={this.handleFocusField}
         onClick={this.handleClickField}
-        onKeyDown={this.handleKeyDownField}
+        onKeyDown={onKeyDown}
         disabled={disabled}
         placeholder={placeholder}
         required={required}
@@ -609,10 +613,7 @@ export class PhoneField extends React.Component {
         tabIndex={tabIndex}
         autoFocus={autoFocus}
         ref={this.refTextField}
-        autoComplete={showOptions ? 'off' : 'on'}
-      >
-        {this.renderOpenButton()}
-      </TextField>
+      />
     );
   }
 
@@ -653,6 +654,7 @@ export class PhoneField extends React.Component {
         ref={this._refRootElement}
       >
         {this.renderField()}
+        {this.renderOpenButton()}
         {showOptions && this.renderPopup()}
       </div>
     );
