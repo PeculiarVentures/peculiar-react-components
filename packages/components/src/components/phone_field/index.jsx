@@ -69,6 +69,10 @@ export class PhoneField extends React.Component {
      */
     colorFocus: PropTypes.string,
     /**
+     * Component error color from the theme.
+     */
+    colorError: PropTypes.string,
+    /**
      * Component size.
      */
     size: PropTypes.oneOf(['medium', 'large']),
@@ -81,7 +85,7 @@ export class PhoneField extends React.Component {
      */
     name: PropTypes.string,
     /**
-     * Element tabIndex.
+     * Input tabIndex.
      */
     tabIndex: PropTypes.number,
     /**
@@ -113,6 +117,10 @@ export class PhoneField extends React.Component {
      */
     onFocus: PropTypes.func,
     onKeyDown: PropTypes.func,
+    /**
+     * This is what will be displayed in wrapper component.
+     */
+    children: PropTypes.node,
   };
 
   static defaultProps = {
@@ -125,6 +133,7 @@ export class PhoneField extends React.Component {
     textColor: 'black',
     placeholderColor: 'grey_4',
     colorFocus: 'primary',
+    colorError: 'wrong',
     size: 'medium',
     tabIndex: 0,
     autoFocus: false,
@@ -571,6 +580,7 @@ export class PhoneField extends React.Component {
       color,
       textColor,
       colorFocus,
+      colorError,
       size,
       valid,
       placeholderColor,
@@ -580,6 +590,7 @@ export class PhoneField extends React.Component {
       tabIndex,
       autoFocus,
       onKeyDown,
+      children,
     } = this.props;
     const {
       inputValue,
@@ -601,6 +612,7 @@ export class PhoneField extends React.Component {
         color={color}
         textColor={textColor}
         colorFocus={colorFocus}
+        colorError={colorError}
         size={size}
         valid={valid}
         placeholderColor={placeholderColor}
@@ -613,7 +625,9 @@ export class PhoneField extends React.Component {
         tabIndex={tabIndex}
         autoFocus={autoFocus}
         ref={this.refTextField}
-      />
+      >
+        {children}
+      </TextField>
     );
   }
 
@@ -624,6 +638,7 @@ export class PhoneField extends React.Component {
       className,
       color,
       colorFocus,
+      colorError,
       disabled,
       flip,
       inputProps,
@@ -642,6 +657,7 @@ export class PhoneField extends React.Component {
       textColor,
       valid,
       defaultCountry,
+      children,
       ...other
     } = this.props;
     const { showOptions } = this.state;

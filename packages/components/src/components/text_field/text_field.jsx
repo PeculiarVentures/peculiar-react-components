@@ -68,7 +68,13 @@ export default class TextField extends Component {
   }
 
   static propTypes = {
+    /**
+     * This is what will be displayed in wrapper component.
+     */
     children: PropTypes.node,
+    /**
+     * Input tabIndex.
+     */
     tabIndex: PropTypes.number,
     /**
      * The CSS class name of the wrapper element.

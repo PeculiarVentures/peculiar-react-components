@@ -437,6 +437,7 @@ interface PhoneFieldProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'on
   textColor?: Color;
   placeholderColor?: Color;
   colorFocus?: Color;
+  colorError?: Color;
   size?: 'medium' | 'large';
   mobileSize?: 'medium' | 'large';
   name?: string;
@@ -452,6 +453,7 @@ interface PhoneFieldProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'on
   onBlur?: React.FocusEventHandler;
   onFocus?: React.FocusEventHandler;
   onKeyDown?: React.KeyboardEventHandler;
+  children?: React.ReactNode;
 }
 
 type AutocompleteChangeEvent = React.ChangeEvent<{

@@ -64,7 +64,7 @@ export default class Input extends PureComponent {
     placeholderColor: PropTypes.string,
     // label: PropTypes.string,
     /**
-     * This is what will be displayed in wrapper component
+     * This is what will be displayed in wrapper component.
      */
     children: PropTypes.node,
     /**
