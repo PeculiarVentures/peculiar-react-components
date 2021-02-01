@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[29],{107:function(e,n,t){"use strict";t.r(n),t.d(n,"default",(function(){return u}));var a=t(0),l=t.n(a),r=t(6);function u(){return l.a.createElement(l.a.Fragment,null,l.a.createElement(r.o,null),l.a.createElement("br",null),l.a.createElement(r.o,{defaultValue:"+7 800 555 35 35"}),l.a.createElement("br",null),l.a.createElement(r.o,{required:!0,defaultCountry:"UA"}),l.a.createElement("br",null),l.a.createElement(r.o,{disabled:!0}))}}}]);
+//# sourceMappingURL=sources-demos-phone-field-simple.c972802b.chunk.js.map
