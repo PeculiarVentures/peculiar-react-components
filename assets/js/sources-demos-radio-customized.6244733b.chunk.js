@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[34],{134:function(e,a,n){"use strict";n.r(a),n.d(a,"default",(function(){return r}));var t=n(0),o=n.n(t),l=n(6);function r(){return o.a.createElement(l.RadioGroup,{name:"numbers",defaultValue:"1"},o.a.createElement(l.Radio,{value:"1",color:"black",style:{marginRight:10}}),o.a.createElement(l.Radio,{value:"2",colorOn:"wrong",style:{marginRight:10}}),o.a.createElement(l.Radio,{value:"3",iconColorOn:"black",bgType:"fill"}))}}}]);
-//# sourceMappingURL=sources-demos-radio-customized.6244733b.chunk.js.map
