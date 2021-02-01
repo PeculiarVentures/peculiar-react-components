@@ -4,7 +4,6 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { Popper } from 'react-popper';
-import * as Flags from 'country-flag-icons/react/3x2';
 import withAnalytics from '../../containers/analytics_hoc';
 import SelectDropdown from '../select/select_dropdown';
 import SelectItem from '../select/select_item';
@@ -12,6 +11,7 @@ import TextField from '../text_field';
 import SelectArrowIcon from '../icons/select_arrow';
 import { formatNumber } from './format_number';
 import { countries } from './countries';
+import CountryIcon from './country_icon';
 
 /**
  * PhoneField component.
@@ -462,7 +462,6 @@ export class PhoneField extends React.Component {
       activeOption,
       showOptions,
     } = this.state;
-    const Icon = Flags[activeOption.code];
 
     return (
       <button
@@ -479,7 +478,8 @@ export class PhoneField extends React.Component {
         aria-label={showOptions ? 'Close' : 'Open'}
         title={showOptions ? 'Close' : 'Open'}
       >
-        <Icon
+        <CountryIcon
+          code={activeOption.code}
           className="phone_field_icon_country"
         />
         <SelectArrowIcon
@@ -495,11 +495,6 @@ export class PhoneField extends React.Component {
 
     return Object.keys(countries).map((code, index) => {
       const option = countries[code];
-      const Icon = Flags[code];
-
-      if (!Icon) {
-        return null;
-      }
 
       return (
         <SelectItem
@@ -510,7 +505,8 @@ export class PhoneField extends React.Component {
           selected={activeOption.code === option.code}
           size={size}
         >
-          <Icon
+          <CountryIcon
+            code={code}
             className="phone_field_icon_country"
           />
           {option.name} <span className="phone_field_text_dial_code">{option.dialCode}</span>

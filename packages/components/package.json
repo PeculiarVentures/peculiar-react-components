@@ -37,7 +37,6 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
-    "country-flag-icons": "^1.2.8",
     "lib-theme-contructor": "^0.4.1",
     "prismjs": "1.21.0",
     "prop-types": "^15.6.1",
