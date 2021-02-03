@@ -40,7 +40,24 @@ export default class SelectDropdown extends React.PureComponent {
   }
 
   getValueMatchedElement(value) {
-    return this._refRootElement.current.querySelector(`[data-value^="${value}" i]`);
+    const { children } = this._refRootElement.current;
+    let el;
+
+    for (const child of children) {
+      let text = child.textContent;
+
+      if (text) {
+        text = text.trim().toLowerCase();
+
+        if (text[0] === value) {
+          el = child;
+
+          break;
+        }
+      }
+    }
+
+    return el;
   }
 
   _refRootElement = React.createRef();
