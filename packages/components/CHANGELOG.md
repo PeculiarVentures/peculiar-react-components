@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://github.com/PeculiarVentures/peculiar-react-components/compare/lib-react-components@2.0.1...lib-react-components@2.1.0) (2021-02-03)
+
+
+### Features
+
+* **components:** add basic phone field component ([c0769f5](https://github.com/PeculiarVentures/peculiar-react-components/commit/c0769f55b2dcebd4b8ce277f24aadb9346608391))
+* **components:** add countries code list ([4203c82](https://github.com/PeculiarVentures/peculiar-react-components/commit/4203c82b55f8d33c9d3ee373c9028fd9be8d5533))
+* **components:** add countries data to phone field component ([375b3a9](https://github.com/PeculiarVentures/peculiar-react-components/commit/375b3a9cd445e2b824e8c8a2b92b8fd1ae447741))
+* **components:** add possibility to open select menu using up/down buttons ([499edf0](https://github.com/PeculiarVentures/peculiar-react-components/commit/499edf0da47a96fe20c85b3e0ed8333048217d38))
+* **components:** add possibility to scroll to matched value in select/phone field ([951a957](https://github.com/PeculiarVentures/peculiar-react-components/commit/951a9574219d6d406ce3aad221d7500cee4694ca))
+* **components:** add props to phone field component ([77bb056](https://github.com/PeculiarVentures/peculiar-react-components/commit/77bb0566023295a0a31957ee7a8455a0e0594ebe))
+* **components:** add types for phone field ([f2b4afb](https://github.com/PeculiarVentures/peculiar-react-components/commit/f2b4afb2aa9c5b2dff083df6a78fd0fc72f797d4))
+* **components:** implement basic phone field component ([0982bef](https://github.com/PeculiarVentures/peculiar-react-components/commit/0982bef8161a4d042f4eda5f2e000ca514271321))
+
+
+
+
+
 ## [2.0.1](https://github.com/PeculiarVentures/peculiar-react-components/compare/lib-react-components@2.0.0...lib-react-components@2.0.1) (2021-01-23)
 
 **Note:** Version bump only for package lib-react-components

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://github.com/PeculiarVentures/peculiar-react-components/compare/docs-app@2.0.1...docs-app@2.1.0) (2021-02-03)
+
+
+### Features
+
+* **docs:** add phone field demo ([587b1a9](https://github.com/PeculiarVentures/peculiar-react-components/commit/587b1a9bdc116330e44bdb75aaa72541aec7bb7a))
+
+
+
+
+
 ## [2.0.1](https://github.com/PeculiarVentures/peculiar-react-components/compare/docs-app@2.0.0...docs-app@2.0.1) (2021-01-23)
 
 **Note:** Version bump only for package docs-app
