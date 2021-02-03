@@ -665,8 +665,8 @@ export class PhoneField extends React.Component {
         className={classnames('phone_field', className)}
         ref={this._refRootElement}
       >
-        {this.renderField()}
         {this.renderOpenButton()}
+        {this.renderField()}
         {showOptions && this.renderPopup()}
       </div>
     );

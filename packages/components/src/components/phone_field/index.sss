@@ -10,26 +10,27 @@
   &_button_country
     position: absolute
     top: 0
-    width: 60px
+    width: 56px
     height: 100%
     left: 0
     user-select: none
     cursor: pointer
     text-align: center
-    background-color: transparent
+    background: transparent
     outline: 0
     border: 0
     color: transparent
     font-size: 0
     display: block
-    transition: opacity 200ms
+    transition: background 200ms
+    z-index: 1
     &:focus
-      opacity: 0.6
+      background: rgba(var(--grey), 0.15)
     &:disabled
       cursor: default
 
     .phone_field_icon_country
-      margin-right: 7px
+      margin: 0 7px 0 4px
 
     &_open
       .phone_field_icon_arrow
@@ -45,6 +46,9 @@
 
   &_text_dial_code
     color: rgba(var(--black), 0.5)
+
+  .select_dropdown_container
+    z-index: 2
 
 input.phone_field_input
   padding-left: 60px
