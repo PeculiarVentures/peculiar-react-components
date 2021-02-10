@@ -428,12 +428,11 @@ class Select extends React.Component {
     return options.map((option, index) => (
       <SelectItem
         key={option.value}
-        data-option-index={index}
         value={option.value}
+        data-option-index={index}
         selected={activeOption === option.value}
-        focused={activeOption === option.value}
-        onClick={this.handleClickOption(option)}
         size={size}
+        onClick={this.handleClickOption(option)}
         disabled={typeof getOptionDisabled === 'function' ? getOptionDisabled(option) : false}
       >
         {typeof renderOption === 'function' ? renderOption(option) : option.label}

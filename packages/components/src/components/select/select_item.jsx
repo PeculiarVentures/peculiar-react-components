@@ -30,9 +30,6 @@ export default function SelectItem(props) {
         'truncate_text',
         [`select_item_${size}`],
         [`text_${textColor}`],
-        {
-          fill_light_grey: selected,
-        },
         className,
       )}
       role="option"

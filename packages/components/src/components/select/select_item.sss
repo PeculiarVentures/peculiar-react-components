@@ -2,7 +2,7 @@
   letter-spacing: 0.04em
   cursor: pointer
   width: auto
-  transition: color 300ms, background-color 300ms, opacity 300ms
+  transition: background-color 300ms
 
   &_medium
     padding: 0 10px
@@ -19,11 +19,12 @@
     color: rgb(var(--grey))
     opacity: .4
 
+  &[aria-selected="true"],
   &[data-focused="true"]
-    background: rgba(var(--light_grey), .55)
+    background: rgba(var(--grey), 0.3)
 
 @media (hover: hover)
   .select_item
     &:not([aria-disabled="true"])
       &:hover
-        background: rgba(var(--light_grey), .55)
+        background: rgba(var(--grey), 0.2)
