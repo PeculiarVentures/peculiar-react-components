@@ -23,10 +23,10 @@ const emotionsСharacterRanges = '\u00a9\u00ae\u2000-\u3300\ud83c\ud000-\udfff\u
 const nonLetterСharacter = '\u0021-\u0040\u005B-\u0060\u007B-\u00BF\u02B9-\u0362\u1FFD-\u2BFF';
 // {allowedNameСharacter} - a line where you can add characters that are not letters but are valid
 // in letter expressions. Created to avoid adding complex exceptions.
-const allowedLetters = 'μ|ι';
-const allowedNameСharacter = `'|${allowedLetters}`;
+const allowedGreecesLetters = 'μ|ι'; // Greece's letters that fall within the range of prohibited characters declared in variable {nonLetterСharacter}
+const allowedNameСharacter = `'|${allowedGreecesLetters}`;
 const nameRegExp = new RegExp(`^(([^${nonLetterСharacter}${emotionsСharacterRanges}\\s]|${allowedNameСharacter})+(\\s|-))*([^${nonLetterСharacter}${emotionsСharacterRanges}\\s]|${allowedNameСharacter})+$`, 'i');
-const lettersRegExp = new RegExp(`^([^${nonLetterСharacter}${emotionsСharacterRanges}\\s']|${allowedNameСharacter})+$`, 'i');
+const lettersRegExp = new RegExp(`^([^${nonLetterСharacter}${emotionsСharacterRanges}\\s']|${allowedGreecesLetters})+$`, 'i');
 
 const regExps = {
   password: /^^(?=.*[0-9])(?=.*[a-zа-я])(?=.*[A-ZА-Я])[A-zА-я0-9!@#$%^&*()-=§±|'";:~,.<>/?]{8,}$/,
