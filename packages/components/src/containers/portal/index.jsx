@@ -2,6 +2,7 @@
 import React, { Component } from 'react'; // eslint-disable-line
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
+import HTMLElementType from '../../utils/HTMLElementType';
 
 function ownerDocument(node) {
   return (node && node.ownerDocument) || document;
@@ -35,7 +36,7 @@ export default class Portal extends Component {
     container: PropTypes.oneOfType([ // eslint-disable-line
       PropTypes.object,
       PropTypes.func,
-      PropTypes.instanceOf(HTMLElement),
+      PropTypes.instanceOf(HTMLElementType),
     ]),
     /**
      * Callback fired once the children has been mounted into the `container`.

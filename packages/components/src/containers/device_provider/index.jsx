@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'; // eslint-disable-line
 import PropTypes from 'prop-types';
 import { getDeviceInfo } from '../../utils/device_info';
+import HTMLElementType from '../../utils/HTMLElementType';
 
 /**
  * DeviceProvider component
@@ -14,7 +15,7 @@ export default class DeviceProvider extends PureComponent {
     /**
      * The root where app is rendered
      */
-    rootElement: PropTypes.instanceOf(HTMLElement),
+    rootElement: PropTypes.instanceOf(HTMLElementType),
   };
 
   static childContextTypes = {

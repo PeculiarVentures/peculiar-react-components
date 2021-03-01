@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import { Popper } from 'react-popper';
 import { RightTriangleIcon } from '../icons';
 import Portal from '../../containers/portal';
+import HTMLElementType from '../../utils/HTMLElementType';
 
 /**
  * TooltipPopper component
@@ -225,7 +226,10 @@ TooltipPopper.propTypes = {
   /**
    * Use React portal for render tooltip to another elemenet.
    */
-  usePortal: PropTypes.oneOfType([PropTypes.bool, PropTypes.instanceOf(HTMLElement)]),
+  usePortal: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.instanceOf(HTMLElementType),
+  ]),
   /**
    * Use preventOverflow for prevent overflow on tooltip.
    */
@@ -249,7 +253,10 @@ TooltipPopper.propTypes = {
   /**
    * Flip boundary element modifier
    */
-  flipBoundaryElement: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(HTMLElement)]),
+  flipBoundaryElement: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.instanceOf(HTMLElementType),
+  ]),
 };
 
 TooltipPopper.defaultProps = {

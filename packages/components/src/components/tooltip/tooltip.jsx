@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import TooltipPopper from './tooltip_popper';
 import Portal from '../../containers/portal';
+import HTMLElementType from '../../utils/HTMLElementType';
 
 /**
  * Check if node is root element
@@ -129,7 +130,10 @@ export default class Tooltip extends Component {
     /**
      * Use React portal for render tooltip to another elemenet.
      */
-    usePortal: PropTypes.oneOfType([PropTypes.bool, PropTypes.instanceOf(HTMLElement)]),
+    usePortal: PropTypes.oneOfType([
+      PropTypes.bool,
+      PropTypes.instanceOf(HTMLElementType),
+    ]),
     /**
      * Use preventOverflow for prevent overflow on tooltip.
      */
@@ -153,7 +157,10 @@ export default class Tooltip extends Component {
     /**
      * Flip boundary element modifier
      */
-    flipBoundaryElement: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(HTMLElement)]),
+    flipBoundaryElement: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.instanceOf(HTMLElementType),
+    ]),
   }
 
   static defaultProps = {
