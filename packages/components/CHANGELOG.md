@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.3](https://github.com/PeculiarVentures/peculiar-react-components/compare/lib-react-components@2.1.2...lib-react-components@2.1.3) (2021-03-01)
+
+
+### Bug Fixes
+
+* **components:** remove HTMLElement check for allow SSR ([6dc5fe2](https://github.com/PeculiarVentures/peculiar-react-components/commit/6dc5fe2f441bb1667d4536a3b923aa51ce1fe9fa))
+
+
+
+
+
 ## [2.1.2](https://github.com/PeculiarVentures/peculiar-react-components/compare/lib-react-components@2.1.1...lib-react-components@2.1.2) (2021-02-10)
 
 **Note:** Version bump only for package lib-react-components
