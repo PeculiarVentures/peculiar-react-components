@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Prism from 'prismjs';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import 'prismjs/components/prism-jsx';
 import 'prismjs/components/prism-bash';
 import 'prismjs/components/prism-c';
@@ -16,7 +16,7 @@ export default class HighlightCode extends PureComponent {
     /**
      * This is what will be displayed inside the component
      */
-    children: PropTypes.node.isRequired,
+    children: PropTypes.string.isRequired,
     /**
      * Supported highlighting languages
      */
@@ -56,8 +56,19 @@ export default class HighlightCode extends PureComponent {
   codeRef = React.createRef();
 
   _highlight() {
+    const {
+      children,
+      lang,
+    } = this.props;
+
     if (this.codeRef && this.codeRef.current) {
-      Prism.highlightElement(this.codeRef.current);
+      let code;
+
+      if (lang !== 'none') {
+        code = Prism.highlight(children, Prism.languages[lang], lang);
+      }
+
+      this.codeRef.current.innerHTML = code || children;
     }
   }
 
@@ -75,19 +86,17 @@ export default class HighlightCode extends PureComponent {
 
     return (
       <pre
+        {...other}
         data-component="highlight_code"
-        className={classNames(
+        className={classnames(
           className,
           `language-${lang}`,
         )}
-        {...other}
       >
         <code
           ref={this.codeRef}
           className={`language-${lang}`}
-        >
-          {children}
-        </code>
+        />
       </pre>
     );
   }
