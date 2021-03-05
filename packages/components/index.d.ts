@@ -153,7 +153,7 @@ interface ContentLoaderProps extends React.SVGAttributes<SVGAElement> {
 }
 
 interface HighlightCodeProps extends React.HTMLAttributes<HTMLPreElement> {
-  children: React.ReactNode;
+  children: string;
   lang?: CodeType;
   ref?: React.Ref<HTMLElement>;
 }

@@ -56,19 +56,8 @@ export default class HighlightCode extends PureComponent {
   codeRef = React.createRef();
 
   _highlight() {
-    const {
-      children,
-      lang,
-    } = this.props;
-
     if (this.codeRef && this.codeRef.current) {
-      let code;
-
-      if (lang !== 'none') {
-        code = Prism.highlight(children, Prism.languages[lang], lang);
-      }
-
-      this.codeRef.current.innerHTML = code || children;
+      Prism.highlightElement(this.codeRef.current);
     }
   }
 
@@ -96,7 +85,9 @@ export default class HighlightCode extends PureComponent {
         <code
           ref={this.codeRef}
           className={`language-${lang}`}
-        />
+        >
+          {children}
+        </code>
       </pre>
     );
   }
