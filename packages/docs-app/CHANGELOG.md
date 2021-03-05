@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.5](https://github.com/PeculiarVentures/peculiar-react-components/compare/docs-app@2.1.4...docs-app@2.1.5) (2021-03-05)
+
+**Note:** Version bump only for package docs-app
+
+
+
+
+
 ## [2.1.4](https://github.com/PeculiarVentures/peculiar-react-components/compare/docs-app@2.1.3...docs-app@2.1.4) (2021-03-02)
 
 **Note:** Version bump only for package docs-app
