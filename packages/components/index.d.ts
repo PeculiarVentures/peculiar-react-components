@@ -569,7 +569,7 @@ interface OfflineProviderProps {
 
 interface PortalProps {
   children: React.ReactNode;
-  container?: HTMLElement;
+  container?: Element | (() => Element | null) | null;
   onRendered?: () => void;
 }
 
@@ -652,9 +652,9 @@ declare const SelectArrowIcon: React.ComponentType<SelectArrowIconProps>;
 
 declare const DeviceProvider: React.ComponentType<DeviceProviderProps>;
 declare const OfflineProvider: React.ComponentType<OfflineProviderProps>;
-declare const Portal: React.ComponentType<PortalProps>;
 declare const SegueHandler: React.ComponentType<SegueHandlerProps>;
 declare const AnalyticsProvider: React.ComponentType<AnalyticsProviderProps>;
+declare function Portal(props: PortalProps): JSX.Element;
 
 declare function getWindowSize(): WindowSize;
 declare function withAnalytics<T>(component: React.ComponentType<T>, trigger?: keyof T): React.ComponentType<T & { gaEventName?: string }>;
