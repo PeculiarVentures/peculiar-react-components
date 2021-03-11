@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[20],{95:function(e,n,t){"use strict";t.r(n),t.d(n,"default",(function(){return c}));var i=t(1),a=t.n(i),r=t(7);function c(){return a.a.createElement("div",null,a.a.createElement(r.i,{style:{marginRight:10}}),a.a.createElement(r.i,{size:40,style:{marginRight:10}}),a.a.createElement(r.i,{size:60,thickness:5}))}}}]);
+//# sourceMappingURL=sources-demos-circular-progress-sizes.504fb9d9.chunk.js.map
