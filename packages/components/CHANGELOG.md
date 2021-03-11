@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0](https://github.com/PeculiarVentures/peculiar-react-components/compare/lib-react-components@2.1.7...lib-react-components@2.2.0) (2021-03-11)
+
+
+### Features
+
+* **components:** rewrite Portal using new react api ([4fc07b9](https://github.com/PeculiarVentures/peculiar-react-components/commit/4fc07b9e26e4381e59758e5e85d5e4467417f001))
+
+
+
+
+
 ## [2.1.7](https://github.com/PeculiarVentures/peculiar-react-components/compare/lib-react-components@2.1.6...lib-react-components@2.1.7) (2021-03-11)
 
 **Note:** Version bump only for package lib-react-components
