@@ -75,7 +75,7 @@ class Tabs extends PureComponent {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const { value } = this.props;
 
     if (value !== nextProps.value) {

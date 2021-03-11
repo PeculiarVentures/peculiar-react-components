@@ -38,7 +38,7 @@ export default class ProgressiveImage extends PureComponent {
     this._loadImage(src);
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const { src } = this.props;
     const { src: nextSrc, placeholder } = nextProps;
 

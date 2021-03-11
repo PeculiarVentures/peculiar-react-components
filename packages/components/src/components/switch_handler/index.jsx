@@ -105,7 +105,7 @@ export default class SwitchHandler extends PureComponent {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const { checked } = this.props;
 
     if (checked !== nextProps.checked) {

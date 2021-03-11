@@ -251,7 +251,7 @@ export default class TextField extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const { value } = this.props;
 
     if (typeof nextProps.valid === 'boolean') {
@@ -488,7 +488,6 @@ export default class TextField extends Component {
       <label
         data-component="text_field"
         data-disabled={disabled}
-        data-valid={hasValue ? valid : true}
         className={classNames(
           'text_field',
           className,

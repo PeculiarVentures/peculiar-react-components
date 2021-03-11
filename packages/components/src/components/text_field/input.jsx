@@ -244,7 +244,6 @@ export default class Input extends PureComponent {
       <div
         data-component="input"
         data-type={bgType}
-        data-valid={valid}
         data-disabled={disabled}
         className={classNames(
           'input',
@@ -281,6 +280,7 @@ export default class Input extends PureComponent {
           name={name}
           autoComplete={autoComplete}
           autoFocus={autoFocus}
+          aria-invalid={!valid}
           {...otherInputProps}
         />
         {this._renderRequiredIcon()}

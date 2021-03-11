@@ -163,7 +163,7 @@ class Slider extends PureComponent {
     value: 0,
   };
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     const {
       value,
       defaultValue,
@@ -181,7 +181,7 @@ class Slider extends PureComponent {
     });
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const { dragging } = this.state;
 
     if (nextProps.value !== undefined && !dragging) {

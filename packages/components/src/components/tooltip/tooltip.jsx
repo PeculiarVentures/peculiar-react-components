@@ -216,7 +216,7 @@ export default class Tooltip extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const { open } = nextProps;
 
     if (open !== undefined) {

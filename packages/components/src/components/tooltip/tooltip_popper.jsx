@@ -31,7 +31,7 @@ export default class TooltipPopper extends React.Component {
     return '';
   }
 
-  componentWillReceiveProps() {
+  UNSAFE_componentWillReceiveProps() {
     // Make schedule to update tooltip, position if button position failed
     this.scheduleUpdate();
   }

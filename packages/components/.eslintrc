@@ -41,6 +41,7 @@
     "jsx-a11y/label-has-for": 1,
     "jsx-a11y/alt-text": 1,
     "function-paren-newline": 1,
-    "jsx-a11y/anchor-has-content": 1
+    "jsx-a11y/anchor-has-content": 1,
+    "camelcase": 1
   }
 }
