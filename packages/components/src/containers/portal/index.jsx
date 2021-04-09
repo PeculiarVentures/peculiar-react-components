@@ -9,7 +9,10 @@ function getContainer(container) {
   return typeof container === 'function' ? container() : container;
 }
 
-function Portal(props) {
+/**
+ * Portal component
+ */
+const Portal = React.forwardRef((props) => {
   const { children, container, onRendered } = props;
   const [mountNode, setMountNode] = React.useState(null);
 
@@ -22,7 +25,7 @@ function Portal(props) {
   }, [container, onRendered]);
 
   return mountNode ? ReactDOM.createPortal(children, mountNode) : mountNode;
-}
+});
 
 Portal.propTypes = {
   /**
