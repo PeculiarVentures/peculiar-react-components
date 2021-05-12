@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[36],{119:function(e,a,t){"use strict";t.r(a),t.d(a,"default",(function(){return u}));var l=t(1),n=t.n(l),r=t(7);function u(){return n.a.createElement(r.s,{name:"numbers",defaultValue:"1"},n.a.createElement(r.r,{value:"1",style:{marginBottom:10},label:"I am label left"}),n.a.createElement("br",null),n.a.createElement(r.r,{value:"2",label:"I am label right",labelPosition:"right"}))}}}]);
-//# sourceMappingURL=sources-demos-radio-label.c16cc115.chunk.js.map

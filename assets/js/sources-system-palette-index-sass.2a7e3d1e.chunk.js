@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[111],{281:function(o,e,n){o.exports={color_item:"color_item_2HjZI",color_name:"color_name_j-zwe"}}}]);
-//# sourceMappingURL=sources-system-palette-index-sass.2a7e3d1e.chunk.js.map

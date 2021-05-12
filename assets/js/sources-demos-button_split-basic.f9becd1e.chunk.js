@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[13],{85:function(t,n,e){"use strict";e.r(n),e.d(n,"default",(function(){return a}));var o=e(1),i=e.n(o),u=e(7);function a(){return i.a.createElement(u.g,{actions:[{href:"https://google.com",text:"Link"},{text:"Button"},{disabled:!0,text:"Disabled"}]},"Button")}}}]);
-//# sourceMappingURL=sources-demos-button_split-basic.f9becd1e.chunk.js.map
