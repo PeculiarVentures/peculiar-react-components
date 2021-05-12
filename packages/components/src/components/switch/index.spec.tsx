@@ -2,7 +2,6 @@ import * as React from 'react';
 import { mount, shallow } from 'enzyme';
 import { expect } from 'chai';
 import { spy } from 'sinon';
-// @ts-ignore
 import AnalyticsProvider from '../../containers/analytics_provider';
 import SwitchWithAnalytics, { Switch } from './index';
 
@@ -96,6 +95,7 @@ describe('<Switch />', () => {
         onEvent={onEvent}
       >
         <SwitchWithAnalytics
+          // @ts-ignore
           gaEventName="test"
         />
       </AnalyticsProvider>

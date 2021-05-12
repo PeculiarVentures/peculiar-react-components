@@ -72,7 +72,7 @@ function validateByType(value, type) {
  * @param {boolean} ignoreStartAndEndSpaces - Trim value spaces
  * @returns {boolean}
  */
-export default function validator(value, types, ignoreStartAndEndSpaces) {
+export default function validator(value, types, ignoreStartAndEndSpaces = false) {
   if (!Array.isArray(types)) {
     console.error('Argument \'types\' must be an \'array\'');
 

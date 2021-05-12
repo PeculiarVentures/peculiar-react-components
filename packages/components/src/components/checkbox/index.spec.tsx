@@ -96,6 +96,7 @@ describe('<Checkbox />', () => {
         onEvent={onEvent}
       >
         <CheckboxWithAnalytics
+          // @ts-ignore
           gaEventName="test"
         />
       </AnalyticsProvider>

@@ -110,6 +110,7 @@ describe('<Button />', () => {
         onEvent={onEvent}
       >
         <ButtonWithAnalytics
+          // @ts-ignore
           gaEventName="test"
         />
       </AnalyticsProvider>
