@@ -1,0 +1,63 @@
+{
+  "name": "lib-pintl",
+  "version": "0.0.3",
+  "description": "PIntl - Library for internationalization of js applications",
+  "main": "./dist/index.umd.js",
+  "module": "./dist/esm/index.js",
+  "jsnext:main": "./dist/index.es.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "build": "rollup -c rollup.config.lib.js && babel lib -d ./dist/esm",
+    "lint": "eslint --ext .js ./lib",
+    "test": "npm run build && NODE_ENV=test mocha --opts ./mocha.opts"
+  },
+  "files": [
+    "LICENSE.md",
+    "README.md",
+    "dist",
+    "index.d.ts"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pentatonica/lib-react-intl.git"
+  },
+  "keywords": [
+    "intl",
+    "react",
+    "js",
+    "i18n"
+  ],
+  "author": "Pentatonica.co",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pentatonica/lib-react-intl/issues"
+  },
+  "homepage": "https://github.com/pentatonica/lib-react-intl#readme",
+  "peerDependencies": {
+    "react": "^16.0.0 || ^17.0.0",
+    "prop-types": "^15.5.4"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "chai": "^4.1.2",
+    "eslint": "^4.18.2",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.7.0",
+    "jsdom": "^11.6.2",
+    "mocha": "^5.0.2",
+    "prop-types": "^15.6.1",
+    "react": "^17.0.2",
+    "rollup": "^0.56.4",
+    "rollup-plugin-babel": "^3.0.3",
+    "rollup-plugin-node-resolve": "^3.0.3",
+    "rollup-plugin-uglify": "^3.0.0"
+  }
+}
