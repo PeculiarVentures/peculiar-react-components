@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.2](https://github.com/PeculiarVentures/peculiar-react-components/compare/lib-theme-contructor@0.4.1...lib-theme-contructor@0.4.2) (2021-05-12)
+
+**Note:** Version bump only for package lib-theme-contructor
+
+
+
+
+
 ## [0.4.1](https://github.com/PeculiarVentures/peculiar-react-components/compare/lib-theme-contructor@0.4.0...lib-theme-contructor@0.4.1) (2021-01-12)
 
 **Note:** Version bump only for package lib-theme-contructor

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.1](https://github.com/PeculiarVentures/peculiar-react-components/compare/lib-react-components@2.2.0...lib-react-components@2.2.1) (2021-05-12)
+
+
+### Bug Fixes
+
+* **components:** fix Portal build error ([ac1bdfd](https://github.com/PeculiarVentures/peculiar-react-components/commit/ac1bdfd62da3ed5a58261a73d6c1d2d2e6be40aa))
+* fix lint errors ([70267a9](https://github.com/PeculiarVentures/peculiar-react-components/commit/70267a9fc8551b0d47fd71d53d65099fbb4cecc9))
+
+
+
+
+
 # [2.2.0](https://github.com/PeculiarVentures/peculiar-react-components/compare/lib-react-components@2.1.7...lib-react-components@2.2.0) (2021-03-11)
 
 
