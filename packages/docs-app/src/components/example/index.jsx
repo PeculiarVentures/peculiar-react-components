@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ReactMarkdown from 'react-markdown';
+import gfm from 'remark-gfm';
 import Loadable from 'react-loadable';
 import { Link } from 'react-router-dom';
 import {
@@ -54,32 +55,38 @@ export default function Example(props) {
 
           return (
             <ReactMarkdown
+              remarkPlugins={[gfm]}
               className={classNames(
                 s.markdown_container,
                 'text_black',
                 'b2',
               )}
               key={index} // eslint-disable-line
-              source={d}
+              children={d}
               skipHtml
-              renderers={{
-                code: elProps => (
-                  <HighlightCode lang={elProps.language === 'sh' ? 'bash' : elProps.language}>
-                    {elProps.value}
-                  </HighlightCode>
-                ),
-                inlineCode: elProps => (
-                  <code
-                    className="fill_light_grey"
-                    style={{
-                      padding: '0px 7px',
-                      display: 'inline-block',
-                      borderRadius: '3px',
-                    }}
-                  >
-                    {elProps.value}
-                  </code>
-                ),
+              components={{
+                code: elProps => {
+                  if (elProps.inline) {
+                    return (
+                      <code
+                        className="fill_light_grey"
+                        style={{
+                          padding: '0px 7px',
+                          display: 'inline-block',
+                          borderRadius: '3px',
+                        }}
+                      >
+                        {elProps.children.toString()}
+                      </code>
+                    );
+                  }
+
+                  return (
+                    <HighlightCode>
+                      {elProps.children.toString()}
+                    </HighlightCode>
+                  );
+                },
                 heading: elProps => (
                   <Typography type={`h${elProps.level}`}>
                     {elProps.children}
