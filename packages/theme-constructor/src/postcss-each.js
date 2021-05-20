@@ -1,5 +1,7 @@
-const postcss = require('postcss'); // eslint-disable-line
-const vars = require('postcss-simple-vars'); // eslint-disable-line
+const postcss = require('postcss');
+const vars = require('postcss-simple-vars');
+
+const SEPARATOR = /\s+in\s+/;
 
 /**
  * @example
@@ -16,25 +18,16 @@ const vars = require('postcss-simple-vars'); // eslint-disable-line
  *  .icon-$(key)
  *    color: $$(key)
  */
-module.exports = postcss.plugin('postcss-each', (opts) => {
-  const SEPARATOR = /\s+in\s+/;
+const plugin = (opts = {}) => {
+  const hasPlugins = opts && opts.plugins;
+  const hasAfterEach = hasPlugins && opts.plugins.afterEach && opts.plugins.afterEach.length;
+  const hasBeforeEach = hasPlugins && opts.plugins.beforeEach && opts.plugins.beforeEach.length;
 
-  function tokenize(str) {
-    return postcss.list.comma(str).map(s => s.replace(/^\$/, ''));
+  function tokenize(string) {
+    return postcss.list.comma(string).map(str => str.replace(/^\$/, ''));
   }
 
-  function checkParams(params) {
-    if (!SEPARATOR.test(params)) return 'Missed "in" keyword in @each';
-
-    const [name, values] = params.split(SEPARATOR).map(str => str.trim());
-
-    if (!name.match(/\$[_a-zA-Z]?\w+/)) return 'Missed variable name in @each';
-    if (!values.match(/(\w+\,?\s?)+/)) return 'Missed values list in @each'; // eslint-disable-line
-
-    return null;
-  }
-
-  function paramsList(params) {
+  function processParams(params) {
     const [name, values] = params.split(SEPARATOR).map(tokenize);
 
     return {
@@ -43,47 +36,85 @@ module.exports = postcss.plugin('postcss-each', (opts) => {
     };
   }
 
-  function processRules(rule, params) {
-    const { name, values } = params;
-    let keys = [];
-
-    if (Array.isArray(values)) {
-      keys = values;
-    }
-    if (values instanceof Object) {
-      keys = Object.keys(values);
-    }
-
-    keys.forEach((v) => {
-      const vals = {
-        [name]: v,
-      };
-
-      rule.nodes.forEach((node) => {
-        const clone = node.clone();
-        const proxy = postcss.rule({ nodes: [clone] });
-
-        vars({ only: vals })(proxy);
-        rule.parent.insertBefore(rule, clone);
-      });
-    });
-  }
-
-  function processLoop(css) {
-    css.walkAtRules('each', processEach); // eslint-disable-line
-  }
-
   function processEach(rule) {
-    const params = ` ${rule.params} `;
-    const parsedParams = paramsList(params);
-    const error = checkParams(params);
+    try {
+      const params = processParams(rule.params);
+      const proxy = new postcss.Root();
 
-    if (error) throw rule.error(error);
+      Object.keys(params.values).forEach((keyName) => {
+        rule.nodes.forEach((node) => {
+          const clone = node.clone();
 
-    processRules(rule, parsedParams);
-    rule.remove();
-    processLoop(rule.root());
+          proxy.append(clone);
+        });
+
+        const processor = postcss([
+          vars({
+            only: {
+              [params.name]: keyName,
+            },
+          }),
+        ]);
+
+        // eslint-disable-next-line no-unused-expressions
+        processor.process(proxy).root;
+      });
+
+      rule.parent.insertBefore(rule, proxy);
+      rule.remove();
+    } catch (error) {
+      throw rule.error(error);
+    }
   }
 
-  return css => processLoop(css);
-});
+  function rulesExists(css) {
+    let rulesLength = 0;
+
+    css.walkAtRules('each', () => {
+      rulesLength += 1;
+    });
+
+    return rulesLength;
+  }
+
+  function processLoop(css, afterEach, beforeEach) {
+    if (afterEach) {
+      css = postcss(afterEach).process(css).root;
+    }
+
+    css.walkAtRules('each', (rule) => {
+      processEach(rule);
+      processLoop(rule.root());
+    });
+
+    if (beforeEach) {
+      css = postcss(beforeEach).process(css).root;
+    }
+
+    if (rulesExists(css)) {
+      processLoop(css, afterEach, beforeEach);
+    }
+  }
+
+  if (hasAfterEach || hasBeforeEach) {
+    return {
+      postcssPlugin: 'postcss-each',
+      Once: css => processLoop(
+        css,
+        hasAfterEach && opts.plugins.afterEach,
+        hasBeforeEach && opts.plugins.beforeEach,
+      ),
+    };
+  }
+
+  return {
+    postcssPlugin: 'postcss-each',
+    AtRule: {
+      each: processEach,
+    },
+  };
+};
+
+plugin.postcss = true;
+
+module.exports = plugin;
