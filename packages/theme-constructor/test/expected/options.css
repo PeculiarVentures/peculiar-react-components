@@ -13,40 +13,40 @@
     --grey_5_border: 124, 133, 137
 }
 svg.fill_primary [data-fill] {
-			fill: rgb(var(--primary))
+      fill: rgb(var(--primary))
 }
 svg.fill_secondary [data-fill] {
-			fill: rgb(var(--secondary))
+      fill: rgb(var(--secondary))
 }
 svg.fill_black [data-fill] {
-			fill: rgb(var(--black))
+      fill: rgb(var(--black))
 }
 svg.fill_dark_grey [data-fill] {
-			fill: rgb(var(--dark_grey))
+      fill: rgb(var(--dark_grey))
 }
 svg.fill_grey [data-fill] {
-			fill: rgb(var(--grey))
+      fill: rgb(var(--grey))
 }
 svg.fill_light_grey [data-fill] {
-			fill: rgb(var(--light_grey))
+      fill: rgb(var(--light_grey))
 }
 svg.fill_success [data-fill] {
-			fill: rgb(var(--success))
+      fill: rgb(var(--success))
 }
 svg.fill_wrong [data-fill] {
-			fill: rgb(var(--wrong))
+      fill: rgb(var(--wrong))
 }
 svg.fill_white [data-fill] {
-			fill: rgb(var(--white))
+      fill: rgb(var(--white))
 }
 svg.fill_grey_1 [data-fill] {
-			fill: rgb(var(--grey_1))
+      fill: rgb(var(--grey_1))
 }
 svg.fill_grey_2 [data-fill] {
-			fill: rgb(var(--grey_2))
+      fill: rgb(var(--grey_2))
 }
 svg.fill_grey_5_border [data-fill] {
-			fill: rgb(var(--grey_5_border))
+      fill: rgb(var(--grey_5_border))
 }
 .border-radius {
   border-radius: 4px
