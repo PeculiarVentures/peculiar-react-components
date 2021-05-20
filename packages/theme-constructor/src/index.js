@@ -61,39 +61,41 @@ async function createTheme(opts) {
   const entryFile = await readFileAsync(opts.entry);
 
   const postcssPlugins = [
-    // for use `@import 'some.sss'`
-    require('postcss-import'), // eslint-disable-line
-    // for use `@each`
-    require('./postcss-each.js')({ // eslint-disable-line
+    // for use `@import 'some.sss'`.
+    // eslint-disable-next-line global-require
+    require('postcss-import'),
+    // for use `@each`.
+    // eslint-disable-next-line global-require
+    require('./postcss-each.js')({
       colors: paletteRGB,
       fonts: opts.options.variables.fonts,
     }),
     // https://github.com/postcss/postcss-simple-vars
-    require('postcss-simple-vars')({ // eslint-disable-line
+    // eslint-disable-next-line global-require
+    require('postcss-simple-vars')({
       variables: Object.assign(
         {},
         paletteRGB,
         traverseObject(opts.options.variables),
       ),
+      silent: true,
     }),
-    // https://github.com/postcss/postcss-custom-properties
-    require('postcss-custom-properties')({ // eslint-disable-line
-      variables: opts.options.palette,
-      appendVariables: true,
-      strict: false,
-    }),
-    // plugin to unwrap nested rules like how Sass does it
-    require('postcss-nested'), // eslint-disable-line
-    // autoprefixer
-    require('autoprefixer'), // eslint-disable-line
+    // plugin to unwrap nested rules like how Sass does it.
+    // eslint-disable-next-line global-require
+    require('postcss-nested'),
+    // autoprefixer.
+    // eslint-disable-next-line global-require
+    require('autoprefixer'),
   ];
 
   if (opts.minify !== false) {
     // for minification
     postcssPlugins.push(
-      require('cssnano')({ // eslint-disable-line
+      // eslint-disable-next-line global-require
+      require('cssnano')({
         preset: ['default', {
           mergeLonghand: false,
+          colormin: false,
         }],
       }),
     );
