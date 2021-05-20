@@ -13,51 +13,39 @@
     --grey_5_border: 124, 133, 137
 }
 svg.fill_primary [data-fill] {
-			fill: rgb(61, 125, 255);
 			fill: rgb(var(--primary))
 }
 svg.fill_secondary [data-fill] {
-			fill: rgb(255, 194, 0);
 			fill: rgb(var(--secondary))
 }
 svg.fill_black [data-fill] {
-			fill: rgb(34, 45, 71);
 			fill: rgb(var(--black))
 }
 svg.fill_dark_grey [data-fill] {
-			fill: rgb(149, 160, 186);
 			fill: rgb(var(--dark_grey))
 }
 svg.fill_grey [data-fill] {
-			fill: rgb(203, 207, 215);
 			fill: rgb(var(--grey))
 }
 svg.fill_light_grey [data-fill] {
-			fill: rgb(245, 246, 250);
 			fill: rgb(var(--light_grey))
 }
 svg.fill_success [data-fill] {
-			fill: rgb(0, 208, 147);
 			fill: rgb(var(--success))
 }
 svg.fill_wrong [data-fill] {
-			fill: rgb(241, 39, 39);
 			fill: rgb(var(--wrong))
 }
 svg.fill_white [data-fill] {
-			fill: rgb(255, 255, 255);
 			fill: rgb(var(--white))
 }
 svg.fill_grey_1 [data-fill] {
-			fill: rgb(251, 252, 253);
 			fill: rgb(var(--grey_1))
 }
 svg.fill_grey_2 [data-fill] {
-			fill: rgb(244, 247, 252);
 			fill: rgb(var(--grey_2))
 }
 svg.fill_grey_5_border [data-fill] {
-			fill: rgb(124, 133, 137);
 			fill: rgb(var(--grey_5_border))
 }
 .border-radius {
