@@ -16,4 +16,4 @@ Or using local npm package:
 <link rel="stylesheet" href="./node_modules/lib-react-components/themes/default.css">
 ```
 
-#### 2. Generate styles using [theme constructor](https://github.com/PeculiarVentures/peculiar-react-components/tree/master/packages/theme-contructor)
+#### 2. Generate styles using [theme constructor](https://github.com/PeculiarVentures/peculiar-react-components/tree/master/packages/theme-constructor)

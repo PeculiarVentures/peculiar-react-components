@@ -67,7 +67,6 @@ module.exports = {
             options: {
               importLoaders: 1,
               modules: true,
-              localIdentName: '[local]_[hash:base64:5]',
             },
           },
           {
@@ -86,7 +85,6 @@ module.exports = {
             options: {
               importLoaders: 1,
               modules: true,
-              localIdentName: '[local]_[hash:base64:5]',
             },
           },
         ],

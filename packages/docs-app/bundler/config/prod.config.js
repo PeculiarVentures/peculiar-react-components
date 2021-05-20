@@ -110,8 +110,9 @@ module.exports = {
             loader: 'css-loader',
             options: {
               importLoaders: 1,
-              modules: true,
-              localIdentName: '[local]_[hash:base64:5]',
+              modules: {
+                localIdentName: '[local]_[hash:base64:5]',
+              },
             },
           },
           {
@@ -129,8 +130,9 @@ module.exports = {
             loader: 'css-loader',
             options: {
               importLoaders: 1,
-              modules: true,
-              localIdentName: '[local]_[hash:base64:5]',
+              modules: {
+                localIdentName: '[local]_[hash:base64:5]',
+              },
             },
           },
         ],
