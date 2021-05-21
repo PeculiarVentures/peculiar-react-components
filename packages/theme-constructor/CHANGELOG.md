@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0](https://github.com/PeculiarVentures/peculiar-react-components/compare/lib-theme-contructor@0.4.2...lib-theme-contructor@1.0.0) (2021-05-21)
+
+
+### Features
+
+* **theme-constructor:** upgrade postcss to ^8 ([a4a85fb](https://github.com/PeculiarVentures/peculiar-react-components/commit/a4a85fb83c780c860eb67eff395754f362a8759d))
+
+
+
+
+
 ## [0.4.2](https://github.com/PeculiarVentures/peculiar-react-components/compare/lib-theme-contructor@0.4.1...lib-theme-contructor@0.4.2) (2021-05-12)
 
 **Note:** Version bump only for package lib-theme-contructor

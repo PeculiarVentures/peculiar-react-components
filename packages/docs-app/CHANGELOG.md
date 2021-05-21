@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0](https://github.com/PeculiarVentures/peculiar-react-components/compare/docs-app@2.1.9...docs-app@3.0.0) (2021-05-21)
+
+
+### Features
+
+* **components:** upgrade theme-constructor dependency ([321b7b8](https://github.com/PeculiarVentures/peculiar-react-components/commit/321b7b8c21254c954e7eb6ddd08ae5b4eb18f07d))
+
+
+
+
+
 ## [2.1.9](https://github.com/PeculiarVentures/peculiar-react-components/compare/docs-app@2.1.8...docs-app@2.1.9) (2021-05-12)
 
 **Note:** Version bump only for package docs-app
