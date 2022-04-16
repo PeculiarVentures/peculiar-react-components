@@ -12,7 +12,7 @@ function getContainer(container) {
 /**
  * Portal component
  */
-const Portal = React.forwardRef((props) => {
+export default function Portal(props) {
   const { children, container, onRendered } = props;
   const [mountNode, setMountNode] = React.useState(null);
 
@@ -24,8 +24,10 @@ const Portal = React.forwardRef((props) => {
     }
   }, [container, onRendered]);
 
-  return mountNode ? ReactDOM.createPortal(children, mountNode) : mountNode;
-});
+  return (
+    <React.Fragment>{mountNode ? ReactDOM.createPortal(children, mountNode) : mountNode}</React.Fragment>
+  );
+};
 
 Portal.propTypes = {
   /**
@@ -51,5 +53,3 @@ Portal.propTypes = {
 Portal.defaultProps = {
   onRendered: undefined,
 };
-
-export default Portal;
