@@ -2,7 +2,7 @@ version: 2.1
 
 aliases:
   - &docker-node-lts
-    - image: circleci/node:lts-browsers
+    - image: cimg/node:14.19.1-browsers
 
   - &restore-node-modules-cache
     name: Restore node_modules cache
@@ -31,7 +31,9 @@ jobs:
       - checkout
       - restore_cache: *restore-yarn-cache
       - restore_cache: *restore-node-modules-cache
-      - run: yarn install --non-interactive --cache-folder ~/.cache/yarn
+      - run:
+          name: Install Dependencies
+          command: yarn install --frozen-lockfile --non-interactive --cache-folder ~/.cache/yarn
       - run:
           name: Check if yarn.lock changed during install
           command: git diff --exit-code
