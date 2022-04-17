@@ -1,8 +1,13 @@
 version: 2.1
 
+orbs:
+  browser-tools: circleci/browser-tools@1.2.5
+
 aliases:
   - &docker-node-lts
-    - image: cimg/node:14.19.1-browsers
+    - image: cimg/node:16.14-browsers
+      environment:
+        CHROME_BIN: '/usr/bin/google-chrome'
 
   - &restore-node-modules-cache
     name: Restore node_modules cache
@@ -59,6 +64,13 @@ jobs:
       - checkout
       - restore_cache: *restore-node-modules-cache
       - attach_workspace: { at: "." }
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
+      - run:
+          name: Verify Chrome browser installed
+          command: |
+            google-chrome --version
+            chromedriver --version
       - run: yarn test
 
   build:
