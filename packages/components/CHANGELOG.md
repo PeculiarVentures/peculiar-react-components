@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.2](https://github.com/PeculiarVentures/peculiar-react-components/compare/lib-react-components@3.0.1...lib-react-components@3.0.2) (2022-04-18)
+
+
+### Bug Fixes
+
+* **components:** fix Portal component docs generation ([5804d1d](https://github.com/PeculiarVentures/peculiar-react-components/commit/5804d1d49286674456f0aae5acd3614ef5172b58))
+* **portal-ref:** Drop extra forwardRef usage for Portal component ([4d49e16](https://github.com/PeculiarVentures/peculiar-react-components/commit/4d49e160d8f58cbfeacfcb5f40b267fc772c3654))
+
+
+
+
+
 ## [3.0.1](https://github.com/PeculiarVentures/peculiar-react-components/compare/lib-react-components@3.0.0...lib-react-components@3.0.1) (2021-05-24)
 
 **Note:** Version bump only for package lib-react-components
