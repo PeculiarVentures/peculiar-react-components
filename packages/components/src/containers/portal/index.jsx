@@ -12,7 +12,7 @@ function getContainer(container) {
 /**
  * Portal component
  */
-const Portal = React.forwardRef((props) => {
+const Portal = (props) => {
   const { children, container, onRendered } = props;
   const [mountNode, setMountNode] = React.useState(null);
 
@@ -24,8 +24,8 @@ const Portal = React.forwardRef((props) => {
     }
   }, [container, onRendered]);
 
-  return mountNode ? ReactDOM.createPortal(children, mountNode) : mountNode;
-});
+  return mountNode ? ReactDOM.createPortal(children, mountNode) : <React.Fragment />;
+};
 
 Portal.propTypes = {
   /**

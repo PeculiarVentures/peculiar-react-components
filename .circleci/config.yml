@@ -1,8 +1,13 @@
 version: 2.1
 
+orbs:
+  browser-tools: circleci/browser-tools@1.2.5
+
 aliases:
   - &docker-node-lts
-    - image: circleci/node:lts-browsers
+    - image: cimg/node:14.19.1-browsers
+      environment:
+        CHROME_BIN: '/usr/bin/google-chrome'
 
   - &restore-node-modules-cache
     name: Restore node_modules cache
@@ -31,7 +36,9 @@ jobs:
       - checkout
       - restore_cache: *restore-yarn-cache
       - restore_cache: *restore-node-modules-cache
-      - run: yarn install --non-interactive --cache-folder ~/.cache/yarn
+      - run:
+          name: Install Dependencies
+          command: yarn install --frozen-lockfile --non-interactive --cache-folder ~/.cache/yarn
       - run:
           name: Check if yarn.lock changed during install
           command: git diff --exit-code
@@ -57,6 +64,13 @@ jobs:
       - checkout
       - restore_cache: *restore-node-modules-cache
       - attach_workspace: { at: "." }
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
+      - run:
+          name: Verify Chrome browser installed
+          command: |
+            google-chrome --version
+            chromedriver --version
       - run: yarn test
 
   build:
