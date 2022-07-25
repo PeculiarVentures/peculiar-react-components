@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[15],{136:function(e,t,n){"use strict";n.r(t),n.d(t,"default",(function(){return r}));var a=n(1),c=n.n(a),l=n(10);function r(){return c.a.createElement("div",{style:{textAlign:"center"}},c.a.createElement(l.h,{style:{marginRight:10},color:"black"}),c.a.createElement(l.h,{defaultChecked:!0,style:{marginRight:10},colorOn:"wrong"}),c.a.createElement(l.h,{defaultChecked:!0,iconColorOn:"black",bgType:"fill"}))}}}]);
+//# sourceMappingURL=sources-demos-checkbox-customized.9c3688bf.chunk.js.map

@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[66],{205:function(e,n,t){"use strict";t.r(n),t.d(n,"default",(function(){return a}));var o=t(1),r=t.n(o),l=t(10);function a(){return r.a.createElement(l.l,null,r.a.createElement(l.B,{type:"h1",tabletType:"h3",mobileType:"h5",color:"primary"},"Resize your window"),r.a.createElement(l.B,{type:"b1",mobileType:"b3",color:"wrong"},"Mobile type only"))}}}]);
-//# sourceMappingURL=sources-demos-typography-resize.184c2981.chunk.js.map
