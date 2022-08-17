@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.1.0](https://github.com/PeculiarVentures/peculiar-react-components/compare/lib-react-components@3.0.2...lib-react-components@3.1.0) (2022-08-17)
+
+
+### Features
+
+* **components:** add "paletteHighlightCode" object to default  theme ([466a300](https://github.com/PeculiarVentures/peculiar-react-components/commit/466a30080bceae5fd58cea59ecd10664f7608008))
+* **components:** bump default.css ([28f3e69](https://github.com/PeculiarVentures/peculiar-react-components/commit/28f3e694ae456bae0d771e3a4a5ac51de7cbc29e))
+
+
+
+
+
 ## [3.0.2](https://github.com/PeculiarVentures/peculiar-react-components/compare/lib-react-components@3.0.1...lib-react-components@3.0.2) (2022-04-18)
 
 

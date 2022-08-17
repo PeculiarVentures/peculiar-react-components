@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/PeculiarVentures/peculiar-react-components/compare/lib-theme-contructor@1.0.0...lib-theme-contructor@1.1.0) (2022-08-17)
+
+
+### Features
+
+* **theme-constructor:** add support "paletteHighlightCode" theme key ([40baddc](https://github.com/PeculiarVentures/peculiar-react-components/commit/40baddc62754c974cf80391a6aca18008241891c))
+
+
+
+
+
 # [1.0.0](https://github.com/PeculiarVentures/peculiar-react-components/compare/lib-theme-contructor@0.4.2...lib-theme-contructor@1.0.0) (2021-05-21)
 
 
