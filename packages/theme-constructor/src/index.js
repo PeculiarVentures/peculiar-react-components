@@ -45,6 +45,7 @@ async function createTheme(opts) {
     { type: 'object', message: 'options.variables parameter is not valid' },
   );
 
+  // Palette.
   const paletteRGB = Object.assign(
     {},
     opts.options.palette,
@@ -54,6 +55,18 @@ async function createTheme(opts) {
     const rgb = colorToRgb(paletteRGB[keyName]);
 
     paletteRGB[keyName] = `${rgb.r}, ${rgb.g}, ${rgb.b}`;
+  });
+
+  // Paletted highlight code.
+  const paletteHighlightCodeRGB = Object.assign(
+    {},
+    opts.options.paletteHighlightCode,
+  );
+
+  Object.keys(paletteHighlightCodeRGB).forEach((keyName) => {
+    const rgb = colorToRgb(paletteHighlightCodeRGB[keyName]);
+
+    paletteHighlightCodeRGB[keyName] = `${rgb.r}, ${rgb.g}, ${rgb.b}`;
   });
 
   console.log(`Starting to create '${opts.name}' theme`);
@@ -68,6 +81,7 @@ async function createTheme(opts) {
     // eslint-disable-next-line global-require
     require('./postcss-each.js')({
       colors: paletteRGB,
+      colorsHighlightCode: paletteHighlightCodeRGB,
       fonts: opts.options.variables.fonts,
     }),
     // https://github.com/postcss/postcss-simple-vars
@@ -76,6 +90,7 @@ async function createTheme(opts) {
       variables: Object.assign(
         {},
         paletteRGB,
+        paletteHighlightCodeRGB,
         traverseObject(opts.options.variables),
       ),
       silent: true,
