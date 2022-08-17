@@ -186,7 +186,7 @@ describe('Theme constructor', () => {
         },
       ]);
     } catch (error) {
-      assert.equal(error.message, 'Cannot read property \'palette\' of undefined');
+      assert.equal(error.message, 'Cannot read properties of undefined (reading \'palette\')');
     }
   });
 });
