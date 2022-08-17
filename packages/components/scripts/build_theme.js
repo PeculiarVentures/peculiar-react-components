@@ -21,6 +21,19 @@ const themeConstructor = require('lib-theme-contructor');
             wrong: '#D0021B',
             white: '#FFFFFF',
           },
+          paletteHighlightCode: {
+            highlightCodeColor: '#ccc',
+            highlightCodeBorderColor: '#F4F7FC',
+            highlightCodeBackgroundColor: '#FFFFFF',
+            highlightCodeColorComment: '#373D4D',
+            highlightCodeColorKeyword: '#88af30',
+            highlightCodeColorPunctuation: '#ccc',
+            highlightCodeColorProperty: '#5db4d1',
+            highlightCodeColorSelector: '#efac5a',
+            highlightCodeColorOperator: '#67cdcc',
+            highlightCodeColorFunction: '#ff8b8e',
+            highlightCodeColorVariable: '#e90',
+          },
           variables: {
             borderRadius: '3px',
             button: {
@@ -66,17 +79,6 @@ const themeConstructor = require('lib-theme-contructor');
             textareaLargeHeight: '200px',
 
             highlightCodeFontSize: '14px',
-            highlightCodeColor: '#222D47',
-            highlightCodeBorderColor: '#f2f2f2',
-            highlightCodeBackgroundColor: 'rgba(246, 246, 246, .2)',
-            highlightCodeColorComment: 'slategray',
-            highlightCodeColorKeyword: '#07a',
-            highlightCodeColorPunctuation: '#999',
-            highlightCodeColorProperty: '#905',
-            highlightCodeColorSelector: '#690',
-            highlightCodeColorOperator: '#9a6e3a',
-            highlightCodeColorFunction: '#DD4A68',
-            highlightCodeColorVariable: '#e90',
             fonts: {
               h1: {
                 weight: 700,
