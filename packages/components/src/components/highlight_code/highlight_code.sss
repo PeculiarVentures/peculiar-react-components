@@ -1,9 +1,9 @@
 pre[class*='language-']
-	background-color: $highlightCodeBackgroundColor
+	background-color: rgb(var(--highlightCodeBackgroundColor))
 	border-radius: $borderRadius
 	border-width: 1px
 	border-style: solid
-	border-color: $highlightCodeBorderColor
+	border-color: rgb(var(--highlightCodeBorderColor))
 code[class*='language-']
 	background: none
 	font-family: Consolas, Monaco, 'Menlo', 'Andale Mono', 'Ubuntu Mono', monospace
@@ -23,22 +23,22 @@ code[class*='language-']
 	font-size: $highlightCodeFontSize
 	display: block
 	overflow-x: auto
-	color: $highlightCodeColor
+	color: rgb(var(--highlightCodeColor))
 	padding: 12px 18px
 
 	[class='token comment'],
 	[class='token prolog'],
 	[class='token doctype,'],
 	[class='token cdata']
-		color: $highlightCodeColorComment
+		color: rgb(var(--highlightCodeColorComment))
 
 	[class='token atrule'],
 	[class='token attr-value'],
 	[class='token keyword']
-		color: $highlightCodeColorKeyword
+		color: rgb(var(--highlightCodeColorKeyword))
 
 	[class='token punctuation']
-		color: $highlightCodeColorPunctuation
+		color: rgb(var(--highlightCodeColorPunctuation))
 
 	[class='namespace']
 		opacity: .7
@@ -50,7 +50,7 @@ code[class*='language-']
 	[class='token constant'],
 	[class='token symbol'],
 	[class='token deleted']
-		color: $highlightCodeColorProperty
+		color: rgb(var(--highlightCodeColorProperty))
 
 	[class='token selector'],
 	[class='token attr-name'],
@@ -58,23 +58,23 @@ code[class*='language-']
 	[class='token char'],
 	[class='token builtin'],
 	[class='token inserted']
-		color: $highlightCodeColorSelector
+		color: rgb(var(--highlightCodeColorSelector))
 
 	[class='token operator'],
 	[class='token entity'],
 	[class='token url'],
 	[class='language-css'] [class='token string'],
 	[class='style'] [class='token string']
-		color: $highlightCodeColorOperator
+		color: rgb(var(--highlightCodeColorOperator))
 
 	[class='token function'],
 	[class='token class-name']
-		color: $highlightCodeColorFunction
+		color: rgb(var(--highlightCodeColorFunction))
 
 	[class='token regex'],
 	[class='token important'],
 	[class='token variable']
-		color: $highlightCodeColorVariable
+		color: rgb(var(--highlightCodeColorVariable))
 
 	[class='token important'],
 	[class='token bold']
