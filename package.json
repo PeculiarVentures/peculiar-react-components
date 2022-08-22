@@ -18,7 +18,7 @@
     "publish:canary": "lerna publish --canary"
   },
   "devDependencies": {
-    "lerna": "4.0.0"
+    "lerna": "5.4.3"
   },
   "author": "PeculiarVentures",
   "license": "AGPL-3.0"
