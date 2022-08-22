@@ -33,7 +33,7 @@
     "optimize-css-assets-webpack-plugin": "^6.0.0",
     "path": "^0.12.7",
     "raw-loader": "^0.5.1",
-    "react-dev-utils": "7.0.3",
+    "react-dev-utils": "7.0.5",
     "react-docgen": "^5.3.1",
     "rimraf": "^2.6.2",
     "sass": "^1.50.0",
