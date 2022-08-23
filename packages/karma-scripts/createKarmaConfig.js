@@ -13,6 +13,13 @@ module.exports = function createKarmaConfig({
     frameworks: [
       'mocha',
     ],
+    plugins: [
+      'karma-mocha',
+      'karma-coverage',
+      'karma-webpack',
+      'karma-mocha-reporter',
+      'karma-chrome-launcher'
+    ],
     browsers: [
       'ChromeHeadlessWithGPU',
     ],

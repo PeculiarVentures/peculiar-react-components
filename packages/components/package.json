@@ -61,7 +61,7 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.23.2",
     "faker": "^4.1.0",
-    "karma": "^6.3.2",
+    "karma": "^6.4.0",
     "lib-theme-contructor": "^1.1.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
