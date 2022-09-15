@@ -38,7 +38,7 @@
   },
   "dependencies": {
     "classnames": "^2.3.1",
-    "prismjs": "^1.23.0",
+    "prismjs": "^1.29.0",
     "prop-types": "^15.6.1",
     "react-popper": "^1.0.2"
   },
