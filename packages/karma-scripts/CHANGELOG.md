@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.3](https://github.com/PeculiarVentures/peculiar-react-components/compare/@peculiar/karma-scripts@0.1.2...@peculiar/karma-scripts@0.1.3) (2022-09-15)
+
+**Note:** Version bump only for package @peculiar/karma-scripts
+
+
+
+
+
 ## [0.1.2](https://github.com/PeculiarVentures/peculiar-react-components/compare/@peculiar/karma-scripts@0.1.1...@peculiar/karma-scripts@0.1.2) (2022-04-18)
 
 **Note:** Version bump only for package @peculiar/karma-scripts

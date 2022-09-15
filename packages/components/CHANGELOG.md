@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.1.1](https://github.com/PeculiarVentures/peculiar-react-components/compare/lib-react-components@3.1.0...lib-react-components@3.1.1) (2022-09-15)
+
+**Note:** Version bump only for package lib-react-components
+
+
+
+
+
 # [3.1.0](https://github.com/PeculiarVentures/peculiar-react-components/compare/lib-react-components@3.0.2...lib-react-components@3.1.0) (2022-08-17)
 
 
