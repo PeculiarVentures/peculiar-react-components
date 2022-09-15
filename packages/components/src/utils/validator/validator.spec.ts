@@ -2,7 +2,7 @@ import faker from 'faker';
 import { expect } from 'chai';
 import validator from './validator';
 
-const locales = ['en', 'ru'];
+const locales = ['en', 'uk', 'de', 'ru', 'zh_CN', 'es', 'fr'];
 
 describe('validator', () => {
   beforeEach(() => {
@@ -10,16 +10,21 @@ describe('validator', () => {
   });
 
   describe('email', () => {
-    it('returns true', () => {
-      const email = faker.internet.email();
-      const isValid = validator(email, ['email']);
+    for (const locale of locales) {
+      faker.locale = locale;
 
-      if (!isValid) {
-        throw new Error(email);
-      }
+      it(`returns true for "${locale}" email`, () => {
+        faker.locale = locale;
+        const email = faker.fake('{{name.firstName}}@{{internet.domainName}}');
+        const isValid = validator(email, ['email']);
 
-      expect(isValid).to.be.true;
-    });
+        if (!isValid) {
+          throw new Error(email);
+        }
+
+        expect(isValid).to.be.true;
+      });
+    }
   });
 
   describe('number', () => {
