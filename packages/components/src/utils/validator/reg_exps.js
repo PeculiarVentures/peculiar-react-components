@@ -25,12 +25,13 @@ const nonLetterСharacter = '\u0021-\u0040\u005B-\u0060\u007B-\u00BF\u02B9-\u036
 // in letter expressions. Created to avoid adding complex exceptions.
 const allowedNameСharacter = "'";
 const nameRegExp = new RegExp(`^(([^${nonLetterСharacter}${emotionsСharacterRanges}\\s]|${allowedNameСharacter})+(\\s|-))*([^${nonLetterСharacter}${emotionsСharacterRanges}\\s]|${allowedNameСharacter})+$`, 'i');
+const emailRegExp = new RegExp('^(([^<>()\\[\\]\\\\.,;:\\s@"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@"]+)*)|(".+"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3})|(([\\p{L}\\-0-9]+\\.)+[\\p{L}-]{2,}))$', 'u');
 const lettersRegExp = new RegExp(`^([^${nonLetterСharacter}${emotionsСharacterRanges}\\s'])+$`, 'i');
 
 const regExps = {
   password: /^^(?=.*[0-9])(?=.*[a-zа-я])(?=.*[A-ZА-Я])[A-zА-я0-9!@#$%^&*()-=§±|'";:~,.<>/?]{8,}$/,
   fullName: nameRegExp,
-  email: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})|(([\p{L}\-0-9]+\.)+[\p{L}-]{2,}))$/u, // eslint-disable-line
+  email: emailRegExp,
   phone: /^(\+?(\d){12})$/,
   number: /^\d+$/,
   text: /^.+$/,
