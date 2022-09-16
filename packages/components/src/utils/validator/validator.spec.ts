@@ -15,7 +15,7 @@ describe('validator', () => {
 
       it(`returns true for "${locale}" email`, () => {
         faker.locale = locale;
-        const email = faker.fake('{{name.firstName}}@{{internet.domainName}}');
+        const email = faker.fake('{{internet.userName}}@{{hacker.abbreviation}}.{{internet.domainSuffix}}');
         const isValid = validator(email, ['email']);
 
         if (!isValid) {
