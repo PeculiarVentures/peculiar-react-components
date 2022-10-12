@@ -89,6 +89,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   gaEventName?: string;
   component?: (props: any) => JSX.Element;
   full?: boolean;
+  componentRef?: React.Ref<HTMLElement>;
 }
 
 interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
