@@ -31,6 +31,7 @@ export default function Typography(props, context) {
     tabletType,
     mobileType,
     className,
+    component: componentProp,
     ...other
   } = props;
   const { device } = context;
@@ -52,7 +53,7 @@ export default function Typography(props, context) {
     { [`text_${align}`]: align !== 'auto' },
     className,
   );
-  const Component = /h[1-6]/.test(type) ? type : 'p';
+  const Component = componentProp || (/h[1-6]/.test(type) ? type : 'p');
 
   return (
     <Component
@@ -100,6 +101,11 @@ Typography.propTypes = {
    * The CSS class name of the root element
    */
   className: PropTypes.string,
+  /**
+   * The component used for the root node.
+   * Either a string to use a HTML element or a component.
+   */
+  component: PropTypes.elementType,
 };
 
 Typography.contextTypes = {
@@ -113,4 +119,5 @@ Typography.defaultProps = {
   className: '',
   tabletType: '',
   mobileType: '',
+  component: undefined,
 };
