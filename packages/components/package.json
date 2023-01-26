@@ -1,6 +1,6 @@
 {
   "name": "lib-react-components",
-  "version": "3.1.4",
+  "version": "3.1.5",
   "private": false,
   "description": "React components",
   "keywords": [
@@ -43,7 +43,7 @@
     "react-popper": "^1.0.2"
   },
   "devDependencies": {
-    "@peculiar/karma-scripts": "^0.1.3",
+    "@peculiar/karma-scripts": "^0.1.4",
     "@types/chai": "^4.2.16",
     "@types/faker": "^5.5.1",
     "@types/sinon": "^9.0.11",
