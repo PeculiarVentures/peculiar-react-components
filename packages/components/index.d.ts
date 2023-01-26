@@ -333,7 +333,7 @@ interface SwitchHandler extends React.HTMLAttributes<HTMLDivElement> {
   iconColor?: Color;
   iconColorOn?: Color;
   ref?: React.Ref<HTMLElement>;
-  label?: string | number;
+  label?: React.ReactNode;
   labelPosition?: 'left' | 'right';
   labelProps?: TypographyBasicProps;
   gaEventName?: string;

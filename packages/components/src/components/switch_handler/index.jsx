@@ -36,10 +36,7 @@ export default class SwitchHandler extends PureComponent {
     /**
      * Label for toggle
      */
-    label: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-    ]),
+    label: PropTypes.node,
     /**
      * Where the label will be placed next to the toggle
      */
@@ -151,6 +148,7 @@ export default class SwitchHandler extends PureComponent {
         color="black"
         className="switch_label"
         data-position={labelPosition}
+        component="span"
         {...labelProps}
       >
         {label}
