@@ -76,7 +76,7 @@ Typography.propTypes = {
   /**
    * This is what will be displayed inside the button
    */
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   /**
    * Typography type
    */
@@ -120,4 +120,5 @@ Typography.defaultProps = {
   tabletType: '',
   mobileType: '',
   component: undefined,
+  children: undefined,
 };

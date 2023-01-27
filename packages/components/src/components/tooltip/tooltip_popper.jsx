@@ -119,10 +119,11 @@ export default class TooltipPopper extends React.Component {
       preventOverflow,
       preventFlip,
       flipBoundaryElement,
+      children,
       ...other
     } = this.props;
 
-    if (!open) {
+    if (!open || !children) {
       return null;
     }
 
@@ -168,7 +169,7 @@ TooltipPopper.propTypes = {
   /**
    * This is what will be displayed inside the popper.
    */
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   /**
    * If `true`, the popper arrow is shown.
    */
@@ -274,4 +275,5 @@ TooltipPopper.defaultProps = {
   classNameTooltipContent: '',
   showDelay: 0,
   flipBoundaryElement: 'viewport',
+  children: undefined,
 };

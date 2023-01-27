@@ -506,7 +506,7 @@ interface AutocompleteProps<T> extends Omit<React.HTMLAttributes<HTMLDivElement>
 
 interface TooltipProps extends React.HTMLAttributes<HTMLDivElement>, Omit<TooltipPopperProps, 'referenceElement' | 'children' | 'open'> {
   children: React.ReactNode;
-  content: React.ReactNode;
+  content?: React.ReactNode;
   action?: 'click' | 'hover' | 'focus' | 'none';
   component?: string;
   ref?: React.Ref<HTMLElement>;
@@ -522,7 +522,7 @@ interface TooltipProps extends React.HTMLAttributes<HTMLDivElement>, Omit<Toolti
 
 interface TooltipPopperProps {
   open: boolean;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   arrow?: boolean;
   placement?: PlacementType;
   positionFixed?: boolean;
@@ -549,7 +549,7 @@ interface TypographyBasicProps extends React.HTMLAttributes<HTMLElement> {
 }
 
 interface TypographyProps extends TypographyBasicProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   ref?: React.Ref<HTMLElement>;
 }
 
