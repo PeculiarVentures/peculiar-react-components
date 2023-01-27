@@ -36,7 +36,7 @@ export default class Tooltip extends Component {
     /**
      * This is what will be displayed inside the tooltip.
      */
-    content: PropTypes.node.isRequired,
+    content: PropTypes.node,
     /**
      * Which action cause tooltip shown.
      */
@@ -186,6 +186,7 @@ export default class Tooltip extends Component {
     classNameTooltipContent: '',
     showDelay: 0,
     flipBoundaryElement: 'viewport',
+    content: undefined,
   }
 
   constructor(props) {
