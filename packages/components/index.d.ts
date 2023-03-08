@@ -508,7 +508,7 @@ interface TooltipProps extends React.HTMLAttributes<HTMLDivElement>, Omit<Toolti
   children: React.ReactNode;
   content?: React.ReactNode;
   action?: 'click' | 'hover' | 'focus' | 'none';
-  component?: string;
+  component?: keyof React.ReactHTML;
   ref?: React.Ref<HTMLElement>;
   open?: boolean;
   onClose?: () => void;
@@ -546,6 +546,7 @@ interface TypographyBasicProps extends React.HTMLAttributes<HTMLElement> {
   color?: Color;
   align?: 'left' | 'center' | 'right' | 'auto';
   className?: string;
+  component?: keyof React.ReactHTML;
 }
 
 interface TypographyProps extends TypographyBasicProps {
