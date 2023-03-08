@@ -77,7 +77,7 @@ export default class Tooltip extends Component {
     /**
      * Parent component for tooltip and reference element.
      */
-    component: PropTypes.string,
+    component: PropTypes.elementType,
     /**
      * Padding from tooltip to reference element in `px`.
      */
