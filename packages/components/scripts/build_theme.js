@@ -17,6 +17,7 @@ const themeConstructor = require('lib-theme-contructor');
             grey: '#DFDFDF',
             light_grey: '#F2F2F2',
             grey_4: '#C4C8CC',
+            grey_5: '#869196',
             success: '#0ABE55',
             wrong: '#D0021B',
             white: '#FFFFFF',
