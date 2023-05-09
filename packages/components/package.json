@@ -1,6 +1,6 @@
 {
   "name": "lib-react-components",
-  "version": "3.1.8",
+  "version": "3.1.9",
   "private": false,
   "description": "React components",
   "keywords": [
@@ -43,7 +43,7 @@
     "react-popper": "^1.3.11"
   },
   "devDependencies": {
-    "@peculiar/karma-scripts": "^0.1.4",
+    "@peculiar/karma-scripts": "^0.1.5",
     "@types/chai": "^4.3.5",
     "@types/faker": "^5.5.9",
     "@types/sinon": "^9.0.11",
@@ -62,7 +62,7 @@
     "eslint-plugin-react": "^7.32.2",
     "faker": "^4.1.0",
     "karma": "^6.4.2",
-    "lib-theme-contructor": "^1.1.1",
+    "lib-theme-contructor": "^1.1.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "rimraf": "^2.7.1",
