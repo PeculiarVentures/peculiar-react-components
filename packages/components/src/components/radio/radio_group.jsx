@@ -89,13 +89,13 @@ class RadioGroup extends PureComponent {
 
     return (
       <div {...other}>
-        {Children.map(children, (child, index) => {
+        {Children.map(children, (child) => {
           if (!isValidElement(child)) {
             return null;
           }
 
           return cloneElement(child, {
-            key: index,
+            key: child.props.value,
             name,
             checked: valueState === child.props.value,
             onChange: this.handleRadioChange,

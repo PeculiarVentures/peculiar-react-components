@@ -150,13 +150,13 @@ class Tabs extends PureComponent {
         )}
         {...other}
       >
-        {Children.map(children, (child, index) => {
+        {Children.map(children, (child) => {
           if (!isValidElement(child)) {
             return null;
           }
 
           return cloneElement(child, {
-            key: index,
+            key: child.props.value,
             selected: valueState === child.props.value,
             onClick: this.handleChange,
             color,

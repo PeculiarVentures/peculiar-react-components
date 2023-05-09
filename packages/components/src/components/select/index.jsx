@@ -413,6 +413,7 @@ class Select extends React.Component {
             select_button_open: showOptions,
           },
         )}
+        // eslint-disable-next-line react/no-unknown-property
         focusable="false"
         aria-hidden
       >

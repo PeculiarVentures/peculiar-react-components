@@ -109,7 +109,9 @@ Typography.propTypes = {
 };
 
 Typography.contextTypes = {
-  device: PropTypes.object,
+  device: PropTypes.shape({
+    type: PropTypes.string,
+  }),
 };
 
 Typography.defaultProps = {
